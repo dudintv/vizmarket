@@ -23,7 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: vizmarket_development
+  database: vizmarket
+  username: dudintv
+  password: ghjcnjq
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: vizmarket_production
+  database: vizmarket
   username: vizmarket
   password: <%= ENV['VIZMARKET_DATABASE_PASSWORD'] %>
