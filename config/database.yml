@@ -19,14 +19,14 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
+  url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: vizmarket
 
 development:
   <<: *default
-  database: vizmarket
-  username: dudintv
-  password: ghjcnjq
-  port: 5454
+  username: postgres
+  password: postgres
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -83,6 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: vizmarket
-  username: vizmarket
   password: <%= ENV['VIZMARKET_DATABASE_PASSWORD'] %>
