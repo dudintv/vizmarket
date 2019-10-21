@@ -1,0 +1,71 @@
+
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres:11.5
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./log:/root/log:cached
+    ports:
+      - 5454:5432
+
+  rails:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: vizmarket_rails:1.0
+    tmpfs:
+      - /tmp
+    stdin_open: true
+    tty: true
+    command: bundle exec rails server -b 0.0.0.0 -p 5000
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/app:cached
+      - rails_cache:/app/tmp/cache
+      - bundle:/bundle
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+    environment:
+      - NODE_ENV=development
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5454/app_development?pool=5
+      - BOOTSNAP_CACHE_DIR=/bundle/bootsnap
+      - WEBPACKER_DEV_SERVER_HOST=webpacker
+      - WEB_CONCURRENCY=1
+      - HISTFILE=/app/log/.bash_history
+      - PSQL_HISTFILE=/app/log/.psql_history
+      - EDITOR=nano
+    depends_on:
+      - postgres
+
+  webpacker:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: vizmarket_rails:1.0
+    tmpfs:
+      - /tmp
+    stdin_open: true
+    tty: true
+    command: ./bin/webpack-dev-server
+    ports:
+      - 3035:3035
+    volumes:
+      - .:/app:cached
+      - bundle:/bundle
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+
+volumes:
+  postgres:
+  rails_cache:
+  node_modules:
+  bundle:
+  packs:
