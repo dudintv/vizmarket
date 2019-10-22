@@ -50,7 +50,6 @@ config/secrets.yml.key
 config/initializers/secret_token.rb
 
 #мои личные добавки
-Gemfile.lock
 Capfile
 /public/assets
 /public/system
