@@ -1,0 +1,89 @@
+header
+  nav role='navigation'
+    .nav-left-half
+      .logo
+        a href='#'
+          img src='images/svg/logo.svg' height='52' width='26'
+          img src='images/svg/logo-name.svg' width="123" height="35"
+      .nav-lg-md
+        ul.nav.horizontal-nav
+          - for item in @data.menu
+            li class=selected_class data-item=item: a href='#'= item
+    .nav-right-half
+      .nav-lg-md
+        .search
+          .search-lg
+            input.input-search type='text' name='search' placeholder=' '
+            a.button-search.over-input href='#': img src='images/svg-icons/search.svg' width="24" height="24"
+          .search-md
+            a.button-search#open-search href='#': img src='images/svg-icons/search.svg' width="24" height="24"
+            .popup.search-popup#search-popup
+              .line: input.input-search type='text' placeholder=' '
+              .line.button: a.main-button href='#': img src='images/svg-icons/search.svg' width="24" height="24"
+      .nav-sm
+        .burger#burger
+          a href='#': img src='images/svg-icons/menu.svg' width="24" height="24"
+        .popup.nav-dropdown#nav-dropdown
+          ul.nav
+            li.line
+              .search
+                input type='text' name='search' placeholder=' '
+                a.button-search.over-input href='#': img src='images/svg-icons/search.svg' width="24" height="24"
+            - for item in @data.menu
+              li.line class=selected_class data-item=item: a href='#'= item
+      .cart
+          a#open-cart href='#'
+            img src='images/svg-icons/cart.svg' width="24" height="24"
+            - if @data.cart_items
+              .count= @data.cart_items.length
+      .auth
+        - if @data.user
+          .auth-user
+            a#open-user href='#'
+              img src='images/svg/default_avatar.svg' width='40' height='40'
+          .popup.user-popup#user-popup
+            .line.edit
+              span.name= @data.user.email
+              a.button href='#' Edit info
+            .line
+              a.main-button href='#' Publisher portal
+            .line
+              a.button href='#' Sign out
+        - else
+          .auth-signin
+            a href='#'.sign-in#open-signin Sign in
+          .auth-signup
+            a href='#'.sign-up Sign up
+    .popup.cart-popup#cart-popup
+      - if @data.cart_items
+        - for item in @data.cart_items
+          a href='#'.line
+            .folder
+              span.type= item.type
+              span.separator /
+              span.category= item.category
+            .name
+              h3.title= item.title
+              h5.price= item.price
+              - if item.original_price
+                h5.original-price= item.original_price
+        .line.button: a.main-button href='#' Check out
+      - else
+        .line.empty_cart
+          h5 Empty cart
+          span Add product by click on the price
+    .popup.signin-popup#signin-popup
+      .line
+        input.input-text type='text' placeholder=' '
+        label.label-text for='email' Email
+      .line
+        input.input-text type='password' placeholder=' '
+        label.label-text for='email' Password
+      .line.button
+        a.main-button href="#" Sign in
+      .line.button
+        a.button href='#' Forgot password?
+      .line.socnets
+        span or login with 
+        - for socnet in @data.socnets
+          a.socnet href='#': img src="images/svg-icons/"+socnet.icon+".svg"

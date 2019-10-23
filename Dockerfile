@@ -48,3 +48,7 @@ RUN gem update --system && \
 RUN mkdir -p /app
 
 WORKDIR /app
+
+# YARN INSTALL
+# COPY ./package.json ./yarn.lock /app/
+# RUN yarn install
