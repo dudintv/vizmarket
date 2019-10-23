@@ -5003,6 +5003,13 @@ postcss-calc@^7.0.1:
     postcss-selector-parser "^5.0.0-rc.4"
     postcss-value-parser "^3.3.1"
 
+postcss-color-adjustment@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/postcss-color-adjustment/-/postcss-color-adjustment-0.1.6.tgz#941541f17d9e291dbcb9040cddcf9783e70c7ee1"
+  integrity sha512-CL2+E5vnDNua1g6TyvpSrtc2ip4SDujVfr7y9YLuO7JVfJMobTssrvKXurvAj2Z6AmI6vIRyjGJQtJCx2ld+5g==
+  dependencies:
+    tinycolor2 "^1.4.1"
+
 postcss-color-functional-notation@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/postcss-color-functional-notation/-/postcss-color-functional-notation-2.0.1.tgz#5efd37a88fbabeb00a2966d1e53d98ced93f74e0"
@@ -5495,7 +5502,7 @@ postcss-place@^4.0.1:
     postcss "^7.0.2"
     postcss-values-parser "^2.0.0"
 
-postcss-preset-env@^6.4.0, postcss-preset-env@^6.6.0:
+postcss-preset-env@^6.4.0, postcss-preset-env@^6.6.0, postcss-preset-env@^6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/postcss-preset-env/-/postcss-preset-env-6.7.0.tgz#c34ddacf8f902383b35ad1e030f178f4cdf118a5"
   integrity sha512-eU4/K5xzSFwUFJ8hTdTQzo2RBLbDVt83QZrAvI07TULOkmyQlnYlpwep+2yIK+K+0KlZO4BvFcleOCCcUtwchg==
@@ -5586,6 +5593,13 @@ postcss-safe-parser@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/postcss-safe-parser/-/postcss-safe-parser-4.0.1.tgz#8756d9e4c36fdce2c72b091bbc8ca176ab1fcdea"
   integrity sha512-xZsFA3uX8MO3yAda03QrG3/Eg1LN3EPfjjf07vke/46HERLZyHrTsQ9E1r1w1W//fWEhtYNndo2hQplN2cVpCQ==
+  dependencies:
+    postcss "^7.0.0"
+
+postcss-scss@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-scss/-/postcss-scss-2.0.0.tgz#248b0a28af77ea7b32b1011aba0f738bda27dea1"
+  integrity sha512-um9zdGKaDZirMm+kZFKKVsnKPF7zF7qBAtIfTSnZXD1jZ0JNZIxdB6TxQOjCnlSzLRInVl2v3YdBh/M881C4ug==
   dependencies:
     postcss "^7.0.0"
 
@@ -6899,6 +6913,11 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tinycolor2@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
+  integrity sha1-9PrTM0R7wLB9TcjpIJ2POaisd+g=
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"
