@@ -1,0 +1,15 @@
+input {
+  @apply .text-lg .w-full;
+  height: 3rem;
+  background-color: transparent;
+  color: $white;
+
+  &[type='text'],
+  &[type='password'] {
+    border-bottom: 1px solid $white-20;
+
+    &:hover, &:focus, &:not(:placeholder-shown) {
+      background-color: $white-05;
+    }
+  }
+}

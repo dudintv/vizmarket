@@ -1,0 +1,29 @@
+h1 {
+  @apply .text-5xl;
+  font-family: MuseoSans;
+  font-weight: 700;
+}
+
+h2 {
+  @apply .text-4xl;
+  font-family: MuseoSans;
+  font-weight: 700;
+}
+
+h3 {
+  @apply .text-3xl;
+  font-family: OpenSans;
+  font-weight: 600;
+}
+
+h4 {
+  @apply .text-2xl;
+  font-family: OpenSans;
+  font-weight: normal;
+}
+
+h5 {
+  @apply .text-xl;
+  font-family: OpenSans;
+  font-weight: 700;
+}

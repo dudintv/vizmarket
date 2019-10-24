@@ -1,2 +1,11 @@
 @import "test";
+
+@import "./common/colors.scss";
+@import "./common/fonts.scss";
+@import "./common/base.scss";
+@import "./common/form.scss";
+@import "./common/headers.scss";
+
+@import "./shared/nav.scss";
+
 @import "tailwind";
