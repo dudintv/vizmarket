@@ -1,0 +1,10 @@
+.grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 230px);
+  grid-gap: 1rem;
+}
+
+.grid-full-row {
+  grid-column: 1 / -1;
+}

@@ -1,0 +1,77 @@
+.product {
+  @apply .block .shadow;
+  // grid-column: 1;
+  max-width: 300px;
+  background-color: $item-bg;
+  transition: box-shadow .2s ease-in-out;
+
+  &:hover {
+    @apply .shadow-xl;
+  }
+
+  .image {
+    @apply .relative;
+
+    .labels {
+      @apply .flex .absolute .bottom-0 .right-0;
+
+      .label {
+        @apply .block .px-2;
+
+        &.featured{
+          background: $red-grad-x;
+        }
+
+        &.new{
+          background: $green-grad-x;
+        }
+      }
+    }
+  }
+
+  .info {
+    @apply .flex .flex-col .p-4;
+
+    .line{
+      @apply .pb-1;
+
+      .categories {
+        @apply .flex .uppercase;
+
+        .kind {
+          color: $orange;
+
+          &:hover {
+            color: $orange-hover;
+          }
+        }
+
+        .category {
+          @apply .ml-2;
+          color: $light-blue;
+
+          &:hover {
+            color: $light-blue-hover;
+          }
+        }
+      }
+
+      .author, .price {
+        color: $light-blue;
+      }
+
+      .version, .date {
+        color: $white-50;
+      }
+
+      .version{
+        @apply .py-1 .px-2 .mr-2;
+        border: 1px solid $white-20;
+      }
+
+      .price {
+        @apply .text-xl .font-bold;
+      }
+    }
+  }
+}

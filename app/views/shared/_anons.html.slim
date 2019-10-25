@@ -1,0 +1,6 @@
+.anons style="background-image: linear-gradient(to right, hsl(202, 38%, 6%) 0%, rgba(0, 0, 0, 0) 80%), url(#{anons[:image]});"
+  .top
+    h1= anons[:title]
+    p= anons[:text]
+  .bottom
+    a.red.action href=anons[:link] = anons[:action]

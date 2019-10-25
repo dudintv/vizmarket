@@ -13,7 +13,9 @@ body {
   min-height: 100vh;
 }
 
+$body-grad: linear-gradient($body-bg-darker 0%, color($body-bg-darker, alpha(0)) 500px);
 body {
-  background-image: $body-grad;
-  background-repeat: repeat-x;
+  background-image: url(/images/svg/pattern-red.svg), $body-grad;
+  background-repeat: repeat-x, repeat-x;
+  background-size: 400px, auto;
 }

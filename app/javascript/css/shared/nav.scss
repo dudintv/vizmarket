@@ -20,7 +20,7 @@ header nav {
       background-color: $red;
 
       &:hover {
-        background-color: $hover-red;
+        background-color: $red-hover;
       }
     }
   }
@@ -48,7 +48,7 @@ header nav {
 
 
   .nav-dropdown {
-    @apply .hidden .absolute .p-6 .w-full .shadow-lg;
+    @apply .hidden .absolute .p-6 .w-full .shadow-lg .z-100;
     left: 0;
     top: 52px;
   }
@@ -142,7 +142,7 @@ header nav {
     }
 
     .count {
-      @apply .flex .justify-center .items-center .absolute .right-2 .top-1 .rounded-full;
+      @apply .flex .justify-center .items-center .absolute .right-2 .top-2 .rounded-full;
       color: $white;
       background-color: $red;
       width: 1.5rem;
@@ -165,7 +165,7 @@ header nav {
     background-color: $red;
 
     &:hover {
-      background-color: $hover-red;
+      background-color: $red-hover;
     }
   }
 
@@ -227,12 +227,28 @@ header nav {
   .cart-popup {
     min-width: 20rem;
 
-    .line {
-      @apply .flex-col .items-start .px-4 .py-2;
+    .line, .cart-item {
+      @apply .flex-col .items-start;
 
       &.button {
         @apply .p-0 .mt-4;
       }
+    }
+
+    .line {
+      @apply .px-4 .py-2;
+
+      &.empty_cart {
+        @apply .normal-case .pb-4;
+
+        h5, span {
+          @apply .m-auto;
+        }
+      }
+    }
+
+    .cart-item {
+      @apply .relative .w-full .px-2 .py-0;
 
       .folder {
         @apply .flex;
@@ -256,27 +272,20 @@ header nav {
         @apply .flex .justify-between .items-baseline .w-full;
         
         .title {
-          @apply .normal-case .mr-4;
+          @apply .text-lg .normal-case .mr-4;
           max-width: 100%;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
         .price {
+          @apply .text-lg .font-bold;
           color: $light-blue;
         }
 
         .original-price {
-          @apply .absolute .right-4 .top-4 .line-through .text-base;
+          @apply .absolute .right-2 .top-0 .line-through .text-base;
           color: $white-50;
-        }
-      }
-
-      &.empty_cart {
-        @apply .normal-case .pb-4;
-
-        h5, span {
-          @apply .m-auto;
         }
       }
     }
@@ -296,9 +305,9 @@ header nav {
   }
 }
 
-/* ----------------------------------- */
+//  -----------------------------------
 
-@screen md {
+@media (min-width: 900px) {
   header nav {
     .nav-left-half {
       flex-grow: 1;
@@ -328,7 +337,7 @@ header nav {
   }
 }
 
-@screen lg {
+@media (min-width: 1100px) {
   header nav {
     .nav-left-half {
       flex-grow: 1;

@@ -54,6 +54,145 @@ class PagesController < ApplicationController
             "title": "Twitter",
             "icon": "twitter"
         }
+      ],
+
+      anonses: [
+        {
+          image: '/images/anons/became-author.jpg',
+          title: 'Became an Author',
+          text: 'Do you have usefull solutions, like scripts or scene example? Lets share the gems!',
+          link: '#',
+          action: 'Submit content'
+        },
+        {
+          image: '/images/anons/create-portfolio.jpg',
+          title: 'Publish your Vizrt portfolio',
+          text: 'Do you want to have a professional portfolio properly describes you as a Vizrt Specialist?',
+          link: '#',
+          action: 'Create portfolio'
+        },
+      ],
+
+      products: [
+        {
+          image: '',
+          title: 'Random Movement',
+          author: 'Dmitry Dudin',
+          version: '1.2',
+          date: '03-07-2019',
+          price: 10,
+          pating: 4.5,
+          kind: "Script",
+          categories: [
+            {title: "position", link: '#'},
+          ],
+          labels: [
+            "Featured",
+            "New",
+          ]
+        },
+        {
+          image: '',
+          title: 'Random Movement',
+          author: 'Dmitry Dudin',
+          version: '1.2',
+          date: '03-07-2019',
+          price: 10,
+          pating: 4.5,
+          kind: "Script",
+          categories: [
+            {title: "position", link: '#'},
+          ],
+          labels: [
+            "Featured",
+            "New",
+          ]
+        },
+        {
+          image: '',
+          title: 'Random Movement',
+          author: 'Dmitry Dudin',
+          version: '1.2',
+          date: '03-07-2019',
+          price: 10,
+          pating: 4.5,
+          kind: "Script",
+          categories: [
+            {title: "position", link: '#'},
+          ],
+          labels: [
+            "Featured",
+            "New",
+          ]
+        },
+        {
+          image: '',
+          title: 'Random Movement',
+          author: 'Dmitry Dudin',
+          version: '1.2',
+          date: '03-07-2019',
+          price: 10,
+          pating: 4.5,
+          kind: "Script",
+          categories: [
+            {title: "position", link: '#'},
+          ],
+          labels: [
+            "Featured",
+            "New",
+          ]
+        },
+        {
+          image: '',
+          title: 'Random Movement',
+          author: 'Dmitry Dudin',
+          version: '1.2',
+          date: '03-07-2019',
+          price: 10,
+          pating: 4.5,
+          kind: "Script",
+          categories: [
+            {title: "position", link: '#'},
+          ],
+          labels: [
+            "Featured",
+            "New",
+          ]
+        },
+        {
+          image: '',
+          title: 'Random Movement',
+          author: 'Dmitry Dudin',
+          version: '1.2',
+          date: '03-07-2019',
+          price: 10,
+          pating: 4.5,
+          kind: "Script",
+          categories: [
+            {title: "position", link: '#'},
+          ],
+          labels: [
+            "Featured",
+            "New",
+          ]
+        },
+        {
+          image: '',
+          title: 'Random Movement',
+          author: 'Dmitry Dudin',
+          version: '1.2',
+          date: '03-07-2019',
+          price: 10,
+          pating: 4.5,
+          kind: "Script",
+          categories: [
+            {title: "position", link: '#'},
+          ],
+          labels: [
+            "Featured",
+            "New",
+          ]
+        },
       ]
     }
   end

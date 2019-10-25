@@ -1,0 +1,26 @@
+.product
+  .image
+    - if(product[:image] == '')
+      img src='/images/svg/default-product.svg'
+    - else
+      img src=product[:image]
+    .labels
+      - for label in product[:labels]
+        .label.uppercase class="#{label.downcase}" = label
+  .info
+    .line.flex.justify-between
+      .left.categories
+        a.kind href="/#{product[:kind].downcase}" = product[:kind]
+        - for category in product[:categories]
+          a.category href=category[:link] = "/ #{category[:title]}"
+      .right.rating= product[:pating]
+    .line
+      h3.text-3xl= product[:title]
+    .line
+      .author= product[:author]
+    .line.flex.justify-between.items-center
+      .left.flex.items-center
+        .version= "v #{product[:version]}"
+        .date= product[:date]
+      .right
+        .price= "$ #{product[:price]}"
