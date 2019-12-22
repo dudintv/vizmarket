@@ -5,6 +5,7 @@ input {
   color: $white;
 
   &[type='text'],
+  &[type='search'],
   &[type='password'] {
     border-bottom: 1px solid $white-20;
 

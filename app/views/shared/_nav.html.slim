@@ -15,7 +15,10 @@ header
       .nav-lg-md
         .search
           .search-lg
-            input.input-search type='text' name='search' placeholder=' '
+            / add the label to disable aggresive auto-complete:
+            label style='display: none;' for='vizmarket-search' Search query
+            input.input-search type='search' name='vizmarket-search' placeholder='' id='vizmarket-search' autocomplete='off'
+            / autocomplete='vizmarket-search' readonly=true onfocus="this.removeAttribute('readonly')"
             a.button-search.over-input href='#': img src='images/svg-icons/search.svg' width="24" height="24"
           .search-md
             a.button-search#open-search href='#': img src='images/svg-icons/search.svg' width="24" height="24"
