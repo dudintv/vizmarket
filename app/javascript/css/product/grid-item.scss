@@ -16,14 +16,32 @@
       @apply .flex .absolute .bottom-0 .right-0;
 
       .label {
-        @apply .block .px-2;
+        @apply .block .px-2 .relative;
+
+        &::before{
+          content: '';
+          position: absolute;
+          width: .6rem;
+          height: 100%;
+          left: -.6rem;
+          border-left: .6rem solid transparent;
+          // border-bottom: 1.5rem solid white;
+        }
 
         &.featured{
           background: $red-grad-x;
+          
+          &::before{
+            border-bottom: 1.5rem solid $orange;
+          }
         }
-
+        
         &.new{
           background: $green-grad-x;
+
+          &::before{
+            border-bottom: 1.5rem solid $lime;
+          }
         }
       }
     }
