@@ -65,12 +65,19 @@ class ApplicationController < ActionController::Base
           link: '#',
           action: 'Submit content'
         },
+        # {
+        #   image: '/images/anons/create-portfolio.jpg',
+        #   title: 'Publish your Vizrt portfolio',
+        #   text: 'Do you want to have a professional portfolio properly describes you as a Vizrt Specialist?',
+        #   link: '#',
+        #   action: 'Create portfolio'
+        # },
         {
-          image: '/images/anons/create-portfolio.jpg',
-          title: 'Publish your Vizrt portfolio',
-          text: 'Do you want to have a professional portfolio properly describes you as a Vizrt Specialist?',
+          image: '/images/anons/learn-basic.jpg',
+          title: 'VizScript is easy!',
+          text: 'Instructions for VizScript\'s beginners. If you are using a script in the first time.',
           link: '#',
-          action: 'Create portfolio'
+          action: 'How to install a script?'
         },
       ],
 
