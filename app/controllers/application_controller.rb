@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  devise_group :account, contains: [:user, :admin]
+
   before_action :get_data
 
   private
