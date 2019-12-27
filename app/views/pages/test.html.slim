@@ -12,6 +12,6 @@ section.grid.container.mx-auto
   h2.text-4xl.grid-full-row Featured
   - for product in @data[:products]
     = render partial: 'product/grid_item', locals: {product: product}
-  a.red.long-button.grid-full-row href='' All featured
+  a.red-bg.long-button.grid-full-row href='' All featured
 
 = render 'shared/footer'
