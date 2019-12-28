@@ -1,0 +1,47 @@
+@keyframes notification-take-in {
+  0% {transform:translateY(50px); opacity: 0.5;}
+  40%{transform:translateY(-2px); opacity: 1;}
+  100%{transform:translateY(0px);}}
+
+.notification {
+  @apply .absolute .right-2 .top-2;
+
+  animation: notification-take-in 2s;
+  
+  background-color: $item-bg;
+  border: 1px solid white;
+  transition: box-shadow .2s ease-in-out;
+
+  &.notice {
+    border-color: $green;
+    box-shadow: 0px 0px 32px $green;
+
+    &:hover {
+      box-shadow: 0px 16px 32px $green,
+                  0px 0px 10px black;
+    }
+  }
+
+  &.alert {
+    border-color: $red;
+    box-shadow: 0px 0px 32px $red;
+
+    &:hover {
+      box-shadow: 0px 0px 32px $red-hover,
+                  0px 0px 10px black;
+    }
+  }
+
+  .message {
+    @apply .ml-6 .mr-6;
+  }
+
+  .close-notification {
+    @apply p-4;
+
+    &:hover {
+      fill: white;
+      background-color: $white-05;
+    }
+  }
+}
