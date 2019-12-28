@@ -5,7 +5,7 @@ module.exports = {
     require('postcss-flexbugs-fixes'),
     require('precss'),
     require('postcss-color-adjustment'),
-    require('tailwindcss')('./app/javascript/css/tailwind.js'),
+    require('tailwindcss')('./app/javascript/css/tailwind/tailwind.js'),
     require('autoprefixer'),
     require('postcss-preset-env')({
       autoprefixer: {

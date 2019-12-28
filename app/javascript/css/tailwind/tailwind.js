@@ -509,6 +509,18 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive'],
   },
-  corePlugins: {},
-  plugins: [],
+  corePlugins: {
+    preflight: false
+  },
+  plugins: [
+    // function({ addBase, config }) {
+    //   addBase({
+    //     'h1': { fontSize: config('theme.fontSize.5xl'), fontFamily: 'MuseoSans', fontWeight: 700 },
+    //     'h2': { fontSize: config('theme.fontSize.4xl'), fontFamily: 'MuseoSans', fontWeight: 700 },
+    //     'h3': { fontSize: config('theme.fontSize.3lg'), fontFamily: 'OpenSans', fontWeight: 600 },
+    //     'h4': { fontSize: config('theme.fontSize.2lg'), fontFamily: 'OpenSans', fontWeight: 'normal' },
+    //     'h5': { fontSize: config('theme.fontSize.xl'), fontFamily: 'OpenSans', fontWeight: 700 },
+    //   })
+    // }
+  ],
 }
