@@ -3,8 +3,8 @@ header
     .nav-left-half
       .logo
         a href='#'
-          img src='images/svg/logo.svg' height='52' width='26'
-          img src='images/svg/logo-name.svg' width="123" height="35"
+          img src='/images/svg/logo.svg' height='52' width='26'
+          img src='/images/svg/logo-name.svg' width="123" height="35"
       .nav-lg-md
         ul.nav.horizontal-nav
           - selected_item = "Scenes"
@@ -19,34 +19,34 @@ header
             label style='display: none;' for='vizmarket-search' Search query
             input.input-search type='search' name='vizmarket-search' placeholder='' id='vizmarket-search' autocomplete='off'
             / autocomplete='vizmarket-search' readonly=true onfocus="this.removeAttribute('readonly')"
-            a.button-search.over-input href='#': img src='images/svg-icons/search.svg' width="24" height="24"
+            a.button-search.over-input href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
           .search-md
-            a.button-search#open-search href='#': img src='images/svg-icons/search.svg' width="24" height="24"
+            a.button-search#open-search href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
             .popup.search-popup#search-popup
               .line: input.input-search type='text' placeholder=' '
-              .line.button: a.main-button href='#': img src='images/svg-icons/search.svg' width="24" height="24"
+              .line.button: a.main-button href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
       .nav-sm
         .burger#burger
-          a href='#': img src='images/svg-icons/menu.svg' width="24" height="24"
+          a href='#': img src='/images/svg-icons/menu.svg' width="24" height="24"
         .popup.nav-dropdown#nav-dropdown
           ul.nav
             li.line
               .search
                 input type='text' name='search' placeholder=' '
-                a.button-search.over-input href='#': img src='images/svg-icons/search.svg' width="24" height="24"
+                a.button-search.over-input href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
             - for item in @data[:menu]
               li.line data-item=item
                 a href='#'= item
       .cart
           a#open-cart href='#'
-            img src='images/svg-icons/cart.svg' width="24" height="24"
+            img src='/images/svg-icons/cart.svg' width="24" height="24"
             - if @data[:cart_items]
               .count= @data[:cart_items].length
       .auth
         - if @data[:user]
           .auth-user
             a#open-user href='#'
-              img src='images/svg/default_avatar.svg' width='40' height='40'
+              img src='/images/svg/default_avatar.svg' width='40' height='40'
           .popup.user-popup#user-popup
             .line.edit
               span.name= @data[:user][:email]
@@ -95,4 +95,4 @@ header
       .line.socnets
         span or login with 
         - for socnet in @data[:socnets]
-          a.socnet href='#': img src="images/svg-icons/#{socnet[:icon]}.svg"
+          a.socnet href='#': img src="/images/svg-icons/#{socnet[:icon]}.svg"
