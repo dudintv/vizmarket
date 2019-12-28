@@ -13,4 +13,15 @@ input {
       background-color: $white-05;
     }
   }
+
+  &[type='button'],
+  &[type='submit'] {
+    background: $red-grad-x;
+    cursor: pointer;
+
+    &:hover {
+      background: $red-grad-x-hover;
+    }
+  }
+
 }

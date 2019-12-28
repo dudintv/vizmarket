@@ -1,3 +1,5 @@
+@import "./tailwind/preflight.css";
+
 @import "./common/colors.scss";
 @import "./common/fonts.scss";
 @import "./common/base.scss";
@@ -11,7 +13,8 @@
 
 @import "./shared/nav.scss";
 @import "./shared/anons.scss";
+@import "./shared/notifications.scss";
 
 @import "./product/grid-item.scss";
 
-@import "tailwind";
+@import "tailwind/tailwind";

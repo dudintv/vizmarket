@@ -27,3 +27,9 @@ h5 {
   font-family: OpenSans;
   font-weight: 700;
 }
+
+h6 {
+  @apply .text-lg;
+  font-family: OpenSans;
+  font-weight: 700;
+}
