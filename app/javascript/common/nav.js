@@ -1,9 +1,9 @@
-let close_popups = () => {
+let close_nav_popups = () => {
   document.querySelectorAll('.popup').forEach( (popup) => {
     popup.style.display = 'none';
   });
 }
-window.onresize = close_popups;
+window.onresize = close_nav_popups;
 
 let setup_popup_opener = (opener_name, popup_name) => {
   let opener = document.getElementById(opener_name);
@@ -13,7 +13,7 @@ let setup_popup_opener = (opener_name, popup_name) => {
       if (window.getComputedStyle(popup).display === 'block'){
         popup.style.display = 'none';
       }else{
-        close_popups();
+        close_nav_popups();
         popup.style.display = 'block';
       }
       e.preventDefault(); 
@@ -39,6 +39,6 @@ window.onload = () => {
 window.onmouseup = (e) => {
   let nav = document.querySelector('header nav');
   if (!nav.contains(e.target)) {
-    close_popups();
+    close_nav_popups();
   }
 }
