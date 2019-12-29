@@ -57,10 +57,10 @@ header
               a.button href='#' Sign out
         - else
           .auth-signin
-            a href='#'
+            = link_to(new_user_session_path) do
               .sign-in#open-signin Sign in
           .auth-signup
-            a href='#'
+            = link_to(new_user_registration_path) do
               .sign-up Sign up
     .popup.cart-popup#cart-popup
       - if @data[:cart_items]

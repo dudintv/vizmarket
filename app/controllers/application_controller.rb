@@ -15,11 +15,11 @@ class ApplicationController < ActionController::Base
         "Portfolios",
         "Vault"
       ],
-      user: {
-        "name": "Dmitry",
-        "surname": "Dudin",
-        "email": "svetoz@gmail.com"
-      },
+      # user: {
+      #   "name": "Dmitry",
+      #   "surname": "Dudin",
+      #   "email": "svetoz@gmail.com"
+      # },
       cart_items: [
         {
             "type": "Script",

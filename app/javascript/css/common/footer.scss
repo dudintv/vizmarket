@@ -16,11 +16,6 @@ footer.footer{
 
   a {
     @apply .py-1;
-    color: $white-80;
-
-    &:hover {
-      color: $white;
-    }
   }
 
   .icons a {

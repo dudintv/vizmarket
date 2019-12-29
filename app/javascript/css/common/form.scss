@@ -1,14 +1,41 @@
+form {
+  .field_with_errors {
+    border-right: 5px solid $red;
+  }
+
+  em {
+    color: $white-20;
+  }
+  label + em {
+    @apply .ml-2;
+  }
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: $white-20;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: $white-20;
+}
+
 input {
-  @apply .text-lg .w-full;
+  @apply .text-lg;
   height: 3rem;
   background-color: transparent;
   color: $white;
 
   &[type='text'],
+  &[type='email'],
   &[type='search'],
   &[type='password'] {
-    border-bottom: 1px solid $white-20;
+    @apply .w-full;
+  }
 
+  &[type='text'],
+  &[type='email'],
+  &[type='search'],
+  &[type='password'] {
+    background-color: $white-03;
     &:hover, &:focus, &:not(:placeholder-shown) {
       background-color: $white-05;
     }
@@ -16,6 +43,7 @@ input {
 
   &[type='button'],
   &[type='submit'] {
+    @apply .p-4 .leading-none;
     background: $red-grad-x;
     cursor: pointer;
 
@@ -24,4 +52,20 @@ input {
     }
   }
 
+  &[type='checkbox'] {
+    vertical-align: middle;
+
+    & + label {
+      @apply .ml-2;
+    }
+  }
+}
+
+.field {
+  @apply .my-2;
+}
+
+label {
+  @apply .uppercase .font-semibold;
+  color: $white-50;
 }
