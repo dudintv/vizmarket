@@ -5,6 +5,6 @@ FactoryBot.define do
     email
     password { 'qwerty' }
     password_confirmation { 'qwerty' }
-    before(:create, &:skip_confirmation!)
+    confirmed_at { Time.now.utc }
   end
 end
