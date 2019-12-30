@@ -1,18 +1,19 @@
-- if notice
+- if notice || alert
   .relative
-    .notification.notice.flex.items-center
-      h6.message = notice
-      a.close-notification href='#' onclick=="this.closest('.notification').remove(); event.preventDefault();"
-        svg fill="none" height="27" viewbox=("0 0 26 27") width="26" xmlns="http://www.w3.org/2000/svg" 
-          line stroke="white" stroke-opacity="0.5" x1="0.646447" x2="25.6464" y1="25.6464" y2="0.646447" /
-          line stroke="white" stroke-opacity="0.5" x1="25.6464" x2="0.646447" y1="26.3536" y2="1.35355" /
+    .notifications
 
+      - if notice
+          .notification.notice.flex.items-center
+            h6.message = notice
+            a.close-notification href='#' onclick=="this.closest('.notification').remove(); event.preventDefault();"
+              svg fill="none" height="27" viewbox=("0 0 26 27") width="26" xmlns="http://www.w3.org/2000/svg" 
+                line stroke="white" stroke-opacity="0.5" x1="0.646447" x2="25.6464" y1="25.6464" y2="0.646447" /
+                line stroke="white" stroke-opacity="0.5" x1="25.6464" x2="0.646447" y1="26.3536" y2="1.35355" /
 
-- if alert
-  .relative
-    .notification.alert.flex.items-center
-      h6.message = alert
-      a.close-notification href='#' onclick=="this.closest('.notification').remove(); event.preventDefault();"
-        svg fill="none" height="27" viewbox=("0 0 26 27") width="26" xmlns="http://www.w3.org/2000/svg" 
-          line stroke="white" stroke-opacity="0.5" x1="0.646447" x2="25.6464" y1="25.6464" y2="0.646447" /
-          line stroke="white" stroke-opacity="0.5" x1="25.6464" x2="0.646447" y1="26.3536" y2="1.35355" /
+      - if alert
+          .notification.alert.flex.items-center
+            h6.message = alert
+            a.close-notification href='#' onclick=="this.closest('.notification').remove(); event.preventDefault();"
+              svg fill="none" height="27" viewbox=("0 0 26 27") width="26" xmlns="http://www.w3.org/2000/svg" 
+                line stroke="white" stroke-opacity="0.5" x1="0.646447" x2="25.6464" y1="25.6464" y2="0.646447" /
+                line stroke="white" stroke-opacity="0.5" x1="25.6464" x2="0.646447" y1="26.3536" y2="1.35355" /
