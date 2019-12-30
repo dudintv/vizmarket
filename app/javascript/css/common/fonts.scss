@@ -39,3 +39,16 @@ $font-path: /fonts/;
     url('#{$font-path}OpenSans-Bold.woff') format('woff'),
     url('#{$font-path}OpenSans-Bold.ttf') format('truetype');
 }
+
+/////////////////////////////////////////////////////////////
+// LINE AWESOME
+.la,
+.lab,
+.lad,
+.lal,
+.lar,
+.las {
+  font-size: 1.5em;
+  vertical-align: -0.15em;
+  margin-right: .2em;
+}
