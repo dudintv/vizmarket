@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2019_12_30_034851) do
   create_table "authorizations", force: :cascade do |t|
     t.string "provider"
     t.string "uid"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
