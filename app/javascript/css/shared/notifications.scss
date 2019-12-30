@@ -33,11 +33,11 @@
   }
 
   .message {
-    @apply .ml-6 .mr-6;
+    @apply .mx-6 .my-2 .leading-snug;
   }
 
   .close-notification {
-    @apply p-4;
+    @apply .p-4 .h-full;
 
     &:hover {
       fill: white;

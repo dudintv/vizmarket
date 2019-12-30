@@ -10,13 +10,13 @@ let setup_popup_opener = (opener_name, popup_name) => {
   let popup = document.getElementById(popup_name);
   if (opener && popup) {
     opener.onclick = (e) => {
+      e.preventDefault();
       if (window.getComputedStyle(popup).display === 'block'){
         popup.style.display = 'none';
       }else{
         close_nav_popups();
         popup.style.display = 'block';
       }
-      e.preventDefault(); 
     }
   }
 }

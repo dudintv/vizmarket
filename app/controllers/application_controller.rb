@@ -6,6 +6,13 @@ class ApplicationController < ActionController::Base
   private
 
   def get_data
+    if user_signed_in?
+      user = {
+        "name": "Temp",
+        "surname": "Temporary",
+        "email": current_user.email
+      }
+    end
     @data = {
       menu: [
         "Scripts",
@@ -15,6 +22,7 @@ class ApplicationController < ActionController::Base
         "Portfolios",
         "Vault"
       ],
+      user: user,
       # user: {
       #   "name": "Dmitry",
       #   "surname": "Dudin",

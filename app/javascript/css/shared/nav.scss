@@ -3,7 +3,7 @@ header nav {
   background-color: $body-bg;
   height: 52px;
 
-  a {
+  a, button {
     @apply .h-full .w-full .flex .items-center .p-4;
 
     &:hover {
@@ -180,6 +180,7 @@ header nav {
 
   .popup {
     @apply .hidden .absolute .right-4 .shadow-2xl .rounded .overflow-hidden .pt-4;
+    z-index: 100;
     background-color: $item-bg;
     top: 64px;
     min-width: 20rem;
@@ -201,13 +202,16 @@ header nav {
     }
   }
 
+  .label-text {
+    @apply .block .normal-case .absolute;
+    top: -0.3rem;
+    left: 0.9rem;
+    color: $white-50;
+  }
+
   .input-text {
     @apply .mx-4 .my-4 .px-2;
 
-    & + .label-text {
-      @apply .absolute .text-sm .right-6 .bottom-6 .normal-case;
-      color: $white-50;
-    }
   }
 
   .signin-popup {
@@ -228,7 +232,7 @@ header nav {
     min-width: 20rem;
 
     .line, .cart-item {
-      @apply .flex-col .items-start;
+      @apply .flex-col .items-start .relative;
 
       &.button {
         @apply .p-0 .mt-4;

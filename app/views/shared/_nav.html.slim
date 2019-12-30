@@ -2,7 +2,7 @@ header
   nav role='navigation'
     .nav-left-half
       .logo
-        a href='#'
+        = link_to(root_path) do
           img src='/images/svg/logo.svg' height='52' width='26'
           img src='/images/svg/logo-name.svg' width="123" height="35"
       .nav-lg-md
@@ -54,7 +54,8 @@ header
             .line
               a.main-button href='#' Publisher portal
             .line
-              a.button href='#' Sign out
+              / a.button href='#' Sign out
+              = link_to('Sign out', destroy_user_session_path, class: 'button', method: :delete)
         - else
           .auth-signin
             = link_to(new_user_session_path) do
@@ -82,16 +83,19 @@ header
           h5 Empty cart
           span Add product by click on the price
     .popup.signin-popup#signin-popup
-      .line
-        input.input-text type='text' placeholder=' '
-        label.label-text for='email' Email
-      .line
-        input.input-text type='password' placeholder=' '
-        label.label-text for='email' Password
+      = form_tag session_path(:user) do
+        .line
+          label.label-text for='email' Email
+          / input.input-text type='text' placeholder=' '
+          = text_field_tag('user[email]', '', class: 'input-text')
+        .line
+          label.label-text for='password' Password
+          / input.input-text type='password' placeholder=' '
+          = password_field_tag('user[password]', '', class: 'input-text')
+        .line.button
+          button.main-button Sign in
       .line.button
-        a.main-button href="#" Sign in
-      .line.button
-        a.button href='#' Forgot password?
+        = link_to "Forgot your password?", new_password_path(:user), class: 'button'
       .line.socnets
         span or login with 
         - for socnet in @data[:socnets]
