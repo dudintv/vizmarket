@@ -1,0 +1,4 @@
+h1= "Authorization through #{@auth.provider}"
+p
+  | To appove your email, click the link:
+  = link_to 'Approve my email', confirm_authorization_url(@auth.id, token: @auth.confirmation_token)

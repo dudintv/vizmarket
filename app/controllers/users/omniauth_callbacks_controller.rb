@@ -3,9 +3,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :authorize, except: [:failure]
 
-  def facebook
-    render json: request.env['omniauth.auth']
-  end
+  def facebook; end
 
   # More info at:
   # https://github.com/plataformatec/devise#omniauth

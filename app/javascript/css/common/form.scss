@@ -74,6 +74,7 @@ label {
   @apply .p-4;
   border: 1px solid $orange;
   border-right: 5px solid $orange;
+  background-color: $item-bg;
 
   li:before {
     @extend %before-icon-exclamation-circle;

@@ -26,12 +26,14 @@ class User < ApplicationRecord
     if user
       # if user with the email is already exist
       user.authorizations.create(provider: auth.provider, 
-                                 uid: auth.uid)
+                                 uid: auth.uid,
+                                 confirmed_at: Time.zone.now)
     else
       # if user is a new one
       user = User.generate(email)
       user.authorizations.create(provider: auth.provider, 
-                                 uid: auth.uid)
+                                 uid: auth.uid,
+                                 confirmed_at: Time.zone.now)
     end
     user
   end
