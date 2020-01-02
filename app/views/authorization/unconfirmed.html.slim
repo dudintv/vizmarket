@@ -1,16 +1,16 @@
 .container.mx-auto
-  h1 This aythorization hasn't confirmed
-  p Please, prove that it is your email by clicking on the link in the email.
-  p If you didn't recieve the message:
-  ul
-    li Check in your SPAM foler
-    li
-      = link_to "Re-send confimation message", resend_authorization_path(@authorization), method: :post
-      | to #{@email}
-    li
-      | Probable email isn't correct, you can change it:
-      = form_tag authorizations_path do |f|
-        label for='email' email
-        = text_field_tag 'email', @email
-        = submit_tag 'Сохранить'
-
+  h1.mt-12.mb-4.text-center This authorization hasn't confirmed
+  p.my-4 Please, prove that it is your email address by clicking on the link in the email.
+  p
+    | If you didn't recieve the message:
+    ul.options
+      li Check in your SPAM foler
+      li
+        =' link_to "Re-send confimation message ", resend_authorization_path(@authorization), method: :post, class: 'small-button red-bg'
+        | to #{@email}
+      li.mt-4
+        | Probably email isn't correct, you can change it:
+        = form_tag authorizations_path do |f|
+          label for='email' email
+          = text_field_tag 'email', @email
+          = submit_tag 'Save and re-send'

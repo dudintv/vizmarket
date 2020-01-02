@@ -1,5 +1,6 @@
 class AuthorizationController < ApplicationController
   # skip_after_action :verify_authorized
+  layout 'account'
   
   def confirm
     authorization = Authorization.find(params[:id])

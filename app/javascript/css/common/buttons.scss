@@ -1,11 +1,7 @@
-.red-bg {
-  background-image: $red-grad-x;
-
-  &:hover {
-    background-image: $red-grad-x-hover;
-  }
-}
-
 .long-button {
   @apply .flex .text-center .justify-center .block .w-full .my-4 .py-2;
+}
+
+.small-button {
+  @apply .inline-block .px-1;
 }

@@ -2,6 +2,7 @@
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :authorize, except: [:failure]
+  layout 'account'
 
   def facebook; end
 
