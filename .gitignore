@@ -46,7 +46,7 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore secrets keys
-config/master.key
+/config/master.key
 
 #мои личные добавки
 Capfile

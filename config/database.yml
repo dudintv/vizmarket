@@ -2,20 +2,17 @@ default: &default
   adapter: postgresql
   encoding: unicode
 
-  host: <%= ENV['DATABASE_HOST'] %>
-  port: <%= ENV['DATABASE_PORT'] %>
-  username: <%= ENV['DATABASE_USER'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  url: <%= Rails.application.credentials.dig Rails.env.to_sym, :database, :url %>
+  database: <%= Rails.application.credentials.dig Rails.env.to_sym, :database, :name %>
+  username: <%= Rails.application.credentials.dig Rails.env.to_sym, :database, :user %>
+  password: <%= Rails.application.credentials.dig Rails.env.to_sym, :database, :password %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: <%= ENV['DATABASE_NAME_DEV'] %>
 
 test:
   <<: *default
-  database: <%= ENV['DATABASE_NAME_TEST'] %>
 
 production:
   <<: *default
-  database: <%= ENV['DATABASE_NAME'] %>
