@@ -46,8 +46,7 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore secrets keys
-config/secrets.yml.key
-config/initializers/secret_token.rb
+config/master.key
 
 #мои личные добавки
 Capfile
