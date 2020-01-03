@@ -47,4 +47,9 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = { host: "localhost" }
+
+  # OmniAuth
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(provider: 'facebook', uid: '123', info: { email: 'facebook@user.com' })
+  OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new(provider: 'google', uid: '123', info: { email: 'google@user.com' })
 end

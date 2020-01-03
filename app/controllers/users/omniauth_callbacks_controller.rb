@@ -8,14 +8,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google; end
 
-  # More info at:
-  # https://github.com/plataformatec/devise#omniauth
-
-  # GET|POST /resource/auth/twitter
-  # def passthru
-  #   super
-  # end
-
   # GET|POST /users/auth/twitter/callback
   def failure
     redirect_to root_path
@@ -45,12 +37,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       create_new_authorization
     end
   end
-
-  # def success_omniauth_sign_in(user, kind)
-  #   flash[:notice] = "Successful sign in through #{kind.capitalize}"
-  #   set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
-  #   sign_in_and_redirect user, event: :authentication
-  # end
 
   def create_new_authorization
     if @auth.info && @auth.info[:email]
