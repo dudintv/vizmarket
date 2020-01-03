@@ -35,6 +35,7 @@ group :development, :test do
   gem "rspec-rails", "~> 4.0.0.beta3"
   gem 'factory_bot_rails'
   # gem 'rails-controller-testing'
+  gem 'ffaker'
 end
 
 group :development do

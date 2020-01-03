@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: %i[facebook google]
   has_many :authorizations, dependent: :destroy
+  has_many :products, dependent: :destroy
 
   def self.generate(email)
     user = User.where(email: email).first
