@@ -7,7 +7,7 @@ h4, h5, h6 {
 }
 
 h1 {
-  @apply .text-5xl;
+  @apply .text-5xl .mt-12 .mb-4 .text-center;
   font-family: MuseoSans;
   font-weight: 700;
 }

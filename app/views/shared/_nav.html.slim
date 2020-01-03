@@ -45,17 +45,16 @@ header
       .auth
         - if @data[:user]
           .auth-user
-            a#open-user href='#'
+            = link_to profile_path, id: 'open-user' do
               img src='/images/svg/default_avatar.svg' width='40' height='40'
+              ' &nbsp;
+              span.normal-case= current_account.email
           .popup.user-popup#user-popup
             .line.edit
               span.name= @data[:user][:email]
               a.button href='#' Edit info
-            .line
-              a.main-button href='#' Publisher portal
-            .line
-              / a.button href='#' Sign out
-              = link_to('Sign out', destroy_user_session_path, class: 'button', method: :delete)
+            .line = link_to('Publisher portal', creator_products_path, class: 'main-button') 
+            .line = link_to('Sign out', destroy_user_session_path, class: 'button', method: :delete)
         - else
           .auth-signin
             = link_to(new_user_session_path, id: 'open-signin') do

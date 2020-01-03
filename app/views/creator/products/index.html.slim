@@ -1,0 +1,11 @@
+h1 Publisher Portal
+.top-board
+  .profile-info
+    ul.profile-info-list
+      / li= @user.name
+      li= @user.email
+      li= link_to 'Publisher settings', creator_edit_settings_path
+  .new-product
+    = link_to 'New product', new_creator_product_path, class: 'long-button red-bg'
+  .earn-money
+#creator-products-app
