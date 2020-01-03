@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
   devise_group :account, contains: [:user, :admin]
-
+  # before_action :authenticate_user!
   before_action :get_data
 
   private
 
   # for OmniAuth
   def success_omniauth_sign_in(user, kind)
-    flash[:notice] = "Successfully authenticated from #{kind}"
+    flash[:notice] = "Successfully authenticated from #{kind.capitalize}"
     sign_in_and_redirect user, event: :authentication
   end
 

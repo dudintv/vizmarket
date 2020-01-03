@@ -6,6 +6,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def facebook; end
 
+  def google; end
+
   # More info at:
   # https://github.com/plataformatec/devise#omniauth
 
@@ -44,11 +46,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  def success_omniauth_sign_in(user, kind)
-    flash[:notice] = "Successful sign in through #{kind}"
-    set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
-    sign_in_and_redirect user, event: :authentication
-  end
+  # def success_omniauth_sign_in(user, kind)
+  #   flash[:notice] = "Successful sign in through #{kind.capitalize}"
+  #   set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
+  #   sign_in_and_redirect user, event: :authentication
+  # end
 
   def create_new_authorization
     if @auth.info && @auth.info[:email]
@@ -59,7 +61,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to new_user_registration_url
       end
     else
-      flash.now[:notice] = "Successful sign in through #{@auth.provider}"
+      flash.now[:notice] = "Successful sign in through #{@auth.provider.capitalize}"
       session[:auth] = { uid: @auth.uid, provider: @auth.provider }
       @authorization = Authorization.new(provider: @auth.provider, uid: @auth.uid.to_s)
       render 'authorization/new'
