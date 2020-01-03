@@ -7,10 +7,11 @@ header
           img src='/images/svg/logo-name.svg' width="123" height="35"
       .nav-lg-md
         ul.nav.horizontal-nav
-          - selected_item = "Scenes"
-          - for item in @data[:menu]
-            li(data-item=item)
-              a(href='#')= item
+          li.line = link_to 'Scripts',  scripts_path, class: @selected=='scripts' ? 'selected' : ''
+          li.line = link_to 'Scenes',   scenes_path,  class: @selected=='scenes'  ? 'selected' : ''
+          li.line = link_to 'Plugins',  plugins_path, class: @selected=='plugins' ? 'selected' : ''
+          li.line = link_to 'Free',     free_path,    class: @selected=='free'    ? 'selected' : ''
+          li.line = link_to 'Vault',    vault_path,   class: @selected=='vault'   ? 'selected' : ''
     .nav-right-half
       .nav-lg-md
         .search
@@ -34,9 +35,12 @@ header
               .search
                 input type='text' name='search' placeholder=' '
                 a.button-search.over-input href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
-            - for item in @data[:menu]
-              li.line data-item=item
-                a href='#'= item
+            
+            li.line = link_to 'Scripts',  scripts_path, class: @selected=='scripts' ? 'selected' : ''
+            li.line = link_to 'Scenes',   scenes_path,  class: @selected=='scenes'  ? 'selected' : ''
+            li.line = link_to 'Plugins',  plugins_path, class: @selected=='plugins' ? 'selected' : ''
+            li.line = link_to 'Free',     free_path,    class: @selected=='free'    ? 'selected' : ''
+            li.line = link_to 'Vault',    vault_path,   class: @selected=='vault'   ? 'selected' : ''
       .cart
           a#open-cart href='#'
             img src='/images/svg-icons/cart.svg' width="24" height="24"
