@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # for OmniAuth
+  def success_omniauth_sign_in(user, kind)
+    flash[:notice] = "Successfully authenticated from #{kind}"
+    sign_in_and_redirect user, event: :authentication
+  end
+
+  #########################################################################
+  #TEMP DATA:
+
   def get_data
     if user_signed_in?
       user = {

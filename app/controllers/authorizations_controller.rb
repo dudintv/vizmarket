@@ -1,4 +1,4 @@
-class AuthorizationController < ApplicationController
+class AuthorizationsController < ApplicationController
   # skip_after_action :verify_authorized
   layout 'account'
   
@@ -20,5 +20,7 @@ class AuthorizationController < ApplicationController
 
   def resend
     Authorization.find(params[:id])&.send_confirmation
+    flash[:notice] = 'Confirmation code was sended.'
+    redirect_to root_path
   end
 end
