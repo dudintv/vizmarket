@@ -1,7 +1,7 @@
 %before-icon-option {
   font-family: 'Line Awesome Free';
   font-weight: 900;
-  content: "\f245";
+  @extend .la-mouse-pointer:before;
   font-size: 1.5rem;
   position: relative;
   left: -0.3rem;

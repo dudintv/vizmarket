@@ -1,5 +1,7 @@
 @import "./tailwind/preflight.css";
 
+@import "./libs/line-awesome.scss";
+
 @import "./common/colors.scss";
 @import "./common/bg.scss";
 @import "./common/fonts.scss";
