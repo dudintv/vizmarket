@@ -21,7 +21,15 @@ let setup_popup_opener = (opener_name, popup_name) => {
   }
 }
 
-window.onload = () => {
+// click outside to close menu
+window.onmouseup = (e) => {
+  let nav = document.querySelector('header nav');
+  if (!nav.contains(e.target)) {
+    close_nav_popups();
+  }
+}
+
+onload = () => {
   setup_popup_opener('burger',      'nav-dropdown');
   setup_popup_opener('open-search', 'search-popup');
   setup_popup_opener('open-signin', 'signin-popup');
@@ -35,10 +43,7 @@ window.onload = () => {
   });
 }
 
-// click outside to close menu
-window.onmouseup = (e) => {
-  let nav = document.querySelector('header nav');
-  if (!nav.contains(e.target)) {
-    close_nav_popups();
-  }
-}
+window.onload = onload;
+document.addEventListener("turbolinks:load", function() {
+  onload();
+})

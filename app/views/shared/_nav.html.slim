@@ -58,8 +58,8 @@ header
               = link_to('Sign out', destroy_user_session_path, class: 'button', method: :delete)
         - else
           .auth-signin
-            = link_to(new_user_session_path) do
-              .sign-in#open-signin Log in
+            = link_to(new_user_session_path, id: 'open-signin') do
+              .sign-in Log in
           .auth-signup
             = link_to(new_user_registration_path) do
               .sign-up Sign up
