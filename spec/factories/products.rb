@@ -10,6 +10,7 @@ FactoryBot.define do
     featured { false }
     deleted_at { nil }
     user
+    kind
 
     factory :featured_product do
       featured { true }
