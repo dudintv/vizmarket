@@ -5,8 +5,11 @@ class Creator::ProductsController < ApplicationController
   def index
     @user = current_user
     @counts = {
-      all: 123 # Product.all.count
+      all: Product.all.count
     }
-    # @products = Product.all
+    @products = Product.all
+  end
+
+  def new
   end
 end

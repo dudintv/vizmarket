@@ -3,5 +3,6 @@ class Creator::SettingsController < ApplicationController
   end
 
   def update
+    render :edit
   end
 end

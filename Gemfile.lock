@@ -56,6 +56,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.5)
@@ -93,6 +95,10 @@ GEM
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jwt (2.2.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -136,6 +142,7 @@ GEM
       omniauth (~> 1.9)
     orm_adapter (0.5.0)
     pg (1.2.1)
+    public_suffix (4.0.2)
     puma (3.12.2)
     rack (2.0.8)
     rack-proxy (0.6.5)
@@ -260,6 +267,7 @@ DEPENDENCIES
   factory_bot_rails
   ffaker
   jbuilder (~> 2.7)
+  letter_opener
   listen (>= 3.0.5, < 3.2)
   omniauth
   omniauth-facebook
