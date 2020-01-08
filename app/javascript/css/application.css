@@ -23,3 +23,6 @@
 @import "./product/grid-item.scss";
 
 @import "tailwind/tailwind";
+
+/* TESTS */
+@import "test/colors.scss";

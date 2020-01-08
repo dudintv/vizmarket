@@ -1,0 +1,41 @@
+.test{
+  &-text-red { color: $red; }
+  &-text-red-hover { color: $red-hover; }
+  &-text-orange { color: $orange; }
+  &-text-orange-hover { color: $orange-hover; }
+
+  &-text-pale-blue { color: $pale-blue; }
+  &-text-light-blue { color: $light-blue; }
+  &-text-light-blue-hover { color: $light-blue-hover; }
+
+  &-text-lime { color: $lime; }
+  &-text-green { color: $green; }
+  
+  &-text-white { color: $white; }
+  &-text-white-on-black { color: $white-on-black; }
+  &-text-white-80 { color: $white-80; }
+  &-text-white-50 { color: $white-50; }
+  &-text-white-20 { color: $white-20; }
+  &-text-white-05 { color: $white-05; }
+  &-text-white-03 { color: $white-03; }
+
+  ///////////////////////////////////////////
+
+  &-bg-red { background-color: $red; }
+  &-bg-red-hover { background-color: $red-hover; }
+  &-bg-orange { background-color: $orange; }
+  &-bg-orange-hover { background-color: $orange-hover; }
+
+  &-bg-pale-blue { background-color: $pale-blue; }
+  &-bg-light-blue { background-color: $light-blue; }
+  &-bg-light-blue-hover { background-color: $light-blue-hover; }
+
+  &-bg-lime { background-color: $lime; }
+  &-bg-green { background-color: $green; }
+
+  &-bg-body { background-color: $body-bg; }
+  &-bg-body-darker { background-color: $body-bg-darker; }
+  &-bg-item { background-color: $item-bg; }
+  &-bg-item-darker { background-color: $item-bg-darker; }
+  &-bg-item-gray { background-color: $item-bg-gray; }
+}

@@ -26,4 +26,8 @@ Rails.application.routes.draw do
     get 'edit_settings', to: 'settings#edit'
     post 'update_settings', to: 'settings#update'
   end
+
+  namespace :test do
+    get 'colors'
+  end
 end
