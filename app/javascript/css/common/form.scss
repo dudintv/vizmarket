@@ -40,11 +40,7 @@ input {
   }
 
   &[type='checkbox'] {
-    vertical-align: middle;
-
-    & + label {
-      @apply .ml-2;
-    }
+    @apply .align-middle .mr-2;
   }
 }
 
@@ -55,6 +51,13 @@ input {
 label {
   @apply .uppercase .font-semibold;
   color: $white-50;
+}
+
+select {
+  background-color: $white-05;
+  color: $white;
+  border: 1px solid $white;
+  border-radius: 100%;
 }
 
 //////////////////////////////////////////////////////////////

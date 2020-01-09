@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from '../creator/products'
+import App from '../creator'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
