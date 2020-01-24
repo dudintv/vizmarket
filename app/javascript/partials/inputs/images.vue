@@ -1,0 +1,42 @@
+<template lang="pug">
+  .form-field
+    ImageLoader(
+      :Images="images"
+      multiple
+      @input="updateInput"
+      keyName="name"
+      valueName="image"
+    )
+    .tip(v-if="$slots['tip']")
+      slot(name="tip")
+</template>
+
+<script>
+import ImageLoader from "./sources/VueImageLoader.vue";
+
+export default {
+  components: {
+    ImageLoader,
+  },
+  props: {
+    name: String,
+    value: Array,
+  },
+  data: function () {
+    return {
+      images: [],
+    }
+  },
+  methods: {
+    updateInput: function (newImageList) {
+      this.$emit('input', newImageList)
+    }
+  },
+  mounted: function () {
+    this.images = this.value;
+  }
+}
+</script>
+
+<style>
+</style>

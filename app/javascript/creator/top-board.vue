@@ -6,7 +6,7 @@
       li {{ user.email }}
       li: a(href='/') Publisher settings
     .new-product
-      a.w-56.long-button.red-bg(href='/') New product
+      a.w-56.long-button.red-bg(href='/creator/products/new') New product
     .earn-money &nbsp;
 </template>
 
@@ -24,11 +24,13 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "../css/common/colors.scss";
+
   ul.separated li {
     @apply .inline .mr-2;
     & + li {
       @apply .pl-3;
-      border-left: 1px solid hsla(0,0,100,0.2);
+      border-left: 1px solid $white-20;
     }
   }
 </style>

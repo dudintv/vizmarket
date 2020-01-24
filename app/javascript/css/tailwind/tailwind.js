@@ -43,6 +43,9 @@ module.exports = {
       orange: 'hsl(18, 83%, 61%)',
       'orange-hover': 'hsl(19, 100%, 69%)',
       'pale-blue': 'hsl(198, 51%, 50%)',
+      'pale-blue-50': 'hsla(198, 51%, 50%, .5)',
+      'pale-blue-20': 'hsla(198, 51%, 50%, .2)',
+      'pale-blue-10': 'hsla(198, 51%, 50%, .1)',
       'light-blue': 'hsl(196, 28%, 62%)',
       lime: 'hsl(76, 78%, 45%)',
       green: 'hsl(96, 66%, 38%)',
@@ -206,6 +209,7 @@ module.exports = {
     borderWidth: {
       default: '1px',
       '0': '0',
+      '1': '1px',
       '2': '2px',
       '4': '4px',
       '8': '8px',

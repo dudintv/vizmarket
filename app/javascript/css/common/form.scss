@@ -5,11 +5,29 @@ input:-moz-placeholder, textarea:-moz-placeholder {
   color: $white-20;
 }
 
-input {
+///////////////////////////////////////////////////////
+
+label {
+  @apply .uppercase .font-semibold;
+  color: $white-50;
+}
+
+input, textarea, select {
   @apply .text-lg;
-  height: 3rem;
-  background-color: transparent;
+  background-color: $pale-blue-10;
   color: $white;
+}
+
+textarea {
+  min-height: 8rem;
+
+  &:hover, &:focus, &:not(:placeholder-shown) {
+    background-color: $pale-blue-20;
+  }
+}
+
+input {
+  height: 3rem;
 
   &[type='text'],
   &[type='email'],
@@ -22,9 +40,15 @@ input {
   &[type='email'],
   &[type='search'],
   &[type='password'] {
-    background-color: $white-03;
+    background-color: $pale-blue-05;
     &:hover, &:focus, &:not(:placeholder-shown) {
-      background-color: $white-05;
+      background-color: $pale-blue-20;
+    }
+  }
+
+  &[type='number'] {
+    &:hover, &:focus {
+      background-color: $pale-blue-20;
     }
   }
 
@@ -44,24 +68,12 @@ input {
   }
 }
 
+//////////////////////////////////////////////////////////////
+// DEVICE:
 .field {
   @apply .my-2;
 }
 
-label {
-  @apply .uppercase .font-semibold;
-  color: $white-50;
-}
-
-select {
-  background-color: $white-05;
-  color: $white;
-  border: 1px solid $white;
-  border-radius: 100%;
-}
-
-//////////////////////////////////////////////////////////////
-// DEVICE:
 %before-icon-exclamation-circle {
   font-family: 'Line Awesome Free';
   font-weight: 900;
@@ -104,4 +116,79 @@ form {
   label + em {
     @apply .ml-2;
   }
+}
+
+// :DEVISE
+//////////////////////////////////////////////////
+
+@keyframes blink {
+  from { border-color: transparent; }
+  10% { border-color: $pale-blue-50; }
+  to { border-color: transparent; }
+}
+
+.form-field {
+  @apply my-4;
+}
+
+.field-with-label {
+  @apply relative;
+
+  input, select {
+    @apply w-full h-16 px-4 pt-4;
+    background-color: $pale-blue-10;
+    outline: none;
+  }
+
+  textarea {
+    @apply w-full h-32 px-4 pt-8 pb-4;
+    display:block;
+    outline: none;
+  }
+
+  label {
+    @apply absolute left-0 top-0 w-full h-full pointer-events-none text-white text-sm;
+
+    .input-name {
+      @apply absolute top-2 left-4 text-white-80 normal-case;
+      transform: translateY(70%) scale(1.5);
+      transform-origin: left center;
+      transition: all .3s ease;
+    }
+
+    &::after {
+      content: "";
+      @apply absolute left-0 top-0 w-full h-full border-b-2 border-pale-blue;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: all .3s ease;
+    }
+  }
+
+  // FOCUS EFFECT:
+  input:focus, input:not(:placeholder-shown),
+  select:focus, select:not(:placeholder-shown),
+  textarea:focus, textarea:not(:placeholder-shown) {
+    & + label .input-name{
+      @apply text-pale-blue;
+      transform: translateY(0%) scale(1);
+    }
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    & + label {
+      border-width: 1px;
+      border-color: transparent;
+      animation: blink 0.5s linear;
+    }
+    & + label::after{
+      @apply text-pale-blue;
+      transform: scaleX(1);
+    }
+  }
+}
+
+.tip {
+  @apply text-sm text-white-50 pl-4;
 }

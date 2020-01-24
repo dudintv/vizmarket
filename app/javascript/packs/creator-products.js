@@ -1,9 +1,19 @@
 import Vue from 'vue'
-import App from '../creator'
+import ProductsApp from '../creator'
+import NewProductApp from '../creator/products/new'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-    render: h => h(App)
+    render: h => h(ProductsApp)
   }).$mount()
-  document.getElementById('creator-products-app').appendChild(app.$el)
+  if (document.getElementById('creator-products-app'))
+    document.getElementById('creator-products-app').appendChild(app.$el)
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new Vue({
+    render: h => h(NewProductApp)
+  }).$mount()
+  if (document.getElementById('creator-new-product-app'))
+    document.getElementById('creator-new-product-app').appendChild(app.$el)
 })

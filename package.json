@@ -6,12 +6,17 @@
     "@rails/activestorage": "^6.0.0-alpha",
     "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "^4.0.7",
+    "postcss-custom-properties": "^9.0.2",
     "precss": "^4.0.0",
     "tailwindcss": "^1.1.2",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.10",
+    "vue-image-loader": "^1.0.4",
     "vue-loader": "^15.7.1",
-    "vue-template-compiler": "^2.6.10"
+    "vue-select": "^3.4.0",
+    "vue-template-compiler": "^2.6.10",
+    "vue-vimeo-player": "^0.1.0",
+    "vue-youtube-embed": "^2.2.2"
   },
   "version": "0.1.0",
   "devDependencies": {

@@ -59,6 +59,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  @import "../../css/common/colors.scss";
+
   li.filter {
     @apply .mr-2;
     & + & {
@@ -71,5 +73,12 @@ export default {
     color: white;
     font-weight: bold;
     border-bottom: 1px solid white;
+  }
+
+  select {
+    background-color: $white-05;
+    color: $white;
+    border: 1px solid $white;
+    border-radius: 100%;
   }
 </style>
