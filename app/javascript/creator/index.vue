@@ -1,24 +1,13 @@
 <template lang='pug'>
-  .creator
-    TopBoard
-    ProductsFilter
-    ProductsList
+  ProductsList
 </template>
 
 <script>
-import TopBoard from './top-board.vue';
-import ProductsFilter from './products/filter.vue';
-import ProductsList from './products/index.vue';
+import ProductsList from './ProductsListPage'
 
 export default {
   components: {
-    TopBoard, 
-    ProductsFilter, 
     ProductsList,
   },
 }
 </script>
-
-<style>
-
-</style>

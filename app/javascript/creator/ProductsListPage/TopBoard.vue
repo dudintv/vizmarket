@@ -23,14 +23,11 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  @import "../css/common/colors.scss";
-
+<style lang="scss" scoped>
   ul.separated li {
-    @apply .inline .mr-2;
+    @apply inline mr-2;
     & + li {
-      @apply .pl-3;
-      border-left: 1px solid $white-20;
+      @apply pl-3 border-l border-white-20;
     }
   }
 </style>

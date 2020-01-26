@@ -24,15 +24,15 @@
 </template>
 
 <script>
-import TextInput from "../../partials/inputs/text.vue"
-import TextareaInput from "../../partials/inputs/textarea.vue"
-import RadioInput from "../../partials/inputs/radio.vue"
-import PriceInput from "../../partials/inputs/price.vue"
-import ImageInput from "../../partials/inputs/image.vue"
-import ImagesInput from "../../partials/inputs/images.vue"
-import FilesInput from "../../partials/inputs/files.vue"
-import VideosInput from "../../partials/inputs/videos.vue"
-import SelectInput from "../../partials/inputs/select.vue"
+import TextareaInput from "../../components/inputs/textarea.vue"
+import TextInput    from "../../components/inputs/text.vue"
+import RadioInput   from "../../components/inputs/radio.vue"
+import PriceInput   from "../../components/inputs/price.vue"
+import ImageInput   from "../../components/inputs/image.vue"
+import ImagesInput  from "../../components/inputs/images.vue"
+import FilesInput   from "../../components/inputs/files.vue"
+import VideosInput  from "../../components/inputs/videos.vue"
+import SelectInput  from "../../components/inputs/select.vue"
 
 export default {
   components: {

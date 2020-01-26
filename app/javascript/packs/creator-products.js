@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import ProductsApp from '../creator'
-import NewProductApp from '../creator/products/new'
+import NewProductApp from '../creator/ProductEditPage/new'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
