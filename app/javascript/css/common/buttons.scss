@@ -1,7 +1,7 @@
 .long-button {
-  @apply .flex .text-center .justify-center .block .w-full .my-4 .py-2;
+  @apply flex text-center justify-center block w-full py-2;
 }
 
 .small-button {
-  @apply .inline-block .px-1;
+  @apply inline-block px-1;
 }

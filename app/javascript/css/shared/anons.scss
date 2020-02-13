@@ -12,7 +12,7 @@ $anons-grad: linear-gradient(to right, color($body-bg-darker, alpha(.8)) 0%, col
 
     &:hover {
       @apply .shadow-2xl z-50;
-      // transform: translateY(-2px);
+      transform: translateY(-2px);
     }
 
     h2 {
