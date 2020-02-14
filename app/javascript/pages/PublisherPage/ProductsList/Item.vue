@@ -1,5 +1,5 @@
 <template lang="pug">
-  .creator-product.bg-item.shadow-xl.flex.flex-col.lg--flex-row
+  .publisher-product.bg-item.shadow-xl.flex.flex-col.lg--flex-row
     .product-content.flex.flex-col.sm--flex-row.flex-grow
       .product-cover.min-w-xs.bg-body-darker
         img(src="product.cover" v-if="product.cover")

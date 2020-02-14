@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TextInput from "../../components/inputs/text.vue"
+import TextInput from "components/inputs/text.vue"
 
 export default {
   components: {

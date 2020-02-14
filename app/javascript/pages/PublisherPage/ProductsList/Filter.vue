@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../css/common/colors.scss";
+  @import "css/common/colors.scss";
 
   li.filter {
     @apply .mr-2;

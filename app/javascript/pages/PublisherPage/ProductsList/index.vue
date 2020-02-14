@@ -8,8 +8,8 @@
 
 <script>
 import TopBoard from './TopBoard'
-import ProductsFilter from './filter';
-import ProductItem from './item';
+import ProductsFilter from './Filter';
+import ProductItem from './Item';
 
 export default {
   components: {
