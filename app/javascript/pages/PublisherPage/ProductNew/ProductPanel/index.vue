@@ -2,6 +2,7 @@
   .edit-product-panel
     .epp-nav
       .epp-preview
+        ProductThumbnail
       .epp-menu
     .epp-content
       component(is="ProductTitleTab")
@@ -10,6 +11,7 @@
 </template>
 
 <script>
+import ProductThumbnail from 'components/product/thumbnail'
 import ProductTitleTab from './TitleTab'
 import ProductMediaTab from './MediaTab'
 import ProductTextsTab from './TextsTab'
@@ -17,6 +19,7 @@ import ProductFilesTab from './FilesTab'
 
 export default {
   components: {
+    ProductThumbnail,
     ProductTitleTab,
     ProductMediaTab,
     ProductTextsTab,
@@ -28,7 +31,7 @@ export default {
 <style style="scss" scoped>
   .edit-product-panel {
     display: grid;
-    grid-template-columns: 286px auto;
+    grid-template-columns: 284px auto;
     grid-template-rows: auto 100px;
     grid-template-areas: 
       "nav content"

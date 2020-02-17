@@ -42,16 +42,16 @@ $red-grad-x: linear-gradient(to right, $orange, $red);
 $red-grad-y: linear-gradient($red, $orange);
 $red-grad-x-hover: linear-gradient(to right, color($orange brighten(10%)), color($red brighten(10%)));
 $red-grad-y-hover: linear-gradient(color($red brighten(10%)), color($orange brighten(10%)));
-// :root {
-//   --color-red: #{$red};
-//   --color-red-hover: #{$red-hover};
-//   --color-orange: #{$orange};
-//   --color-orange-hover: #{$orange-hover};
-//   --color-red-grad-x: #{$red-grad-x};
-//   --color-red-grad-x-hover: #{$red-grad-x-hover};
-//   --color-red-grad-y: #{$red-grad-y};
-//   --color-red-grad-y-hover: #{$red-grad-y-hover};
-// }
+:root {
+  --color-red: #{$red};
+  --color-red-hover: #{$red-hover};
+  --color-orange: #{$orange};
+  --color-orange-hover: #{$orange-hover};
+  --color-red-grad-x: #{$red-grad-x};
+  --color-red-grad-x-hover: #{$red-grad-x-hover};
+  --color-red-grad-y: #{$red-grad-y};
+  --color-red-grad-y-hover: #{$red-grad-y-hover};
+}
 
 // BLUE
 $pale-blue: hsl(198, 51%, 50%);
@@ -63,23 +63,23 @@ $light-blue: hsl(196, 28%, 62%);
 $light-blue-hover: color($light-blue brighten(10%));
 $blue-mark-grad: linear-gradient(120deg, #0081ce 0%, rgba(0, 115, 184, .680985) 2.68%, rgba(0, 102, 162, .376874) 7.07%, rgba(0, 85, 136, 0) 28.7%),
                  linear-gradient(90deg, rgba(0, 77, 124, .25) 0%, rgba(0, 45, 71, 0) 100%);
-// :root{
-//   --color-pale-blue: #{$pale-blue};
-//   --color-pale-blue-50: #{$pale-blue-50};
-//   --color-pale-blue-10: #{$pale-blue-10};
-//   --color-light-blue: #{$light-blue};
-//   --color-light-blue-hover: #{$light-blue-hover};
-//   --color-blue-mark-grad: #{$blue-mark-grad};
-// }
+:root{
+  --color-pale-blue: #{$pale-blue};
+  --color-pale-blue-50: #{$pale-blue-50};
+  --color-pale-blue-10: #{$pale-blue-10};
+  --color-light-blue: #{$light-blue};
+  --color-light-blue-hover: #{$light-blue-hover};
+  --color-blue-mark-grad: #{$blue-mark-grad};
+}
 
 // GREEEN
 $lime: hsl(76, 78%, 45%);
 $green: hsl(96, 66%, 38%);
 $green-grad-x: linear-gradient(to right, $lime, $green);
 $green-grad-y: linear-gradient($lime, $green);
-// :root{
-//   --color-lime: #{$lime};
-//   --color-green: #{$green};
-//   --color-green-grad-x: #{$green-grad-x};
-//   --color-green-grad-y: #{$green-grad-y};
-// }
+:root{
+  --color-lime: #{$lime};
+  --color-green: #{$green};
+  --color-green-grad-x: #{$green-grad-x};
+  --color-green-grad-y: #{$green-grad-y};
+}
