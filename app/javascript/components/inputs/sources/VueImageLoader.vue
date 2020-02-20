@@ -97,10 +97,10 @@ export default {
 </script>
 <style scoped lang="scss">
 .container {
-  @apply bg-pale-blue-10 p-4;
+  @apply bg-blue-10 p-4;
 
   &:hover {
-    @apply bg-pale-blue-20;
+    @apply bg-blue-20;
   }
 }
 
@@ -131,7 +131,7 @@ export default {
   font-size: 40px;
   margin: 10px 20px;
   &:hover {
-    @apply text-pale-blue;
+    @apply text-blue;
   }
   &:active {
     color: lightcoral;

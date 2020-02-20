@@ -21,7 +21,7 @@ export default {
     @apply w-32 relative;
 
     &::after {
-      @apply absolute bottom-3 left-4 text-pale-blue pointer-events-none;
+      @apply absolute bottom-3 left-4 text-blue pointer-events-none;
       content: "$";
     }
 

@@ -1,8 +1,8 @@
-.grid {
+.products-grid {
+  @apply justify-center;
   display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fill, 230px);
   grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 230px);
 }
 
 .grid-full-row {

@@ -1,5 +1,5 @@
 footer.footer{
-  background-color: $item-bg-darker;
+  @apply bg-item-darker;
 
   .pattern {
     background-image: url(/images/svg/pattern.svg);
@@ -10,24 +10,23 @@ footer.footer{
   }
 
   &:hover .pattern {
-    opacity: .1;
+    @apply opacity-10;
     background-position-y: -105px;
   }
 
   a {
-    @apply .py-1;
+    @apply py-1;
   }
 
   .icons a {
-    @apply .p-1;
-    opacity: .8;
+    @apply p-1 opacity-80;
 
     &:hover {
-      opacity: 1;
+      @apply opacity-100;
     }
   }
 
   .copyright {
-    color: $white-50;
+    @apply text-white-50;
   }
 }

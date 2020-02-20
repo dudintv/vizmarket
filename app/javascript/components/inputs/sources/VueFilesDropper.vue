@@ -142,7 +142,7 @@
 
 <style lang="scss" scoped>
   .v-files-dropper{
-    @apply bg-pale-blue-10 p-4 cursor-pointer w-full text-lg;
+    @apply bg-blue-10 p-4 cursor-pointer w-full text-lg;
 
     .border{
       @apply relative w-full flex justify-center items-center p-4;
@@ -157,7 +157,7 @@
     }
 
     &:not(.disabled){
-      &:hover, &.hover{ @apply bg-pale-blue-20; }
+      &:hover, &.hover{ @apply bg-blue-20; }
     }
 
     &.error{cursor: not-allowed}

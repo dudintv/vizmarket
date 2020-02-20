@@ -1,13 +1,13 @@
 <template lang='pug'>
   .top-board.flex.flex-col.items-center.w-full
-    h1 Publisher Portal
-    ul.separated
+    h1.mb-0 Publisher Portal
+    ul.separated.mb-2
       li {{ user.name }}
       li {{ user.email }}
       li: a(href='/') Publisher settings
     .new-product
-      a.w-56.long-button.red-bg(href='/creator/products/new') New product
-    .earn-money &nbsp;
+      a.big-btn.red-btn(href='/creator/products/new') New product
+    //- .earn-money &nbsp;
 </template>
 
 <script>

@@ -31,17 +31,17 @@ export default {
 
   ul.radios {
     @apply flex flex-wrap w-full uppercase;
-    background-color: $pale-blue-10;
+    background-color: $blue-10;
 
     li {
       @apply flex items-center justify-center h-16;
 
       &:hover {
-        background-color: $pale-blue-20;
+        @apply bg-blue-20;
       }
 
       &.selected {
-        background-color: $body-bg-darker;
+        @apply bg-body-darker;
       }
 
       label {
@@ -63,11 +63,11 @@ export default {
         // @extend .las;
         // @extend .la-check-circle;
         content: "\f058";
-        color: $pale-blue;
+        color: $blue;
       }
 
       input:checked ~ span {
-        color: $pale-blue;
+        color: $blue;
       }
     }
   }

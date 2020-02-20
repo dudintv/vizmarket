@@ -5,17 +5,16 @@
 
 html,
 body {
-  background-color: $body-bg;
-  color: $white;
+  @apply bg-body text-white;
   font-family: OpenSans;
   font-size: 14px;
   font-weight: normal;
   min-height: 100vh;
 }
 
-$body-grad: linear-gradient($body-bg-darker 0%, color($body-bg-darker, alpha(0)) 500px);
 body.pattern, body.pattern-dark {
-  background-image: url(/images/svg/pattern-red.svg), $body-grad;
+  background-image: url(/images/svg/pattern-red.svg),
+                    linear-gradient(theme('colors.body-darker') 0%, theme('colors.body-darker-0') 500px);
   background-repeat: repeat-x, repeat-x;
   background-size: 400px, auto;
 }

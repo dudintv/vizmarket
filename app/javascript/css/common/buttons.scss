@@ -1,7 +1,24 @@
-.long-button {
-  @apply flex text-center justify-center block w-full py-2;
+// COLORS
+.red-btn{
+  @apply bg-red-grad-x;
+
+  &:hover {
+    @apply bg-red-grad-x-hover;
+  }
 }
 
-.small-button {
+// SIZE
+
+.long-btn {
+  @apply text-center w-full py-2;
+}
+
+.big-btn {
+  @apply inline-block px-6 py-3 text-lg uppercase;
+}
+
+.small-btn {
   @apply inline-block px-1;
 }
+
+

@@ -1,17 +1,13 @@
-/ .absolute style="background-image: url(images/svg/pattern.svg); background-size: 400px; width: 100%; height: 290px; z-index: 0"
-
-/ = render 'shared/nav'
-
 .anonses.mx-auto
   - for anons in @data[:anonses]
     = render partial: 'shared/anons', locals: {anons: anons}
 
 hr.hr.featured
 
-section.grid.container.mx-auto
-  h2.text-4xl.grid-full-row Featured
+section.products-grid.container.mx-auto
+  h2.grid-full-row Featured
   - for product in @data[:products]
     = render partial: 'product/grid_item', locals: {product: product}
-  a.red-bg.long-button.grid-full-row href='' All featured
+  a.red-btn.long-btn.grid-full-row href='' All featured
 
 = render 'shared/footer'

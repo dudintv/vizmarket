@@ -1,12 +1,10 @@
 %before-icon-option {
+  @apply relative text-orange text-2xl;
   font-family: 'Line Awesome Free';
   font-weight: 900;
   @extend .la-mouse-pointer:before;
-  font-size: 1.5rem;
-  position: relative;
   left: -0.3rem;
   top: 0.2rem;
-  color: $orange;
 }
 
 ul.options {

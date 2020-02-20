@@ -1,28 +1,25 @@
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: $white-20;
+  @apply text-white-20;
 }
 input:-moz-placeholder, textarea:-moz-placeholder {
-  color: $white-20;
+  @apply text-white-20;
 }
 
 ///////////////////////////////////////////////////////
 
 label {
-  @apply .uppercase .font-semibold;
-  color: $white-50;
+  @apply uppercase font-semibold text-white-50;
 }
 
 input, textarea, select {
-  @apply .text-lg;
-  background-color: $pale-blue-10;
-  color: $white;
+  @apply text-lg text-white bg-blue-10;
 }
 
 textarea {
   min-height: 8rem;
 
   &:hover, &:focus, &:not(:placeholder-shown) {
-    background-color: $pale-blue-20;
+    @apply bg-blue-20;
   }
 }
 
@@ -33,63 +30,56 @@ input {
   &[type='email'],
   &[type='search'],
   &[type='password'] {
-    @apply .w-full;
+    @apply w-full;
   }
 
   &[type='text'],
   &[type='email'],
   &[type='search'],
   &[type='password'] {
-    background-color: $pale-blue-05;
+    @apply bg-blue-05;
     &:hover, &:focus, &:not(:placeholder-shown) {
-      background-color: $pale-blue-20;
+      @apply bg-blue-20;
     }
   }
 
   &[type='number'] {
     &:hover, &:focus {
-      background-color: $pale-blue-20;
+      @apply bg-blue-20;
     }
   }
 
   &[type='button'],
   &[type='submit'] {
-    @apply .p-4 .leading-none;
-    background: $red-grad-x;
-    cursor: pointer;
+    @apply p-4 leading-none bg-red-grad-x cursor-pointer;
 
     &:hover {
-      background: $red-grad-x-hover;
+      @apply bg-red-grad-x-hover;
     }
   }
 
   &[type='checkbox'] {
-    @apply .align-middle .mr-2;
+    @apply align-middle mr-2;
   }
 }
 
 //////////////////////////////////////////////////////////////
 // DEVICE:
 .field {
-  @apply .my-2;
+  @apply my-2;
 }
 
 %before-icon-exclamation-circle {
+  @apply relative text-orange text-2xl;
   font-family: 'Line Awesome Free';
   font-weight: 900;
   @extend .la-exclamation-circle:before;
-  font-size: 1.5rem;
-  position: relative;
   left: -0.3rem;
   top: 0.2rem;
-  color: $orange;
 }
 
 #error_explanation {
-  @apply .p-4;
-  border: 1px solid $orange;
-  border-right: 5px solid $orange;
-  background-color: $item-bg;
+  @apply p-4 border border-orange bg-item border-r-4;
 
   li:before {
     @extend %before-icon-exclamation-circle;
@@ -98,10 +88,10 @@ input {
 
 form {
   .field_with_errors {
-    border-right: 5px solid $orange;
+    @apply border-4 border-orange;
 
     label {
-      color: $orange;
+      @apply text-orange;
 
       &:before {
         @extend %before-icon-exclamation-circle;
@@ -110,11 +100,10 @@ form {
   }
 
   em {
-    color: $white-20;
-    text-transform: none;
+    @apply text-white-20 normal-case;
   }
   label + em {
-    @apply .ml-2;
+    @apply ml-2;
   }
 }
 
@@ -123,7 +112,7 @@ form {
 
 @keyframes blink {
   from { border-color: transparent; }
-  10% { border-color: $pale-blue-50; }
+  10% { border-color: theme('blue-50'); }
   to { border-color: transparent; }
 }
 
@@ -135,15 +124,11 @@ form {
   @apply relative;
 
   input, select {
-    @apply w-full h-16 px-4 pt-4;
-    background-color: $pale-blue-10;
-    outline: none;
+    @apply w-full h-16 px-4 pt-4 bg-blue-10 outline-none;
   }
 
   textarea {
-    @apply w-full h-32 px-4 pt-8 pb-4;
-    display:block;
-    outline: none;
+    @apply w-full h-32 px-4 pt-8 pb-4 block outline-none;
   }
 
   label {
@@ -158,7 +143,7 @@ form {
 
     &::after {
       content: "";
-      @apply absolute left-0 top-0 w-full h-full border-b-2 border-pale-blue;
+      @apply absolute left-0 top-0 w-full h-full border-b-2 border-blue;
       transform: scaleX(0);
       transform-origin: left center;
       transition: all .3s ease;
@@ -170,7 +155,7 @@ form {
   select:focus, select:not(:placeholder-shown),
   textarea:focus, textarea:not(:placeholder-shown) {
     & + label .input-name{
-      @apply text-pale-blue;
+      @apply text-blue;
       transform: translateY(0%) scale(1);
     }
   }
@@ -178,12 +163,11 @@ form {
   select:focus,
   textarea:focus {
     & + label {
-      border-width: 1px;
-      border-color: transparent;
+      @apply border border-transparent;
       animation: blink 0.5s linear;
     }
     & + label::after{
-      @apply text-pale-blue;
+      @apply text-blue;
       transform: scaleX(1);
     }
   }

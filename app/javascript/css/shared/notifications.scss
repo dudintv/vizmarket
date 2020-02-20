@@ -4,48 +4,44 @@
   100%{transform:translateY(0px);}}
 
 .notifications {
-  @apply .absolute .right-2 .top-2;
-  z-index: 80;
+  @apply absolute right-2 top-2 z-80;
 }
 
 .notification {
-  @apply .mb-2;
+  @apply mb-2 border border-white bg-item;
   animation: notification-take-in 2s;
   
-  background-color: $item-bg;
-  border: 1px solid white;
   transition: box-shadow .2s ease-in-out;
 
   &.notice {
-    border-color: $green;
-    box-shadow: 0px 0px 32px $green;
+    @apply border-green;
+    box-shadow: 0px 0px 32px theme('colors.green');
 
     &:hover {
-      box-shadow: 0px 0px 32px $green,
+      box-shadow: 0px 0px 32px theme('colors.green-hover'),
                   0px 0px 10px black;
     }
   }
 
   &.alert {
-    border-color: $red;
-    box-shadow: 0px 0px 32px $red;
+    @apply border-red;
+    box-shadow: 0px 0px 32px theme('colors.red');
 
     &:hover {
-      box-shadow: 0px 0px 32px $red-hover,
+      box-shadow: 0px 0px 32px theme('colors.red-hover'),
                   0px 0px 10px black;
     }
   }
 
   .message {
-    @apply .mx-6 .my-2 .leading-snug;
+    @apply mx-6 my-2 leading-snug;
   }
 
   .close-notification {
-    @apply .p-4 .h-full;
+    @apply p-4 h-full;
 
     &:hover {
-      fill: white;
-      background-color: $white-05;
+      @apply bg-white-05 fill-white;
     }
   }
 }

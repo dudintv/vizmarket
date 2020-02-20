@@ -1,6 +1,6 @@
 <template lang="pug">
   .products-filter.flex.flex-col.items-center
-    ul
+    ul.mb-1
       li.filter.inline-block(v-for="filter in filters" :key="filter.name")
         a(
           href='/' 
@@ -59,26 +59,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "css/common/colors.scss";
-
   li.filter {
-    @apply .mr-2;
+    @apply mr-2;
     & + & {
-      @apply .pl-3;
-      border-left: 1px solid hsla(0,0,100,0.2);
+      @apply pl-3 border-l border-white-20;
     }
   }
 
   .selected_filter {
-    color: white;
-    font-weight: bold;
-    border-bottom: 1px solid white;
+    @apply text-white font-bold border-b border-white;
   }
 
   select {
-    background-color: $white-05;
-    color: $white;
-    border: 1px solid $white;
-    border-radius: 100%;
+    @apply bg-white-05 text-white border border-white rounded-full;
   }
 </style>

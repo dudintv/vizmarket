@@ -40,7 +40,7 @@ export default {
 <style scoped lang="scss">
   @keyframes blink {
     from { border-color: transparent; }
-    10% { @apply border-pale-blue-50; }
+    10% { @apply border-blue-50; }
     to { border-color: transparent; }
   }
 
@@ -51,12 +51,12 @@ export default {
   }
 
   // .v-select.focused, .v-select.vs--open {
-  //   @apply bg-pale-blue-10;
+  //   @apply bg-blue-10;
   // }
 
   .v-select.vs--open, .v-select.have-selected {
     & + label .input-name{
-      @apply text-pale-blue;
+      @apply text-blue;
       transform: translateY(0%) scale(1);
     }
 
@@ -69,24 +69,24 @@ export default {
 
   .v-select.vs--open {
     & + label::after{
-      @apply text-pale-blue;
+      @apply text-blue;
       transform: scaleX(1);
     }
   }
 
 
   ::v-deep .vs__dropdown-toggle {
-    @apply relative bg-pale-blue-10 text-lg;
+    @apply relative bg-blue-10 text-lg;
 
     &:hover {
-      @apply bg-pale-blue-20;
+      @apply bg-blue-20;
     }
 
     .vs__selected-options {
       @apply flex items-end pl-4;
 
       .vs__selected {
-        @apply flex px-2 py-0 mb-2 mr-2 fill-current bg-pale-blue-10;
+        @apply flex px-2 py-0 mb-2 mr-2 fill-current bg-blue-10;
         height: fit-content;
 
         .vs__deselect {
@@ -104,14 +104,14 @@ export default {
       @apply absolute top-0 right-0 h-full flex items-center fill-current;
       
       &:hover {
-        @apply bg-pale-blue-20;
+        @apply bg-blue-20;
       }
 
       .vs__clear {
         @apply p-4 h-full;
 
         &:hover {
-          @apply bg-pale-blue-20;
+          @apply bg-blue-20;
         }
       }
 
@@ -129,7 +129,7 @@ export default {
   }
 
   ::v-deep ul.vs__dropdown-menu {
-    @apply bg-pale-blue-10;
+    @apply bg-blue-10;
 
     li{
       &.vs__dropdown-option {
@@ -137,10 +137,10 @@ export default {
       }
       
       &.vs__dropdown-option--selected {
-        @apply font-bold border-l-2 border-pale-blue text-pale-blue;
+        @apply font-bold border-l-2 border-blue text-blue;
       }
       &.vs__dropdown-option--highlight {
-        @apply bg-pale-blue-20;
+        @apply bg-blue-20;
       }
     }
   }

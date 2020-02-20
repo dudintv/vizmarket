@@ -1,7 +1,7 @@
 a {
-  color: $white-80;
+  @apply text-white;
 
   &:hover {
-    color: $white;
+    @apply text-white-hover;
   }
 }

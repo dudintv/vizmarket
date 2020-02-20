@@ -1,26 +1,23 @@
 header nav {
-  @apply .flex .justify-between .shadow-lg .uppercase .whitespace-no-wrap;
-  background-color: $body-bg;
+  @apply flex justify-between shadow-lg uppercase whitespace-no-wrap bg-body;
   height: 52px;
 
   a, button {
-    @apply .h-full .w-full .flex .items-center .p-4;
+    @apply h-full w-full flex items-center p-4;
 
     &:hover {
-      background-color: $white-05;
+      @apply bg-white-05;
     }
 
     &.button {
-      @apply .flex .justify-center;
+      @apply flex justify-center;
     }
 
     &.main-button {
-      @apply .flex .justify-center .text-lg;
-      color: $white;
-      background-color: $red;
+      @apply flex justify-center text-lg text-white bg-red;
 
       &:hover {
-        background-color: $red-hover;
+        @apply bg-red-hover;
       }
     }
   }
@@ -28,123 +25,121 @@ header nav {
   .nav-left-half,
   .nav-right-half,
   .nav-sm {
-    @apply .flex .flex-shrink-0 .flex-grow;
+    @apply flex flex-shrink-0 flex-grow;
   }
 
   .nav-left-half {
-    @apply .flex-grow;
+    @apply flex-grow;
     max-width: 60rem;
   }
 
   .nav-right-half {
-    @apply .justify-end .flex-grow-0;
+    @apply justify-end flex-grow-0;
     max-width: 40rem;
     width: min-content;
   }
 
   .nav-lg-md {
-    @apply .hidden .flex-grow;
+    @apply hidden flex-grow;
   }
 
 
   .nav-dropdown {
-    @apply .hidden .absolute .p-6 .w-full .shadow-lg .z-100;
+    @apply hidden absolute p-6 w-full shadow-lg z-100;
     left: 0;
     top: 52px;
   }
 
   .burger {
-    @apply .flex .items-center .justify-center;
+    @apply flex items-center justify-center;
     width: 52px;
 
     &:hover {
-      background-color: $white-05;
+      @apply bg-white-05;
     }
   }
 
 
   .logo {
     a {
-      @apply .px-2;
+      @apply px-2;
 
       img {
-        @apply .mx-2 .inline-block;
+        @apply mx-2 inline-block;
       }
     }
   }
 
   .nav {
     .selected {
-      background-color: $white-03;
-      border-bottom: 1px solid $red;
+      @apply bg-white-03 border border-red;
 
       a {
-        @apply .relative;
+        @apply relative;
         top: 1px;
       }
     }
   }
 
   .horizontal-nav {
-    @apply .flex .w-full .h-full .px-3 .text-lg;
+    @apply flex w-full h-full px-3 text-lg;
 
     li {
-      @apply .flex-grow;
+      @apply flex-grow;
     }
 
     a {
-      @apply .px-3 .justify-center;
+      @apply px-3 justify-center;
 
       &:hover {
-        background-color: $white-05;
+        @apply bg-white-05;
       }
     }
   }
 
   .search {
-    @apply .flex .items-center .h-full .flex-grow;
+    @apply flex items-center h-full flex-grow;
 
     .search-lg,
     .search-md {
-      @apply .hidden .items-center .h-full;
+      @apply hidden items-center h-full;
     }
 
     .search-lg {
-      @apply .relative;
+      @apply relative;
     }
   }
 
   .input-search {
-    @apply .pl-3 .pr-16;
+    @apply pl-3 pr-16;
   }
 
   .button-search {
-    @apply .flex .items-center .h-full .px-4 .flex-shrink-0 .w-full .justify-center;
+    @apply flex items-center h-full px-4 flex-shrink-0 w-full justify-center;
 
     &.over-input {
-      @apply .absolute .right-0 .w-auto .px-4;
+      @apply absolute right-0 w-auto px-4;
     }
 
     &:hover {
-      background-color: $white-05;
+      @apply bg-white-05;
     }
   }
 
   .cart {
-    @apply .flex .items-center .h-full .flex-shrink-0 .relative;
+    @apply flex items-center h-full flex-shrink-0 relative;
 
     a {
-      @apply .px-4;
+      @apply px-4;
 
       &:hover {
-        background-color: $white-05;
+        @apply bg-white-05;
       }
     }
 
     .count {
-      @apply .flex .justify-center .items-center .absolute .right-2 .top-2 .rounded-full;
-      color: $white;
-      background-color: $red;
+      @apply flex justify-center items-center absolute right-2 top-2 rounded-full;
+      @apply text-white bg-red;
       width: 1.5rem;
       height: 1.5rem;
     }
@@ -153,35 +148,34 @@ header nav {
   .auth,
   .auth-signin,
   .auth-signup {
-    @apply .flex .items-center .text-lg .h-full;
+    @apply flex items-center text-lg h-full;
   }
 
   .auth-signin {
-    @apply .items-center .h-full;
+    @apply items-center h-full;
   }
 
   .auth-signup {
-    color: $white;
-    background-color: $red;
+    @apply text-white bg-red;
 
     &:hover {
-      background-color: $red-hover;
+      @apply bg-red-hover;
     }
   }
 
   .auth-user {
-    @apply .h-full;
+    @apply h-full;
     width: max-content;
 
     .open-user {
-      @apply .px-4 .py-0 .h-full;
+      @apply px-4 py-0 h-full;
     }
   }
 
   .popup {
-    @apply .hidden .absolute .right-4 .shadow-2xl .rounded .overflow-hidden .pt-4;
+    @apply hidden absolute right-4 shadow-2xl rounded overflow-hidden pt-4;
+    @apply bg-item;
     z-index: 100;
-    background-color: $item-bg;
     top: 64px;
     min-width: 20rem;
     max-width: calc(100% - 2rem);
@@ -193,37 +187,35 @@ header nav {
   }
 
   .line {
-    @apply .flex .items-center .relative;
+    @apply flex items-center relative;
     min-height: 52px;
     max-width: 100%;
 
     &:hover {
-      background-color: $white-05;
+      @apply bg-white-05;
     }
   }
 
   .label-text {
-    @apply .block .normal-case .absolute;
+    @apply block normal-case absolute text-white-50;
     top: -0.3rem;
     left: 0.9rem;
-    color: $white-50;
   }
 
   .input-text {
-    @apply .mx-4 .my-4 .px-2;
-
+    @apply mx-4 my-4 px-2;
   }
 
   .signin-popup {
     .socnets {
-      @apply .pl-4;
+      @apply pl-4;
 
       span {
-        @apply .normal-case .mr-3;
+        @apply normal-case mr-3;
       }
     }
     .socnet {
-      @apply .flex .justify-center .h-full;
+      @apply flex justify-center h-full;
       width: 52px;
     }
   }
@@ -232,64 +224,59 @@ header nav {
     min-width: 20rem;
 
     .line, .cart-item {
-      @apply .flex-col .items-start .relative;
+      @apply flex-col items-start relative;
 
       &.button {
-        @apply .p-0 .mt-4;
+        @apply p-0 mt-4;
       }
     }
 
     .line {
-      @apply .px-4 .py-2;
+      @apply px-4 py-2;
 
       &.empty_cart {
-        @apply .normal-case .pb-4;
+        @apply normal-case pb-4;
 
         h5, span {
-          @apply .m-auto;
+          @apply m-auto;
         }
       }
     }
 
     .cart-item {
-      @apply .relative .w-full .px-2 .py-0;
+      @apply relative w-full px-2 py-0;
 
       .folder {
-        @apply .flex;
+        @apply flex;
 
         .type {
-          @apply .mr-1;
-          color: $orange;
+          @apply mr-1 text-orange;
         }
 
         .separator {
-          color: $white-50;
+          @apply text-white-50;
         }
 
         .category {
-          @apply .ml-1 .normal-case;
-          color: $light-blue;
+          @apply ml-1 normal-case text-light-blue;
         }
       }
 
       .name{
-        @apply .flex .justify-between .items-baseline .w-full;
+        @apply flex justify-between items-baseline w-full;
         
         .title {
-          @apply .text-lg .normal-case .mr-4;
+          @apply text-lg normal-case mr-4 overflow-hidden;
           max-width: 100%;
-          overflow: hidden;
           text-overflow: ellipsis;
         }
 
         .price {
-          @apply .text-lg .font-bold;
-          color: $light-blue;
+          @apply text-lg font-bold text-light-blue;
         }
 
         .original-price {
-          @apply .absolute .right-2 .top-0 .line-through .text-base;
-          color: $white-50;
+          @apply absolute right-2 top-0 line-through text-base text-white-50;
         }
       }
     }
@@ -299,12 +286,11 @@ header nav {
     min-width: 20rem;
 
     .line.edit {
-      @apply .flex .flex-col .justify-center;
+      @apply flex flex-col justify-center;
     }
 
     .name {
-      @apply .flex .justify-center .w-full .normal-case;
-      color: $white-50;
+      @apply flex justify-center w-full normal-case text-white-50;
     }
   }
 }
@@ -313,29 +299,25 @@ header nav {
 
 @media (min-width: 900px) {
   header nav {
-    .nav-left-half {
-      flex-grow: 1;
-    }
-    
-    .nav-right-half {
-      flex-grow: 1;
+    .nav-left-half, .nav-right-half {
+      @apply flex-grow;
     }
 
     .nav-lg-md {
-      @apply .flex;
+      @apply flex;
 
       .search {
-        @apply .justify-end;
+        @apply justify-end;
       }
     }
 
     .nav-sm {
-      @apply .hidden;
+      @apply hidden;
     }
 
     .search {
       .search-md {
-        @apply .flex .flex-shrink-0;
+        @apply flex flex-shrink-0;
       }
     }
   }
@@ -353,11 +335,11 @@ header nav {
 
     .search {
       .search-md {
-        @apply .hidden;
+        @apply hidden;
       }
 
       .search-lg {
-        @apply .flex .w-full;
+        @apply flex w-full;
       }
     }
   }

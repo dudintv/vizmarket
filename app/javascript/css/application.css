@@ -2,17 +2,15 @@
 
 @import "./libs/line-awesome.scss";
 
-@import "./common/colors.scss";
-@import "./common/bg.scss";
 @import "./common/fonts.scss";
 @import "./common/base.scss";
 @import "./common/grid.scss";
 
+@import "./common/buttons.scss";
 @import "./common/footer.scss";
 @import "./common/form.scss";
 @import "./common/headers.scss";
 @import "./common/decoration.scss";
-@import "./common/buttons.scss";
 @import "./common/links.scss";
 @import "./common/list.scss";
 
@@ -23,6 +21,3 @@
 @import "./product/grid-item.scss";
 
 @import "tailwind/tailwind";
-
-/* TESTS */
-@import "test/colors.scss";

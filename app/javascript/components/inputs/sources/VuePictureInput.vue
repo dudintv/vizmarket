@@ -576,7 +576,7 @@ export default {
   justify-content: center;
 } */
 .preview-container {
-  @apply bg-pale-blue-10;
+  @apply bg-blue-10;
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
@@ -584,7 +584,7 @@ export default {
   overflow: hidden;
   
   &:hover {
-    @apply bg-pale-blue-20;
+    @apply bg-blue-20;
   }
 }
 .picture-preview {
@@ -595,7 +595,7 @@ export default {
   box-sizing: border-box;
 }
 .picture-preview.dragging-over {
-  @apply bg-pale-blue-20;
+  @apply bg-blue-20;
   // filter: brightness(0.5);
 }
 .picture-inner {
@@ -620,14 +620,14 @@ export default {
 }
 
 button {
-  @apply px-4 py-2 m-0 bg-pale-blue-20;
+  @apply px-4 py-2 m-0 bg-blue-20;
   cursor: pointer;
 }
 button.secondary {
-  @apply bg-pale-blue-10;
+  @apply bg-blue-10;
 }
 button:hover, button.secondary:hover {
-  @apply bg-pale-blue-50;
+  @apply bg-blue-50;
 }
 input[type=file] {
   display: none;

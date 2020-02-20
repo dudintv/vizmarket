@@ -1,46 +1,43 @@
 .product {
-  @apply .block .shadow;
-  // grid-column: 1;
+  @apply block shadow bg-item;
   max-width: 300px;
-  background-color: $item-bg;
   transition: box-shadow .2s ease-in-out;
 
   &:hover {
-    @apply .shadow-xl;
+    @apply shadow-xl;
   }
 
   .image {
-    @apply .relative;
+    @apply relative;
 
     .labels {
-      @apply .flex .absolute .bottom-0 .right-0;
+      @apply flex absolute bottom-0 right-0;
 
       .label {
-        @apply .block .px-2 .relative;
+        @apply block px-2 relative;
 
         &::before{
+          @apply absolute;
           content: '';
-          position: absolute;
           width: .6rem;
           height: 100%;
           left: -.6rem;
           border-left: .6rem solid transparent;
-          // border-bottom: 1.5rem solid white;
         }
 
         &.featured{
-          background: $red-grad-x;
+          @apply bg-red-grad-x;
           
           &::before{
-            border-bottom: 1.5rem solid $orange;
+            border-bottom: 1.5rem solid theme('colors.orange');
           }
         }
         
         &.new{
-          background: $green-grad-x;
+          @apply bg-green-grad-x;
 
           &::before{
-            border-bottom: 1.5rem solid $lime;
+            border-bottom: 1.5rem solid theme('colors.lime');
           }
         }
       }
@@ -48,47 +45,45 @@
   }
 
   .info {
-    @apply .flex .flex-col .p-4;
+    @apply flex flex-col p-4;
 
     .line{
-      @apply .pb-1;
+      @apply pb-1;
 
       .categories {
-        @apply .flex .uppercase;
+        @apply flex uppercase;
 
         .kind {
-          color: $orange;
+          @apply text-orange;
 
           &:hover {
-            color: $orange-hover;
+            @apply text-orange-hover;
           }
         }
 
         .category {
-          @apply .ml-2;
-          color: $light-blue;
+          @apply ml-2 text-light-blue;
 
           &:hover {
-            color: $light-blue-hover;
+            @apply text-light-blue-hover;
           }
         }
       }
 
       .author, .price {
-        color: $light-blue;
+        @apply text-light-blue;
       }
 
       .version, .date {
-        color: $white-50;
+        @apply text-white-50;
       }
 
       .version{
-        @apply .py-1 .px-2 .mr-2;
-        border: 1px solid $white-20;
+        @apply py-1 px-2 mr-2 border border-white-20;
       }
 
       .price {
-        @apply .text-xl .font-bold;
+        @apply text-xl font-bold;
       }
     }
   }
