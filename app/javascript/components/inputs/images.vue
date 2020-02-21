@@ -22,17 +22,17 @@ export default {
     name: String,
     value: Array,
   },
-  data: function () {
+  data () {
     return {
       images: [],
     }
   },
   methods: {
-    updateInput: function (newImageList) {
+    updateInput (newImageList) {
       this.$emit('input', newImageList)
     }
   },
-  mounted: function () {
+  mounted () {
     this.images = this.value;
   }
 }

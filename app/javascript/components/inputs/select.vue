@@ -26,12 +26,12 @@ export default {
     value: [String, Array],
     options: Array,
   },
-  data: function () {
+  data () {
     return {
       selected: [""],
     }
   },
-  mounted: function () {
+  mounted () {
     this.selected = new Array(this.value).flat() //guarantee an array as input
   },
 }

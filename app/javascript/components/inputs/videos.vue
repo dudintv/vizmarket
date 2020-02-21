@@ -23,13 +23,13 @@ export default {
     name: String,
     value: String,
   },
-  data: function () {
+  data () {
     return {
       videos: "",
     }
   },
   computed: {
-    video_ids: function() {
+    video_ids () {
       // https://www.youtube.com/watch?v=j-HkuKxTYEU
       // https://youtu.be/O13ZItlALxg
       // youtu.be/mbbfyWyQGWg
@@ -40,7 +40,7 @@ export default {
     }
   },
   methods: {
-    textareaAutoGrowth() {
+    textareaAutoGrowth () {
       let el = this.$refs.textarea;
       el.style.height = (el.scrollHeight)+"px";
     }

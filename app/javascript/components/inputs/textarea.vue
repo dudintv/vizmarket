@@ -14,7 +14,7 @@ export default {
     value: String,
   },
   methods: {
-    textareaAutoGrowth() {
+    textareaAutoGrowth () {
       let el = this.$refs.textarea;
       el.style.height = (el.scrollHeight)+"px";
     }

@@ -1,9 +1,25 @@
-// COLORS
-.red-btn{
+// STATUS COLOR
+.main-btn {
   @apply bg-red-grad-x;
 
   &:hover {
     @apply bg-red-grad-x-hover;
+  }
+}
+
+.second-btn {
+  @apply bg-white-20;
+
+  &:hover {
+    @apply bg-white-50;
+  }
+}
+
+.third-btn {
+  @apply bg-white-05;
+
+  &:hover {
+    @apply bg-white-10;
   }
 }
 

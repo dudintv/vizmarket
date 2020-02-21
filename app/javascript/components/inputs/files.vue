@@ -28,15 +28,15 @@ export default {
     name: String,
     value: Array,
   },
-  data: function () {
+  data () {
     return {
       files: [],
     }
   },
   watch: {
-    files: function () { this.$emit('input', this.files) }
+    files () { this.$emit('input', this.files) }
   },
-  mounted: function () { this.files = this.value }
+  mounted () { this.files = this.value }
 }
 </script>
 

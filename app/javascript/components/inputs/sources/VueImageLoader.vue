@@ -37,19 +37,21 @@ export default {
       default: ".jpg, .png, .svg"
     }
   },
-  data: () => ({
-    preLoaded: []
-  }),
+  data () {
+    return {
+      preLoaded: [],
+    }
+  },
   computed: {
-    allImages: function () {
+    allImages () {
       return this.Images.concat(this.preLoaded)
     }
   },
   methods: {
-    Select() {
+    Select () {
       this.$refs.file.click();
     },
-    Remove(e) {
+    Remove (e) {
       this.$emit("remove", e[this.keyName]);
       const index = this.Images.indexOf(
         this.Images.filter(el => el[this.keyName] === e[this.keyName])[0]
@@ -66,13 +68,13 @@ export default {
         this.preLoaded.splice(index, 1);
       }
     },
-    // Upload() {
+    // Upload () {
     //   Array.from(this.preLoaded).forEach(el => {
     //     this.$emit("upload", el.image);
     //   });
     //   this.preLoaded = [];
     // },
-    async handleFileUpload() {
+    async handleFileUpload () {
       const files = this.$refs.file.files;
       Array.from(files).forEach(file => {
         const reader = new FileReader();
@@ -89,8 +91,8 @@ export default {
     },
   },
   watch: {
-    Images:    function () { this.$emit( 'input', this.allImages ) },
-    preLoaded: function () { this.$emit( 'input', this.allImages ) },
+    Images ()    { this.$emit( 'input', this.allImages ) },
+    preLoaded () { this.$emit( 'input', this.allImages ) },
   },
   name: "vue-picture-upload"
 };

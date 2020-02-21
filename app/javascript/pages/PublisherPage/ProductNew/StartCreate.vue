@@ -11,13 +11,13 @@ export default {
   components: {
     TextInput,
   },
-  data: function () {
+  data () {
     return {
       name: "",
     }
   },
   methods: {
-    createProduct: function() {
+    createProduct () {
 
     }
   }

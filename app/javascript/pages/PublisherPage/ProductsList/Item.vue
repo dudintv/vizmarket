@@ -51,10 +51,10 @@ export default {
     product: Object
   },
   computed: {
-    showTotalEarn: function () {
+    showTotalEarn () {
       return this.product.price > 0 && this.product.purchased_count > 0;
     },
-    price: function () {
+    price () {
       if (this.product.price > 0) {
         return `\$ ${this.product.price}`;
       }else{

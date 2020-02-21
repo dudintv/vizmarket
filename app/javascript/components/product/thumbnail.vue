@@ -11,7 +11,7 @@ export default {
   props: {
     product: {
       type: Object,
-      default: function () { return {
+      default () { return {
           image: '',
           labels: [],
       }}
@@ -29,28 +29,27 @@ export default {
     @apply flex absolute bottom-0 right-0;
 
     .label {
-      @apply block px-2 relative;
+      @apply flex pl-2 relative text-sm h-6 items-center;
 
       &:not(:last-child){
-        @apply pr-4;
+        @apply pr-6;
       }
 
       &:last-child {
-        @apply pr-2;
+        @apply pr-3;
       }
 
       &::before{
         content: '';
         position: absolute;
-        width: .6rem;
+        width: 1rem;
         height: 100%;
-        left: -.6rem;
-        border-left: .6rem solid transparent;
+        left: -1rem;
+        border-left: 1rem solid transparent;
       }
 
       &.featured{
-        // background: $red-grad-x;
-        background: var(--color-red-grad-x);
+        @apply bg-red-grad-x;
         
         &::before{
           @apply border-orange;
@@ -60,8 +59,7 @@ export default {
       }
       
       &.new{
-        // background: $green-grad-x;
-        background: var(--color-green-grad-x);
+        @apply bg-green-grad-x;
 
         &::before{
           @apply border-lime;

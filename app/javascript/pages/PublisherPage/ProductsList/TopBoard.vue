@@ -6,13 +6,13 @@
       li {{ user.email }}
       li: a(href='/') Publisher settings
     .new-product
-      a.big-btn.red-btn(href='/creator/products/new') New product
+      a.big-btn.main-btn(href='/creator/products/new') New product
     //- .earn-money &nbsp;
 </template>
 
 <script>
 export default {
-  data: function () {
+  data () {
     return {
       user: {
         name: 'User Name',

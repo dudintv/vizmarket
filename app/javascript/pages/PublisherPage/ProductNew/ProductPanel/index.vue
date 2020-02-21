@@ -1,8 +1,8 @@
 <template lang="pug">
-  .edit-product-panel
+  .edit-product-panel(:class="bg_class")
     .nav
       ProductThumbnail(:product="product")
-      h5.title {{ product.title }}
+      ProductTitle(:product="product")
       .tabs
         a.tab(href="#")
           i.las.la-tag
@@ -19,11 +19,18 @@
     .content
       component(is="ProductTitleTab")
     .status
+      span.text-white-20 status:&nbsp;
+      span {{ product.status }}
     .actions
+      button.big-btn.third-btn Delete the draft
+      button.big-btn.second-btn Save and continue later
+      button.big-btn.main-btn Next: upload files
 </template>
 
 <script>
 import ProductThumbnail from 'components/product/thumbnail'
+import ProductTitle from 'components/product/title'
+
 import ProductTitleTab from './TitleTab'
 import ProductMediaTab from './MediaTab'
 import ProductTextsTab from './TextsTab'
@@ -32,14 +39,18 @@ import ProductFilesTab from './FilesTab'
 export default {
   components: {
     ProductThumbnail,
+    ProductTitle,
     ProductTitleTab,
     ProductMediaTab,
     ProductTextsTab,
     ProductFilesTab,
   },
   computed: {
-    product: function () {
+    product () {
       return this.$store.state.currentProduct;
+    },
+    bg_class () {
+      return this.product.status == 'published' ? 'bg-published' : 'bg-item-gray'
     }
   }
 }
@@ -47,7 +58,7 @@ export default {
 
 <style style="scss" scoped>
   .edit-product-panel {
-    @apply bg-item;
+    @apply shadow-2xl;
     display: grid;
     grid-template-columns: 284px auto;
     grid-template-rows: auto 100px;
@@ -58,41 +69,44 @@ export default {
 
   .nav {
     grid-area: nav;
-    /* background-color: red; */
-
-    .title {
-      @apply px-4 py-2 bg-item-darker;
-    }
 
     .tabs {
-      @apply bg-item-lighter;
+      @apply bg-item-50;
     }
 
     .tab {
-      @apply block p-4 text-xl;
+      @apply block px-4 py-6 text-xl;
 
       i {
         @apply mr-6;
       }
 
       &:hover {
-        @apply bg-white-05;
+        @apply bg-item;
       }
     }
   }
 
   .content {
     grid-area: content;
-    /* background-color: green; */
+  }
+
+  .status, .actions {
+    @apply bg-item;
   }
 
   .status {
+    @apply text-xl uppercase text-white-50 flex justify-center items-center;
     grid-area: status;
-    /* background-color: blue; */
   }
 
   .actions {
+    @apply flex justify-end items-center;
     grid-area: actions;
-    /* background-color: yellow; */
+
+    button {
+      @apply mr-8;
+    }
   }
+
 </style>

@@ -17,7 +17,7 @@ export default {
     ProductsFilter,
     ProductItem,
   },
-  data: function() {
+  data () {
     return {
       products: [
         {

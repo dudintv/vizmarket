@@ -52,7 +52,7 @@ export default {
     VideosInput,
     SelectInput,
   },
-  data: function () {
+  data () {
     return {
       product: {
         title: "",
