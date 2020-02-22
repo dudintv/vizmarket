@@ -7,9 +7,11 @@ export default new Vuex.Store({
   state: {
     currentProduct: {
       title: "Name of product",
+      short_description: "",
+      description: "",
       image: "/images/test-examples/thumbnails/thumb02.png",
       labels: ["new", "featured"],
-      status: "published",
+      status: "draft",
       kind: "script",
       category: "position", 
     },

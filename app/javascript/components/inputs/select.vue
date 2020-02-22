@@ -90,11 +90,11 @@ export default {
         height: fit-content;
 
         .vs__deselect {
-          @apply p-2 mr-0 opacity-25;
+          @apply p-2 ml-2 mr-0 text-white-50 bg-item-50;
           margin-right: -0.5rem;
 
           &:hover{
-            @apply opacity-100;
+            @apply bg-item text-white;
           }
         }
       }

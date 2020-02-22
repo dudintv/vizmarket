@@ -4,7 +4,7 @@
       ProductThumbnail(:product="product")
       ProductTitle(:product="product")
       .tabs
-        a.tab(href="#")
+        a.tab.selected(href="#")
           i.las.la-tag
           span Title & Category
         a.tab(href="#")
@@ -17,7 +17,7 @@
           i.las.la-file-upload
           span Product files
     .content
-      component(is="ProductTitleTab")
+      component(is="ProductMediaTab")
     .status
       span.text-white-20 status:&nbsp;
       span {{ product.status }}
@@ -65,25 +65,29 @@ export default {
     grid-template-areas: 
       "nav content"
       "status actions";
+    min-width: 700px;
   }
 
   .nav {
+    @apply flex flex-col;
     grid-area: nav;
 
     .tabs {
-      @apply bg-item-50;
+      @apply flex-grow bg-item-50;
     }
 
     .tab {
       @apply block px-4 py-6 text-xl;
 
-      i {
-        @apply mr-6;
+      &.selected {
+        @apply bg-red;
+
+        &:hover { @apply bg-red; }
       }
 
-      &:hover {
-        @apply bg-item;
-      }
+      i { @apply mr-6; }
+
+      &:hover { @apply bg-item; }
     }
   }
 

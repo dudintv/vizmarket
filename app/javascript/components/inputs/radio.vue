@@ -27,11 +27,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../css/common/colors";
-
   ul.radios {
-    @apply flex flex-wrap w-full uppercase;
-    background-color: $blue-10;
+    @apply flex flex-wrap w-full uppercase bg-blue-10;
 
     li {
       @apply flex items-center justify-center h-16;
@@ -63,11 +60,11 @@ export default {
         // @extend .las;
         // @extend .la-check-circle;
         content: "\f058";
-        color: $blue;
+        @apply text-blue;
       }
 
       input:checked ~ span {
-        color: $blue;
+        @apply text-blue;
       }
     }
   }

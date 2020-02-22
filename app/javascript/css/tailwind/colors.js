@@ -14,7 +14,6 @@ colors['item-darker']  = 'hsl(202, 38%, 6%)'
 colors['item-gray']    = 'hsl(198, 16%, 19%)'
 
 gradients['published'] = "hsl(202,47%,14%) linear-gradient(to bottom right, hsl(202,90%,20%) 0%, hsla(202,36%,20%,.2) 50%, hsla(202,90%,20%,0) 100%)"
-
 // gradients['anons-grad'] = `linear-gradient(to right, ${body.alpha(.8)} 0%, ${body.alpha(0)} 500px)`
 
 // WHITE
@@ -24,6 +23,7 @@ colors['white'] = white.string()
 colors['white-hover'] = white.lightness(100).string()
 colors['white-80'] = white.alpha(0.80).string()
 colors['white-50'] = white.alpha(0.50).string()
+colors['white-30'] = white.alpha(0.30).string()
 colors['white-20'] = white.alpha(0.20).string()
 colors['white-10'] = white.alpha(0.10).string()
 colors['white-05'] = white.alpha(0.05).string()

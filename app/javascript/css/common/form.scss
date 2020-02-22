@@ -121,7 +121,7 @@ form {
 }
 
 .field-with-label {
-  @apply relative;
+  @apply relative w-full;
 
   input, select {
     @apply w-full h-16 px-4 pt-4 bg-blue-10 outline-none;
