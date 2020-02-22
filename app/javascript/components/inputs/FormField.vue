@@ -36,8 +36,17 @@ export default {
     .required {
       @apply uppercase text-white-50 text-sm;
     }
+
     .required-star {
       @apply text-red;
+    }
+
+    h5{
+      @apply mb-1;
+    }
+
+    p {
+      @apply text-white-80;
     }
   }
   .control {

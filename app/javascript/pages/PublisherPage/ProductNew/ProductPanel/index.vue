@@ -4,10 +4,10 @@
       ProductThumbnail(:product="product")
       ProductTitle(:product="product")
       .tabs
-        a.tab.selected(href="#")
+        a.tab(href="#")
           i.las.la-tag
           span Title & Category
-        a.tab(href="#")
+        a.tab.selected(href="#")
           i.las.la-photo-video
           span Images & Video
         a.tab(href="#")
@@ -58,7 +58,7 @@ export default {
 
 <style style="scss" scoped>
   .edit-product-panel {
-    @apply shadow-2xl;
+    @apply shadow-2xl mb-8;
     display: grid;
     grid-template-columns: 284px auto;
     grid-template-rows: auto 100px;
