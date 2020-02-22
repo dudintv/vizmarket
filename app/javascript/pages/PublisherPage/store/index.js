@@ -13,7 +13,7 @@ export default new Vuex.Store({
       labels: ["new", "featured"],
       status: "draft",
       kind: "script",
-      category: "position", 
+      category: "position",
     },
   },
   mutation: {},

@@ -17,7 +17,7 @@
           i.las.la-file-upload
           span Product files
     .content
-      component(is="ProductMediaTab")
+      component(is="ProductTextsTab")
     .status
       span.text-white-20 status:&nbsp;
       span {{ product.status }}
