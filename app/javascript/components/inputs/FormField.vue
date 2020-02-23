@@ -22,7 +22,6 @@ export default {
 
 <style lang="scss" scoped>
   .field {
-    @apply m-8;
     display: grid;
     grid-template-columns: auto;
     grid-column-gap: 1rem;
@@ -48,8 +47,5 @@ export default {
     p {
       @apply text-white-80;
     }
-  }
-  .control {
-    
   }
 </style>

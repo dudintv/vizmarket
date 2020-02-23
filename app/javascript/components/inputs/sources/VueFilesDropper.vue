@@ -163,7 +163,7 @@
     &.error{cursor: not-allowed}
 
     &__clear{
-      @apply absolute right-4 top-4 cursor-pointer outline-none text-light-blue;
+      @apply absolute right-4 top-4 cursor-pointer outline-none bg-blue-20 text-light-blue;
       &:hover {
         @apply text-white;
       }

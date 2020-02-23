@@ -7,17 +7,17 @@
         a.tab(href="#")
           i.las.la-tag
           span Title & Category
-        a.tab.selected(href="#")
+        a.tab(href="#")
           i.las.la-photo-video
           span Images & Video
         a.tab(href="#")
           i.las.la-align-left
           span Instructions
-        a.tab(href="#")
+        a.tab.selected(href="#")
           i.las.la-file-upload
           span Product files
     .content
-      component(is="ProductTextsTab")
+      component(is="ProductFilesTab")
     .status
       span.text-white-20 status:&nbsp;
       span {{ product.status }}
@@ -50,7 +50,7 @@ export default {
       return this.$store.state.currentProduct;
     },
     bg_class () {
-      return this.product.status == 'published' ? 'bg-published' : 'bg-item-gray'
+      return this.product.status == 'published' ? 'bg-published' : 'bg-unpublished'
     }
   }
 }
@@ -92,6 +92,7 @@ export default {
   }
 
   .content {
+    @apply px-8 py-6;
     grid-area: content;
   }
 

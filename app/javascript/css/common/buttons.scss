@@ -33,7 +33,11 @@
   @apply inline-block px-6 py-3 text-lg uppercase;
 }
 
-.small-btn {
+.middle-btn {
+  @apply inline-block px-4 py-1 uppercase;
+}
+
+.tiny-btn {
   @apply inline-block px-1;
 }
 

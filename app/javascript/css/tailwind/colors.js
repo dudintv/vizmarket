@@ -14,6 +14,7 @@ colors['item-darker']  = 'hsl(202, 38%, 6%)'
 colors['item-gray']    = 'hsl(198, 16%, 19%)'
 
 gradients['published'] = "hsl(202,47%,14%) linear-gradient(to bottom right, hsl(202,90%,20%) 0%, hsla(202,36%,20%,.2) 50%, hsla(202,90%,20%,0) 100%)"
+gradients['unpublished'] = "hsl(202,15%,17%) linear-gradient(to bottom right, hsl(202,32%,20%) 0%, hsla(202,32%,20%,.2) 50%, hsla(202,32%,20%,0) 100%)"
 // gradients['anons-grad'] = `linear-gradient(to right, ${body.alpha(.8)} 0%, ${body.alpha(0)} 500px)`
 
 // WHITE
