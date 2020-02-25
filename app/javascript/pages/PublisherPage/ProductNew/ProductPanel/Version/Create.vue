@@ -13,7 +13,6 @@
         span.text-white-20 Status:&nbsp;
         span.text-white-50 {{ version.status }}
       .actions
-        button.middle-btn.second-btn Save as a Draft
         button.middle-btn.main-btn Save
 </template>
 

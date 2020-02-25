@@ -1,17 +1,17 @@
 <template lang="pug">
   .form
     VersionCreate
-    Version(v-for="version in product.versions" :version="version")
+    VersionShow(v-for="version in product.versions" :version="version")
 </template>
 
 <script>
-import VersionCreate from "./VersionCreate.vue"
-import Version       from "./Version.vue"
+import VersionCreate from "./Version/Create.vue"
+import VersionShow   from "./Version/Show.vue"
 
 export default {
   components: {
     VersionCreate,
-    Version,
+    VersionShow,
   },
   data () {
     return {
