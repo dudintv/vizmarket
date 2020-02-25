@@ -50,7 +50,7 @@ services:
 
   rails:
     <<: *backend
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 5000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -e devwin -p 5000 -b '0.0.0.0'"
     # command: [bundle, exec, rails, s, -p, '5000', -b, '0.0.0.0']
     ports:
       - '5000:5000'
@@ -68,7 +68,7 @@ services:
     environment:
       - PSQL_HISTFILE=/root/log/.psql_history
     ports:
-      - '5400:5432'
+      - '5432:5432'
 
   # redis:
   #   image: redis:3.2-alpine
