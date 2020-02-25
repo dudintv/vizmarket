@@ -75,6 +75,31 @@ development:
     watch_options:
       ignored: '**/node_modules/**'
 
+devwin:
+  <<: *default
+  compile: true
+
+  # Verifies that correct packages and versions are installed by inspecting package.json, yarn.lock, and node_modules
+  check_yarn_integrity: true
+
+  # Reference: https://webpack.js.org/configuration/dev-server/
+  dev_server:
+    https: false
+    host: webpacker
+    port: 3035
+    public: webpacker:3035
+    hmr: false # can set to TRUE to increse speed compiling
+    # Inline should be set to true if using HMR
+    inline: true
+    overlay: true
+    compress: true
+    disable_host_check: true
+    use_local_ip: false
+    quiet: false
+    headers:
+      'Access-Control-Allow-Origin': '*'
+    watch_options:
+      ignored: '**/node_modules/**'
 
 test:
   <<: *default

@@ -11,6 +11,9 @@ default: &default
 development:
   <<: *default
 
+devwin:
+  <<: *default
+
 test:
   <<: *default
 

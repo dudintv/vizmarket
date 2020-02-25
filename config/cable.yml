@@ -1,6 +1,9 @@
 development:
   adapter: async
 
+devwin:
+  adapter: async
+
 test:
   adapter: test
 
