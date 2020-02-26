@@ -22,7 +22,7 @@ export default {
     product () {
       return this.$store.state.currentProduct;
     },
-  }
+  },
 }
 </script>
 

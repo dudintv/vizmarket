@@ -34,7 +34,11 @@
 }
 
 .middle-btn {
-  @apply inline-block px-4 py-1 uppercase;
+  @apply inline-block px-4 py-2 uppercase;
+}
+
+.small-btn {
+  @apply inline-block px-2 py-1;
 }
 
 .tiny-btn {
