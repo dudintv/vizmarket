@@ -6,6 +6,7 @@
       removable=true
       @change="imageChange"
       :prefill="value"
+      :recommendations="recommendations"
     )
     .tip(v-if="$slots['tip']")
       slot(name="tip")
@@ -21,6 +22,7 @@ export default {
   props: {
     name: String,
     value: [String, File],
+    recommendations: String,
   },
   methods: {
     imageChange: function(image) { this.$emit('input', image) }

@@ -3,7 +3,7 @@
   <div ref="container" id="picture-input" class="picture-input">
     <div v-if="!supportsUpload" v-html="strings.upload"></div>
     <div v-else-if="supportsPreview" class="flex flex-col justify-center">
-      <div class="preview-container"
+      <div class="preview-container relative"
         :style="{maxWidth: previewWidth + 'px', height: previewHeight + 'px', borderRadius: radius + '%'}">
           <canvas ref="previewCanvas"
             class="picture-preview"
@@ -24,6 +24,7 @@
           <span v-if="supportsDragAndDrop" class="picture-inner-text" v-html="strings.drag"></span>
           <span v-else class="picture-inner-text" v-html="strings.tap"></span>
         </div>
+        <span v-if="recommendations" class="recommendations">{{ recommendations }}</span>
       </div>
       <button v-if="imageSelected && !hideChangeButton" @click.prevent="selectImage" :class="buttonClass">{{ strings.change }}</button>
       <button v-if="imageSelected && removable" @click.prevent="removeImage" :class="removeButtonClass">{{ strings.remove }}</button>
@@ -140,6 +141,10 @@ export default {
       default: () => {
         return {}
       }
+    },
+    recommendations: {
+      type: String,
+      default: undefined,
     }
   },
   watch: {
@@ -585,6 +590,10 @@ export default {
   
   &:hover {
     @apply bg-blue-20;
+    
+    .recommendations {
+      opacity: .6;
+    }
   }
 }
 .picture-preview {
@@ -596,7 +605,6 @@ export default {
 }
 .picture-preview.dragging-over {
   @apply bg-blue-20;
-  // filter: brightness(0.5);
 }
 .picture-inner {
   position: relative;
@@ -631,5 +639,17 @@ button:hover, button.secondary:hover {
 }
 input[type=file] {
   display: none;
+}
+
+.recommendations {
+  display: block;
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: .3;
+  width: 100%;
+  padding: 0 1.5rem;
+  line-height: 1.2rem;
 }
 </style>
