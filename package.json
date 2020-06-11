@@ -13,6 +13,7 @@
     "vue": "^2.6.10",
     "vue-image-loader": "^1.0.4",
     "vue-loader": "^15.7.1",
+    "vue-router": "^3.3.2",
     "vue-select": "^3.4.0",
     "vue-template-compiler": "^2.6.10",
     "vue-vimeo-player": "^0.1.0",

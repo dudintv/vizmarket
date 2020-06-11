@@ -5,7 +5,7 @@
       template(#tip) Hello, this is a tip!
     VideosInput(name="Videos" v-model="product.videos")
       template(#tip) Hello, this is a tip!
-    ImageInput(name="Image" v-model="product.featured_image")
+    ImageInput(name="Image" v-model="product.featured_image" recommendations="1920 x 1080")
       template(#tip) Hello, this is a tip!
     ImagesInput(name="Images" v-model="product.images")
       template(#tip) Hello, this is a tip!
@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import RulesNotice from './RulesNotice'
-import ProductPanel from './ProductPanel'
+import RulesNotice from './../PublisherPage/ProductNew/RulesNotice'
+// import ProductPanel from './../ProductPanel'
 
 import TextareaInput from "components/inputs/textarea.vue"
 import TextInput    from "components/inputs/text.vue"
@@ -40,7 +40,7 @@ import SelectInput  from "components/inputs/select.vue"
 export default {
   components: {
     RulesNotice,
-    ProductPanel,
+    // ProductPanel,
     
     TextInput,
     TextareaInput,

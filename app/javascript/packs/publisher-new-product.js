@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import store from '../pages/PublisherPage/store'
-import ProductsApp from '../pages/PublisherPage/ProductsList'
+import NewProductApp from '../pages/PublisherPage/ProductNew'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-    render: h => h(ProductsApp),
+    render: h => h(NewProductApp),
     store
   }).$mount()
-  document.getElementById('publisher-products-app').appendChild(app.$el)
+  document.getElementById('publisher-new-product-app').appendChild(app.$el)
 })

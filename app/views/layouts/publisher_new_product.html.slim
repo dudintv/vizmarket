@@ -2,17 +2,18 @@ doctype html
 html
   head
     title
-      | Vizmarket
+      | Vizmarket — Publisher Portal
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
-    = stylesheet_pack_tag 'test', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'test', 'data-turbolinks-track': 'reload'
-  body
+    = stylesheet_pack_tag 'publisher-new-product', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'publisher-new-product', 'data-turbolinks-track': 'reload'
+    
+  body.pattern-dark
     = render 'shared/nav'
     = render 'shared/device_messages'
-    .mx-auto.w-4_5
+    .container.mx-auto.w-4_5
       = yield

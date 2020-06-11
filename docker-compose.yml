@@ -68,7 +68,7 @@ services:
     environment:
       - PSQL_HISTFILE=/root/log/.psql_history
     ports:
-      - '5432:5432'
+      - '5454:5432'
 
   # redis:
   #   image: redis:3.2-alpine

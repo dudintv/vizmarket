@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Creator::SettingsController, type: :controller do
+RSpec.describe Publisher::SettingsController, type: :controller do
 
   describe "GET #edit" do
     it "returns http success" do

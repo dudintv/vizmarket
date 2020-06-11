@@ -6,7 +6,7 @@
       li {{ user.email }}
       li: a(href='/') Publisher settings
     .new-product
-      a.big-btn.main-btn(href='/creator/products/new') New product
+      a.big-btn.main-btn(href='/publisher/products/new') New product
     //- .earn-money &nbsp;
 </template>
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Creator::ProductsController, type: :controller do
+RSpec.describe Publisher::ProductsController, type: :controller do
 
   describe "GET #index" do
     sign_in_user

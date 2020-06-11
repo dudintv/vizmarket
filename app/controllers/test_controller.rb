@@ -1,6 +1,6 @@
 class TestController < ApplicationController
   layout 'test'
   
-  def colors
+  def test
   end
 end

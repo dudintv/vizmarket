@@ -21,13 +21,12 @@ Rails.application.routes.draw do
   get "/profile", to: "profile#index"
   get "/profile/*slug", to: "profile#index"
 
-  namespace :creator do
+  namespace :publisher do
     resources :products
     get 'edit_settings', to: 'settings#edit'
     post 'update_settings', to: 'settings#update'
   end
 
-  namespace :test do
-    get 'colors'
-  end
+  get '/test', to: 'test#test'
+  get '/test/*path', to: 'test#test' # to test vue-router
 end
