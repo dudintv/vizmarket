@@ -20,7 +20,6 @@
 
 <script>
 import Swither from 'components/inputs/switcher'
-import { clone } from 'utils/object'
 
 export default {
   components: {
