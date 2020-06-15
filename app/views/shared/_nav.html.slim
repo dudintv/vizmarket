@@ -57,7 +57,7 @@ header
             .line.edit
               span.name= @data[:user][:email]
               a.button href='#' Edit info
-            .line = link_to('Publisher portal', publisher_products_path, class: 'main-button') 
+            .line = link_to('Publisher portal', publisher_path, class: 'main-button', 'data-turbolinks': "false") 
             .line = link_to('Sign out', destroy_user_session_path, class: 'button', method: :delete)
         - else
           .auth-signin

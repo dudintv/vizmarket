@@ -8,16 +8,11 @@
 <script>
 import RulesNotice from "./RulesNotice"
 import ProductPanel from "./ProductPanel"
-import StartCreate from "./StartCreate"
 
 export default {
   components: {
     RulesNotice,
     ProductPanel,
-    StartCreate,
   }
 }
 </script>
-
-<style lsng="scss" scoped>
-</style>

@@ -1,57 +1,95 @@
 <template lang="pug">
-  .edit-product-panel(:class="bg_class")
+  .edit-product-panel(:class="bgClass")
     .nav
       ProductThumbnail(:product="product")
       ProductTitle(:product="product")
       .tabs
-        a.tab(href="#")
+        router-link.tab(to="/publisher/new/title")
           i.las.la-tag
           span Title & Category
-        a.tab(href="#")
+        router-link.tab(to="/publisher/new/media")
           i.las.la-photo-video
           span Images & Video
-        a.tab(href="#")
+        router-link.tab(to="/publisher/new/texts")
           i.las.la-align-left
           span Instructions
-        a.tab.selected(href="#")
+        router-link.tab.selected(to="/publisher/new/files")
           i.las.la-file-upload
           span Product files
     .content
-      component(is="ProductMediaTab")
+      router-view
     .status
       span.text-white-20 status:&nbsp;
       span {{ product.status }}
     .actions
       button.big-btn.third-btn Delete the draft
       button.big-btn.second-btn Save and continue later
-      button.big-btn.main-btn Next: upload files
+      button.big-btn.main-btn(@click="doNext()") {{ nextButtonText }}
 </template>
 
 <script>
 import ProductThumbnail from 'components/product/thumbnail'
 import ProductTitle from 'components/product/title'
 
-import ProductTitleTab from './TitleTab'
-import ProductMediaTab from './MediaTab'
-import ProductTextsTab from './TextsTab'
-import ProductFilesTab from './FilesTab'
-
 export default {
   components: {
     ProductThumbnail,
     ProductTitle,
-    ProductTitleTab,
-    ProductMediaTab,
-    ProductTextsTab,
-    ProductFilesTab,
   },
   computed: {
     product () {
       return this.$store.state.currentProduct;
     },
-    bg_class () {
+    bgClass () {
       return this.product.status == 'published' ? 'bg-published' : 'bg-unpublished'
-    }
+    },
+    nextButtonText () {
+      switch (this.$route.fullPath.split('/').slice(-1)[0]) {
+        case 'title':
+        case 'media':
+        case 'texts': return 'Save and go next'
+        case 'files': return 'Finish and publish'
+        default: return 'Next'
+      }
+    },
+  },
+  methods: {
+    doNext () {
+      switch (this.$route.fullPath.split('/').slice(-1)[0]) {
+        case 'title':
+          this.saveTitle()
+          this.$router.push('/publisher/new/media')
+          break
+        case 'media':
+          this.saveMedia()
+          this.$router.push('/publisher/new/texts')
+          break
+        case 'texts':
+          this.saveTexts()
+          this.$router.push('/publisher/new/files')
+          break
+        case 'files':
+          this.saveFiles()
+          this.saveAndClose()
+          break
+        default: this.saveAndClose()
+      }
+    },
+    saveAndClose () {
+      console.log('SAVE AND CLOSE')
+    },
+    saveTitle () {
+      console.log('SAVE TITLE')
+    },
+    saveMedia () {
+      console.log('SAVE MEDIA')
+    },
+    saveTexts () {
+      console.log('SAVE TEXTS')
+    },
+    saveFiles () {
+      console.log('SAVE FILES')
+    },
   }
 }
 </script>
@@ -79,7 +117,7 @@ export default {
     .tab {
       @apply block px-4 py-6 text-xl;
 
-      &.selected {
+      &.router-link-active {
         @apply bg-red;
 
         &:hover { @apply bg-red; }

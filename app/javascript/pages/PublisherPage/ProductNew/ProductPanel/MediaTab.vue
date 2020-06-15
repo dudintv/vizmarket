@@ -28,7 +28,7 @@ export default {
       thumbnail: "",
       featured_image: "",
       youtube_videos: "",
-      gallery: "",
+      gallery: [],
     }
   },
   computed: {

@@ -1,13 +1,8 @@
 <template lang='pug'>
-  ProductsList
+  router-view
 </template>
 
 <script>
-import ProductsList from './ProductsList'
-
 export default {
-  components: {
-    ProductsList,
-  },
 }
 </script>
