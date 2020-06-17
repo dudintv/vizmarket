@@ -6,19 +6,27 @@
       li {{ user.email }}
       li: a(href='/') Publisher settings
     .new-product
-      //- a.big-btn.main-btn(href='/publisher/products/new') New product
-      router-link.big-btn.main-btn(to='/publisher/new') New product
-    //- .earn-money &nbsp;
+      button.big-btn.main-btn(to='/publisher/new' @click="isShowNewProductDialog=true") New product
+      ModalWindow(v-model="isShowNewProductDialog")
+        StartCreate
 </template>
 
 <script>
+import ModalWindow from "components/common/ModalWindow"
+import StartCreate from "../ProductNew/StartCreate"
+
 export default {
+  components: {
+    ModalWindow,
+    StartCreate,
+  },
   data () {
     return {
       user: {
         name: 'User Name',
         email: 'email@dot.com'
-      }
+      },
+      isShowNewProductDialog: false,
     }
   }
 }
