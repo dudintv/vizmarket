@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe TestController, type: :controller do
 
-  describe "GET #colors" do
+  describe "GET #test" do
     it "returns http success" do
-      get :colors
+      get :test
       expect(response).to have_http_status(:success)
     end
   end
