@@ -3,6 +3,9 @@ import store from '../pages/PublisherPage/store'
 import router from '../pages/PublisherPage/router'
 import ProductsApp from '../pages/PublisherPage'
 
+import backend from '../backend/axios'
+Vue.prototype.$backend = backend;
+
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: '#publisher-app',
