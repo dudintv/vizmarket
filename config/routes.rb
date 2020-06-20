@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   #   post 'update_settings', to: 'settings#update'
   # end
   get '/publisher', to: 'publisher/products#index'
+  post '/publisher/products', to: 'publisher/products#create'
   get '/publisher/*path', to: 'publisher/products#index' # to vue-router
 
   get '/test', to: 'test#test'
