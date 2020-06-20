@@ -46,8 +46,9 @@ export default {
 }
 
 .close {
-  @apply absolute top-0 right-0 px-6 py-2 cursor-pointer bg-blue-10 text-white-50 text-2xl;
-  
+  @apply absolute top-0 right-4 px-6 py-2 cursor-pointer bg-blue-10 text-white-50 text-2xl;
+  height: 3rem;
+
   &:hover {
     @apply bg-blue-20;
   }

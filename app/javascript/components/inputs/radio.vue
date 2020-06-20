@@ -5,11 +5,11 @@
         v-for="(option, index) in options" 
         :data-index="index" 
         :key="index" 
-        :class="{selected: option==value}"
+        :class="{selected: option === value}"
         @click="$emit('input', option)"
       )
         label
-          input.hidden(:name="name" type="radio" :value="option" v-model="value")
+          input.hidden(:id="`${name}_${option}`" :name="name" type="radio" :value="option" v-model="value")
           i
           span {{ option }}
     .tip(v-if="$slots['tip']")
@@ -47,8 +47,6 @@ export default {
 
       input + i::before {
         @apply text-4xl mr-1;
-        // @extend .lar;
-        // @extend .la-circle;
         font-family: 'Line Awesome Free';
         font-weight: 900;
         font-style: normal;
