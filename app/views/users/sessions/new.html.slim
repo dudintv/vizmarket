@@ -1,6 +1,6 @@
 h2.mt-12.mb-4.text-center
   | Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'devise' }) do |f|
   .field
     = f.label :email
     br
