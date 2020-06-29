@@ -84,7 +84,7 @@ input {
 }
 
 .has_error {
-  @apply relative border-2 border-orange;
+  @apply relative border border-orange;
 }
 
 .error-in-field {
@@ -107,7 +107,7 @@ form.devise {
   }
 
   .field_with_errors {
-    @apply border-4 border-orange;
+    @apply border border-orange;
 
     label {
       @apply text-orange ml-2;
