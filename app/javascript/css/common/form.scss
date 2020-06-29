@@ -63,11 +63,8 @@ input {
   }
 }
 
-//////////////////////////////////////////////////////////////
-// DEVICE:
-.field {
-  @apply my-2;
-}
+///////////////////////////////////////////////
+// VALIDATION:
 
 %before-icon-exclamation-circle {
   @apply relative text-orange text-2xl;
@@ -78,20 +75,42 @@ input {
   top: 0.2rem;
 }
 
-#error_explanation {
-  @apply p-4 border border-orange bg-item border-r-4;
+.error_explanation {
+  @apply px-4 py-2 border border-orange bg-item;
 
   li:before {
     @extend %before-icon-exclamation-circle;
   }
 }
 
-form {
+.has_error {
+  @apply relative border-2 border-orange;
+}
+
+.error-in-field {
+  @apply text-orange pl-4 pt-1 pb-2 leading-none;
+
+  &:before {
+    @extend %before-icon-exclamation-circle;
+  }
+}
+
+// :VALIDATIONS
+//////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+// DEVICE:
+
+form.devise {
+  .field {
+    @apply my-2;
+  }
+
   .field_with_errors {
     @apply border-4 border-orange;
 
     label {
-      @apply text-orange;
+      @apply text-orange ml-2;
 
       &:before {
         @extend %before-icon-exclamation-circle;
@@ -107,8 +126,8 @@ form {
   }
 }
 
-// :DEVISE
-//////////////////////////////////////////////////
+// :DEVICE
+//////////////////////////////////////////////////////////////
 
 @keyframes blink {
   from { border-color: transparent; }
