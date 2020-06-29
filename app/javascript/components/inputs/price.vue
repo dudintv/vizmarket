@@ -5,6 +5,8 @@
       label(:for="name"): .input-name {{ name }}
     .tip(v-if="$slots['tip']")
       slot(name="tip")
+    .error-in-field(v-if="$slots['error']")
+      slot(name="error")
 </template>
 
 <script>
