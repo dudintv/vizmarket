@@ -131,7 +131,9 @@ export default {
   }
 
   ::v-deep ul.vs__dropdown-menu {
-    @apply bg-blue-10;
+    @apply bg-body-darker absolute w-full shadow-xl;
+    top: calc(100% - 2px);
+    z-index: 100000;
 
     li{
       &.vs__dropdown-option {
