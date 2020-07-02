@@ -18,3 +18,4 @@ require("channels")
 
 require("../css/application.css");
 require("../common/nav.js");
+require("../common/flash.js");
