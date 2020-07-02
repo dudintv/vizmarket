@@ -1,24 +1,10 @@
-# README
+# Vizrt Marketplace
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Toasting / flash messages / global notification
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To make a new notification/toast just run:
+```
+FlashVM.notice("message")
+FlashVM.alert("message")
+```
+It's avaliable everywhere, includes Vue and regular js code.

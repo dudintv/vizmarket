@@ -16,7 +16,6 @@
 
 @import "./shared/nav.scss";
 @import "./shared/anons.scss";
-@import "./shared/notifications.scss";
 
 @import "./product/grid-item.scss";
 
