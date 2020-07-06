@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import backend from 'backend/axios'
 
 Vue.use(Vuex)
 
@@ -128,7 +129,7 @@ export default new Vuex.Store({
   },
   actions: {
     loadCurrentProductData ({ commit }, id) {
-      this.$backend.products.get(id)
+      backend.products.get(id)
         .then(response => {
           commit('setCurrentProduct', response.data.data.attributes)
         })
