@@ -1,6 +1,6 @@
 <template lang="pug">
   #toasts
-    Flash(v-for="message in messages" :kind="message[0]" :message="message[1]")
+    Flash(v-for="message in messages" :kind="message[0]" :message="message[1]" :key="message[1]")
 </template>
 
 <script>

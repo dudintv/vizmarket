@@ -4,16 +4,16 @@
       ProductThumbnail(:product="product")
       ProductTitle(:product="product")
       .tabs
-        router-link.tab(:to="`/publisher/product/${product.id}/title`")
+        router-link.tab(:to="`/publisher/products/${product.id}/title`")
           i.las.la-tag
           span Title & Category
-        router-link.tab(:to="`/publisher/product/${product.id}/media`")
+        router-link.tab(:to="`/publisher/products/${product.id}/media`")
           i.las.la-photo-video
           span Images & Video
-        router-link.tab(:to="`/publisher/product/${product.id}/texts`")
+        router-link.tab(:to="`/publisher/products/${product.id}/texts`")
           i.las.la-align-left
           span Instructions
-        router-link.tab.selected(:to="`/publisher/product/${product.id}/files`")
+        router-link.tab.selected(:to="`/publisher/products/${product.id}/files`")
           i.las.la-file-upload
           span Product files
     .content
@@ -69,15 +69,15 @@ export default {
       switch (this.$route.fullPath.split('/').slice(-1)[0]) {
         case 'title':
           this.saveTitle()
-          this.$router.push(`/publisher/product/${this.product.id}/media`)
+          this.$router.push(`/publisher/products/${this.product.id}/media`)
           break
         case 'media':
           this.saveMedia()
-          this.$router.push(`/publisher/product/${this.product.id}/texts`)
+          this.$router.push(`/publisher/products/${this.product.id}/texts`)
           break
         case 'texts':
           this.saveTexts()
-          this.$router.push(`/publisher/product/${this.product.id}/files`)
+          this.$router.push(`/publisher/products/${this.product.id}/files`)
           break
         case 'files':
           this.saveFiles()

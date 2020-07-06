@@ -21,7 +21,7 @@
         .product-line
           .product-short-description.px-4.py-2 {{product.short_description}}
         table.product-line.m-4
-          tr.product-version(v-for="version in product.versions")
+          tr.product-version(v-for="version in product.versions" :key="version.id")
             td.product-version-number.align-top.pt-1.pr-2.w-1
               .border.border-red.px-2.py-1 v&nbsp;{{version.number}}
             td.product-version-info.px-2.py-2

@@ -21,15 +21,24 @@ Rails.application.routes.draw do
   get "/profile", to: "profile#index"
   get "/profile/*slug", to: "profile#index"
 
-  # namespace :publisher do
-  #   resources :products
-  #   get 'edit_settings', to: 'settings#edit'
-  #   post 'update_settings', to: 'settings#update'
-  # end
-  get '/publisher', to: 'publisher/products#index'
-  get '/publisher/products/:id', to: 'publisher/products#show'
-  post '/publisher/products', to: 'publisher/products#create'
-  get '/publisher/*path', to: 'publisher/products#index' # to vue-router
+  namespace :publisher do
+    root to: 'products#index'
+    get 'products/*path', to: 'products#index' # to vue-router
+    
+    get  'settings', to: 'settings#edit'
+    post 'settings', to: 'settings#update'
+
+    namespace :api, defaults: { format: :json } do
+      constraints ->(r) { r.format == :json } do
+        resources :products, only: %i[index show new create update destroy] do
+          resources :versions, only: %i[index show create update destroy] do
+            post :publish, on: :member
+            post :unpublish, on: :member
+          end
+        end
+      end
+    end
+  end
 
   get '/test', to: 'test#test'
   get '/test/*path', to: 'test#test' # to test vue-router

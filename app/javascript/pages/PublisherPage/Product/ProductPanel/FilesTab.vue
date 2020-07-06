@@ -1,7 +1,7 @@
 <template lang="pug">
   .form
     VersionCreate
-    VersionShow(v-for="version in product.versions" :version="version")
+    VersionShow(v-for="version in product.versions" :version="version" :key="version.id")
 </template>
 
 <script>

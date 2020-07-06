@@ -47,7 +47,7 @@ export default {
             if (response.status === 201) {
               FlashVM.notice('The draft of new product was succesfully created')
               this.$store.commit('setCurrentProduct', response.data.data.attributes)
-              this.$router.push({path: `/publisher/product/${response.data.data.id}/title`})
+              this.$router.push({path: `/publisher/products/${response.data.data.id}/title`})
             }
           })
           .catch(error => {

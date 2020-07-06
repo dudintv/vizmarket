@@ -15,8 +15,9 @@ export default new VueRouter({
   hashbang: false,
   routes: [
     { path: '/publisher', redirect: '/publisher/index' },
+    { path: '/publisher/index', component: ProductList },
     {
-      path: '/publisher/product/:id',
+      path: '/publisher/products/:id',
       component: Product,
       children: [
         { path: 'title', component: TitleTab },
@@ -25,6 +26,5 @@ export default new VueRouter({
         { path: 'files', component: FilesTab },
       ]
     },
-    { path: '/publisher/index', component: ProductList },
   ]
 })

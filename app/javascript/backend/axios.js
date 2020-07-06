@@ -8,7 +8,7 @@ axios.defaults.headers.common = {
 };
 
 const publisher_adapter = axios.create({
-  baseURL: '/publisher',
+  baseURL: '/publisher/api',
 })
 
 export default {
