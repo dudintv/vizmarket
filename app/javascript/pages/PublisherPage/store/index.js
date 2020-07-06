@@ -5,38 +5,39 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    currentProduct: {
-      id: 1,
-      title: "Name of product",
-      short_description: "",
-      description: "",
-      image: "/images/test-examples/thumbnails/thumb02.png",
-      labels: ["new", "featured"],
-      status: "draft",
-      kind: "script",
-      category: "position",
+    currentProduct: {},
+    // currentProduct: {
+    //   id: 1,
+    //   title: "Name of product",
+    //   short_description: "",
+    //   description: "",
+    //   image: "/images/test-examples/thumbnails/thumb02.png",
+    //   labels: ["new", "featured"],
+    //   status: "draft",
+    //   kind: "script",
+    //   category: "position",
 
-      versions: [
-        {
-          id: 1,
-          number: "1.0",
-          support: "VizArtist 3.13",
-          status: "published",
-          created_at: (new Date()).toString(),
-          updated_at: (new Date()).toString(),
-          files: [
-            {
-              filename: "2019_v1.0_SuperPlugin.vip",
-              path: "/product/1/versions/1/2019_v1.0_SuperPlugin.vip",
-            },
-            {
-              filename: "2020_v1.1_SuperPlugin.vip",
-              path: "/product/1/versions/2/2020_v1.1_SuperPlugin.vip",
-            },
-          ]
-        },
-      ]
-    },
+    //   versions: [
+    //     {
+    //       id: 1,
+    //       number: "1.0",
+    //       support: "VizArtist 3.13",
+    //       status: "published",
+    //       created_at: (new Date()).toString(),
+    //       updated_at: (new Date()).toString(),
+    //       files: [
+    //         {
+    //           filename: "2019_v1.0_SuperPlugin.vip",
+    //           path: "/product/1/versions/1/2019_v1.0_SuperPlugin.vip",
+    //         },
+    //         {
+    //           filename: "2020_v1.1_SuperPlugin.vip",
+    //           path: "/product/1/versions/2/2020_v1.1_SuperPlugin.vip",
+    //         },
+    //       ]
+    //     },
+    //   ]
+    // },
     products: [
       {
         id: 1,
@@ -123,9 +124,19 @@ export default new Vuex.Store({
     },
     changeFilter: (state, newFilter) => {
       state.filter = newFilter
-    }
+    },
   },
   actions: {
+    loadCurrentProductData ({ commit }, id) {
+      this.$backend.products.get(id)
+        .then(response => {
+          commit('setCurrentProduct', response.data.data.attributes)
+        })
+        .catch(error => {
+          console.alert('Can\'t load current product data. Error: ', error)
+          FlashVM.alert(error)
+        }) 
+    },
     versionPublishedChanged ({ commit, state}, { version, is_published }) {
       console.log(is_published)
       let status
@@ -139,7 +150,7 @@ export default new Vuex.Store({
       version.status = status
 
       console.log(state.currentProduct.versions[0].status)
-    }
+    },
   },
   modules: {},
   plugins: [],

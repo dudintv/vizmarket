@@ -20,6 +20,35 @@ RSpec.describe Publisher::ProductsController, type: :controller do
     end
   end
 
+  describe 'GET #show' do
+    let(:product) { create(:product) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        get :show, params: { id: product.id }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      context 'With wrong id' do
+        it 'return not_found (404)' do
+          get :show, params: { id: product.id + 1 }
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context 'With correct id' do
+        it 'returns http success' do
+          get :show, params: { id: product.id }
+          expect(response).to have_http_status(:success)
+        end
+      end
+    end
+  end
+
   describe 'POST #create' do
     let(:product_params) { attributes_for(:product) }
 

@@ -46,14 +46,12 @@ export default {
           .then(response => {
             if (response.status === 201) {
               FlashVM.notice('The draft of new product was succesfully created')
-              console.log('!! response', response)
               this.$store.commit('setCurrentProduct', response.data.data.attributes)
-              console.log("response.data.data.id", response.data.data.id)
               this.$router.push({path: `/publisher/product/${response.data.data.id}/title`})
             }
           })
           .catch(error => {
-            console.log('!! error', error)
+            console.alert('Can\'t create product. Error:', error)
             this.errorFromServer = error
             FlashVM.alert(error)
           }) 

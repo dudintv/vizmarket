@@ -9,7 +9,7 @@ FactoryBot.define do
     public { true }
     featured { false }
     deleted_at { nil }
-    user { create(:user).id }
+    user { create(:user) }
     kind { Kind.find_by(title: 'script') }
 
     factory :featured_product do
