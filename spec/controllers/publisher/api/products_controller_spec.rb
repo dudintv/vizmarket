@@ -131,5 +131,46 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
         expect(response).to have_http_status(:unauthorized)
       end
     end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      context 'Update title & category' do
+        it 'return success' do
+          patch :update, params: {
+            id: product.id,
+            product: {
+              title: "#{product.title} updated",
+              short_description: "#{product.short_description} updated",
+              kind: "assets",
+              categories: ["utility", "other"]
+            }
+          }
+          expect(response).to have_http_status(:success)
+        end
+
+        it 'change product\'s title' do
+          expect{
+            patch :update, params: {
+              id: product.id,
+              product: {
+                title: "#{product.title} updated"
+              }
+            }
+          }.to change{ product.title }
+          expect(product.title).end_with "updated"
+        end
+      end
+
+      context 'Update Images & Video' do
+        
+      end
+
+      context 'Update Instructions' do
+        
+      end
+
+      # Product Files are tested in versions_controller_spec
+    end
   end
 end

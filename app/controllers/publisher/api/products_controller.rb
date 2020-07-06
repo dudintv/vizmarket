@@ -25,4 +25,26 @@ class Publisher::Api::ProductsController < ApplicationController
       render json: @product.errors.as_json, status: :unprocessable_entity
     end
   end
+
+  def update
+    @product = Product.find_by(id: params[:id]) # avoid raising exception with Product#find()
+    @kind = Kind.find_by(title: params[:product][:kind])
+    @categories = Kind.where(title: params[:product][:categories])
+
+    if @product.update(product_params)
+      render json: ProductSerializer.new(@product).serialized_json, status: :success
+    else
+      render json: @product.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(
+      :title, :short_description,
+      :description, :instruction,
+      :price
+    )
+  end
 end
