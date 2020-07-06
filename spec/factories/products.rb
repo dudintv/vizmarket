@@ -11,6 +11,7 @@ FactoryBot.define do
     deleted_at { nil }
     user { create(:user) }
     kind { Kind.find_by(title: 'script') }
+    categories { [Category.find_by(title: 'animation')] }
 
     factory :featured_product do
       featured { true }
