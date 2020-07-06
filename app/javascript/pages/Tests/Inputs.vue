@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import RulesNotice from './../PublisherPage/ProductNew/RulesNotice'
+import RulesNotice from './../PublisherPage/Product/RulesNotice'
 import FormField from 'components/inputs/FormField'
 
 import TextareaInput from "components/inputs/textarea.vue"

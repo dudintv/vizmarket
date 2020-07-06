@@ -23,7 +23,7 @@ export default {
   },
   data () {
     return {
-      kinds: ['script', 'scene', 'plugin'],
+      kinds: ['script', 'scene', 'plugin', 'asset'],
       kind: '',
       name: '',
       errorFromServer: '',
@@ -45,12 +45,17 @@ export default {
         this.$backend.products.create({ name: this.name, kind: this.kind })
           .then(response => {
             if (response.status === 201) {
+              FlashVM.notice('The draft of new product was succesfully created')
               console.log('!! response', response)
+              this.$store.commit('setCurrentProduct', response.data.data.attributes)
+              console.log("response.data.data.id", response.data.data.id)
+              this.$router.push({path: `/publisher/product/${response.data.data.id}/title`})
             }
           })
           .catch(error => {
             console.log('!! error', error)
             this.errorFromServer = error
+            FlashVM.alert(error)
           }) 
       }
     },

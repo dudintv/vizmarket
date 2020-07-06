@@ -6,14 +6,14 @@
       li {{ user.email }}
       li: a(href='/') Publisher settings
     .new-product
-      button.big-btn.main-btn(to='/publisher/new' @click="isShowNewProductDialog=true") New product
+      button.big-btn.main-btn(@click="isShowNewProductDialog=true") New product
       ModalWindow(v-model="isShowNewProductDialog")
         StartCreate
 </template>
 
 <script>
 import ModalWindow from "components/common/ModalWindow"
-import StartCreate from "../ProductNew/StartCreate"
+import StartCreate from "../Product/StartCreate"
 
 export default {
   components: {

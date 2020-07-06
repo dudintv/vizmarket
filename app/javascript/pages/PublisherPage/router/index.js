@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const ProductNew  = () => import('../ProductNew')
+const Product     = () => import('../Product')
 const ProductList = () => import('../ProductsList')
 
-const TitleTab = () => import('../ProductNew/ProductPanel/TitleTab')
-const MediaTab = () => import('../ProductNew/ProductPanel/MediaTab')
-const TextsTab = () => import('../ProductNew/ProductPanel/TextsTab')
-const FilesTab = () => import('../ProductNew/ProductPanel/FilesTab')
+const TitleTab = () => import('../Product/ProductPanel/TitleTab')
+const MediaTab = () => import('../Product/ProductPanel/MediaTab')
+const TextsTab = () => import('../Product/ProductPanel/TextsTab')
+const FilesTab = () => import('../Product/ProductPanel/FilesTab')
 
 Vue.use(VueRouter)
 export default new VueRouter({
@@ -16,8 +16,8 @@ export default new VueRouter({
   routes: [
     { path: '/publisher', redirect: '/publisher/index' },
     {
-      path: '/publisher/new',
-      component: ProductNew,
+      path: '/publisher/product/:id',
+      component: Product,
       children: [
         { path: 'title', component: TitleTab },
         { path: 'media', component: MediaTab },

@@ -21,24 +21,6 @@
 export default {
   data () {
     return {
-      filters: [
-        {
-          name: "All",
-          count: 7,
-        },
-        {
-          name: "Published",
-          count: 6,
-        },
-        {
-          name: "Drafts",
-          count: 1,
-        },
-        {
-          name: "Pending approval",
-          count: 0,
-        },
-      ],
       selected_filter: "All",
       sorts: [
         {
@@ -54,6 +36,41 @@ export default {
       ],
       arrange_by_type: false,
     }
+  },
+  computed: {
+    totalCount () {
+      console.log(this.$store.state.products)
+      return this.$store.state.products.length
+    },
+    publishedCount () {
+      return this.$store.getters.published.length
+    },
+    draftCount () {
+      return this.$store.getters.drafts.length
+    },
+    pendingCount () {
+      return this.$store.getters.pendings.length
+    },
+    filters () {
+      return [
+        {
+          name: "All",
+          count: this.totalCount,
+        },
+        {
+          name: "Published",
+          count: this.publishedCount,
+        },
+        {
+          name: "Drafts",
+          count: this.draftCount,
+        },
+        {
+          name: "Pending approval",
+          count: this.pendingCount,
+        },
+      ].filter(part => part.count > 0)
+    },
   }
 }
 </script>

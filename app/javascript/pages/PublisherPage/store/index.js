@@ -37,12 +37,93 @@ export default new Vuex.Store({
         },
       ]
     },
+    products: [
+      {
+        id: 1,
+        cover: null,
+        title: 'Random movement',
+        short_description: 'Random besier movement single container with separated three dimensions.',
+        created_at: '2019-12-31 02:09:38 UTC',
+        updated_at: '2020-01-03 03:57:14 UTC',
+        public: true,
+        featured: false,
+        kind: 'Script',
+        category: 'Positioning',
+        price: 100,
+        price_original: 200,
+        purchased_count: 14,
+        rating: {
+          average: 4.7,
+          count: 35,
+        },
+        versions: [
+          {
+            number: 1.2,
+            created_at: '2020-01-03 03:57:14 UTC',
+            developed_for: 'developed for VizArtist 3.10 … 3.13',
+            // tested_in: 'tested in VizArtist 3.13',
+          },
+          {
+            number: 1.1,
+            created_at: '2020-01-02 02:34:00 UTC',
+            developed_for: 'developed for VizArtist 3.10',
+            // tested_in: 'tested in VizArtist 3.10',
+          },
+          {
+            number: 1.0,
+            created_at: '2020-01-01 01:00:00 UTC',
+            developed_for: 'developed for VizArtist 3.8',
+            // tested_in: 'tested in VizArtist 3.8',
+          },
+        ]
+      }
+    ],
+    categoryList: [
+      "transformation",
+      "visibility",
+      "animation",
+      "texture",
+      "interactive",
+      "utility",
+      "other",
+    ],
+    kindList: [
+      "script",
+      "scene",
+      "plugin",
+      "assets",
+    ],
+    filter: 'all',
+  },
+  getters: {
+    published: state => {
+      return state.products.filter(product => !!product.published)
+    },
+    drafts: state => {
+      return state.products.filter(product => !product.published)
+    },
+    pendings: state => {
+      return state.products.filter(product => !!product.published && !product.aproved)
+    },
+    filteredProducts: (state, getters) => {
+      switch(state.filter.toLowerCase()){
+        case 'published':
+          return getters.published
+        case 'drafts':
+          return getters.drafts
+        case 'pendings':
+          return getters.pendings
+      }
+      return state.products
+    },
   },
   mutations: {
-    // changeVersionPublished (state, { version, status } ) {
-    //   // state.currentProduct.versions[0].status = status
-    //   version.status = status
-    // }
+    setCurrentProduct: (state, productData) => {
+      state.currentProduct = productData
+    },
+    changeFilter: (state, newFilter) => {
+      state.filter = newFilter
+    }
   },
   actions: {
     versionPublishedChanged ({ commit, state}, { version, is_published }) {

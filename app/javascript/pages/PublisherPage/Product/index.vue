@@ -1,7 +1,7 @@
 <template lang="pug">
   .new-product
     RulesNotice(image="/images/anons/take-a-look.jpg")
-    h1 Create new product
+    h1 Edit product
     ProductPanel
 </template>
 
@@ -13,6 +13,6 @@ export default {
   components: {
     RulesNotice,
     ProductPanel,
-  }
+  },
 }
 </script>
