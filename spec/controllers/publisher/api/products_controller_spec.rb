@@ -139,26 +139,57 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
         it 'return success' do
           patch :update, params: {
             id: product.id,
+            kind: "assets",
+            categories: ["utility", "other"],
             product: {
               title: "#{product.title} updated",
-              short_description: "#{product.short_description} updated",
-              kind: "assets",
-              categories: ["utility", "other"]
+              short_description: "#{product.short_description} updated"
             }
           }
           expect(response).to have_http_status(:success)
         end
 
-        it 'change product\'s title' do
+        it 'change product\'s kind and categories' do
+          expect{
+            patch :update, params: {
+              id: product.id,
+              kind: "assets",
+              categories: ["utility", "other"],
+            }
+            product.reload
+          }
+          .to change { product.kind }
+          .and change { product.categories.pluck(:title) }
+        end
+
+        it 'change product\'s title and short_description' do
           expect{
             patch :update, params: {
               id: product.id,
               product: {
-                title: "#{product.title} updated"
+                title: "#{product.title} updated",
+                short_description: "#{product.short_description} updated"
               }
             }
-          }.to change{ product.title }
-          expect(product.title).end_with "updated"
+            product.reload
+          }
+          .to change { product.title }
+          .and change { product.short_description }
+        end
+
+        it 'change product\'s description and instruction' do
+          expect{
+            patch :update, params: {
+              id: product.id,
+              product: {
+                description: "#{product.description} updated",
+                instruction: "#{product.instruction} updated"
+              }
+            }
+            product.reload
+          }
+          .to change { product.description }
+          .and change { product.instruction }
         end
       end
 
