@@ -33,9 +33,14 @@ export default {
       selected: [""],
     }
   },
-  mounted () {
-    this.selected = new Array(this.value).flat() //guarantee an array as input
+  watch: {
+    value () { this.setSelected() },
   },
+  methods: {
+    setSelected () {
+      this.selected = new Array(this.value).flat() //guarantee an array as input
+    }
+  }
 }
 </script>
 

@@ -22,7 +22,12 @@ export default {
   },
   props: {
     name: String,
-    value: Array,
+    value: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
   },
   data () {
     return {
