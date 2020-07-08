@@ -126,6 +126,9 @@ export default new Vuex.Store({
     changeFilter: (state, newFilter) => {
       state.filter = newFilter
     },
+    setYoutubeIds: (state, newIds) => {
+      state.currentProduct.youtube_ids = newIds
+    },
   },
   actions: {
     loadCurrentProductData ({ commit }, id) {

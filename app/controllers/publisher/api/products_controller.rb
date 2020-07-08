@@ -53,7 +53,8 @@ class Publisher::Api::ProductsController < ApplicationController
     params.require(:product).permit(
       :title, :short_description,
       :description, :instruction,
-      :price
+      :videos, :youtube_ids,
+      :price,
     )
   end
 end

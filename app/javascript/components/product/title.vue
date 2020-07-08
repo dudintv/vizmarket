@@ -1,8 +1,11 @@
 <template lang="pug">
   .product-title
-    .taxonomy(v-if="product.kind || product.category")
+    .taxonomy(v-if="product.kind || product.categories")
       a.kind {{ product.kind }}&nbsp;
-      a.category / {{ product.category }}
+      | / 
+      a.category(v-for="(category, index) in product.categories" :key="category")
+        | {{ category }}
+        template(v-if="index < product.categories.length-1") , 
     span.title {{ product.title }}
 </template>
 

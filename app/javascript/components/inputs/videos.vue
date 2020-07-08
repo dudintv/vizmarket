@@ -35,11 +35,20 @@ export default {
       // https://www.youtube.com/watch?v=j-HkuKxTYEU
       // https://youtu.be/O13ZItlALxg
       // youtu.be/mbbfyWyQGWg
-      let youtube_regexp = /(?:https?:)?(?:\/\/)?(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/\S*?[^\w\s-])((?!videoseries)[\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/
-      let arr = this.value.split(/\s+/).filter( line => youtube_regexp.test(line) ).map( line => youtube_regexp.exec(line)[1] );
-      return arr
+      const youtube_regexp = /(?:https?:)?(?:\/\/)?(?:[0-9A-Z-]+\.)?(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/\S*?[^\w\s-])((?!videoseries)[\w-]{11})(?=[^\w-]|$)(?![?=&+%\w.-]*(?:['"][^<>]*>|<\/a>))[?=&+%\w.-]*/
+      if (this.value) {
+        let arr = this.value.split(/\s+/).filter( line => youtube_regexp.test(line) ).map( line => youtube_regexp.exec(line)[1] );
+        return arr
+      } else {
+        return []
+      }
       // return ["LDDy4m_TiVk", "TjE2w9Gng8g", "j-HkuKxTYEU"]
     }
+  },
+  watch: {
+    video_ids (ids) {
+      this.$emit('updateIds', ids)
+    } 
   },
   methods: {
     textareaAutoGrowth () {

@@ -191,6 +191,21 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
           .to change { product.description }
           .and change { product.instruction }
         end
+
+        it 'change product\'s videos and youtube_ids' do
+          expect{
+            patch :update, params: {
+              id: product.id,
+              product: {
+                videos: "https://www.youtube.com/watch?v=JMP3x9OffBM",
+                youtube_ids: "JMP3x9OffBM"
+              }
+            }
+            product.reload
+          }
+          .to change { product.videos }
+          .and change { product.youtube_ids }
+        end
       end
 
       context 'Update Images & Video' do
