@@ -34,10 +34,16 @@ class Publisher::Api::ProductsController < ApplicationController
       kind = Kind.find_by(title: params[:kind])
       @product.update(kind: kind)
     end
+    
     if params[:categories]
       categories = Category.where(title: params[:categories])
       @product.update(categories: categories)
     end
+
+    if params[:newCategory]
+      NewCategory.create(title: params[:newCategory], user: current_user, product: @product)
+    end
+
     if params[:product]
       if @product.update!(product_params)
         render json: ProductSerializer.new(@product.reload).serialized_json, status: :ok
