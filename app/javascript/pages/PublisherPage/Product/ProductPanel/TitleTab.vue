@@ -10,8 +10,9 @@
       template(#input)
         SelectInput(name="Category" v-model="product.categories" :options="categoryList")
           template(#tip)
-            | If you didn't find proper category — select "Other" and&nbsp;
-            a(href="#" @click.prevent="") advice a new category
+            | If you didn't find proper category — choose "Other" and 
+            a(href="#" @click.prevent="showNewCategory = !showNewCategory") advice a new category
+        TextInput(v-if="showCategory" name="New advisable category" v-model="newCategory")
 </template>
 
 <script>
@@ -22,6 +23,12 @@ import RadioInput    from "components/inputs/radio.vue"
 import SelectInput   from "components/inputs/select.vue"
 
 export default {
+  data () {
+    return {
+      showNewCategory: false,
+      newCategory: '',
+    }
+  },
   components: {
     FormField,
     TextInput,

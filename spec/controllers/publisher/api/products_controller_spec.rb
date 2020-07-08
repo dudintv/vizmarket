@@ -135,7 +135,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
     context 'Authenticated user' do
       sign_in_user
 
-      context 'Update title & category' do
+      context 'Update on "Title & Category" page' do
         it 'return success' do
           patch :update, params: {
             id: product.id,
@@ -205,6 +205,30 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
           }
           .to change { product.videos }
           .and change { product.youtube_ids }
+        end
+        
+        context 'create NewCategory if user advise a new advisable category' do
+          it 'dont create empty NewCategory' do
+            expect{
+              patch :update, params: {
+                id: product.id,
+                newCategory: ''
+              }
+              product.reload
+            }
+            .to_not change { NewCategory.count }
+          end
+
+          it 'create NewCategory if it presence' do
+            expect{
+              patch :update, params: {
+                id: product.id,
+                newCategory: 'My category'
+              }
+              product.reload
+            }
+            .to change { NewCategory.count }.by(1)
+          end
         end
       end
 
