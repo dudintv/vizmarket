@@ -45,7 +45,7 @@ class Publisher::Api::ProductsController < ApplicationController
     end
 
     if params[:product]
-      if @product.update!(product_params)
+      if @product.update(product_params)
         render json: ProductSerializer.new(@product.reload).serialized_json, status: :ok
       else
         render json: @product.errors.as_json, status: :unprocessable_entity
@@ -59,6 +59,7 @@ class Publisher::Api::ProductsController < ApplicationController
     params.require(:product).permit(
       :title, :short_description,
       :description, :instruction,
+      :thumbnail,
       :videos, :youtube_ids,
       :price,
     )

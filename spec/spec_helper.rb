@@ -93,4 +93,8 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  config.after(:suite) do
+    # delete all Active Storage files after all tests 
+    FileUtils.rm_rf(Rails.root.join('tmp', 'storage'))
+  end
 end

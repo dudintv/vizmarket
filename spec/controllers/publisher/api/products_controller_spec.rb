@@ -207,7 +207,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
           .and change { product.youtube_ids }
         end
         
-        context 'create NewCategory if user advise a new advisable category' do
+        context 'when user advise a new category' do
           it 'dont create empty NewCategory' do
             expect{
               patch :update, params: {
@@ -233,7 +233,21 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       end
 
       context 'Update Images & Video' do
+        let(:square_image) { fixture_file_upload('spec/fixtures/images/square568x568.jpg', 'image/jpeg') }
         
+        it 'upload thumbnail image' do
+          # square_image_base64 = Base64.encode64(File.open('spec/fixtures/images/square568x568.jpg', 'rb').read)
+          # square_image = "data:image/jpeg;base64,#{square_image_base64}"
+          expect{
+            patch :update, params: {
+              id: product.id,
+              product: {
+                thumbnail: square_image
+              }
+            }
+            product.reload
+          }.to change { product.thumbnail.attached? }.to true
+        end
       end
 
       context 'Update Instructions' do
