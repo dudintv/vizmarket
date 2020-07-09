@@ -4,7 +4,7 @@
     <div v-if="!supportsUpload" v-html="strings.upload"></div>
     <div v-else-if="supportsPreview" class="flex flex-col justify-center">
       <div class="preview-container relative"
-        :style="{maxWidth: previewWidth + 'px', height: previewHeight + 'px', borderRadius: radius + '%'}">
+        :style="{width: previewWidth + 'px', height: previewHeight + 'px', borderRadius: radius + '%'}">
           <canvas ref="previewCanvas"
             class="picture-preview"
             :class="computedClasses"
@@ -562,7 +562,8 @@ export default {
       return classObject
     },
     fontSize () {
-      return Math.min(0.04 * this.previewWidth, 21) + 'px'
+      // return Math.min(0.04 * this.previewWidth, 21) + 'px'
+      return '10px'
     }
   }
 }

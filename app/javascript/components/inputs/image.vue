@@ -2,8 +2,8 @@
   .form-field
     PictureInput(
       :name="inputName"
-      width="230"
-      height="230"
+      :width="width"
+      :height="height"
       removable=true
       @change="imageChange"
       @remove="imageRemove"
@@ -23,15 +23,27 @@ export default {
   components: {
     PictureInput
   },
+  data () {
+    return {
+      height: 230,
+    }
+  },
   props: {
     name: String,
     value: [String, File],
     recommendations: String,
+    aspect: {
+      type: Number,
+      default: 1,
+    }
   },
   computed: {
     inputName () {
       return this.name.toLowerCase().replace(/\s/g, '_')
-    }
+    },
+    width () {
+      return this.height * this.aspect
+    },
   },
   methods: {
     imageChange: function(image) { this.$emit('input', image) },
