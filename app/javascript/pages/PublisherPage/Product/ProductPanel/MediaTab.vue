@@ -1,6 +1,6 @@
 <template lang="pug">
   .form
-    FormField(:required="true", title="Thumbnail", description="This image will be clicked to lead users from the homepage or search results of the Marketplace to your product’s details page. Must have a resolution of 288x288.")
+    FormField(:required="true", title="Thumbnail", description="This image will be clicked to lead users from the homepage or search results of the Marketplace to your product’s details page. Must be squared. The optimal resolution is 288x288.")
       template(#input): ImageInput(name="Thumbnail" v-model="product.thumbnail" recommendations="288 × 288")
     FormField(:required="true", title="Featured image", description="This image may be used for feature placement on the homepage of the Marketplace. Must have a resolution of 1920x1080.")
       template(#input): ImageInput(name="Featured image" v-model="product.featured_image" recommendations="1920 × 1080")
@@ -31,7 +31,7 @@ export default {
   methods: {
     updateVideoIds (ids) {
       this.$store.commit('setYoutubeIds', ids.join(' '))
-    }
+    },
   }
 }
 </script>

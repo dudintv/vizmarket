@@ -1,7 +1,7 @@
 <template lang="pug">
   .product-thumbnail
-    img(v-if="!product.image" src='/images/svg/default-product.svg')
-    img(v-else :src="product.image")
+    img.thumbnail(v-if="product.thumbnail" :src="product.thumbnail")
+    img.thumbnail(v-else src='/images/svg/default-product.svg')
     .labels
       .label.uppercase(v-for="label in product.labels" :class="label.toLowerCase()") {{ label }}
 </template>
@@ -12,7 +12,7 @@ export default {
     product: {
       type: Object,
       default () { return {
-          image: '',
+          image: null,
           labels: [],
       }}
     },
@@ -23,6 +23,16 @@ export default {
 <style lang="scss" scoped>
   .product-thumbnail{
     @apply relative;
+
+    &:after {
+      @apply block;
+      content: '';
+      padding-bottom: 100%;
+    }
+
+    .thumbnail {
+      @apply absolute top-0 bottom-0 left-0 right-0 w-full h-full;
+    }
   }
 
   .labels {

@@ -1,10 +1,12 @@
 <template lang="pug">
   .form-field
     PictureInput(
+      :name="inputName"
       width="230"
       height="230"
       removable=true
       @change="imageChange"
+      @remove="imageRemove"
       :prefill="value"
       :recommendations="recommendations"
     )
@@ -26,8 +28,14 @@ export default {
     value: [String, File],
     recommendations: String,
   },
+  computed: {
+    inputName () {
+      return this.name.toLowerCase().replace(/\s/g, '_')
+    }
+  },
   methods: {
-    imageChange: function(image) { this.$emit('input', image) }
+    imageChange: function(image) { this.$emit('input', image) },
+    imageRemove: function() { this.$emit('input', null) },
   },
 }
 </script>
