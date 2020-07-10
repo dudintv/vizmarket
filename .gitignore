@@ -33,6 +33,7 @@ doc/
 bower.json
 /coverage/
 /spec/tmp
+/spec/examples.txt
 .overmind.sock
 
 # Ignore webpacker files

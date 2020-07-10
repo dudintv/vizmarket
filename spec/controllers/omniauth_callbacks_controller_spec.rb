@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples_for 'Omniauthable' do |provider|
+RSpec.shared_examples_for 'Omniauthable' do |provider|
   let(:auth) { OmniAuth.config.mock_auth[provider] }
   let(:user) { create(:user, email: auth.info&.email || 'user@email.com') }
   
