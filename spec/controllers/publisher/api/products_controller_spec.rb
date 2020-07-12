@@ -192,21 +192,6 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
           .and change { product.instruction }
         end
 
-        it 'change product\'s videos and youtube_ids' do
-          expect{
-            patch :update, params: {
-              id: product.id,
-              product: {
-                videos: "https://www.youtube.com/watch?v=JMP3x9OffBM",
-                youtube_ids: "JMP3x9OffBM"
-              }
-            }
-            product.reload
-          }
-          .to change { product.videos }
-          .and change { product.youtube_ids }
-        end
-        
         context 'when user advise a new category' do
           it 'dont create empty NewCategory' do
             expect{
@@ -233,20 +218,19 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       end
 
       context 'Update Images & Video' do
-        let(:square_image) { fixture_file_upload('spec/fixtures/images/square568x568.jpg', 'image/jpeg') }
-        
-        it 'upload thumbnail image' do
-          # square_image_base64 = Base64.encode64(File.open('spec/fixtures/images/square568x568.jpg', 'rb').read)
-          # square_image = "data:image/jpeg;base64,#{square_image_base64}"
+        it 'change product\'s videos and youtube_ids' do
           expect{
             patch :update, params: {
               id: product.id,
               product: {
-                thumbnail: square_image
+                videos: "https://www.youtube.com/watch?v=JMP3x9OffBM",
+                youtube_ids: "JMP3x9OffBM"
               }
             }
             product.reload
-          }.to change { product.thumbnail.attached? }.to true
+          }
+          .to change { product.videos }
+          .and change { product.youtube_ids }
         end
       end
 
@@ -255,6 +239,82 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       end
 
       # Product Files are tested in versions_controller_spec
+    end
+  end
+
+  describe 'POST #upload_thumbnail' do
+    let(:product) { create(:product) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        post :upload_thumbnail, params: { id: product.id }, format: :json
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      let(:square_image) { fixture_file_upload('spec/fixtures/images/square568x568.jpg', 'image/jpeg') }
+
+      it 'uploads thumbnail image' do
+        expect {
+          post :upload_thumbnail, params: {
+            id: product.id,
+            thumbnail: square_image
+          }
+          product.reload
+        }.to change { product.thumbnail.attached? }.to true
+      end
+    end
+  end
+
+  describe 'POST #upload_featured_image' do
+    let(:product) { create(:product) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        post :upload_featured_image, params: { id: product.id }, format: :json
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      let(:image_16_9) { fixture_file_upload('spec/fixtures/images/1920x1080.jpg', 'image/jpeg') }
+
+      it 'uploads featured image' do
+        expect {
+          post :upload_featured_image, params: {
+            id: product.id,
+            featured_image: image_16_9
+          }
+          product.reload
+        }.to change { product.featured_image.attached? }.to true
+      end
+    end
+  end
+
+  describe 'DELETE #delete_thumbnail' do
+    let(:product) { create(:product_with_images) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        delete :delete_thumbnail, params: { id: product.id }, format: :json
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      it 'deletes thumbnail' do
+        expect {
+          delete :delete_thumbnail, params: { id: product.id }
+          product.reload
+        }.to change { product.thumbnail.attached? }.to false
+      end
     end
   end
 end

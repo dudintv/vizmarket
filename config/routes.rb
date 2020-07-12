@@ -31,6 +31,12 @@ Rails.application.routes.draw do
     namespace :api, defaults: { format: :json } do
       constraints ->(r) { r.format == :json } do
         resources :products, only: %i[index show new create update destroy] do
+          member do
+            post :upload_thumbnail
+            post :upload_featured_image
+            delete :delete_thumbnail
+            delete :delete_featured_image
+          end
           resources :versions, only: %i[index show create update destroy] do
             post :publish, on: :member
             post :unpublish, on: :member

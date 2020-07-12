@@ -57,10 +57,9 @@ export default {
     if (this.product == null || Object.getOwnPropertyNames(this.product).length <= 1 || this.product.id === undefined) {
       // needs to load currentProduct data
       if (+this.$route.params.id > 0) {
-        console.log("this.$route.params.id", this.$route.params.id)
         this.$store.dispatch('loadCurrentProductData', this.$route.params.id)
       } else {
-        this.$router.push('/publisher')
+        this.$router.push('/publisher') // redirect to the dasboard
       }
     }
   },
@@ -94,6 +93,20 @@ export default {
     },
     saveMedia () {
       console.log('SAVE MEDIA')
+      const formData = new FormData()
+
+      fetch(this.product.thumbnail)
+        .then( res => res.blob())
+        .then( blob => {
+          formData.append('thumbnail', blob_data)
+          return this.$backend.products.upload_thumbnail(this.product.id, formData)
+        })
+        .then(response => {
+          console.log('SUCCES', response)
+        })
+        .catch(error => {
+          console.warn('ERROR', error)
+        })
     },
     saveTexts () {
       console.log('SAVE TEXTS')
@@ -101,6 +114,40 @@ export default {
     saveFiles () {
       console.log('SAVE FILES')
     },
+
+    /**
+     * Convert a base64 string in a Blob according to the data and contentType.
+     * 
+     * @param b64Data {String} Pure base64 string without contentType
+     * @param contentType {String} the content type of the file i.e (image/jpeg - image/png - text/plain)
+     * @param sliceSize {Int} SliceSize to process the byteCharacters
+     * @see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
+     * @return Blob
+     */
+    b64toBlob (b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+      var blob = new Blob(byteArrays, {type: contentType});
+      return blob;
+    },
+
   }
 }
 </script>

@@ -1,3 +1,5 @@
+include ActionDispatch::TestProcess
+
 FactoryBot.define do
   factory :product do
     title { FFaker::Product.product_name }
@@ -28,6 +30,11 @@ FactoryBot.define do
 
     factory :deleted_product do
       deleted_at { Time.zone.now }
+    end
+
+    factory :product_with_images do
+      thumbnail { fixture_file_upload('spec/fixtures/images/square568x568.jpg', 'image/jpeg') }
+      featured_image { fixture_file_upload('spec/fixtures/images/1920x1080.jpg', 'image/jpeg') }
     end
   end
 end

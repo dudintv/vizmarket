@@ -137,7 +137,7 @@ export default new Vuex.Store({
           commit('setCurrentProduct', response.data.data.attributes)
         })
         .catch(error => {
-          console.alert('Can\'t load current product data. Error: ', error)
+          console.warn('Can\'t load current product data. Error: ', error)
           FlashVM.alert(error)
         }) 
     },
