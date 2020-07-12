@@ -58,3 +58,6 @@ Capfile
 /config/credentials/development.key
 /config/credentials/devwin.key
 /config/credentials/test.key
+
+# Active Storage on harddrive
+/storage
