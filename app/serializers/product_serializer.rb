@@ -18,7 +18,11 @@ class ProductSerializer
     end
   end
 
-  attribute :idid do |object|
-    object.id
+  attribute :featuredImage do |object|
+    if object.featured_image.attached?
+      Rails.application.routes.url_helpers.rails_blob_url(object.featured_image, only_path: true)
+    else
+      nil
+    end
   end
 end

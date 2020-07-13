@@ -4,6 +4,9 @@
     .flex
       form.flex-grow.mr-4
         h3 Simple
+        Switcher(name="Simplest Swither")
+        Switcher(name="Swither" off_name="Off name")
+        Switcher(name="Loading switcher" :loading="true")
         SelectInput(name="Category" v-model="product.categories" :options="categories")
         VideosInput(name="Videos" v-model="product.videos")
         ImageInput(name="Image" v-model="product.featured_image" recommendations="1920 x 1080")
@@ -17,6 +20,10 @@
 
       form.flex-grow
         h3 With tips
+        Switcher(name="Simplest Swither")
+          template(#tip) Hello, this is a tip!
+        Switcher(name="Swither" off_name="Off name")
+          template(#tip) Hello, this is a tip!
         SelectInput(name="Category" v-model="product.categories" :options="categories")
           template(#tip) Hello, this is a tip!
         VideosInput(name="Videos" v-model="product.videos")
@@ -56,6 +63,8 @@
     h3 Fields with errors
     .flex
       form.flex-grow.mr-4
+        Switcher(name="Swither" off_name="Off name")
+          template(#error) And, this is an error.
         SelectInput.has_error(name="Category" v-model="product.categories" :options="categories")
           template(#error) And, this is an error.
         VideosInput.has_error(name="Videos" v-model="product.videos")
@@ -114,12 +123,12 @@
     .flex
       .form
         FormField(:required="true", title="Title", description="")
-          template(#input): TextInput(name="Title" v-model="title")
+          template(#input): TextInput(name="Title" v-model="product.title")
         FormField(:required="true", title="Short description",
             description="This text should give customers an idea of your product at a glance. It will be used at the top of your product’s details page and as a tooltip for your product’s thumbnail image. Must be 255 characters or less, but we recommend 100 characters or less.")
-          template(#input): TextareaInput(name="Short description" v-model="short_description")
+          template(#input): TextareaInput(name="Short description" v-model="product.short_description")
         FormField(:required="true", title="Type", description="")
-          template(#input): RadioInput(name="Type" v-model="kind" :options="kinds")
+          template(#input): RadioInput(name="Type" v-model="product.kind" :options="kinds")
         FormField(:required="true", title="Category", description="Define the most proper category for your product. Or select “other” and advise new category.")
           template(#input)
             SelectInput(name="Category" v-model="product.categories" :options="categories")
@@ -128,18 +137,18 @@
                 a advice a new category
 
         FormField(:required="true", title="Detailed description", description="Provide a full explanation of your product and set the expectations of what it can be used for. Must be 1900 characters or less.")
-          template(#input): TextareaInput(name="Detailed description" v-model="description")
+          template(#input): TextareaInput(name="Detailed description" v-model="product.description")
         FormField(:required="true", title="How to install and use", description="This text should provide all the discrete data that details the contents of your product and how it can be used. Links to any documentation or instructional material should appear here. Must be 1900 characters or less.")
-          template(#input): TextareaInput(name="How to install and use" v-model="instruction")
+          template(#input): TextareaInput(name="How to install and use" v-model="product.instruction")
         
         FormField(:required="true", title="Thumbnail", description="This image will be clicked to lead users from the homepage or search results of the Marketplace to your product’s details page. Must have a resolution of 288x288.")
-          template(#input): ImageInput(name="Thumbnail" v-model="thumbnail" recommendations="288 × 288")
+          template(#input): ImageInput(name="Thumbnail" v-model="product.thumbnail" recommendations="288 × 288")
         FormField(:required="true", title="Featured image", description="This image may be used for feature placement on the homepage of the Marketplace. Must have a resolution of 1920x1080.")
-          template(#input): ImageInput(name="Featured image" v-model="featured_image" recommendations="1920 × 1080")
+          template(#input): ImageInput(name="Featured image" v-model="product.featured_image" recommendations="1920 × 1080")
         FormField(title="YouTube videos", description="Add links to video(s) describes how the Product works. Also, the video will give an instruction how to setup and use it.")
           template(#input): VideosInput(name="Videos" v-model="product.videos")
         FormField(title="Gallery", description="These images will be displayed on your product’s details page and should contain in-engine shots of original assets with an overview map if applicable. Must contain 1-25 images, each with a resolution of 1920x1080.")
-          template(#input): ImagesInput(name="Gallery" v-model="gallery")
+          template(#input): ImagesInput(name="Gallery" v-model="product.gallery")
 </template>
 
 <script>
@@ -155,6 +164,7 @@ import ImagesInput  from "components/inputs/images.vue"
 import FilesInput   from "components/inputs/files.vue"
 import VideosInput  from "components/inputs/videos.vue"
 import SelectInput  from "components/inputs/select.vue"
+import Switcher     from "components/inputs/switcher.vue"
 
 export default {
   components: {
@@ -170,6 +180,7 @@ export default {
     FilesInput,
     VideosInput,
     SelectInput,
+    Switcher,
   },
   data () {
     return {

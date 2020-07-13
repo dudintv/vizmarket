@@ -317,4 +317,26 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE #delete_featured_image' do
+    let(:product) { create(:product_with_images) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        delete :delete_featured_image, params: { id: product.id }, format: :json
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      it 'deletes featured image' do
+        expect {
+          delete :delete_featured_image, params: { id: product.id }
+          product.reload
+        }.to change { product.featured_image.attached? }.to false
+      end
+    end
+  end
 end

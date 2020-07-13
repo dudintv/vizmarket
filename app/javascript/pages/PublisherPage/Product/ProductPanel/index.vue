@@ -93,20 +93,6 @@ export default {
     },
     saveMedia () {
       console.log('SAVE MEDIA')
-      const formData = new FormData()
-
-      fetch(this.product.thumbnail)
-        .then( res => res.blob())
-        .then( blob => {
-          formData.append('thumbnail', blob_data)
-          return this.$backend.products.upload_thumbnail(this.product.id, formData)
-        })
-        .then(response => {
-          console.log('SUCCES', response)
-        })
-        .catch(error => {
-          console.warn('ERROR', error)
-        })
     },
     saveTexts () {
       console.log('SAVE TEXTS')

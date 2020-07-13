@@ -5,6 +5,14 @@
     <div v-else-if="supportsPreview" class="flex flex-col justify-center">
       <div class="preview-container relative"
         :style="{width: previewWidth + 'px', height: previewHeight + 'px', borderRadius: radius + '%'}">
+          <div class="loading-container" v-show="isLoading">
+            <div class="loading"></div>
+            <span class="loading-text">loading...</span>
+          </div>
+          <div class="status-container" :class="{success: successMessage, error: errorMessage}" v-show="successMessage!=='' || errorMessage!==''">
+            <span class="status-text" v-if="successMessage">{{ successMessage }}</span>
+            <span class="status-text" v-else-if="errorMessage">{{ errorMessage }}</span>
+          </div>
           <canvas ref="previewCanvas"
             class="picture-preview"
             :class="computedClasses"
@@ -130,7 +138,7 @@ export default {
     },
     zIndex: {
       type: Number,
-      default: 10000
+      default: 100
     },
     alertOnError: {
       type: Boolean,
@@ -142,10 +150,24 @@ export default {
         return {}
       }
     },
+
+    // MY ADDITIONS:
     recommendations: {
       type: String,
       default: undefined,
-    }
+    },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
+    successMessage: {
+      type: String,
+      default: undefined,
+    },
+    errorMessage: {
+      type: String,
+      default: undefined,
+    },
   },
   watch: {
     prefill () {
@@ -601,7 +623,7 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  z-index: 10001;
+  z-index: 101;
   box-sizing: border-box;
 }
 .picture-preview.dragging-over {
@@ -609,7 +631,7 @@ export default {
 }
 .picture-inner {
   position: relative;
-  z-index: 10002;
+  z-index: 102;
   pointer-events: none;
   box-sizing: border-box;
   margin: 1rem auto;
@@ -652,5 +674,29 @@ input[type=file] {
   width: 100%;
   padding: 0 1.5rem;
   line-height: 1.2rem;
+}
+
+.loading-container, .status-container {
+  @apply absolute bottom-0 left-0 right-0;
+  height: 14px;
+  z-index: 103;
+}
+
+.status-container {
+  line-height: 100%;
+  &.success {
+    background-color: theme('colors.green');
+  }
+  &.error {
+    font-size: xx-small;
+    background-color: theme('colors.red');
+  }
+}
+
+.loading-text, .status-text {
+  @apply absolute text-sm;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 </style>

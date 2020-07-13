@@ -9,6 +9,9 @@
       @remove="imageRemove"
       :prefill="value"
       :recommendations="recommendations"
+      :isLoading="isLoading"
+      :successMessage="successMessage"
+      :errorMessage="errorMessage"
     )
     .tip(v-if="$slots['tip']")
       slot(name="tip")
@@ -35,7 +38,19 @@ export default {
     aspect: {
       type: Number,
       default: 1,
-    }
+    },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
+    successMessage: {
+      type: String,
+      default: undefined,
+    },
+    errorMessage: {
+      type: String,
+      default: undefined,
+    },
   },
   computed: {
     inputName () {

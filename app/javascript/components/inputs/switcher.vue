@@ -3,7 +3,8 @@
     .checkbox-field-with-label(@click="change()")
       span.name.off-name(v-if="off_name" :class="{ checked: !checked }") {{ off_name }}
       input.checkbox(type="checkbox" :name="name" :id="name" :checked="value" ref="checkbox")
-      .border(:class="{ loading: loading }")
+      .border
+        .loading(v-show="loading")
         .point
       span.name.on-name(:class="{ checked: checked }") {{ name }}
     .tip(v-if="$slots['tip']")
@@ -63,7 +64,7 @@ export default {
   }
 
   .border {
-    @apply flex justify-center items-center h-8 w-16 border border-white-50 rounded-full bg-white-10 px-1 mr-2;
+    @apply relative overflow-hidden flex justify-center items-center h-8 w-16 border border-white-50 rounded-full bg-white-10 px-1 mr-2;
     transition: background-color .2s cubic-bezier(0.77, 0, 0.175, 1); //easeInOutQuart
 
     &:first-child {
@@ -71,7 +72,9 @@ export default {
     }
 
     .point {
-      @apply h-6 w-6 rounded-full bg-white;
+      @apply rounded-full bg-white;
+      height: 1.4rem;
+      width: 1.4rem;
       transition: transform .2s cubic-bezier(0.68, -0.55, 0.265, 1.55); //easeInOutBack
     }
 
@@ -89,20 +92,14 @@ export default {
     }
   }
 
-  @keyframes barberpole {
-    from { background-position-x: 0; }
-    to   { background-position-x: 4rem; }
-  }
-  .loading {
-    background: repeating-linear-gradient(
-      45deg,
-      theme('colors.orange'),
-      theme('colors.orange') 11%,
-      transparent 11%,
-      transparent 22%
-    );
-    animation: barberpole 1s linear infinite;
-  }
+  // @keyframes barberpole {
+  //   from { background-position-x: 0; }
+  //   to   { background-position-x: 4rem; }
+  // }
+  // .loading {
+  //   @apply bg-loading;
+  //   animation: barberpole 1s linear infinite;
+  // }
 
   .tip {
     @apply pl-0;
