@@ -7,7 +7,7 @@
     FormField(title="YouTube videos", description="Add links to video(s) describes how the Product works. Also, the video will give an instruction how to setup and use it.")
       template(#input): VideosInput(name="YouTube videos" v-model="product.videos" @updateIds="updateVideoIds")
     FormField(title="Gallery", description="These images will be displayed on your product’s details page and should contain in-engine shots of original assets with an overview map if applicable. Must contain 1-25 images, each with a resolution of 1920x1080.")
-      template(#input): ImagesInput(name="Gallery" v-model="product.gallery")
+      template(#input): ImagesInput(name="Gallery" v-model="product.images" @uploadImages="uploadGalleryImages" @remove="removeGalleryImage" :isLoading="isImagesLoading" :successMessage="imagesSuccessMessage" :errorMessage="imagesErrorMessage")
 </template>
 
 <script>
@@ -31,6 +31,9 @@ export default {
       isFeatureImageLoading: false,
       featuredImageSuccessMessage: '',
       featuredImageErrorMessage: '',
+      isImagesLoading: false,
+      imagesSuccessMessage: '',
+      imagesErrorMessage: '',
     }
   },
   computed: {
@@ -59,7 +62,7 @@ export default {
             console.log('SUCCES', response)
           })
           .catch(error => {
-            this.thumbnailErrorMessage = error
+            this.thumbnailErrorMessage = error.message
             console.warn('ERROR', error)
           })
           .finally(() => {
@@ -105,7 +108,7 @@ export default {
             console.log('SUCCESS', response)
           })
           .catch(error => {
-            this.featuredImageErrorMessage = error
+            this.featuredImageErrorMessage = error.message
             console.warn('ERROR', error)
           })
           .finally(() => {
@@ -136,6 +139,51 @@ export default {
     updateVideoIds (ids) {
       this.$store.commit('setYoutubeIds', ids.join(' '))
     },
+    uploadGalleryImages (images) {
+      this.isImagesLoading = true
+      const formData = new FormData()
+      for (let x = 0; x < images.length; x++) {
+        formData.append('images[]', images[x])
+      }
+      this.$backend.products.uploadGalleryImages(this.product.id, formData)
+        .then(response => {
+          this.$store.commit('setImages', response.data.data.attributes.images)
+          this.imagesSuccessMessage = 'Loaded successfully'
+          this.imagesErrorMessage = ''
+          setTimeout(() => {
+            this.imagesSuccessMessage = ''
+          }, 2000)
+          console.log('SUCCESS', response)
+        })
+        .catch(error => {
+          this.imagesSuccessMessage = ''
+          this.imagesErrorMessage = error.message
+          console.warn('ERROR', error)
+        })
+        .finally(() => {
+          this.isImagesLoading = false
+        })
+    },
+    removeGalleryImage (key) {
+      this.$backend.products.deleteImage(key)
+        .then(response => {
+          this.$store.commit('removeGalleryImage', key)
+          this.imagesSuccessMessage = 'Deleted successfully'
+          this.imagesErrorMessage = ''
+          setTimeout(() => {
+            this.imagesSuccessMessage = ''
+          }, 2000)
+          console.log('SUCCESS', response)
+        })
+        .catch(error => {
+          this.imagesSuccessMessage = ''
+          this.imagesErrorMessage = error.message
+          console.warn('ERROR', error)
+        })
+        .finally(() => {
+          this.isImagesLoading = false
+        })
+    }
   }
 }
 </script>

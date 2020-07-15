@@ -45,5 +45,7 @@ module Vizmarket
           request_specs: false,
           routing_specs: false
     end
+
+    # config.active_storage.variant_processor = :vips
   end
 end

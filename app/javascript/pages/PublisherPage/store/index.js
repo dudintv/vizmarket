@@ -129,6 +129,15 @@ export default new Vuex.Store({
     setYoutubeIds: (state, newIds) => {
       state.currentProduct.youtube_ids = newIds
     },
+    setImages: (state, images) => {
+      state.currentProduct.images = images
+    },
+    removeGalleryImage: (state, key) => {
+      const index = state.currentProduct.images.findIndex(el => el.key === key)
+      if (index >= 0) {
+        state.currentProduct.images.splice(index, 1)
+      }
+    },
   },
   actions: {
     loadCurrentProductData ({ commit }, id) {
@@ -138,7 +147,7 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.warn('Can\'t load current product data. Error: ', error)
-          FlashVM.alert(error)
+          FlashVM.alert(error.message)
         }) 
     },
     versionPublishedChanged ({ commit, state}, { version, is_published }) {

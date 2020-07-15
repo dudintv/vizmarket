@@ -53,7 +53,7 @@ export default {
           .catch(error => {
             console.warn('Can\'t create product. Error:', error)
             this.errorFromServer = error
-            FlashVM.alert(error)
+            FlashVM.alert(error.message)
           }) 
       }
     },

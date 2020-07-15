@@ -296,6 +296,39 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
     end
   end
 
+  describe 'POST #upload_gallery_images' do
+    let(:product) { create(:product) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        post :upload_gallery_images, params: { id: product.id }, format: :json
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      let(:image_1) { fixture_file_upload('spec/fixtures/images/1920x1080_car.jpg', 'image/jpeg') }
+      let(:image_2) { fixture_file_upload('spec/fixtures/images/1920x1080_cubes.jpg', 'image/jpeg') }
+      let(:image_3) { fixture_file_upload('spec/fixtures/images/1920x1080_leopard.jpg', 'image/jpeg') }
+
+      it 'uploads many images for the gallery' do
+        expect {
+          post :upload_gallery_images, params: {
+            id: product.id,
+            images: [
+              image_1,
+              image_2,
+              image_3
+            ]
+          }
+          product.reload
+        }.to change { product.images.attached? }.to true
+      end
+    end
+  end
+
   describe 'DELETE #delete_thumbnail' do
     let(:product) { create(:product_with_images) }
 
@@ -336,6 +369,28 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
           delete :delete_featured_image, params: { id: product.id }
           product.reload
         }.to change { product.featured_image.attached? }.to false
+      end
+    end
+  end
+
+  describe 'DELETE #delete_image' do
+    let(:product) { create(:product_with_images) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        delete :delete_image, params: { key: product.images[0].blob.key }, format: :json
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      it 'deletes featured image' do
+        expect {
+          delete :delete_image, params: { key: product.images[0].blob.key }
+          product.reload
+        }.to change { product.images.count }.from(3).to(2)
       end
     end
   end

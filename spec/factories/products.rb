@@ -35,6 +35,11 @@ FactoryBot.define do
     factory :product_with_images do
       thumbnail { fixture_file_upload('spec/fixtures/images/square568x568.jpg', 'image/jpeg') }
       featured_image { fixture_file_upload('spec/fixtures/images/1920x1080.jpg', 'image/jpeg') }
+      images {[
+        fixture_file_upload('spec/fixtures/images/1920x1080_car.jpg', 'image/jpeg'),
+        fixture_file_upload('spec/fixtures/images/1920x1080_cubes.jpg', 'image/jpeg'),
+        fixture_file_upload('spec/fixtures/images/1920x1080_leopard.jpg', 'image/jpeg'),
+      ]}
     end
   end
 end

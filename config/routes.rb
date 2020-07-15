@@ -34,8 +34,12 @@ Rails.application.routes.draw do
           member do
             post :upload_thumbnail
             post :upload_featured_image
+            post :upload_gallery_images
             delete :delete_thumbnail
             delete :delete_featured_image
+          end
+          collection do
+            delete :delete_image
           end
           resources :versions, only: %i[index show create update destroy] do
             post :publish, on: :member

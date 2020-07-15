@@ -2,7 +2,7 @@ class Publisher::Api::ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [
     :show, :update, 
-    :upload_thumbnail, :upload_featured_image, 
+    :upload_thumbnail, :upload_featured_image, :upload_gallery_images, 
     :delete_featured_image, :delete_thumbnail,
     :destroy]
 
@@ -71,6 +71,16 @@ class Publisher::Api::ProductsController < ApplicationController
     end
   end
 
+  def upload_gallery_images
+    if params[:images]
+      if @product.images.attach(params[:images])
+        render json: ProductSerializer.new(@product).serialized_json, status: :ok
+      else
+        render json: @product.errors.as_json, status: :unprocessable_entity
+      end
+    end
+  end
+
   def delete_thumbnail
     @product.thumbnail.purge
     render json: {}, status: :ok
@@ -81,16 +91,19 @@ class Publisher::Api::ProductsController < ApplicationController
     render json: {}, status: :ok
   end
 
-  # def delete_image
-  #   @image = ActiveStorage::Blob.find_signed(params[:id])
-  #   @image.attachments.first.purge
-  #   render json: {}, status: :ok
-  # end
+  def delete_image
+    @image = ActiveStorage::Blob.find_by_key(params[:key])
+    if @image&.attachments&.first.purge
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :unprocessable_entity
+    end
+  end
 
   private
 
   def set_product
-    @product = Product.find_by(id: params[:id])
+    @product = Product.with_attached_thumbnail.with_attached_featured_image.with_attached_images.find_by(id: params[:id])
 
     until @product
       render json: "Can't find product with id: #{params[:id]}", status: :not_found
