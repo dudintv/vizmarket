@@ -21,11 +21,13 @@
         router-view
     .status
       span.text-white-20 status:&nbsp;
-      span {{ product.status }}
+      span {{ product.public ? 'Published' : 'Draft' }}
     .actions
-      button.big-btn.third-btn Delete the draft
-      button.big-btn.second-btn Save and continue later
-      button.big-btn.main-btn(@click="doNext()") {{ nextButtonText }}
+      button.big-btn.third-btn(@click="deleteProduct()")
+        template(v-if="product.public") Delete the product
+        template(v-else) Delete the draft
+      button.big-btn.second-btn(v-if="!product.public" @click="saveAndClose()") Save and continue later
+      button.big-btn.main-btn(@click="goNext()") {{ nextButtonText }}
 </template>
 
 <script>
@@ -42,17 +44,21 @@ export default {
       return this.$store.state.currentProduct;
     },
     bgClass () {
-      return this.product.status == 'published' ? 'bg-published' : 'bg-unpublished'
+      return this.product.public ? 'bg-published' : 'bg-unpublished'
     },
     nextButtonText () {
       switch (this.$route.fullPath.split('/').slice(-1)[0]) {
         case 'title':
         case 'media':
         case 'texts': return 'Save and go next'
-        case 'files': return 'Finish and publish'
+        case 'files': 
+          return this.product.public ? 'Save and close' : 'Finish and publish'
         default: return 'Next'
       }
     },
+    currentTabName () {
+      return this.$route.fullPath.split('/').slice(-1)[0]
+    }
   },
   mounted () {
     if (this.product == null || Object.getOwnPropertyNames(this.product).length <= 1 || this.product.id === undefined) {
@@ -65,41 +71,75 @@ export default {
     }
   },
   methods: {
-    doNext () {
-      switch (this.$route.fullPath.split('/').slice(-1)[0]) {
+    saveCurrentTab () {
+      switch (this.currentTabName) {
         case 'title':
-          this.saveTitle()
+          this.$backend.products.update(this.product.id, { product: {
+              title: this.product.title,
+              short_description: this.product.short_description,
+            },
+            kind: this.product.kind,
+            categories: this.product.categories,
+          })
+          .then((responce) => {
+            if (responce.status == 200) {
+              FlashVM.notice('Successfully saved')
+            }
+          })
+          break
+        case 'media':
+          this.$backend.products.update(this.product.id, { product: {
+              videos: this.product.videos,
+            },
+          })
+          .then((responce) => {
+            if (responce.status == 200) {
+              FlashVM.notice('Successfully saved')
+            }
+          })
+          break
+        case 'texts':
+          this.$backend.products.update(this.product.id, { product: {
+              description: this.product.description,
+              instruction: this.product.instruction,
+            },
+          })
+          .then((responce) => {
+            if (responce.status == 200) {
+              FlashVM.notice('Successfully saved')
+            }
+          })
+          break
+      }
+    },
+    goNext () {
+      this.saveCurrentTab()
+      switch (this.currentTabName) {
+        case 'title':
           this.$router.push(`/publisher/products/${this.product.id}/media`)
           break
         case 'media':
-          this.saveMedia()
           this.$router.push(`/publisher/products/${this.product.id}/texts`)
           break
         case 'texts':
-          this.saveTexts()
           this.$router.push(`/publisher/products/${this.product.id}/files`)
           break
         case 'files':
-          this.saveFiles()
-          this.saveAndClose()
+          // TODO: set publish
           break
-        default: this.saveAndClose()
       }
     },
     saveAndClose () {
-      console.log('SAVE AND CLOSE')
+      this.saveCurrentTab()
+      this.$router.push('/publisher')
     },
-    saveTitle () {
-      console.log('SAVE TITLE')
-    },
-    saveMedia () {
-      console.log('SAVE MEDIA')
-    },
-    saveTexts () {
-      console.log('SAVE TEXTS')
-    },
-    saveFiles () {
-      console.log('SAVE FILES')
+    deleteProduct () {
+      if (confirm('Are you sure?')){
+        this.$backend.products.delete(this.product.id)
+          .then(() => {
+            this.$router.push('/publisher')
+          })
+      }
     },
   }
 }
