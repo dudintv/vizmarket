@@ -125,7 +125,15 @@ export default {
           this.$router.push(`/publisher/products/${this.product.id}/files`)
           break
         case 'files':
-          // TODO: set publish
+          if (!this.product.public) {
+            this.$backend.products.publish(this.product.id)
+            .then((responce) => {
+              if (responce.status == 200) {
+                FlashVM.notice('Successfully saved and published')
+              }
+            })
+          }
+          this.$router.push('/publisher')
           break
       }
     },

@@ -16,6 +16,9 @@ export default {
     get: id => publisher_adapter.get(`/products/${id}`),
     create: product => publisher_adapter.post('/products', product),
     
+    publish: (id) => publisher_adapter.post(`/products/${id}/publish`),
+    unpublish: (id) => publisher_adapter.post(`/products/${id}/unpublish`),
+
     update: (id, product) => publisher_adapter.patch(`/products/${id}`, product),
     uploadThumbnail: (id, image) => publisher_adapter.post(`/products/${id}/upload_thumbnail`, image),
     uploadFeaturedImage: (id, image) => publisher_adapter.post(`/products/${id}/upload_featured_image`, image),

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   namespace :publisher do
     root to: 'products#index'
+    get 'index', to: 'products#index'
     get 'products/*path', to: 'products#index' # to vue-router
     
     get  'settings', to: 'settings#edit'
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
       constraints ->(r) { r.format == :json } do
         resources :products, only: %i[index show new create update destroy] do
           member do
+            post :publish
+            post :unpublish
             post :upload_thumbnail
             post :upload_featured_image
             post :upload_gallery_images

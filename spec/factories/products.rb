@@ -16,8 +16,8 @@ FactoryBot.define do
     categories { [Category.find_by(title: 'animation')] }
 
     videos { 'https://www.youtube.com/watch?v=PdzuwlYgLUQ
-    https://www.youtube.com/watch?v=Rv31GQZlAx0
-    https://www.youtube.com/watch?v=uZ0sPEZdTks' }
+              https://www.youtube.com/watch?v=Rv31GQZlAx0
+              https://www.youtube.com/watch?v=uZ0sPEZdTks' }
     youtube_ids { 'PdzuwlYgLUQ Rv31GQZlAx0 uZ0sPEZdTks' }
 
     factory :featured_product do

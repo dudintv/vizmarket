@@ -1,7 +1,7 @@
 class Publisher::Api::ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [
-    :show, :update, 
+    :show, :update, :publish, :unpublish,
     :upload_thumbnail, :upload_featured_image, :upload_gallery_images, 
     :delete_featured_image, :delete_thumbnail,
     :destroy]
@@ -22,6 +22,22 @@ class Publisher::Api::ProductsController < ApplicationController
 
     if @product.save
       render json: ProductSerializer.new(@product).serialized_json, status: :created
+    else
+      render json: @product.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
+  def publish
+    if @product.update(public: true)
+      render json: {}, status: :ok
+    else
+      render json: @product.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
+  def unpublish
+    if @product.update(public: false)
+      render json: {}, status: :ok
     else
       render json: @product.errors.as_json, status: :unprocessable_entity
     end

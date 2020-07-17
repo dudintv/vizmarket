@@ -329,6 +329,50 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
     end
   end
 
+  describe 'POST #publish' do
+    let(:product) { create(:draft_product) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        post :publish, params: { id: product.id }, format: :json
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      it 'make product publish' do
+        expect {
+          post :publish, params: { id: product.id }, format: :json
+          product.reload
+        }.to change { product.public }.to true
+      end
+    end
+  end
+
+  describe 'POST #unpublish' do
+    let(:product) { create(:product) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        post :unpublish, params: { id: product.id }, format: :json
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      it 'make product unpublish' do
+        expect {
+          post :unpublish, params: { id: product.id }, format: :json
+          product.reload
+        }.to change { product.public }.to false
+      end
+    end
+  end
+
   describe 'DELETE #delete_thumbnail' do
     let(:product) { create(:product_with_images) }
 
