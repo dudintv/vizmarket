@@ -54,5 +54,6 @@ Rails.application.routes.draw do
   end
 
   get '/test', to: 'test#test'
+  get '/test/images', to: 'test#images' # to test vue-router
   get '/test/*path', to: 'test#test' # to test vue-router
 end

@@ -1,0 +1,6 @@
+#test-images-page
+  h1 Thumbnail
+  h2 Crop 568
+  = image_tag @product.thumbnail.variant(combine_options: { gravity: 'center', resize: '568^', crop: '568x568+0+0' }) 
+  h2 Original
+  = image_tag @product.thumbnail

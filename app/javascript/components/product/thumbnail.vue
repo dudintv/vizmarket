@@ -1,7 +1,6 @@
 <template lang="pug">
   .product-thumbnail
-    img.thumbnail(v-if="product.thumbnail" :src="product.thumbnail")
-    img.thumbnail(v-else src='/images/svg/default-product.svg')
+    .thumbnail(:style="`background-image: url(${thumbnailUrl}); background-size: cover; background-position: center;`")
     .labels
       .label.uppercase(v-for="label in product.labels" :class="label.toLowerCase()") {{ label }}
 </template>
@@ -16,6 +15,15 @@ export default {
           labels: [],
       }}
     },
+  },
+  computed: {
+    thumbnailUrl () {
+      if (this.product.thumbnail) {
+        return this.product.thumbnail
+      } else {
+        return '/images/svg/default-product.svg'
+      }
+    }
   }
 }
 </script>

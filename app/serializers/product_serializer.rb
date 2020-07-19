@@ -15,7 +15,7 @@ class ProductSerializer
 
   attribute :thumbnail do |object|
     if object.thumbnail.attached?
-      Rails.application.routes.url_helpers.rails_representation_url( object.thumbnail.variant(combine_options: { gravity: "center", size: "568x568!",  }).processed, only_path: true )
+      Rails.application.routes.url_helpers.rails_representation_url( object.thumbnail.variant(combine_options: { gravity: "center", resize: '568^', crop: '568x568+0+0' }).processed, only_path: true )
     else
       nil
     end

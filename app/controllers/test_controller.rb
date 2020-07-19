@@ -3,4 +3,8 @@ class TestController < ApplicationController
   
   def test
   end
+
+  def images
+    @product = Product.first
+  end
 end

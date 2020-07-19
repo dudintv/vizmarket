@@ -105,5 +105,8 @@ export default {
       @apply bg-white-50;
     }
   }
-
+  .product-cover {
+    width: 288px;
+    height: 288px;
+  }
 </style>
