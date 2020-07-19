@@ -23,6 +23,9 @@ export default {
   },
   computed: {
     filteredProducts () { return this.$store.getters.filteredProducts },
+  },
+  mounted () {
+    this.$store.dispatch('loadProducts')
   }
 }
 </script>

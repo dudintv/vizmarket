@@ -7,7 +7,7 @@ class Publisher::Api::ProductsController < ApplicationController
     :destroy]
 
   def index
-    @products = current_user.products
+    @products = current_user.products.order(id: :desc)
     render json: ProductSerializer.new(@products).serialized_json
   end
 

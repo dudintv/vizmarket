@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentProduct: {},
+    products: [],
     // currentProduct: {
     //   id: 1,
     //   title: "Name of product",
@@ -39,47 +40,47 @@ export default new Vuex.Store({
     //     },
     //   ]
     // },
-    products: [
-      {
-        id: 1,
-        cover: null,
-        title: 'Random movement',
-        short_description: 'Random besier movement single container with separated three dimensions.',
-        created_at: '2019-12-31 02:09:38 UTC',
-        updated_at: '2020-01-03 03:57:14 UTC',
-        public: true,
-        featured: false,
-        kind: 'Script',
-        category: 'Positioning',
-        price: 100,
-        price_original: 200,
-        purchased_count: 14,
-        rating: {
-          average: 4.7,
-          count: 35,
-        },
-        versions: [
-          {
-            number: 1.2,
-            created_at: '2020-01-03 03:57:14 UTC',
-            developed_for: 'developed for VizArtist 3.10 … 3.13',
-            // tested_in: 'tested in VizArtist 3.13',
-          },
-          {
-            number: 1.1,
-            created_at: '2020-01-02 02:34:00 UTC',
-            developed_for: 'developed for VizArtist 3.10',
-            // tested_in: 'tested in VizArtist 3.10',
-          },
-          {
-            number: 1.0,
-            created_at: '2020-01-01 01:00:00 UTC',
-            developed_for: 'developed for VizArtist 3.8',
-            // tested_in: 'tested in VizArtist 3.8',
-          },
-        ]
-      }
-    ],
+    // products: [
+    //   {
+    //     id: 1,
+    //     cover: null,
+    //     title: 'Random movement',
+    //     short_description: 'Random besier movement single container with separated three dimensions.',
+    //     created_at: '2019-12-31 02:09:38 UTC',
+    //     updated_at: '2020-01-03 03:57:14 UTC',
+    //     public: true,
+    //     featured: false,
+    //     kind: 'Script',
+    //     category: 'Positioning',
+    //     price: 100,
+    //     price_original: 200,
+    //     purchased_count: 14,
+    //     rating: {
+    //       average: 4.7,
+    //       count: 35,
+    //     },
+    //     versions: [
+    //       {
+    //         number: 1.2,
+    //         created_at: '2020-01-03 03:57:14 UTC',
+    //         developed_for: 'developed for VizArtist 3.10 … 3.13',
+    //         // tested_in: 'tested in VizArtist 3.13',
+    //       },
+    //       {
+    //         number: 1.1,
+    //         created_at: '2020-01-02 02:34:00 UTC',
+    //         developed_for: 'developed for VizArtist 3.10',
+    //         // tested_in: 'tested in VizArtist 3.10',
+    //       },
+    //       {
+    //         number: 1.0,
+    //         created_at: '2020-01-01 01:00:00 UTC',
+    //         developed_for: 'developed for VizArtist 3.8',
+    //         // tested_in: 'tested in VizArtist 3.8',
+    //       },
+    //     ]
+    //   }
+    // ],
     categoryList: [
       "transformation",
       "visibility",
@@ -120,6 +121,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setProducts: (state, productsData) => {
+      state.products = productsData
+    },
     setCurrentProduct: (state, productData) => {
       state.currentProduct = productData
     },
@@ -138,8 +142,23 @@ export default new Vuex.Store({
         state.currentProduct.images.splice(index, 1)
       }
     },
+    changeProductPublic: (state, payload) => {
+      const product = state.products.find(p => p.id === payload.id)
+      product.public = payload.newPublic
+    }
   },
   actions: {
+    loadProducts ({ commit }) {
+      backend.products.index()
+        .then(response => {
+          let products = response.data.data.map(el => el.attributes)
+          commit('setProducts', products)
+        })
+        .catch(error => {
+          console.warn('Can\'t load products data. Error: ', error)
+          FlashVM.alert(error.message)
+        })
+    },
     loadCurrentProductData ({ commit }, id) {
       backend.products.get(id)
         .then(response => {

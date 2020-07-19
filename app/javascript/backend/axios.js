@@ -13,6 +13,7 @@ const publisher_adapter = axios.create({
 
 export default {
   products: {
+    index: () => publisher_adapter.get('/products'),
     get: id => publisher_adapter.get(`/products/${id}`),
     create: product => publisher_adapter.post('/products', product),
     

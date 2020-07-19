@@ -1,6 +1,9 @@
 class ProductSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :title, :short_description, :description, :instruction, :videos, :youtube_ids, :price, :price_original, :public, :featured
+  attributes :id, :title, :short_description, :description, 
+             :instruction, :videos, :youtube_ids, 
+             :price, :price_original, :public, :featured,
+             :created_at, :updated_at
 
   attribute :kind do |object|
     object.kind&.title
@@ -12,7 +15,7 @@ class ProductSerializer
 
   attribute :thumbnail do |object|
     if object.thumbnail.attached?
-      Rails.application.routes.url_helpers.rails_representation_url( object.thumbnail.variant(resize: "568x568").processed, only_path: true )
+      Rails.application.routes.url_helpers.rails_representation_url( object.thumbnail.variant(combine_options: { gravity: "center", size: "568x568!",  }).processed, only_path: true )
     else
       nil
     end

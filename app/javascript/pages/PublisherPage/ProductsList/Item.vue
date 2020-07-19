@@ -1,9 +1,9 @@
 <template lang="pug">
-  .publisher-product.bg-item.shadow-xl.flex.flex-col.lg--flex-row
+  .publisher-product.shadow-xl.flex.flex-col.lg--flex-row.mb-8(:class="product.public ? 'bg-item': 'bg-item-gray'")
     .product-content.flex.flex-col.sm--flex-row.flex-grow
       .product-cover.min-w-xs.bg-body-darker
-        img(src="product.cover" v-if="product.cover")
-        img(src="/images/svg/default-product.svg" v-else)
+        img(v-if="product.thumbnail" :src="product.thumbnail")
+        img(v-else src="/images/svg/default-product.svg" )
       .product-info.flex.flex-col.flex-grow
         .product-line.px-4.py-2
           .product-hierachy
@@ -30,9 +30,10 @@
               .product-version-tested-for.text-sm.text-orange.opacity-50 {{version.tested_in}}
     .product-actions.flex-grow-0.py-6.border-t-2.border-dashed.border-white-20.lg--border-t-0.lg--border-l-2
       .product-buttons.flex.flex-row.flex-wrap.items-center.justify-center.px-4.lg--flex-col.lg--items-start
-        a.product-button(href="#") Edit&nbsp;main&nbsp;info
-        a.product-button(href="#") Add/Edit&nbsp;versions
-        a.product-button(href="#") Unpublish
+        button.product-button(@click="router.push(`/publisher/products/${product.id}/title`)") Edit&nbsp;main&nbsp;info
+        button.product-button(@click="router.push(`/publisher/products/${product.id}/files`)") Add/Edit&nbsp;versions
+        button.product-button(v-if="product.public" @click="unpublish(product.id)") Unpublish
+        button.product-button(v-else @click="publish(product.id)") Publish
       ul.product-dates.text-sm.flex.justify-center.mx-6.my-4.text-white-50.lg--flex-col
         li.product-date.mr-4 Created {{prettyDate(product.created_at)}}
         li.product-date Updated {{prettyDate(product.updated_at)}}
@@ -63,8 +64,28 @@ export default {
     }
   },
   methods: {
-    prettyDate: function(date_in_string) {
+    prettyDate (date_in_string) {
       return new Date(date_in_string).toLocaleDateString();
+    },
+    publish (id) {
+      this.$backend.products.publish(id)
+        .then(response => {
+          this.$store.commit({ type: 'changeProductPublic', id, newPublic: true })
+        })
+        .catch(error => {
+          console.warn('Can\'t update products data. Error: ', error)
+          FlashVM.alert(error.message)
+        })
+    },
+    unpublish (id) {
+      this.$backend.products.unpublish(id)
+        .then(response => {
+          this.$store.commit({ type: 'changeProductPublic', id, newPublic: false })
+        })
+        .catch(error => {
+          console.warn('Can\'t update products data. Error: ', error)
+          FlashVM.alert(error.message)
+        })
     },
   }
 }
