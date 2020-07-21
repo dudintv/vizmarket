@@ -242,6 +242,27 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
     end
   end
 
+  describe 'POST #update' do
+    let!(:product) { create(:product) }
+
+    context 'Guest user' do
+      it 'redirect to login' do
+        delete :destroy, params: { id: product.id }, format: :json
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      it 'destroy the product' do
+        expect{
+          delete :destroy, params: { id: product.id }, format: :json
+        }.to change{ Product.count }.by(-1)
+      end
+    end
+  end
+
   describe 'POST #upload_thumbnail' do
     let(:product) { create(:product) }
 

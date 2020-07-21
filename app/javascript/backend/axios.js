@@ -16,8 +16,8 @@ export default {
     index: () => publisher_adapter.get('/products'),
     get: id => publisher_adapter.get(`/products/${id}`),
     create: product => publisher_adapter.post('/products', product),
-    delete: id => publisher_adapter.delete('/products', id),
-    
+    delete: id => publisher_adapter.delete(`/products/${id}`),
+
     publish: (id) => publisher_adapter.post(`/products/${id}/publish`),
     unpublish: (id) => publisher_adapter.post(`/products/${id}/unpublish`),
 
