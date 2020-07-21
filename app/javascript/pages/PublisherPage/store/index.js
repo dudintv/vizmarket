@@ -6,8 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    currentProduct: {},
     products: [],
+    currentProduct: {},
     // currentProduct: {
     //   id: 1,
     //   title: "Name of product",
@@ -97,21 +97,23 @@ export default new Vuex.Store({
       "assets",
     ],
     filter: 'all',
+    sort: {},
+    isGrouped: false,
   },
   getters: {
-    published: state => {
-      return state.products.filter(product => !!product.published)
+    publics: state => {
+      return state.products.filter(product => !!product.public)
     },
     drafts: state => {
-      return state.products.filter(product => !product.published)
+      return state.products.filter(product => !product.public)
     },
-    pendings: state => {
-      return state.products.filter(product => !!product.published && !product.aproved)
-    },
+    // pendings: state => {
+    //   return state.products.filter(product => !!product.public && !product.aproved)
+    // },
     filteredProducts: (state, getters) => {
       switch(state.filter.toLowerCase()){
         case 'published':
-          return getters.published
+          return getters.publics
         case 'drafts':
           return getters.drafts
         case 'pendings':
@@ -119,6 +121,31 @@ export default new Vuex.Store({
       }
       return state.products
     },
+    filteredAndSortedProducts: (state, getters) => {
+      const sortField = state.sort.field
+      const isSortOrderUpToDown = state.sort.order == 'desc'
+      return getters.filteredProducts.sort((product1, product2) => {
+        if (product1[sortField] == product2[sortField]) {
+          return 0
+        } else {
+          const result = product1[sortField] > product2[sortField] ? 1 : -1
+          return isSortOrderUpToDown ? result*-1 : result
+        }
+      })
+    },
+    filteredAndSortedAndGroupedProducts: (state, getters) => {
+      if (state.isGrouped) {
+        return getters.filteredAndSortedProducts.sort((product1, product2) => {
+          if (product1.kind === product2.kind) {
+            return 0
+          } else {
+            return product1.kind > product2.kind ? 1 : -1
+          }
+        })
+      } else {
+        return getters.filteredAndSortedProducts
+      }
+    }
   },
   mutations: {
     setProducts: (state, productsData) => {
@@ -127,8 +154,14 @@ export default new Vuex.Store({
     setCurrentProduct: (state, productData) => {
       state.currentProduct = productData
     },
-    changeFilter: (state, newFilter) => {
+    setFilter: (state, newFilter) => {
       state.filter = newFilter
+    },
+    setSort: (state, newSort) => {
+      state.sort = newSort
+    },
+    setGrouped: (state, newGrouped) => {
+      state.isGrouped = newGrouped
     },
     setYoutubeIds: (state, newIds) => {
       state.currentProduct.youtube_ids = newIds

@@ -1,9 +1,9 @@
 <template lang="pug">
   .products-list
     TopBoard
-    .products(v-if="filteredProducts")
+    .products(v-if="filteredAndSortedAndGroupedProducts")
       ProductsFilter.my-6
-      ProductItem(v-for="product in filteredProducts" :product="product" :key="product.id")
+      ProductItem(v-for="product in filteredAndSortedAndGroupedProducts" :product="product" :key="product.id")
     .empty-products(v-else).flex.justify-center.items-center.text-white-20.w-full.h-64
       .block
         h5.text-center No products
@@ -22,7 +22,7 @@ export default {
     ProductItem,
   },
   computed: {
-    filteredProducts () { return this.$store.getters.filteredProducts },
+    filteredAndSortedAndGroupedProducts () { return this.$store.getters.filteredAndSortedAndGroupedProducts },
   },
   mounted () {
     this.$store.dispatch('loadProducts')

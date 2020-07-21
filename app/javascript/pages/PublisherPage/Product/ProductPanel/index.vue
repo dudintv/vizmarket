@@ -47,13 +47,16 @@ export default {
       return this.product.public ? 'bg-published' : 'bg-unpublished'
     },
     nextButtonText () {
-      switch (this.$route.fullPath.split('/').slice(-1)[0]) {
-        case 'title':
-        case 'media':
-        case 'texts': return 'Save and go next'
-        case 'files': 
-          return this.product.public ? 'Save and close' : 'Finish and publish'
-        default: return 'Next'
+      if (this.product.public) {
+        return 'Save and close'
+      } else {
+        switch (this.$route.fullPath.split('/').slice(-1)[0]) {
+          case 'title':
+          case 'media':
+          case 'texts': return 'Save and go next'
+          case 'files': return 'Finish and publish'
+          default: return 'Next'
+        }
       }
     },
     currentTabName () {
@@ -114,27 +117,28 @@ export default {
     },
     goNext () {
       this.saveCurrentTab()
-      switch (this.currentTabName) {
-        case 'title':
-          this.$router.push(`/publisher/products/${this.product.id}/media`)
-          break
-        case 'media':
-          this.$router.push(`/publisher/products/${this.product.id}/texts`)
-          break
-        case 'texts':
-          this.$router.push(`/publisher/products/${this.product.id}/files`)
-          break
-        case 'files':
-          if (!this.product.public) {
+      if (this.product.public) {
+        this.$router.push('/publisher')
+      } else {
+        switch (this.currentTabName) {
+          case 'title':
+            this.$router.push(`/publisher/products/${this.product.id}/media`)
+            break
+          case 'media':
+            this.$router.push(`/publisher/products/${this.product.id}/texts`)
+            break
+          case 'texts':
+            this.$router.push(`/publisher/products/${this.product.id}/files`)
+            break
+          case 'files':
             this.$backend.products.publish(this.product.id)
             .then((responce) => {
               if (responce.status == 200) {
                 FlashVM.notice('Successfully saved and published')
               }
             })
-          }
-          this.$router.push('/publisher')
-          break
+            break
+        }
       }
     },
     saveAndClose () {

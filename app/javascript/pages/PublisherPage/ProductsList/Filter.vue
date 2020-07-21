@@ -2,18 +2,18 @@
   .products-filter.flex.flex-col.items-center
     ul.mb-1
       li.filter.inline-block(v-for="filter in filters" :key="filter.name")
-        a(
-          href='/' 
+        a.cursor-pointer( 
           :class="{'selected_filter': filter.name.toLowerCase() === selected_filter.toLowerCase() }"
+          @click.prevent="changeFilter(filter)"
           ) {{ filter.name }} ({{ filter.count }})
         | &nbsp;
     .sorting
-      select
-        option(v-for="sort in sorts" value="sort.field") {{ sort.title }}
+      select(v-model="selected_sort")
+        option(v-for="sort in sorts" :value="sort") {{ sort.title }}
       | &nbsp;
       | &nbsp;
       label
-        input(type="checkbox" name="arrange_by_type" checked)
+        input(type="checkbox" name="arrange_by_type" v-model="isGrouped")
         | Arrange by type
 </template>
 
@@ -22,35 +22,35 @@ export default {
   data () {
     return {
       selected_filter: "All",
+      selected_sort: "",
       sorts: [
         {
           title: "Newest first",
           field: "created_at",
-          order: "DESC",
+          order: "desc",
         },
         {
           title: "Oldest first",
           field: "created_at",
-          order: "ASC",
+          order: "asc",
         },
       ],
-      arrange_by_type: false,
+      isGrouped: false,
     }
   },
   computed: {
     totalCount () {
-      console.log(this.$store.state.products)
       return this.$store.state.products.length
     },
     publishedCount () {
-      return this.$store.getters.published.length
+      return this.$store.getters.publics.length
     },
     draftCount () {
       return this.$store.getters.drafts.length
     },
-    pendingCount () {
-      return this.$store.getters.pendings.length
-    },
+    // pendingCount () {
+    //   return this.$store.getters.pendings.length
+    // },
     filters () {
       return [
         {
@@ -65,12 +65,29 @@ export default {
           name: "Drafts",
           count: this.draftCount,
         },
-        {
-          name: "Pending approval",
-          count: this.pendingCount,
-        },
+        // {
+        //   name: "Pending approval",
+        //   count: this.pendingCount,
+        // },
       ].filter(part => part.count > 0)
     },
+  },
+  watch: {
+    selected_sort (newSort) {
+      this.$store.commit('setSort', newSort)
+    },
+    isGrouped (newGrouped) {
+      this.$store.commit('setGrouped', newGrouped)
+    }
+  },
+  mounted () {
+    this.selected_sort = this.sorts[0]
+  },
+  methods: {
+    changeFilter (filter) {
+      this.selected_filter = filter.name
+      this.$store.commit('setFilter', filter.name)
+    }
   }
 }
 </script>

@@ -7,9 +7,11 @@
       .product-info.flex.flex-col.flex-grow
         .product-line.px-4.py-2
           .product-hierachy
-            a.text-orange.hover--text-orange-hover(href='/') {{ product.kind }}
+            a.uppercase.text-orange.hover--text-orange-hover(href='/') {{ product.kind }}
             span.text-white-50: i.las.la-angle-right.text-base.align-middle
-            a.product-category(href='/') {{ product.category }}
+            template(v-for="(category, index) in product.categories")
+              a.product-category(href='/') {{ category }}
+              template(v-if="index < product.categories.length-1") , 
           .rating
         .product-line.px-4.pb-4.flex.justify-between
           .product-title
@@ -30,8 +32,8 @@
               .product-version-tested-for.text-sm.text-orange.opacity-50 {{version.tested_in}}
     .product-actions.flex-grow-0.py-6.border-t-2.border-dashed.border-white-20.lg--border-t-0.lg--border-l-2
       .product-buttons.flex.flex-row.flex-wrap.items-center.justify-center.px-4.lg--flex-col.lg--items-start
-        button.product-button(@click="router.push(`/publisher/products/${product.id}/title`)") Edit&nbsp;main&nbsp;info
-        button.product-button(@click="router.push(`/publisher/products/${product.id}/files`)") Add/Edit&nbsp;versions
+        button.product-button(@click="$router.push(`/publisher/products/${product.id}/title`)") Edit&nbsp;main&nbsp;info
+        button.product-button(@click="$router.push(`/publisher/products/${product.id}/files`)") Add/Edit&nbsp;versions
         button.product-button(v-if="product.public" @click="unpublish(product.id)") Unpublish
         button.product-button(v-else @click="publish(product.id)") Publish
       ul.product-dates.text-sm.flex.justify-center.mx-6.my-4.text-white-50.lg--flex-col

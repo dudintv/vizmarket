@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss" scoped>
   .product-title {
-    @apply block px-4 py-2 bg-item;
+    @apply block px-4 py-2 bg-item leading-tight;
   }
 
   .kind {

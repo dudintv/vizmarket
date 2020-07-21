@@ -67,6 +67,14 @@ class Publisher::Api::ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    if @product.destroy
+      render json: {id: @product.id, title: @product.title}, status: :ok
+    else
+      render json: @product.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
   def upload_thumbnail
     if params[:thumbnail]
       if @product.update(thumbnail: params[:thumbnail])
