@@ -64,13 +64,10 @@ export default {
     }
   },
   mounted () {
-    if (this.product == null || Object.getOwnPropertyNames(this.product).length <= 1 || this.product.id === undefined) {
-      // needs to load currentProduct data
-      if (+this.$route.params.id > 0) {
-        this.$store.dispatch('loadCurrentProductData', this.$route.params.id)
-      } else {
-        this.$router.push('/publisher') // redirect to the dasboard
-      }
+    if (+this.$route.params.id > 0) {
+      this.$store.dispatch('loadCurrentProductData', this.$route.params.id)
+    } else {
+      this.$router.push('/publisher')
     }
   },
   methods: {
