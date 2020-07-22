@@ -25,3 +25,12 @@ FlashVM.notice("message")
 FlashVM.alert("message")
 ```
 It's avaliable everywhere, includes Vue and regular js code.
+
+## Z-index layers
+101 — image preview in Image Input
+102 — image preview in Image Input, .picture-inner
+103 — image preview in Image Input, .loading-container, .status-container 
+200 — popup toasts/flashes
+300 — popup main menu
+1000 — modal window
+10000 — Dropdown menu ul.vs__dropdown-menu

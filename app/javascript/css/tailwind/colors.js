@@ -64,7 +64,9 @@ gradients['blue-mark-grad'] = 'linear-gradient(120deg, #0081ce 0%, rgba(0, 115, 
 let lime = Color('hsl(76, 78%, 45%)')
 let green = Color('hsl(96, 66%, 38%)')
 colors['lime'] = lime.string()
+colors['lime-hover'] = lime.lighten(.1).string()
 colors['green'] = green.string()
+colors['green-hover'] = green.lighten(.1).string()
 
 gradients['green-grad-x'] = `linear-gradient(to right, ${lime}, ${green})`
 gradients['green-grad-y'] = `linear-gradient(${lime}, ${green})`

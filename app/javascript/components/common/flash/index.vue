@@ -62,6 +62,7 @@ export default {
 
 <style>
 #toasts {
-  @apply sticky right-2 top-2 z-80 flex flex-col;
+  @apply sticky right-2 top-2 flex flex-col;
+  z-index: 200;
 }
 </style>

@@ -145,7 +145,7 @@
     @apply bg-blue-10 p-4 cursor-pointer w-full text-lg;
 
     .border{
-      @apply relative w-full flex justify-center items-center p-4;
+      @apply relative w-full flex justify-start items-center p-4;
       border: .15rem dashed hsl(198, 51%, 50%);
       min-height: 6em;
     }

@@ -45,9 +45,10 @@ header nav {
 
 
   .nav-dropdown {
-    @apply hidden absolute p-6 w-full shadow-lg z-100;
+    @apply hidden absolute p-6 w-full shadow-lg;
     left: 0;
     top: 52px;
+    z-index: 300;
   }
 
   .burger {
@@ -175,7 +176,7 @@ header nav {
   .popup {
     @apply hidden absolute right-4 shadow-2xl rounded overflow-hidden pt-4;
     @apply bg-item;
-    z-index: 100;
+    z-index: 300;
     top: 64px;
     min-width: 20rem;
     max-width: calc(100% - 2rem);
