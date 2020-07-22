@@ -1,33 +1,35 @@
 <template lang="pug">
-  .edit-product-panel(:class="bgClass")
-    .nav
-      ProductThumbnail(:product="product")
-      ProductTitle(:product="product")
-      .tabs
-        router-link.tab(:to="`/publisher/products/${product.id}/title`")
-          i.las.la-tag
-          span Title & Category
-        router-link.tab(:to="`/publisher/products/${product.id}/media`")
-          i.las.la-photo-video
-          span Images & Video
-        router-link.tab(:to="`/publisher/products/${product.id}/texts`")
-          i.las.la-align-left
-          span Instructions
-        router-link.tab.selected(:to="`/publisher/products/${product.id}/files`")
-          i.las.la-file-upload
-          span Product files
-    .content
-      keep-alive
-        router-view
-    .status
-      span.text-white-20 status:&nbsp;
-      span {{ product.public ? 'Published' : 'Draft' }}
-    .actions
-      button.big-btn.third-btn(@click="deleteProduct()")
-        template(v-if="product.public") Delete the product
-        template(v-else) Delete the draft
-      button.big-btn.second-btn(v-if="!product.public" @click="saveAndClose()") Save and continue later
-      button.big-btn.main-btn(@click="goNext()") {{ nextButtonText }}
+  .edit-product-page
+    .edit-product-panel(:class="bgClass")
+      .nav
+        ProductThumbnail(:product="product")
+        ProductTitle(:product="product")
+        .tabs
+          router-link.tab(:to="`/publisher/products/${product.id}/title`")
+            i.las.la-tag
+            span Title & Category
+          router-link.tab(:to="`/publisher/products/${product.id}/media`")
+            i.las.la-photo-video
+            span Images & Video
+          router-link.tab(:to="`/publisher/products/${product.id}/texts`")
+            i.las.la-align-left
+            span Instructions
+          router-link.tab.selected(:to="`/publisher/products/${product.id}/files`")
+            i.las.la-file-upload
+            span Product files
+      .content
+        keep-alive
+          router-view
+      .status
+        span.text-white-20 status:&nbsp;
+        span {{ product.public ? 'Published' : 'Draft' }}
+      .actions
+        button.big-btn.third-btn(@click="deleteProduct()")
+          template(v-if="product.public") Delete the product
+          template(v-else) Delete the draft
+        button.big-btn.second-btn(v-if="product.public" @click="unpublish()") Unpublish
+        button.big-btn.second-btn(v-if="!product.public" @click="saveAndClose()") Save and continue later
+        button.big-btn.main-btn(@click="goNext()") {{ nextButtonText }}
 </template>
 
 <script>
@@ -132,11 +134,24 @@ export default {
             .then((responce) => {
               if (responce.status == 200) {
                 FlashVM.notice('Successfully saved and published')
+                this.$router.push('/publisher')
               }
             })
             break
         }
       }
+    },
+    unpublish () {
+      this.$backend.products.unpublish(this.product.id)
+        .then(responce => {
+          if (responce.status == 200){
+            FlashVM.notice('Successfully unpublished')
+            this.product.public = false
+          }
+        })
+        .catch(error => {
+          FlashVM.error('Can\'t unpublish with error: ' + error)
+        })
     },
     saveAndClose () {
       this.saveCurrentTab()
@@ -147,6 +162,10 @@ export default {
         this.$backend.products.delete(this.product.id)
           .then(() => {
             this.$router.push('/publisher')
+            FlashVM.notice('Successfully deleted')
+          })
+          .catch(error => {
+            FlashVM.error('Can\'t delete the product with error: ' + error)
           })
       }
     },

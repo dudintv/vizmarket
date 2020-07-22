@@ -73,6 +73,7 @@ export default {
       this.$backend.products.publish(id)
         .then(response => {
           this.$store.commit({ type: 'changeProductPublic', id, newPublic: true })
+          FlashVM.notice('Successfully published')
         })
         .catch(error => {
           console.warn('Can\'t update products data. Error: ', error)
@@ -83,6 +84,7 @@ export default {
       this.$backend.products.unpublish(id)
         .then(response => {
           this.$store.commit({ type: 'changeProductPublic', id, newPublic: false })
+          FlashVM.notice('Successfully unpublished')
         })
         .catch(error => {
           console.warn('Can\'t update products data. Error: ', error)

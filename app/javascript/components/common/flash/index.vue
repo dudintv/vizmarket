@@ -39,7 +39,7 @@ export default {
       this.messages.push([kind, message])
       setTimeout(() => {
         this.messages.shift()
-      }, 5000)
+      }, 1000000)
     }
   }
 }
@@ -47,6 +47,6 @@ export default {
 
 <style>
 #toasts {
-  @apply absolute right-2 top-2 z-80 flex flex-row;
+  @apply sticky right-2 top-2 z-80 flex flex-col;
 }
 </style>
