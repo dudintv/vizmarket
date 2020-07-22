@@ -92,6 +92,7 @@ export default {
         case 'media':
           this.$backend.products.update(this.product.id, { product: {
               videos: this.product.videos,
+              youtube_ids: this.product.youtube_ids,
             },
           })
           .then((responce) => {

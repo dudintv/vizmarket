@@ -18,7 +18,6 @@ class Publisher::Api::ProductsController < ApplicationController
   def create
     @kind = Kind.find_by(title: params[:kind])
     @product = Product.new(title: params[:name], user: current_user, kind: @kind)
-    # @categories = Category.where(title: params[:categories])
 
     if @product.save
       render json: ProductSerializer.new(@product).serialized_json, status: :created
@@ -44,6 +43,7 @@ class Publisher::Api::ProductsController < ApplicationController
   end
 
   def update
+    p "!!!!!!!!!!!!!!!!!!!!! params = " + params.to_s
     if params[:kind]
       kind = Kind.find_by(title: params[:kind])
       @product.update(kind: kind)
