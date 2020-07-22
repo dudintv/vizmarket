@@ -1,11 +1,10 @@
 <template lang="pug">
-  .toast.flex.items-center(:class="kind")
+  .toast.flex.items-center.justify-between.pointer-events-auto(:class="kind")
     h6.message {{ message }}
-    //- CLOSE BUTTON IS HIDED TO AVOID INTERSECTION WITH AUTO-CLOSE
-    //- button.close-notification(@click="emit()")
-    //-   svg(fill="none" height="27" viewbox=("0 0 26 27") width="26" xmlns="http://www.w3.org/2000/svg")
-    //-     line(stroke="white" stroke-opacity="0.5" x1="0.646447" x2="25.6464" y1="25.6464" y2="0.646447")
-    //-     line(stroke="white" stroke-opacity="0.5" x1="25.6464" x2="0.646447" y1="26.3536" y2="1.35355")
+    button.cursor-pointer.close-notification(@click="$emit('deleteToast', time)")
+      svg(fill="none" height="27" viewbox=("0 0 26 27") width="26" xmlns="http://www.w3.org/2000/svg")
+        line(stroke="white" stroke-opacity="0.5" x1="0.646447" x2="25.6464" y1="25.6464" y2="0.646447")
+        line(stroke="white" stroke-opacity="0.5" x1="25.6464" x2="0.646447" y1="26.3536" y2="1.35355")
 </template>
 
 <script>
@@ -22,6 +21,10 @@ export default {
       type: String,
       default: '',
     },
+    time: {
+      type: Number,
+      required: true,
+    }
   }
 }
 </script>
@@ -63,12 +66,12 @@ export default {
     @apply mx-6 my-2 leading-snug;
   }
 
-  // .close-notification {
-  //   @apply p-4 h-full;
+  .close-notification {
+    @apply p-4 h-full bg-transparent;
 
-  //   &:hover {
-  //     @apply bg-white-05 fill-white;
-  //   }
-  // }
+    &:hover {
+      @apply bg-white-05 fill-white;
+    }
+  }
 }
 </style>

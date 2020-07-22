@@ -1,6 +1,13 @@
 <template lang="pug">
   #toasts
-    Flash(v-for="message in messages" :kind="message[0]" :message="message[1]" :key="message[1]")
+    Flash(
+      v-for="message in messages" 
+      :kind="message.kind" 
+      :message="message.message" 
+      :key="message.time"
+      :time="message.time"
+      @deleteToast="deleteToast"
+    )
 </template>
 
 <script>
@@ -36,11 +43,19 @@ export default {
     },
     toast (kind, message) {
       // make a toast with auto-deleting
-      this.messages.push([kind, message])
-      setTimeout(() => {
-        this.messages.shift()
-      }, 1000000)
-    }
+      const time = Date.now()
+      const timer = setTimeout(() => {
+        this.deleteToast (time)
+      }, 5000)
+      this.messages.push({ kind, message, time, timer })
+    },
+    deleteToast (time) {
+      const index = this.messages.findIndex(toast => toast.time == time)
+      if (index > -1) {
+        clearInterval(this.messages[index].timer)
+        this.messages.splice(index, 1)
+      }
+    },
   }
 }
 </script>
