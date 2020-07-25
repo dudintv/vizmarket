@@ -117,11 +117,8 @@ class Publisher::Api::ProductsController < ApplicationController
 
   def delete_image
     @image = ActiveStorage::Blob.find_by_key(params[:key])
-    if @image&.attachments&.first.purge
-      render json: {}, status: :ok
-    else
-      render json: {}, status: :unprocessable_entity
-    end
+    @image&.attachments&.first.purge
+    render json: {}, status: :ok
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_210118) do
+ActiveRecord::Schema.define(version: 2020_07_22_145814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,9 +141,19 @@ ActiveRecord::Schema.define(version: 2020_07_08_210118) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "versions", force: :cascade do |t|
+    t.integer "number"
+    t.boolean "public"
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_versions_on_product_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "authorizations", "users"
   add_foreign_key "new_categories", "products"
   add_foreign_key "new_categories", "users"
   add_foreign_key "products", "users"
+  add_foreign_key "versions", "products"
 end

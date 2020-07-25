@@ -47,6 +47,10 @@ Rails.application.routes.draw do
           resources :versions, only: %i[index show create update destroy] do
             post :publish, on: :member
             post :unpublish, on: :member
+            member do
+              post :upload_files
+              post :delete_file
+            end
           end
         end
       end

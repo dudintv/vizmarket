@@ -41,5 +41,13 @@ FactoryBot.define do
         fixture_file_upload('spec/fixtures/images/1920x1080_leopard.jpg', 'image/jpeg'),
       ]}
     end
+
+    trait :with_one_version do
+      versions {[ association(:version_with_one_file) ]}
+    end
+
+    trait :with_versions do
+      versions {[ association(:version_with_one_file), association(:version_with_files) ]}
+    end
   end
 end
