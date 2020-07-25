@@ -43,7 +43,6 @@ class Publisher::Api::ProductsController < ApplicationController
   end
 
   def update
-    p "!!!!!!!!!!!!!!!!!!!!! params = " + params.to_s
     if params[:kind]
       kind = Kind.find_by(title: params[:kind])
       @product.update(kind: kind)

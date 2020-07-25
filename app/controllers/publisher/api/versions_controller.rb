@@ -8,7 +8,7 @@ class Publisher::Api::VersionsController < ApplicationController
   end
   
   def show
-    render json: VersionSerializer.new(@versions).serialized_json
+    render json: VersionSerializer.new(@version).serialized_json
   end
 
   def create

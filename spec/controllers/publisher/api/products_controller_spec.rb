@@ -3,32 +3,21 @@ require 'rails_helper'
 RSpec.describe Publisher::Api::ProductsController, type: :controller do
 
   describe 'GET #index' do
-    context 'Guest user' do
-      it 'redirects to login' do
-        get :index
-        expect(response).to redirect_to(new_user_session_path)
-      end
+    def make_request
+      get :index, format: :json
     end
 
-    context 'Authenticated user' do
-      sign_in_user
-      
-      it 'returns http success' do
-        get :index
-        expect(response).to have_http_status(:success)
-      end
-    end
+    it_behaves_like 'Authorizable'
   end
 
   describe 'GET #show' do
     let(:product) { create(:product) }
 
-    context 'Guest user' do
-      it 'return unauthorized (401)' do
-        get :show, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      get :show, params: { id: product.id }, format: :json
     end
+
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
@@ -39,29 +28,22 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
           expect(response).to have_http_status(:not_found)
         end
       end
-
-      context 'With correct id' do
-        it 'returns http success' do
-          get :show, params: { id: product.id }, format: :json
-          expect(response).to have_http_status(:success)
-        end
-      end
     end
   end
 
   describe 'POST #create' do
     let(:product_params) { attributes_for(:product) }
+    let(:product_params_title_and_kind) { { name: product_params[:title], kind: product_params[:kind][:title] } } 
+
+    def make_request
+      post :create, params: product_params_title_and_kind, format: :json
+    end
+
+    it_behaves_like 'Authorizable'
 
     context 'Guest user' do
-      let(:product_params_title_and_kind) { { name: product_params[:title], kind: product_params[:kind][:title] } } 
-
-      it 'redirects to login' do
-        post :create, params: product_params_title_and_kind, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
-
       it 'does not save the new product' do
-        expect { post :create, params: product_params_title_and_kind, format: :json }.to_not change(Product, :count)
+        expect { make_request }.to_not change(Product, :count)
       end
     end
 
@@ -125,30 +107,24 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
   describe 'POST #update' do
     let(:product) { create(:product) }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        get :show, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      patch :update, params: {
+        id: product.id,
+        kind: "assets",
+        categories: ["utility", "other"],
+        product: {
+          title: "#{product.title} updated",
+          short_description: "#{product.short_description} updated"
+        }
+      }, format: :json
     end
+    
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
       context 'Update on "Title & Category" page' do
-        it 'return success' do
-          patch :update, params: {
-            id: product.id,
-            kind: "assets",
-            categories: ["utility", "other"],
-            product: {
-              title: "#{product.title} updated",
-              short_description: "#{product.short_description} updated"
-            }
-          }
-          expect(response).to have_http_status(:success)
-        end
-
         it 'change product\'s kind and categories' do
           expect{
             patch :update, params: {
@@ -233,31 +209,24 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
           .and change { product.youtube_ids }
         end
       end
-
-      context 'Update Instructions' do
-        
-      end
-
-      # Product Files are tested in versions_controller_spec
     end
   end
 
   describe 'POST #update' do
     let!(:product) { create(:product) }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        delete :destroy, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      delete :destroy, params: { id: product.id }, format: :json
     end
+    
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
       it 'destroy the product' do
         expect{
-          delete :destroy, params: { id: product.id }, format: :json
+          make_request
         }.to change{ Product.count }.by(-1)
       end
     end
@@ -265,25 +234,23 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
 
   describe 'POST #upload_thumbnail' do
     let(:product) { create(:product) }
+    let(:square_image) { fixture_file_upload('spec/fixtures/images/square568x568.jpg', 'image/jpeg') }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        post :upload_thumbnail, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      post :upload_thumbnail, params: {
+        id: product.id,
+        thumbnail: square_image
+      }, format: :json
     end
+    
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
-      let(:square_image) { fixture_file_upload('spec/fixtures/images/square568x568.jpg', 'image/jpeg') }
-
       it 'uploads thumbnail image' do
         expect {
-          post :upload_thumbnail, params: {
-            id: product.id,
-            thumbnail: square_image
-          }
+          make_request
           product.reload
         }.to change { product.thumbnail.attached? }.to true
       end
@@ -292,25 +259,23 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
 
   describe 'POST #upload_featured_image' do
     let(:product) { create(:product) }
+    let(:image_16_9) { fixture_file_upload('spec/fixtures/images/1920x1080.jpg', 'image/jpeg') }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        post :upload_featured_image, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      post :upload_featured_image, params: {
+        id: product.id,
+        featured_image: image_16_9
+      }, format: :json
     end
+
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
-      let(:image_16_9) { fixture_file_upload('spec/fixtures/images/1920x1080.jpg', 'image/jpeg') }
-
       it 'uploads featured image' do
         expect {
-          post :upload_featured_image, params: {
-            id: product.id,
-            featured_image: image_16_9
-          }
+          make_request
           product.reload
         }.to change { product.featured_image.attached? }.to true
       end
@@ -319,31 +284,29 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
 
   describe 'POST #upload_gallery_images' do
     let(:product) { create(:product) }
+    let(:image_1) { fixture_file_upload('spec/fixtures/images/1920x1080_car.jpg', 'image/jpeg') }
+    let(:image_2) { fixture_file_upload('spec/fixtures/images/1920x1080_cubes.jpg', 'image/jpeg') }
+    let(:image_3) { fixture_file_upload('spec/fixtures/images/1920x1080_leopard.jpg', 'image/jpeg') }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        post :upload_gallery_images, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      post :upload_gallery_images, params: {
+        id: product.id,
+        images: [
+          image_1,
+          image_2,
+          image_3
+        ]
+      }, format: :json
     end
+
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
-      let(:image_1) { fixture_file_upload('spec/fixtures/images/1920x1080_car.jpg', 'image/jpeg') }
-      let(:image_2) { fixture_file_upload('spec/fixtures/images/1920x1080_cubes.jpg', 'image/jpeg') }
-      let(:image_3) { fixture_file_upload('spec/fixtures/images/1920x1080_leopard.jpg', 'image/jpeg') }
-
       it 'uploads many images for the gallery' do
         expect {
-          post :upload_gallery_images, params: {
-            id: product.id,
-            images: [
-              image_1,
-              image_2,
-              image_3
-            ]
-          }
+          make_request
           product.reload
         }.to change { product.images.attached? }.to true
       end
@@ -353,19 +316,18 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
   describe 'POST #publish' do
     let(:product) { create(:draft_product) }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        post :publish, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      post :publish, params: { id: product.id }, format: :json
     end
+
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
       it 'make product publish' do
         expect {
-          post :publish, params: { id: product.id }, format: :json
+          make_request
           product.reload
         }.to change { product.public }.to true
       end
@@ -375,19 +337,18 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
   describe 'POST #unpublish' do
     let(:product) { create(:product) }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        post :unpublish, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      post :unpublish, params: { id: product.id }, format: :json
     end
+
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
       it 'make product unpublish' do
         expect {
-          post :unpublish, params: { id: product.id }, format: :json
+          make_request
           product.reload
         }.to change { product.public }.to false
       end
@@ -397,19 +358,18 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
   describe 'DELETE #delete_thumbnail' do
     let(:product) { create(:product_with_images) }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        delete :delete_thumbnail, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      delete :delete_thumbnail, params: { id: product.id }, format: :json
     end
+
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
       it 'deletes thumbnail' do
         expect {
-          delete :delete_thumbnail, params: { id: product.id }
+          make_request
           product.reload
         }.to change { product.thumbnail.attached? }.to false
       end
@@ -419,19 +379,18 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
   describe 'DELETE #delete_featured_image' do
     let(:product) { create(:product_with_images) }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        delete :delete_featured_image, params: { id: product.id }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      delete :delete_featured_image, params: { id: product.id }, format: :json
     end
+
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
       it 'deletes featured image' do
         expect {
-          delete :delete_featured_image, params: { id: product.id }
+          make_request
           product.reload
         }.to change { product.featured_image.attached? }.to false
       end
@@ -439,23 +398,22 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
   end
 
   describe 'DELETE #delete_image' do
-    let(:product) { create(:product_with_images) }
+    let(:product_with_images) { create(:product_with_images) }
 
-    context 'Guest user' do
-      it 'redirect to login' do
-        delete :delete_image, params: { key: product.images[0].blob.key }, format: :json
-        expect(response).to have_http_status(:unauthorized)
-      end
+    def make_request
+      delete :delete_image, params: { key: product_with_images.images[0].blob.key }, format: :json
     end
+
+    it_behaves_like 'Authorizable'
 
     context 'Authenticated user' do
       sign_in_user
 
       it 'deletes featured image' do
         expect {
-          delete :delete_image, params: { key: product.images[0].blob.key }
-          product.reload
-        }.to change { product.images.count }.from(3).to(2)
+          make_request
+          product_with_images.reload
+        }.to change { product_with_images.images.count }.from(3).to(2)
       end
     end
   end
