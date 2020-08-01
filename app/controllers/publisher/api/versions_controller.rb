@@ -1,7 +1,9 @@
 class Publisher::Api::VersionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:index, :create]
-  before_action :set_version, only: [:show, :update, :destroy, :upload_files, :delete_file]
+  before_action :set_version, only: [:show, :update, :destroy, 
+                                     :upload_files, :delete_file,
+                                     :publish, :unpublish]
 
   def index
     render json: VersionSerializer.new(@product.versions).serialized_json
@@ -52,6 +54,22 @@ class Publisher::Api::VersionsController < ApplicationController
     render json: {}, status: :ok
   end
 
+  def publish
+    if @version.update(public: true)
+      render json: {id: @version.id, public: @version.public}, status: :ok
+    else
+      render json: @version.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
+  def unpublish
+    if @version.update(public: false)
+      render json: {id: @version.id, public: @version.public}, status: :ok
+    else
+      render json: @version.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_product
@@ -73,6 +91,7 @@ class Publisher::Api::VersionsController < ApplicationController
   end
 
   def version_params
-    params.require(:version).permit(:number, files: [])
+    p "!!!!!!!!!!!!!! params = " + params.to_s
+    params.require(:version).permit(:number, :public, :support, files: [])
   end
 end

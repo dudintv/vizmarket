@@ -1,27 +1,33 @@
 <template lang="pug">
-  .product-version(:class="{ ['is-published']: is_published }")
-    table.versions-table
-      tr
-        td ver. {{ version.number }}
-        td {{ dates }}
-      tr
-        td.text-white-50 Files:
-        td: ul.files: li(v-for="file in version.files"): a.file(:href="file.path") {{ file.filename }}
-      tr
-        td.text-white-50 Support:
-        td {{ version.support }}
-      tr
-        td: Swither(name="Published" v-model="is_published")
-        td
-          button.second-btn.middle-btn Edit
-          | &nbsp;
-          button.second-btn.middle-btn Delete
+  .product-version(:class="{ ['is-published']: version.public }")
+    .version-grid
+      .version-number ver. {{ version.number }} | id {{ version.id }}
+      .version-dates {{ dates }}
+      .version-files-title.text-white-20 Files:
+      .version-files 
+        ul.files: li(v-for="file in version.files"): a.file(:href="file.url") {{ file.filename }}
+      .version-support-title.text-white-20 Support info:
+      .version-support.text-white-50 {{ version.support }}
+      .version-status.uppercase
+        span.text-white-20 status: 
+        span.text-white-50 {{ publicStatus }}
+      .version-actions
+        .flex.align-center.justify-between
+          Swither(name="Published" v-model="public" :isFormField="false" :isLoading="isLoadingPublicStatus")
+          .buttons
+            button.second-btn.middle-btn(@click="editVersion()") Edit
+            button.second-btn.middle-btn.ml-4(@click="deleteVersion()") Delete
 </template>
 
 <script>
 import Swither from 'components/inputs/switcher'
 
 export default {
+  data () {
+    return {
+      isLoadingPublicStatus: true
+    }
+  },
   components: {
     Swither,
   },
@@ -31,7 +37,6 @@ export default {
   computed: {
     dates () {
       const created_at = (new Date(this.version.created_at)).toLocaleDateString()
-
       if(!this.version.updated_at || this.version.created_at == this.version.updated_at) {
         return created_at
       } else {
@@ -39,15 +44,33 @@ export default {
         return `${created_at} — ${updated_at}`
       }
     },
-    is_published: {
+    public: {
       get () {
-        return this.version.status === "published"
+        this.version.public
       },
       set (newValue) {
-        this.$store.dispatch('versionPublishedChanged', { version: this.version, is_published: newValue } )
+        this.$store.dispatch('versionPublishedChanged', { version: this.version, isPublished: newValue } )
       }
+    },
+    publicStatus () {
+      return this.version.public ? "published" : "unpublished"
     }
   },
+  methods: {
+    editVersion () {
+
+    },
+    deleteVersion () {
+      this.$backend.versions.delete(this.version.id)
+        .then(() => {
+          FlashVM.notice('Successfully deleted')
+          this.$store.dispatch('updateVersionsList')
+        })
+        .catch(error => {
+          FlashVM.error('Can\'t delete the version with error: ' + error)
+        })
+    }
+  }
 }
 </script>
 
@@ -58,9 +81,11 @@ export default {
     &.is-published { @apply bg-published; }
   }
 
-  .versions-table{
-    border-spacing: 20px 10px;
-    border-collapse: separate;
+  .version-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    grid-gap: 1rem;
   }
 
   .files li {

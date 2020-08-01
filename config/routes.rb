@@ -44,12 +44,12 @@ Rails.application.routes.draw do
           collection do
             delete :delete_image
           end
-          resources :versions, only: %i[index show create update destroy] do
+          resources :versions, only: %i[index show create update destroy], shallow: true do
             member do
               post :publish
               post :unpublish
               post :upload_files
-              post :delete_file
+              delete :delete_file
             end
           end
         end

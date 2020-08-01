@@ -46,7 +46,7 @@ export default {
       const time = Date.now()
       const timer = setTimeout(() => {
         this.deleteToast (time)
-      }, 5000)
+      }, 10000)
       this.messages.push({ kind, message, time, timer })
     },
     deleteToast (time) {

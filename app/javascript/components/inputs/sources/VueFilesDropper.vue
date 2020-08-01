@@ -17,6 +17,7 @@
       ) remove all
       slot
       input(
+        :id="inputId"
         type="file"
         ref="input"
         :disabled="disabled"
@@ -30,6 +31,7 @@
   export default {
     name: "VueFilesDropper",
     props: {
+      inputId: String,
       placeholder: String,
       value:{},
       multiple: Boolean,

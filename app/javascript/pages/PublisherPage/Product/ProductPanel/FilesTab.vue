@@ -1,7 +1,8 @@
 <template lang="pug">
   .form
-    VersionCreate
     VersionShow(v-for="version in product.versions" :version="version" :key="version.id")
+    VersionCreate(v-if="isShowCreateVersionPanel" @hide="hideCreatingPanel()")
+    button.btn.main-btn.middle-btn.mb-4(v-else @click="isShowCreateVersionPanel=true") Create new version
 </template>
 
 <script>
@@ -15,7 +16,7 @@ export default {
   },
   data () {
     return {
-      
+      isShowCreateVersionPanel: false,
     }
   },
   computed: {
@@ -23,6 +24,11 @@ export default {
       return this.$store.state.currentProduct;
     },
   },
+  methods: {
+    hideCreatingPanel () {
+      this.isShowCreateVersionPanel = false
+    }
+  }
 }
 </script>
 

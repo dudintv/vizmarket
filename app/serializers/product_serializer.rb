@@ -2,7 +2,8 @@ class ProductSerializer
   include FastJsonapi::ObjectSerializer
   attributes :id, :title, :short_description, :description, 
              :instruction, :videos, :youtube_ids, 
-             :price, :price_original, :public, :featured,
+             :price, :price_original, 
+             :public, :featured,
              :created_at, :updated_at
 
   attribute :kind do |object|
@@ -38,6 +39,16 @@ class ProductSerializer
           filename: image.blob.filename.to_s,
           key: image.blob.key
         }
+      end
+    else
+      nil
+    end
+  end
+
+  attribute :versions do |object|
+    if object.versions.present?
+      object.versions.map do |version|
+        VersionSerializer.new(version).serializable_hash[:data][:attributes]
       end
     else
       nil

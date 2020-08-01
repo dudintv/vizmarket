@@ -154,6 +154,9 @@ export default new Vuex.Store({
     setCurrentProduct: (state, productData) => {
       state.currentProduct = productData
     },
+    setProductVersions: (state, vesrionsData) => {
+      state.currentProduct.versions = vesrionsData
+    },
     setFilter: (state, newFilter) => {
       state.filter = newFilter
     },
@@ -195,6 +198,7 @@ export default new Vuex.Store({
     loadCurrentProductData ({ commit }, id) {
       backend.products.get(id)
         .then(response => {
+          console.debug('setCurrentProduct', response.data.data.attributes)
           commit('setCurrentProduct', response.data.data.attributes)
         })
         .catch(error => {
@@ -202,15 +206,18 @@ export default new Vuex.Store({
           FlashVM.alert(error.message)
         }) 
     },
-    versionPublishedChanged ({ commit, state}, { version, is_published }) {
-      console.log(is_published)
-      let status
-      if (version.created_at) {
-        status = is_published ? "published" : "unpublished"
-      } else {
-        // if the version not saved (because it's new one) it could be a "draft"
-        status = is_published ? "published" : "draft"
-      }
+    updateVersionsList ({ commit, state }){
+      backend.versions.index(state.currentProduct.id)
+        .then(response => {
+          console.debug("response.data.data", response.data.data.map(el => el.attributes))
+          commit('setProductVersions', response.data.data.map(el => el.attributes))
+        })
+        .catch(error => {
+          console.warn('Can\'t load versions data. Error: ', error)
+          FlashVM.alert(error.message)
+        }) 
+    },
+    versionPublishedChanged ({ commit, state}, { version, isPublished }) {
       // TODO: AXIOS
       version.status = status
 

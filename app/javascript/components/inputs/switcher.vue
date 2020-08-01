@@ -1,10 +1,10 @@
 <template lang="pug">
-  .form-field
+  div(:class="{ 'form-field': isFormField }")
     .checkbox-field-with-label(@click="change()")
       span.name.off-name(v-if="off_name" :class="{ checked: !checked }") {{ off_name }}
       input.checkbox(type="checkbox" :name="name" :id="name" :checked="value" ref="checkbox")
       .border
-        .loading(v-show="loading")
+        .loading(v-show="isLoading")
         .point
       span.name.on-name(:class="{ checked: checked }") {{ name }}
     .tip(v-if="$slots['tip']")
@@ -19,9 +19,13 @@ export default {
     name: String,
     off_name: String,
     value: Boolean,
-    loading: {
+    isLoading: {
       type: Boolean,
       default: false,
+    },
+    isFormField: {
+      type: Boolean,
+      default: true,
     }
   },
   data() {

@@ -1,6 +1,7 @@
 <template lang="pug">
   .form-field
     VueFilesDropper(
+      :inputId="inputId"
       v-model="files"
       multiple
     )
@@ -27,6 +28,7 @@ export default {
     VueFilesDropper,
   },
   props: {
+    inputId: String,
     name: String,
     value: Array,
   },
@@ -41,6 +43,3 @@ export default {
   mounted () { this.files = this.value }
 }
 </script>
-
-<style scoped lang="scss">
-</style>

@@ -1,8 +1,13 @@
 FactoryBot.define do
   factory :version do
     sequence(:number) { |n| n }
-    public { false }
+    public { true }
     product
+    support { 'VizArtist any versions' }
+
+    factory :draft_version do
+      public { false }
+    end
 
     factory :version_with_one_file do
       files {[

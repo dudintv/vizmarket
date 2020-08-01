@@ -16,7 +16,7 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
     let(:version) { create :version }
 
     def make_request
-      get :show, params: { product_id: version.product.id, id: version.id }, format: :json
+      get :show, params: { id: version.id }, format: :json
     end
 
     it_behaves_like 'Authorizable'
@@ -44,13 +44,12 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
   end
 
   describe 'POST #update' do
-    let(:product_with_version) { create :product, :with_one_version }
+    let(:version) { create :version }
 
     def make_request
-      post :update, params: { 
-        product_id: product_with_version.id, 
-        id: product_with_version.versions.first.id, 
-        version: { number: product_with_version.versions.first.number + 123 }
+      post :update, params: {
+        id: version.id, 
+        version: { number: version.number + 123 }
       }, format: :json
     end
 
@@ -62,8 +61,8 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
       it 'updates the version' do
         expect {
           make_request
-          product_with_version.versions.first.reload
-        }.to change{ product_with_version.versions.first.number }.by(123)
+          version.reload
+        }.to change{ version.number }.by(123)
       end
     end
   end
@@ -72,8 +71,7 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
     let(:product_with_versions) { create :product, :with_versions }
 
     def make_request
-      delete :destroy, params: { 
-        product_id: product_with_versions.id, 
+      delete :destroy, params: {
         id: product_with_versions.versions.first.id
       }, format: :json
     end
@@ -95,8 +93,7 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
     let(:file_3) { fixture_file_upload('spec/fixtures/files/text3.txt', 'text/plain') }
 
     def make_request
-      post :upload_files, params: { 
-        product_id: version.product.id, 
+      post :upload_files, params: {
         id: version.id, 
         files: [file_2, file_3]
       }, format: :json
@@ -120,8 +117,7 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
     let(:version) { create :version_with_files }
 
     def make_request
-      post :delete_file, params: { 
-        product_id: version.product.id, 
+      post :delete_file, params: {
         id: version.id, 
         key: version.files[0].blob.key
       }, format: :json
@@ -137,6 +133,48 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
           make_request
           version.reload
         }.to change{ version.files.count }.by(-1)
+      end
+    end
+  end
+
+  describe 'POST #publish' do
+    let(:version) { create(:draft_version) }
+
+    def make_request
+      post :publish, params: { id: version.id }, format: :json
+    end
+
+    it_behaves_like 'Authorizable'
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      it 'make version publish' do
+        expect {
+          make_request
+          version.reload
+        }.to change { version.public }.to true
+      end
+    end
+  end
+
+  describe 'POST #unpublish' do
+    let(:version) { create(:version) }
+
+    def make_request
+      post :unpublish, params: { id: version.id }, format: :json
+    end
+
+    it_behaves_like 'Authorizable'
+
+    context 'Authenticated user' do
+      sign_in_user
+
+      it 'make version unpublish' do
+        expect {
+          make_request
+          version.reload
+        }.to change { version.public }.to false
       end
     end
   end
