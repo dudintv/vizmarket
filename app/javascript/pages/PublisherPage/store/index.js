@@ -198,7 +198,6 @@ export default new Vuex.Store({
     loadCurrentProductData ({ commit }, id) {
       backend.products.get(id)
         .then(response => {
-          console.debug('setCurrentProduct', response.data.data.attributes)
           commit('setCurrentProduct', response.data.data.attributes)
         })
         .catch(error => {
@@ -218,10 +217,31 @@ export default new Vuex.Store({
         }) 
     },
     versionPublishedChanged ({ commit, state}, { version, isPublished }) {
-      // TODO: AXIOS
-      version.status = status
-
-      console.log(state.currentProduct.versions[0].status)
+      if (isPublished) {
+        return new Promise((resolve, reject) => {
+          backend.versions.publish(version.id)
+            .then(response => {
+              resolve(response.data.public)
+            })
+            .catch(error => {
+              console.warn('Can\'t publish version. Error: ', error)
+              FlashVM.alert(error.message)
+              reject()
+            }) 
+        })
+      } else {
+        return new Promise((resolve, reject) => {
+          backend.versions.unpublish(version.id)
+            .then(response => {
+              resolve(response.data.public)
+            })
+            .catch(error => {
+              console.warn('Can\'t unpublish version. Error: ', error)
+              FlashVM.alert(error.message)
+              reject()
+            })
+        })
+      }
     },
   },
   modules: {},

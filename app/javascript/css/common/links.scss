@@ -5,3 +5,11 @@ a {
     @apply text-white-hover;
   }
 }
+
+a.file {
+  @apply text-orange;
+
+  &:hover {
+    @apply text-orange-hover border-b border-orange-hover;
+  }
+}

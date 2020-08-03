@@ -13,7 +13,7 @@
         span.text-white-50 {{ publicStatus }}
       .version-actions
         .flex.align-center.justify-between
-          Swither(name="Published" v-model="public" :isFormField="false" :isLoading="isLoadingPublicStatus")
+          Swither(name="Public" v-model="public" :isFormField="false" :isLoading="isLoadingPublicStatus")
           .buttons
             button.second-btn.middle-btn(@click="editVersion()") Edit
             button.second-btn.middle-btn.ml-4(@click="deleteVersion()") Delete
@@ -25,7 +25,7 @@ import Swither from 'components/inputs/switcher'
 export default {
   data () {
     return {
-      isLoadingPublicStatus: true
+      isLoadingPublicStatus: false
     }
   },
   components: {
@@ -40,16 +40,21 @@ export default {
       if(!this.version.updated_at || this.version.created_at == this.version.updated_at) {
         return created_at
       } else {
-        const updated_at = (new Date(this.version.created_at)).toLocaleDateString()
+        const updated_at = (new Date(this.version.updated_at)).toLocaleDateString()
         return `${created_at} — ${updated_at}`
       }
     },
     public: {
       get () {
-        this.version.public
+        return this.version.public
       },
       set (newValue) {
+        this.isLoadingPublicStatus = true
         this.$store.dispatch('versionPublishedChanged', { version: this.version, isPublished: newValue } )
+          .then((newPublic) => {
+            this.version.public = newPublic
+            this.isLoadingPublicStatus = false
+          })
       }
     },
     publicStatus () {
@@ -58,7 +63,7 @@ export default {
   },
   methods: {
     editVersion () {
-
+      this.version.isEdit = true
     },
     deleteVersion () {
       this.$backend.versions.delete(this.version.id)
@@ -90,12 +95,5 @@ export default {
 
   .files li {
     @apply block;
-  }
-  .file {
-    @apply text-orange;
-
-    &:hover {
-      @apply text-orange-hover border-b border-orange-hover;
-    }
   }
 </style>

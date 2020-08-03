@@ -1,18 +1,20 @@
 <template lang="pug">
   .form
-    VersionShow(v-for="version in product.versions" :version="version" :key="version.id")
-    VersionCreate(v-if="isShowCreateVersionPanel" @hide="hideCreatingPanel()")
+    div(v-for="version in product.versions" :key="version.id")
+      VersionForm(v-if="version.isEdit" :version="version" @hide="hideEditingPanel(version)")
+      VersionListItem(v-else :version="version")
+    VersionForm(v-if="isShowCreateVersionPanel" @hide="hideCreatingPanel()" isCreating)
     button.btn.main-btn.middle-btn.mb-4(v-else @click="isShowCreateVersionPanel=true") Create new version
 </template>
 
 <script>
-import VersionCreate from "./Version/Create.vue"
-import VersionShow   from "./Version/Show.vue"
+import VersionForm from "./Version/Form.vue"
+import VersionListItem from "./Version/ListItem.vue"
 
 export default {
   components: {
-    VersionCreate,
-    VersionShow,
+    VersionForm,
+    VersionListItem,
   },
   data () {
     return {
@@ -27,6 +29,9 @@ export default {
   methods: {
     hideCreatingPanel () {
       this.isShowCreateVersionPanel = false
+    },
+    hideEditingPanel (version) {
+      version.isEdit = false
     }
   }
 }

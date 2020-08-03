@@ -16,6 +16,7 @@ class Publisher::Api::VersionsController < ApplicationController
   def create
     @version = Version.new(version_params.merge(product: @product))
     if @version.save
+      @version.files.attach(params[:version][:files]) if params.dig(:version, :files).present?
       render json: VersionSerializer.new(@version).serialized_json, status: :created
     else
       render json: @product.errors.as_json, status: :unprocessable_entity
@@ -23,7 +24,14 @@ class Publisher::Api::VersionsController < ApplicationController
   end
 
   def update
+    p "!!!!!!!!!!! params = " + params.to_s
     if @version.update(version_params)
+      @version.files.attach(params[:version][:files]) if params.dig(:version, :files).present?
+      if params.dig(:version, :remove_files).present?
+        params[:version][:remove_files].each do |file_id|
+          @version.files.find(file_id).purge
+        end
+      end
       render json: VersionSerializer.new(@version.reload).serialized_json, status: :ok
     else
       render json: @version.errors.as_json, status: :unprocessable_entity
@@ -61,7 +69,7 @@ class Publisher::Api::VersionsController < ApplicationController
       render json: @version.errors.as_json, status: :unprocessable_entity
     end
   end
-
+  
   def unpublish
     if @version.update(public: false)
       render json: {id: @version.id, public: @version.public}, status: :ok
@@ -91,7 +99,6 @@ class Publisher::Api::VersionsController < ApplicationController
   end
 
   def version_params
-    p "!!!!!!!!!!!!!! params = " + params.to_s
-    params.require(:version).permit(:number, :public, :support, files: [])
+    params.require(:version).permit(:number, :public, :support)
   end
 end
