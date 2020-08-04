@@ -17,6 +17,10 @@
             a.remove(v-if="file.isRemoved" @click.prevent="undoRemoveFile(file)") undo
             a.remove(v-else @click.prevent="removeFile(file)") delete
         FilesInput(name="Files for this version:", v-model="newFiles", inputId="versionFileInput")
+    .script-section(v-if="product.kind=='script'")
+      h5 Script code
+      p This script will be avaliable in "fast copy to clipboard" feature.
+      TextareaInput(name="Script", v-model="script", maxHeightCss="95vh")
     .left_and_right
       .status.uppercase
         span.text-white-20 Status:&nbsp;
@@ -60,6 +64,7 @@ export default {
   },
   data () {
     return {
+      script: '',
       newNumber: 1,
       newSupport: '',
       newPublic: false,
@@ -116,6 +121,9 @@ export default {
         if (file.isRemoved) {
           formData.append('version[remove_files][]', file.id)
         }
+      }
+      if (this.product.kind === 'script') {
+        formData.append('version[script]', this.script)
       }
       return formData
     },

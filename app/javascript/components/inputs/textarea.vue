@@ -1,7 +1,14 @@
 <template lang="pug">
   .form-field
     .field-with-label
-      textarea(ref="textarea" :name="name" :id="name" :value="value" @input="$emit('input', $event.target.value);textareaAutoGrowth();" placeholder=" ")
+      textarea(
+        ref="textarea" 
+        :name="name" 
+        :id="name" 
+        :value="value" 
+        @input="$emit('input', $event.target.value); textareaAutoGrowth();"
+        placeholder=" "
+        :style="`max-height: ${maxHeightCss}`")
       label(:for="name"): .input-name {{ name }}
     .tip(v-if="$slots['tip']")
       slot(name="tip")
@@ -14,6 +21,7 @@ export default {
   props: {
     name: String,
     value: String,
+    maxHeightCss: String,
   },
   methods: {
     textareaAutoGrowth () {

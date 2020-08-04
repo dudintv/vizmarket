@@ -37,11 +37,12 @@ export default {
   computed: {
     dates () {
       const created_at = (new Date(this.version.created_at)).toLocaleDateString()
-      if(!this.version.updated_at || this.version.created_at == this.version.updated_at) {
+      const updated_at = (new Date(this.version.updated_at)).toLocaleDateString()
+      if(created_at === updated_at) {
         return created_at
       } else {
         const updated_at = (new Date(this.version.updated_at)).toLocaleDateString()
-        return `${created_at} — ${updated_at}`
+        return `${created_at} (${updated_at})`
       }
     },
     public: {

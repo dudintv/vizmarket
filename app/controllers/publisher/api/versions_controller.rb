@@ -17,6 +17,9 @@ class Publisher::Api::VersionsController < ApplicationController
     @version = Version.new(version_params.merge(product: @product))
     if @version.save
       @version.files.attach(params[:version][:files]) if params.dig(:version, :files).present?
+      if params[:version][:script].present? && @product.kind.title == 'script'
+        Script.create(version: @version, script: params[:version][:script])
+      end
       render json: VersionSerializer.new(@version).serialized_json, status: :created
     else
       render json: @product.errors.as_json, status: :unprocessable_entity
@@ -24,7 +27,6 @@ class Publisher::Api::VersionsController < ApplicationController
   end
 
   def update
-    p "!!!!!!!!!!! params = " + params.to_s
     if @version.update(version_params)
       @version.files.attach(params[:version][:files]) if params.dig(:version, :files).present?
       if params.dig(:version, :remove_files).present?

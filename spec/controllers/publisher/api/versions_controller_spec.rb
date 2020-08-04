@@ -29,16 +29,39 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
     let(:file_3) { fixture_file_upload('spec/fixtures/files/text3.txt', 'text/plain') }
     
     it_behaves_like 'Authorizable'
-
-    def make_request
-      post :create, params: { product_id: product.id, version: { files: [file_1, file_2, file_3] } }, format: :json
+    
+    def make_request(params = {})
+      post :create, params: { 
+        product_id: product.id, 
+        version: { 
+          files: [file_1, file_2, file_3]
+        }, 
+      }.merge(params), format: :json
     end
-
+    
     context 'Authenticated user' do
       sign_in_user
       
       it 'creates new version' do
         expect { make_request }.to change{ product.versions.count }.by(1)
+      end
+      
+      context 'Without script' do
+        let(:scene_product) { create :scene_product }
+
+        it 'doesn\'t create a script when it hasn\'t script' do
+          expect { make_request }.to_not change{ Script.all.count }
+        end
+
+        it 'doesn\'t create a script when it isn\'t \'script\' kind' do
+          expect { make_request({ product_id: scene_product.id, version: { script: 'Dim a As Alpha' } }) }.to_not change{ Script.all.count }
+        end
+      end
+
+      context 'With script' do
+        it 'creates a script' do
+          expect { make_request({ version: { script: 'Dim a As Alpha' } }) }.to change{ Script.all.count }.by(1)
+        end
       end
     end
   end

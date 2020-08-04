@@ -42,6 +42,10 @@ FactoryBot.define do
       ]}
     end
 
+    factory :scene_product do
+      kind { Kind.find_by(title: 'scene') }
+    end
+
     trait :with_one_version do
       versions {[ association(:version_with_one_file) ]}
     end
