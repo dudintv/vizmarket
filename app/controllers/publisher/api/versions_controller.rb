@@ -34,6 +34,13 @@ class Publisher::Api::VersionsController < ApplicationController
           @version.files.find(file_id).purge
         end
       end
+      if params[:version][:script].present? && @version.product.kind.title == 'script'
+        if @version.script.present?
+          @version.script.update(script: params[:version][:script])
+        else
+          @version.create_script(script: params[:version][:script])
+        end
+      end
       render json: VersionSerializer.new(@version.reload).serialized_json, status: :ok
     else
       render json: @version.errors.as_json, status: :unprocessable_entity

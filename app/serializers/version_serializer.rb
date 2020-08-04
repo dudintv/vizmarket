@@ -4,9 +4,9 @@ class VersionSerializer
              :number, :public, :support,
              :created_at, :updated_at
   
-  attribute :files do |object|
-    if object.files.attached?
-      object.files.map do |file|
+  attribute :files do |version|
+    if version.files.attached?
+      version.files.map do |file|
         {
           id: file.id,
           url: Rails.application.routes.url_helpers.rails_blob_url(file, only_path: true),
@@ -15,6 +15,14 @@ class VersionSerializer
           isRemoved: false
         }
       end
+    else
+      nil
+    end
+  end
+
+  attribute :script do |version|
+    if version.script.present?
+      version.script.script
     else
       nil
     end

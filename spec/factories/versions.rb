@@ -22,5 +22,9 @@ FactoryBot.define do
         fixture_file_upload('spec/fixtures/files/text3.txt', 'text/plain')
       ]}
     end
+
+    factory :script_version do
+      script
+    end
   end
 end

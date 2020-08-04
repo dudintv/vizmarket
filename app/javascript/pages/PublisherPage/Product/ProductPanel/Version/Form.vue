@@ -91,6 +91,7 @@ export default {
       this.newSupport = this.version.support
       this.newPublic = this.version.public
       this.oldFiles = this.version.files
+      this.script = this.version.script
     }
   },
   methods: {

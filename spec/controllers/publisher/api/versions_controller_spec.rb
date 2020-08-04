@@ -69,11 +69,11 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
   describe 'POST #update' do
     let(:version) { create :version }
 
-    def make_request
+    def make_request(params = {})
       post :update, params: {
         id: version.id, 
         version: { number: version.number + 123 }
-      }, format: :json
+      }.merge(params), format: :json
     end
 
     it_behaves_like 'Authorizable'
@@ -86,6 +86,26 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
           make_request
           version.reload
         }.to change{ version.number }.by(123)
+      end
+
+      context 'Without script' do
+        let(:scene_version) { update :scene_version }
+
+        it 'doesn\'t update a script when it hasn\'t script' do
+          expect { make_request }.to_not change{ version.script }
+        end
+
+        it 'doesn\'t update a script when it isn\'t \'script\' kind' do
+          expect { make_request({ id: version.id, version: { script: 'Dim a As Alpha' } }) }.to_not change{ version.script }
+        end
+      end
+
+      context 'With script' do
+        let (:script_version) { create :script_version }
+
+        it 'updates a script' do
+          expect { make_request({ id: script_version.id, version: { script: 'Dim c As Container' } }) }.to change{ script_version.script.reload.script }
+        end
       end
     end
   end

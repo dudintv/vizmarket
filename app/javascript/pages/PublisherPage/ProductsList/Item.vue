@@ -20,16 +20,19 @@
           .product-price.flex.flex-col.items-end
             h3.text-orange {{ price }}
             span.text-white-50.text-sm(v-if="showTotalEarn") x&nbsp;{{product.purchased_count}}&nbsp;downloads
-        .product-line
+        .product-line(v-if="product.short_description")
           .product-short-description.px-4.py-2 {{product.short_description}}
         table.product-line.m-4
           tr.product-version(v-for="version in product.versions" :key="version.id")
             td.product-version-number.align-top.pt-1.pr-2.w-1
               .border.border-red.px-2.py-1 v&nbsp;{{version.number}}
             td.product-version-info.px-2.py-2
-              .product-version-date.text-lg {{prettyDate(version.created_at)}}
-              .product-version-developed-for.text-sm.opacity-50 {{version.developed_for}}
-              .product-version-tested-for.text-sm.text-orange.opacity-50 {{version.tested_in}}
+              .product-version-date.text-lg {{ prettyDate(version.created_at) }}
+              .product-version-support.text-sm.opacity-50 {{version.support}}
+              ul.files(v-if="version.files"): li(v-for="file in version.files"): a.file(:href="file.url") {{ file.filename }}
+              button.show-script-btn(v-if="version.script" @click="isShowScript=true") show attached script
+              ModalWindow(v-model="isShowScript")
+                .script {{ version.script }}
     .product-actions.flex-grow-0.py-6.border-t-2.border-dashed.border-white-20.lg--border-t-0.lg--border-l-2
       .product-buttons.flex.flex-row.flex-wrap.items-center.justify-center.px-4.lg--flex-col.lg--items-start
         button.product-button(@click="$router.push(`/publisher/products/${product.id}/title`)") Edit&nbsp;main&nbsp;info
@@ -37,8 +40,8 @@
         button.product-button(v-if="product.public" @click="unpublish(product.id)") Unpublish
         button.product-button(v-else @click="publish(product.id)") Publish
       ul.product-dates.text-sm.flex.justify-center.mx-6.my-4.text-white-50.lg--flex-col
-        li.product-date.mr-4 Created {{prettyDate(product.created_at)}}
-        li.product-date Updated {{prettyDate(product.updated_at)}}
+        li.product-date.mr-4 Created {{ prettyDate(product.created_at) }}
+        li.product-date Updated {{ prettyDate(product.updated_at) }}
       .product-status.mx-5.flex.justify-center.uppercase.text-white-50.lg--justify-start
         .product-published(v-if="product.public")
           i.las.la-globe
@@ -49,9 +52,19 @@
 </template>
 
 <script>
+import ModalWindow from 'components/common/ModalWindow'
+
 export default {
+  components: {
+    ModalWindow,
+  },
   props: {
     product: Object
+  },
+  data () {
+    return {
+      isShowScript: false,
+    }
   },
   computed: {
     showTotalEarn () {
@@ -112,5 +125,13 @@ export default {
   .product-cover {
     width: 288px;
     height: 288px;
+  }
+
+  .show-script-btn {
+    @apply bg-blue-20 text-orange px-2 py-1;
+
+    &:hover {
+      @apply text-orange-hover;
+    }
   }
 </style>
