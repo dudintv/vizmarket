@@ -23,16 +23,17 @@
         .product-line(v-if="product.short_description")
           .product-short-description.px-4.py-2 {{product.short_description}}
         table.product-line.m-4
-          tr.product-version(v-for="version in product.versions" :key="version.id")
+          tr.product-version(v-for="version in product.versions" :key="version.id" :class="{'opacity-50': !version.public}")
             td.product-version-number.align-top.pt-1.pr-2.w-1
               .border.border-red.px-2.py-1 v&nbsp;{{version.number}}
             td.product-version-info.px-2.py-2
-              .product-version-date.text-lg {{ prettyDate(version.created_at) }}
+              .product-version-date.text-lg {{ versionDate(version) }}
               .product-version-support.text-sm.opacity-50 {{version.support}}
               ul.files(v-if="version.files"): li(v-for="file in version.files"): a.file(:href="file.url") {{ file.filename }}
               button.show-script-btn(v-if="version.script" @click="isShowScript=true") show attached script
               ModalWindow(v-model="isShowScript")
-                .script {{ version.script }}
+                vue-code-highlight.script(language="basic")
+                  pre.code {{ version.script }}
     .product-actions.flex-grow-0.py-6.border-t-2.border-dashed.border-white-20.lg--border-t-0.lg--border-l-2
       .product-buttons.flex.flex-row.flex-wrap.items-center.justify-center.px-4.lg--flex-col.lg--items-start
         button.product-button(@click="$router.push(`/publisher/products/${product.id}/title`)") Edit&nbsp;main&nbsp;info
@@ -53,10 +54,15 @@
 
 <script>
 import ModalWindow from 'components/common/ModalWindow'
+import { component as VueCodeHighlight } from 'vue-code-highlight';
+import 'vue-code-highlight/themes/prism-tomorrow.css'
+import 'prism-es6/components/prism-markup-templating'
+import 'prism-es6/components/prism-basic'
 
 export default {
   components: {
     ModalWindow,
+    VueCodeHighlight,
   },
   props: {
     product: Object
@@ -81,6 +87,15 @@ export default {
   methods: {
     prettyDate (date_in_string) {
       return new Date(date_in_string).toLocaleDateString();
+    },
+    versionDate (version) {
+      const created_at = this.prettyDate(version.created_at)
+      const updated_at = this.prettyDate(version.updated_at)
+      if (created_at === updated_at) {
+        return created_at
+      } else {
+        return `${created_at} (${updated_at})`
+      }
     },
     publish (id) {
       this.$backend.products.publish(id)
@@ -133,5 +148,10 @@ export default {
     &:hover {
       @apply text-orange-hover;
     }
+  }
+
+  .script {
+    max-height: 95vh;
+    min-width: 30vw;
   }
 </style>

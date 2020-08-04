@@ -20,11 +20,16 @@
             button.second-btn.middle-btn.ml-4(@click="deleteVersion()") Delete
     .version-script-container(v-if="version.script")
       button.show-script(@click="isShowingScript=!isShowingScript") show attached script
-      .script(v-if="isShowingScript") {{ version.script }}
+      vue-code-highlight.script(language="basic")(v-if="isShowingScript")
+        pre.code {{ version.script }}
 </template>
 
 <script>
 import Swither from 'components/inputs/switcher'
+import { component as VueCodeHighlight } from 'vue-code-highlight';
+import 'vue-code-highlight/themes/prism-tomorrow.css'
+import 'prism-es6/components/prism-markup-templating'
+import 'prism-es6/components/prism-basic'
 
 export default {
   data () {
@@ -35,6 +40,7 @@ export default {
   },
   components: {
     Swither,
+    VueCodeHighlight,
   },
   props: {
     version: Object,

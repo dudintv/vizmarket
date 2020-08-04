@@ -11,7 +11,7 @@
       template(#input): TextareaInput(name="Support info", v-model="newSupport")
     FormField(title="Files for this version:", description="")
       template(#input)
-        ul.files(v-if="oldFiles.length > 0")
+        ul.files(v-if="oldFiles && oldFiles.length > 0")
           li(v-for="file in oldFiles")
             a.file(:href="file.url" :class="{'removed': file.isRemoved}") {{ file.filename }}
             a.remove(v-if="file.isRemoved" @click.prevent="undoRemoveFile(file)") undo
@@ -85,7 +85,6 @@ export default {
     }
   },
   mounted () {
-    console.debug("version.files", this.version.files.length)
     if (!this.isCreating) {
       this.newNumber = this.version.number
       this.newSupport = this.version.support
