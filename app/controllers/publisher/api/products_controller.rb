@@ -11,6 +11,13 @@ class Publisher::Api::ProductsController < ApplicationController
     render json: ProductSerializer.new(@products).serialized_json
   end
 
+  def new
+    render json: { 
+      categories: Category.all.map(&:title),
+      kinds: Kind.all.map(&:title)
+    }
+  end
+
   def show
     render json: ProductSerializer.new(@product).serialized_json
   end

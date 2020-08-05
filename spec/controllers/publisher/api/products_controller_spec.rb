@@ -10,6 +10,14 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
     it_behaves_like 'Authorizable'
   end
 
+  describe 'GET #new' do
+    def make_request
+      get :new, format: :json
+    end
+
+    it_behaves_like 'Authorizable'
+  end
+
   describe 'GET #show' do
     let(:product) { create(:product) }
 
