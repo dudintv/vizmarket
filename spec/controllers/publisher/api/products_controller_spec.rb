@@ -7,7 +7,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       get :index, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
   end
 
   describe 'GET #new' do
@@ -15,7 +15,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       get :new, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
   end
 
   describe 'GET #show' do
@@ -25,10 +25,12 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       get :show, params: { id: product.id }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
       context 'With wrong id' do
         it 'return not_found (404)' do
@@ -47,7 +49,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       post :create, params: product_params_title_and_kind, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Guest user' do
       it 'does not save the new product' do
@@ -127,13 +129,15 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       }, format: :json
     end
     
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
-    context 'Authenticated user' do
-      sign_in_user
+    context 'Authenticated author-user' do
+      before do
+        sign_in product.user
+      end
 
       context 'Update on "Title & Category" page' do
-        it 'change product\'s kind and categories' do
+        it 'changes product\'s kind and categories' do
           expect{
             patch :update, params: {
               id: product.id,
@@ -146,7 +150,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
           .and change { product.categories.pluck(:title) }
         end
 
-        it 'change product\'s title and short_description' do
+        it 'changes product\'s title and short_description' do
           expect{
             patch :update, params: {
               id: product.id,
@@ -161,7 +165,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
           .and change { product.short_description }
         end
 
-        it 'change product\'s description and instruction' do
+        it 'changes product\'s description and instruction' do
           expect{
             patch :update, params: {
               id: product.id,
@@ -177,7 +181,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
         end
 
         context 'when user advise a new category' do
-          it 'dont create empty NewCategory' do
+          it 'doesn\'t create empty NewCategory' do
             expect{
               patch :update, params: {
                 id: product.id,
@@ -188,7 +192,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
             .to_not change { NewCategory.count }
           end
 
-          it 'create NewCategory if it presence' do
+          it 'creates NewCategory if it presence' do
             expect{
               patch :update, params: {
                 id: product.id,
@@ -202,7 +206,7 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       end
 
       context 'Update Images & Video' do
-        it 'change product\'s videos and youtube_ids' do
+        it 'changes product\'s videos and youtube_ids' do
           expect{
             patch :update, params: {
               id: product.id,
@@ -218,24 +222,67 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
         end
       end
     end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t change product params' do
+        expect{
+          patch :update, params: {
+            id: product.id,
+            kind: "assets",
+            categories: ["utility", "other"],
+            product: {
+              title: "#{product.title} updated",
+              short_description: "#{product.short_description} updated",
+              description: "#{product.description} updated",
+              instruction: "#{product.instruction} updated",
+              videos: "https://www.youtube.com/watch?v=JMP3x9OffBM",
+              youtube_ids: "JMP3x9OffBM"
+            }
+          }
+          product.reload
+        }
+        .to  not_change { product.kind }
+        .and not_change { product.categories.pluck(:title) }
+        .and not_change { product.title }
+        .and not_change { product.short_description }
+        .and not_change { product.description }
+        .and not_change { product.instruction }
+        .and not_change { product.videos }
+        .and not_change { product.youtube_ids }
+      end
+    end
   end
 
-  describe 'POST #update' do
+  describe 'DELETE #destroy' do
     let!(:product) { create(:product) }
 
     def make_request
       delete :destroy, params: { id: product.id }, format: :json
     end
     
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
-      it 'destroy the product' do
+      it 'destroys the product' do
         expect{
           make_request
         }.to change{ Product.count }.by(-1)
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t destroy the product' do
+        expect{
+          make_request
+        }.to_not change{ Product.count }
       end
     end
   end
@@ -251,16 +298,29 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       }, format: :json
     end
     
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
       it 'uploads thumbnail image' do
         expect {
           make_request
           product.reload
         }.to change { product.thumbnail.attached? }.to true
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t upload thumbnail image' do
+        expect {
+          make_request
+          product.reload
+        }.to_not change { product.thumbnail.attached? }
       end
     end
   end
@@ -276,16 +336,29 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
       it 'uploads featured image' do
         expect {
           make_request
           product.reload
         }.to change { product.featured_image.attached? }.to true
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t upload featured image' do
+        expect {
+          make_request
+          product.reload
+        }.to_not change { product.featured_image.attached? }
       end
     end
   end
@@ -307,16 +380,29 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
       it 'uploads many images for the gallery' do
         expect {
           make_request
           product.reload
         }.to change { product.images.attached? }.to true
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t upload images for the gallery' do
+        expect {
+          make_request
+          product.reload
+        }.to_not change { product.images.attached? }
       end
     end
   end
@@ -328,16 +414,29 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       post :publish, params: { id: product.id }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
-      it 'make product publish' do
+      it 'makes product publish' do
         expect {
           make_request
           product.reload
         }.to change { product.public }.to true
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t make product publish' do
+        expect {
+          make_request
+          product.reload
+        }.to_not change { product.public }
       end
     end
   end
@@ -349,16 +448,29 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       post :unpublish, params: { id: product.id }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
-      it 'make product unpublish' do
+      it 'makes product unpublish' do
         expect {
           make_request
           product.reload
         }.to change { product.public }.to false
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t make product publish' do
+        expect {
+          make_request
+          product.reload
+        }.to_not change { product.public }
       end
     end
   end
@@ -370,16 +482,29 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       delete :delete_thumbnail, params: { id: product.id }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
       it 'deletes thumbnail' do
         expect {
           make_request
           product.reload
         }.to change { product.thumbnail.attached? }.to false
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+      
+      it 'doesn\'t delete thumbnail' do
+        expect {
+          make_request
+          product.reload
+        }.to_not change { product.thumbnail.attached? }
       end
     end
   end
@@ -391,10 +516,12 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
       delete :delete_featured_image, params: { id: product.id }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
       it 'deletes featured image' do
         expect {
@@ -403,25 +530,49 @@ RSpec.describe Publisher::Api::ProductsController, type: :controller do
         }.to change { product.featured_image.attached? }.to false
       end
     end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t delete featured image' do
+        expect {
+          make_request
+          product.reload
+        }.to_not change { product.featured_image.attached? }
+      end
+    end
   end
 
   describe 'DELETE #delete_image' do
-    let(:product_with_images) { create(:product_with_images) }
+    let(:product) { create(:product_with_images) }
 
     def make_request
-      delete :delete_image, params: { key: product_with_images.images[0].blob.key }, format: :json
+      delete :delete_image, params: { key: product.images[0].blob.key }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable product'
 
     context 'Authenticated user' do
-      sign_in_user
+      before do
+        sign_in product.user
+      end
 
       it 'deletes featured image' do
         expect {
           make_request
-          product_with_images.reload
-        }.to change { product_with_images.images.count }.from(3).to(2)
+          product.reload
+        }.to change { product.images.count }.from(3).to(2)
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t delete featured image' do
+        expect {
+          make_request
+          product.reload
+        }.to_not change { product.images.count }
       end
     end
   end

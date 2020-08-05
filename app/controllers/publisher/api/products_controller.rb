@@ -123,8 +123,12 @@ class Publisher::Api::ProductsController < ApplicationController
 
   def delete_image
     @image = ActiveStorage::Blob.find_by_key(params[:key])
-    @image&.attachments&.first.purge
-    render json: {}, status: :ok
+    if @image&.attachments&.first&.record&.user == current_user
+      @image&.attachments&.first.purge
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :not_found
+    end
   end
 
   private
@@ -132,7 +136,7 @@ class Publisher::Api::ProductsController < ApplicationController
   def set_product
     @product = Product.with_attached_thumbnail.with_attached_featured_image.with_attached_images.find_by(id: params[:id])
 
-    until @product
+    if !@product || @product.user != current_user
       render json: "Can't find product with id: #{params[:id]}", status: :not_found
       return
     end

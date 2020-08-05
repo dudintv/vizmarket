@@ -9,7 +9,16 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
       get :index, params: { product_id: product.id }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable version'
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t find versions' do
+        make_request
+        expect(response).to have_http_status(:not_found)
+      end
+    end
   end
 
   describe 'GET #show' do
@@ -19,7 +28,16 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
       get :show, params: { id: version.id }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable version'
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t find the version' do
+        make_request
+        expect(response).to have_http_status(:not_found)
+      end
+    end
   end
 
   describe 'POST #create' do
@@ -28,7 +46,7 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
     let(:file_2) { fixture_file_upload('spec/fixtures/files/text2.txt', 'text/plain') }
     let(:file_3) { fixture_file_upload('spec/fixtures/files/text3.txt', 'text/plain') }
     
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable version'
     
     def make_request(params = {})
       post :create, params: { 
@@ -39,8 +57,10 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
       }.merge(params), format: :json
     end
     
-    context 'Authenticated user' do
-      sign_in_user
+    context 'Authenticated author-user' do
+      before do
+        sign_in product.user
+      end
       
       it 'creates new version' do
         expect { make_request }.to change{ product.versions.count }.by(1)
@@ -64,6 +84,14 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
         end
       end
     end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t create a new version' do
+        expect { make_request }.to_not change{ product.versions.count }
+      end
+    end
   end
 
   describe 'POST #update' do
@@ -76,10 +104,12 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
       }.merge(params), format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable version'
 
-    context 'Authenticated user' do
-      sign_in_user
+    context 'Authenticated author-user' do
+      before do
+        sign_in version.product.user
+      end
 
       it 'updates the version' do
         expect {
@@ -88,7 +118,7 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
         }.to change{ version.number }.by(123)
       end
 
-      context 'Without script' do
+      context 'without script' do
         let(:scene_version) { update :scene_version }
 
         it 'doesn\'t update a script when it hasn\'t script' do
@@ -100,36 +130,61 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
         end
       end
 
-      context 'With script' do
+      context 'with script' do
         let (:script_version) { create :script_version }
+
+        before do
+          sign_in script_version.product.user
+        end
 
         it 'updates a script' do
           expect { make_request({ id: script_version.id, version: { script: 'Dim c As Container' } }) }.to change{ script_version.script.reload.script }
         end
       end
     end
-  end
 
-  describe 'DELETE #destroy' do
-    let(:product_with_versions) { create :product, :with_versions }
-
-    def make_request
-      delete :destroy, params: {
-        id: product_with_versions.versions.first.id
-      }, format: :json
-    end
-
-    it_behaves_like 'Authorizable'
-
-    context 'Authenticated user' do
+    context 'Authenticated non-author-user' do
       sign_in_user
 
-      it 'updates the version' do
-        expect { make_request }.to change{ product_with_versions.versions.count }.by(-1)
+      it 'doesn\'t update the version' do
+        expect {
+          make_request
+          version.reload
+        }.to_not change{ version.number }
       end
     end
   end
-  
+
+  describe 'DELETE #destroy' do
+    let(:product) { create :product, :with_versions }
+
+    def make_request
+      delete :destroy, params: {
+        id: product.versions.first.id
+      }, format: :json
+    end
+
+    it_behaves_like 'Authorizable version'
+
+    context 'Authenticated author-user' do
+      before do
+        sign_in product.user
+      end
+
+      it 'deletes the version' do
+        expect { make_request }.to change{ product.versions.count }.by(-1)
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t deletes the version' do
+        expect { make_request }.to_not change{ product.versions.count }
+      end
+    end
+  end
+
   describe 'PATCH #upload_files' do
     let(:version) { create :version_with_one_file }
     let(:file_2) { fixture_file_upload('spec/fixtures/files/text2.txt', 'text/plain') }
@@ -142,16 +197,29 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
       }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable version'
 
-    context 'Authenticated user' do
-      sign_in_user
+    context 'Authenticated author-user' do
+      before do
+        sign_in version.product.user
+      end
 
-      it 'change count of files' do
+      it 'changes count of files' do
         expect {
           make_request
           version.reload
         }.to change{ version.files.count }.by(2)
+      end
+    end
+    
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t change count of files' do
+        expect {
+          make_request
+          version.reload
+        }.to_not change{ version.files.count }
       end
     end
   end
@@ -166,16 +234,29 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
       }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable version'
 
-    context 'Authenticated user' do
-      sign_in_user
+    context 'Authenticated author-user' do
+      before do
+        sign_in version.product.user
+      end
 
-      it 'change count of files down' do
+      it 'changes count of files down' do
         expect {
           make_request
           version.reload
         }.to change{ version.files.count }.by(-1)
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t change count of files down' do
+        expect {
+          make_request
+          version.reload
+        }.to_not change{ version.files.count }
       end
     end
   end
@@ -187,16 +268,29 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
       post :publish, params: { id: version.id }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable version'
 
-    context 'Authenticated user' do
-      sign_in_user
+    context 'Authenticated author-user' do
+      before do
+        sign_in version.product.user
+      end
 
-      it 'make version publish' do
+      it 'makes version publish' do
         expect {
           make_request
           version.reload
         }.to change { version.public }.to true
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t make version publish' do
+        expect {
+          make_request
+          version.reload
+        }.to_not change { version.public }
       end
     end
   end
@@ -208,16 +302,29 @@ RSpec.describe Publisher::Api::VersionsController, type: :controller do
       post :unpublish, params: { id: version.id }, format: :json
     end
 
-    it_behaves_like 'Authorizable'
+    it_behaves_like 'Authorizable version'
 
-    context 'Authenticated user' do
-      sign_in_user
+    context 'Authenticated author-user' do
+      before do
+        sign_in version.product.user
+      end
 
-      it 'make version unpublish' do
+      it 'makes version unpublish' do
         expect {
           make_request
           version.reload
         }.to change { version.public }.to false
+      end
+    end
+
+    context 'Authenticated non-author-user' do
+      sign_in_user
+
+      it 'doesn\'t make version unpublish' do
+        expect {
+          make_request
+          version.reload
+        }.to_not change { version.public }
       end
     end
   end

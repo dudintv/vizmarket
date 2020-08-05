@@ -92,7 +92,8 @@ class Publisher::Api::VersionsController < ApplicationController
   def set_product
     @product = Product.find_by(id: params[:product_id])
 
-    until @product
+    # until @product
+    if !@product || @product.user != current_user
       render json: "Can't find product with id: #{params[:product_id]}", status: :not_found
       return
     end
@@ -101,7 +102,8 @@ class Publisher::Api::VersionsController < ApplicationController
   def set_version
     @version = Version.find_by(id: params[:id])
 
-    until @version
+    # until @version
+    if !@version || @version.product.user != current_user
       render json: "Can't find version with id: #{params[:id]}", status: :not_found
       return
     end

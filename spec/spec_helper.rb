@@ -102,3 +102,5 @@ RSpec.configure do |config|
     FileUtils.rm_rf(Rails.root.join('tmp', 'storage'))
   end
 end
+
+RSpec::Matchers.define_negated_matcher(:not_change, :change)
