@@ -26,6 +26,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadProducts')
+    this.$store.dispatch('loadTaxonomy')
   }
 }
 </script>

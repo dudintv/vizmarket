@@ -8,6 +8,9 @@ export default new Vuex.Store({
   state: {
     products: [],
     currentProduct: {},
+    categoryList: [],
+    kindList: [],
+
     // currentProduct: {
     //   id: 1,
     //   title: "Name of product",
@@ -40,6 +43,7 @@ export default new Vuex.Store({
     //     },
     //   ]
     // },
+
     // products: [
     //   {
     //     id: 1,
@@ -81,21 +85,23 @@ export default new Vuex.Store({
     //     ]
     //   }
     // ],
-    categoryList: [
-      "transformation",
-      "visibility",
-      "animation",
-      "texture",
-      "interactive",
-      "utility",
-      "other",
-    ],
-    kindList: [
-      "script",
-      "scene",
-      "plugin",
-      "assets",
-    ],
+
+    // categoryList: [
+    //   "transformation",
+    //   "visibility",
+    //   "animation",
+    //   "texture",
+    //   "interactive",
+    //   "utility",
+    //   "other",
+    // ],
+    // kindList: [
+    //   "script",
+    //   "scene",
+    //   "plugin",
+    //   "assets",
+    // ],
+
     filter: 'all',
     sort: {},
     isGrouped: false,
@@ -148,6 +154,12 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setCategories: (state, categoryList) => {
+      state.categoryList = categoryList
+    },
+    setKinds: (state, kindList) => {
+      state.kindList = kindList
+    },
     setProducts: (state, productsData) => {
       state.products = productsData
     },
@@ -192,6 +204,17 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.warn('Can\'t load products data. Error: ', error)
+          FlashVM.alert(error.message)
+        })
+    },
+    loadTaxonomy ({ commit }) {
+      backend.products.new()
+        .then(response => {
+          commit('setCategories', response.data.categories)
+          commit('setKinds', response.data.kinds)
+        })
+        .catch(error => {
+          console.warn('Can\'t load taxonomy data. Error: ', error)
           FlashVM.alert(error.message)
         })
     },
