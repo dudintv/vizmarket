@@ -65,14 +65,17 @@ export default {
       return this.$route.fullPath.split('/').slice(-1)[0]
     }
   },
-  mounted () {
-    if (+this.$route.params.id > 0) {
-      this.$store.dispatch('loadCurrentProductData', this.$route.params.id)
-    } else {
-      this.$router.push('/publisher')
-    }
+  activated () {
+    this.onMounted()
   },
   methods: {
+    onMounted () {
+      if (+this.$route.params.id > 0) {
+        this.$store.dispatch('loadCurrentProductData', this.$route.params.id)
+      } else {
+        this.$router.push('/publisher')
+      }
+    },
     saveCurrentTab () {
       switch (this.currentTabName) {
         case 'title':
