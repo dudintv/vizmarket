@@ -25,7 +25,7 @@
         table.product-line.m-4
           tr.product-version(v-for="version in product.versions" :key="version.id")
             td.product-version-number.align-top.pt-1.pr-2.w-1(:class="{ 'opacity-50': !version.public }")
-              .border.px-2.py-1(:class="{ 'border-red': version.public, 'border-gray-500': !version.public }") v&nbsp;{{version.number}}
+              .border.px-2.py-1(:class="[ version.public ? 'border-red': 'border-gray-500' ]") v&nbsp;{{version.number}}
             td.product-version-info.px-2.py-2
               .product-version-date.text-lg {{ versionDate(version) }}
               .product-version-support.text-sm.opacity-50 {{version.support}}

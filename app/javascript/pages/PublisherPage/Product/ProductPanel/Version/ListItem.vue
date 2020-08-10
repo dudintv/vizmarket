@@ -1,7 +1,7 @@
 <template lang="pug">
   .product-version(:class="{ ['is-published']: version.public }")
     .version-grid
-      .version-number ver. {{ version.number }} | id {{ version.id }}
+      .version-number Version # {{ version.number }}
       .version-dates {{ dates }}
       .version-files-title.text-white-20 Files:
       .version-files

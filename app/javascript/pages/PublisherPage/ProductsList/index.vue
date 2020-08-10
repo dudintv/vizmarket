@@ -24,8 +24,10 @@ export default {
   computed: {
     filteredAndSortedAndGroupedProducts () { return this.$store.getters.filteredAndSortedAndGroupedProducts },
   },
-  mounted () {
+  activated() {
     this.$store.dispatch('loadProducts')
+  },
+  mounted () {
     this.$store.dispatch('loadTaxonomy')
   }
 }
