@@ -15,10 +15,11 @@ export default new VueRouter({
   hashbang: false,
   routes: [
     { path: '/publisher', redirect: '/publisher/index' },
-    { path: '/publisher/index', component: ProductList },
+    { path: '/publisher/index', component: ProductList, name: 'ProductList' },
     {
       path: '/publisher/products/:id',
       component: Product,
+      name: 'Product',
       children: [
         { path: 'title', component: TitleTab },
         { path: 'media', component: MediaTab },

@@ -41,11 +41,6 @@ export default {
     ProductThumbnail,
     ProductTitle,
   },
-  data () {
-    return {
-      isLoaded: false,
-    }
-  },
   computed: {
     product () {
       return this.$store.state.currentProduct
