@@ -40,5 +40,8 @@ export default {
     unpublish: (id) => publisher_adapter.post(`/versions/${id}/unpublish`),
 
     deleteFile: (key) => publisher_adapter.delete(`/versions/delete_file`, { params: { key: key } }),
+  },
+  settings: {
+    index: () => publisher_adapter.get('/settings')
   }
 }

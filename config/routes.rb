@@ -21,13 +21,13 @@ Rails.application.routes.draw do
   get "/profile", to: "profile#index"
   get "/profile/*slug", to: "profile#index"
 
+  get '/settings', to: 'settings#edit'
+  get '/settings/*path', to: 'settings#edit' # to vue-router
+
   namespace :publisher do
     root to: 'products#index'
     get 'index', to: 'products#index'
     get 'products/*path', to: 'products#index' # to vue-router
-    
-    get  'settings', to: 'settings#edit'
-    post 'settings', to: 'settings#update'
 
     namespace :api, defaults: { format: :json } do
       constraints ->(r) { r.format == :json } do

@@ -56,7 +56,7 @@ header
           .popup.user-popup#user-popup
             .line.edit
               span.name= @data[:user][:email]
-              a.button href='#' Edit info
+              = link_to('Edit info', settings_path, class: "button")
             .line = link_to('Publisher portal', publisher_root_path, class: 'main-button', 'data-turbolinks': "false") 
             .line = link_to('Sign out', destroy_user_session_path, class: 'button', method: :delete)
         - else
