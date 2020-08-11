@@ -11,6 +11,10 @@ const publisher_adapter = axios.create({
   baseURL: '/publisher/api',
 })
 
+const settings_adapter = axios.create({
+  baseURL: '/settings',
+})
+
 export default {
   products: {
     index: () => publisher_adapter.get('/products'),
@@ -42,6 +46,6 @@ export default {
     deleteFile: (key) => publisher_adapter.delete(`/versions/delete_file`, { params: { key: key } }),
   },
   settings: {
-    index: () => publisher_adapter.get('/settings')
+    userData: () => settings_adapter.get('/user_data')
   }
 }

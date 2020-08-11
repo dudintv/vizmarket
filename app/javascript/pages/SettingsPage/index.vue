@@ -6,7 +6,7 @@
       //- router-link.settings-link(to="/settings/history") History
       router-link.settings-link(to="/settings/password") Password
       //- router-link.settings-link(to="/settings/agreements") Agreements
-      //- router-link.settings-link(to="/settings/linked_accounts") Linked&nbsp;accounts
+      router-link.settings-link(to="/settings/linked_accounts") Linked&nbsp;accounts
       router-link.settings-link(to="/settings/publisher") Publisher
       //- router-link.settings-link(to="/settings/help") Heed help?
     #settings-content
@@ -15,7 +15,9 @@
 
 <script>
 export default {
-
+  mounted () {
+    this.$store.dispatch('loadUser')
+  },
 }
 </script>
 
@@ -26,7 +28,7 @@ export default {
   grid-template-columns: auto 1fr;
 
   #settings-nav {
-    @apply flex flex-col;
+    @apply flex flex-col mb-4;
   }
 }
 
@@ -42,8 +44,14 @@ export default {
   }
 }
 
+#settings-content {
+  @apply px-8 w-full;
+  max-width: 50rem;
+}
+
 @media screen and (max-width: 800px) {
   #settings-page {
+    width: inherit;
     justify-items: center;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;

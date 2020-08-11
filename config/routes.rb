@@ -21,14 +21,12 @@ Rails.application.routes.draw do
   get "/profile", to: "profile#index"
   get "/profile/*slug", to: "profile#index"
 
-  get '/settings', to: 'settings#edit'
-  get '/settings/*path', to: 'settings#edit' # to vue-router
-
+  # PUBLISHER
   namespace :publisher do
     root to: 'products#index'
     get 'index', to: 'products#index'
     get 'products/*path', to: 'products#index' # to vue-router
-
+    
     namespace :api, defaults: { format: :json } do
       constraints ->(r) { r.format == :json } do
         resources :products, only: %i[index show new create update destroy] do
@@ -56,7 +54,17 @@ Rails.application.routes.draw do
       end
     end
   end
+  
+  # SETTINGS
+  get '/settings', to: 'settings#index'
+  get '/settings/user_data', to: 'settings#user_data', format: :json # get all settings data
+  post '/settings/update_user', to: 'settings#update_user', format: :json
+  post '/settings/update_password', to: 'settings#update_password', format: :json
+  post '/settings/update_publisher', to: 'settings#update_publisher', format: :json
+  delete '/settings/destroy_account_link', to: 'settings#destroy_account_link', format: :json
+  get '/settings/*path', to: 'settings#index' # to vue-router
 
+  # TEST
   get '/test', to: 'test#test'
   get '/test/images', to: 'test#images' # to test vue-router
   get '/test/*path', to: 'test#test' # to test vue-router
