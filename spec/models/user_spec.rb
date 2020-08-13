@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :password }
   it { should have_many(:authorizations).dependent(:destroy) }
   it { should have_many(:products).dependent(:destroy) }
+  it { should have_one(:author).dependent(:destroy) }
 
   describe '.from_omniauth' do
     let!(:user) { create(:user) }
@@ -70,6 +71,19 @@ RSpec.describe User, type: :model do
           expect(authorization.uid).to eq auth.uid
         end
       end
+    end
+  end
+
+  describe '#is_author?' do
+    let(:user) { create :user }
+    let(:author) { create :author }
+
+    it 'returns true if user is Author' do
+      expect(author.user.is_author?).to be true
+    end
+
+    it 'returns false if user isn\'t Author' do
+      expect(user.is_author?).to be false
     end
   end
 end

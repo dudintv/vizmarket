@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[facebook google]
   has_many :authorizations, dependent: :destroy
   has_many :products, dependent: :destroy
+  has_one :author, dependent: :destroy
   has_one_attached :avatar
 
   def self.generate(email)
@@ -38,5 +39,9 @@ class User < ApplicationRecord
                                  confirmed_at: Time.zone.now)
     end
     user
+  end
+
+  def is_author?
+    author.present?
   end
 end

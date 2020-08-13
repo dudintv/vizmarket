@@ -60,7 +60,8 @@ Rails.application.routes.draw do
   get '/settings/user_data', to: 'settings#user_data', format: :json # get all settings data
   post '/settings/update_user', to: 'settings#update_user', format: :json
   post '/settings/update_password', to: 'settings#update_password', format: :json
-  post '/settings/update_publisher', to: 'settings#update_publisher', format: :json
+  post '/settings/create_author', to: 'settings#create_author', format: :json
+  post '/settings/update_author', to: 'settings#update_author', format: :json
   delete '/settings/destroy_account_link', to: 'settings#destroy_account_link', format: :json
   delete '/settings/destroy_my_account', to: 'settings#destroy_my_account'
   get '/settings/*path', to: 'settings#index' # to vue-router

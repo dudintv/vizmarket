@@ -9,4 +9,8 @@ class UserSerializer
       nil
     end
   end
+
+  attribute :isAuthor do |object|
+    object.is_author?
+  end
 end
