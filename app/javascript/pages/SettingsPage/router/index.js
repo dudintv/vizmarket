@@ -10,7 +10,7 @@ export default new VueRouter({
   mode: 'history',
   hashbang: false,
   routes: [
-    { path: '/settings', redirect: '/settings/general' },
+    // { path: '/settings', redirect: '/settings/general' },
     { path: '/settings/general', component: SettingsGeneral },
     // { path: '/settings/payments', component: undefined },
     // { path: '/settings/history', component: undefined },

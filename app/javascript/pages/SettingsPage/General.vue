@@ -28,9 +28,22 @@ export default {
       avatarErrorMessage: '',
     }
   },
-  activated () {
-    this.user = this.$store.getters.user
+  mounted () {
+    this.loadUser()
   },
+  methods: {
+    loadUser () {
+      this.$backend.settings.userData()
+        .then(response => {
+          console.log("response", response)
+          this.user = response.data.data.attributes
+        })
+        .catch(error => {
+          console.warn('Can\'t load user data. Error: ', error)
+          FlashVM.alert(error.message)
+        })
+    }
+  }
 }
 </script>
 

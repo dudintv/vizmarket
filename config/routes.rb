@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   post '/settings/update_password', to: 'settings#update_password', format: :json
   post '/settings/update_publisher', to: 'settings#update_publisher', format: :json
   delete '/settings/destroy_account_link', to: 'settings#destroy_account_link', format: :json
+  delete '/settings/destroy_my_account', to: 'settings#destroy_my_account'
   get '/settings/*path', to: 'settings#index' # to vue-router
 
   # TEST
