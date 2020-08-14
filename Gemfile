@@ -36,7 +36,8 @@ group :development, :test do
   gem "rspec-rails", "~> 4.0.0.beta3"
   gem 'factory_bot_rails'
   # gem 'rails-controller-testing'
-  gem 'ffaker'
+  gem 'faker' # https://github.com/faker-ruby/faker
+  gem 'ffaker' # https://github.com/ffaker/ffaker/blob/master/REFERENCE.md
 end
 
 group :development do
