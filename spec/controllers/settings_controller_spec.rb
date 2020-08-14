@@ -181,7 +181,10 @@ RSpec.describe SettingsController, type: :controller do
       end
 
       it 'marks the user as deleted' do
-        
+        expect{
+          make_request
+          user.reload
+        }.to change { user.deleted_at }.from(nil)
       end
     end
   end
