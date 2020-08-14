@@ -96,6 +96,28 @@ RSpec.describe SettingsController, type: :controller do
     end
   end
 
+  describe 'POST #reset_password' do
+    let(:user) { create :user }
+
+    def make_request
+      post :reset_password, format: :json
+    end
+
+    context 'Authorized user' do
+      before do
+        sign_in user
+      end
+
+      it 'start password resetting process' do
+        expect{
+          make_request
+          user.reload
+        }.to change { user.reset_password_sent_at }.from(nil)
+        .and change { user.reset_password_token }.from(nil)
+      end
+    end
+  end
+
   describe 'POST #create_author' do
     let(:user) { create :user }
 

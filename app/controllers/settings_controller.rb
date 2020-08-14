@@ -17,6 +17,14 @@ class SettingsController < ApplicationController
     end
   end
 
+  def reset_password
+    if current_user.send_reset_password_instructions
+      render json: {}, status: :ok
+    else
+      render json: current_user.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
   def update_password
     unless params[:user][:current_password].present? && current_user.valid_password?(params[:user][:current_password])
       render json: current_user.errors.as_json, status: :unauthorized

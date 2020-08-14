@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   get '/settings', to: 'settings#index'
   get '/settings/user_data', to: 'settings#user_data', format: :json # get all settings data
   post '/settings/update_user', to: 'settings#update_user', format: :json
+  post '/settings/reset_password', to: 'settings#reset_password', format: :json
   post '/settings/update_password', to: 'settings#update_password', format: :json
   post '/settings/create_author', to: 'settings#create_author', format: :json
   post '/settings/update_author', to: 'settings#update_author', format: :json
