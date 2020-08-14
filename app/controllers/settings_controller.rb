@@ -41,9 +41,19 @@ class SettingsController < ApplicationController
   end
 
   def update_author
+    if current_user.author.update(author_params)
+      render json: {}, status: :ok
+    else
+      render json: author.errors.as_json, status: :unprocessable_entity
+    end
   end
   
   def destroy_account_link
+    if current_user.authorizations.where(provider: params[:link]).first&.destroy
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :not_found
+    end
   end
   
   def destroy_my_account

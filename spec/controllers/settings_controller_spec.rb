@@ -119,14 +119,51 @@ RSpec.describe SettingsController, type: :controller do
     end
   end
 
+  describe 'POST #update_author' do
+    let(:author) { create :author }
+    let(:user) { author.user }
+
+    def make_request
+      post :update_author, params: { author: { name: author.name+'_new', title: author.title+'_new' } }, format: :json
+    end
+
+    it_behaves_like 'Authorizable with json'
+
+    context 'Authorized user' do
+      before do
+        sign_in user
+      end
+
+      it 'updates publisher status' do
+        expect{
+          make_request
+          author.reload
+        }.to change { author.name }
+        .and change { author.title }
+      end
+    end
+  end
+
   describe 'DELETE #destroy_account_link' do
-    let(:user) { create :user }
+    let(:user) { create :user_with_oauth }
 
     def make_request
       delete :destroy_account_link, params: { link: 'google' }, format: :json
     end
 
     it_behaves_like 'Authorizable with json'
+
+    context 'Authorized user' do
+      before do
+        sign_in user
+      end
+
+      it 'deletes account link with Google' do
+        expect{
+          make_request
+        }.to change{ user.authorizations.count }.by(-1)
+      end
+    end
   end
 
   describe 'DELETE #destroy_my_account' do
@@ -137,5 +174,15 @@ RSpec.describe SettingsController, type: :controller do
     end
 
     it_behaves_like 'Authorizable with redirect to login'
+
+    context 'Authorized user' do
+      before do
+        sign_in user
+      end
+
+      it 'marks the user as deleted' do
+        
+      end
+    end
   end
 end
