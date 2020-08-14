@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_one :author, dependent: :destroy
   has_one_attached :avatar
 
+  default_scope { where(deleted_at: nil) }
+
   def self.generate(email)
     user = User.where(email: email).first
     return user if user

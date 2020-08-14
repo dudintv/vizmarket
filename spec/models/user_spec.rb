@@ -74,6 +74,14 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'default scope' do
+    it 'contains only not deleted users' do
+      not_deleted_users = create_list :user, 2
+      create :user, :deleted
+      expect(User.all).to eq not_deleted_users
+    end
+  end
+
   describe '#is_author?' do
     let(:user) { create :user }
     let(:author) { create :author }

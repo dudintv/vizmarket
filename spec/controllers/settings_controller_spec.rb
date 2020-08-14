@@ -96,11 +96,11 @@ RSpec.describe SettingsController, type: :controller do
     end
   end
 
-  describe 'POST #update_publisher' do
+  describe 'POST #create_author' do
     let(:user) { create :user }
 
     def make_request
-      post :update_publisher, params: { enable_publishing: true }, format: :json
+      post :create_author, params: { author: { name: user.name, title: user.jobtitle } }, format: :json
     end
 
     it_behaves_like 'Authorizable with json'
@@ -114,7 +114,7 @@ RSpec.describe SettingsController, type: :controller do
         expect{
           make_request
           user.reload
-        }.to change { user.is_publisher }.to { true }
+        }.to change { user.is_author? }.to (true)
       end
     end
   end

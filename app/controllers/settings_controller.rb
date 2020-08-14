@@ -31,7 +31,16 @@ class SettingsController < ApplicationController
     end
   end
 
-  def update_publisher
+  def create_author
+    author = current_user.build_author(author_params)
+    if author.save
+      render json: {}, status: :ok
+    else
+      render json: author.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
+  def update_author
   end
   
   def destroy_account_link
@@ -44,5 +53,9 @@ class SettingsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :surname, :jobtitle, :country, :about, :avatar)
+  end
+
+  def author_params
+    params.require(:author).permit(:name, :title, :links, :support_contacts, :private_contacts)
   end
 end
