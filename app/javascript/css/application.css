@@ -16,8 +16,9 @@
 
 @import "./common/utility.scss";
 
-@import "./shared/nav.scss";
 @import "./shared/anons.scss";
+@import "./shared/devise.scss";
+@import "./shared/nav.scss";
 
 @import "./product/grid-item.scss";
 

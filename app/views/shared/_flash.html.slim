@@ -1,6 +1,6 @@
 .relative
   = content_tag 'div', nil, id: 'flashData', data: { notice: flash[:notice], alert: flash[:alert], warning: flash[:warning], error: flash[:error] }
-  - flash.each do |key, value|
-    = content_tag :div, value, :class => "flash #{key}" unless value.blank?
+  / - flash.each do |key, value|
+  /   = content_tag :div, value, :class => "flash #{key}" unless value.blank?
 .absolute.top-0.bottom-0.right-0.mt-16.pointer-events-none
   #flash

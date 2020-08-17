@@ -66,7 +66,10 @@ class SettingsController < ApplicationController
   
   def destroy_my_account
     if current_user.update(deleted_at: Time.zone.now)
-      render json: {}, status: :ok
+      p "!!!!!!!!!! current_user = " + current_user.to_s
+      sign_out
+      flash[:notice] = "Successfully delete account. Good bye!"
+      redirect_to root_path
     else
       render json: current_password.errors.as_json, status: :unprocessable_entity
     end

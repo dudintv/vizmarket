@@ -7,6 +7,14 @@
     TextInput(name="Country" v-model="user.country")
     TextareaInput(name="About" v-model="user.about")
     button.btn.main-btn.big-btn Save
+    
+    .bg-body-darker.p-8.mt-16.text-white-30.hover--text-white-80
+      h3 Request to delete the account
+      p.my-4
+        //- | Click the button to begin destroing your account with all history, purcheses. Also, you lose all your earned money that you didn’t withdraw. We recomend to get it before delete account!
+        | Click the button begin destroing your account with all your products and history.
+        | The account will be available to restore for 30 days. After that, it will be automatically totally deleted in databases.
+      a.btn.second-btn.big-btn(href='/settings/destroy_my_account' data-method="delete") Delete account
 </template>
 
 <script>

@@ -195,11 +195,21 @@ RSpec.describe SettingsController, type: :controller do
       delete :destroy_my_account
     end
 
-    it_behaves_like 'Authorizable with redirect to login'
+    context 'Guest user' do
+      it 'returns http unauthorized' do
+        make_request
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
 
     context 'Authorized user' do
       before do
         sign_in user
+      end
+
+      it 'redirects to root url' do
+        make_request
+        expect(response).to redirect_to(root_path)
       end
 
       it 'marks the user as deleted' do
