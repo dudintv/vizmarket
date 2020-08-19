@@ -1,5 +1,5 @@
 <template lang="pug">
-  #settings-page
+  #settings-user-page
     #settings-nav
       router-link.settings-link(to="/settings/general") General
       //- router-link.settings-link(to="/settings/payments") Payments
@@ -7,7 +7,12 @@
       router-link.settings-link(to="/settings/password") Password
       //- router-link.settings-link(to="/settings/agreements") Agreements
       router-link.settings-link(to="/settings/linked_accounts") Linked&nbsp;accounts
-      router-link.settings-link(to="/settings/publisher") Publisher
+      //- template(v-if="author && author.completed")
+      router-link.settings-link(to="/settings/publisher/private") :: private info
+      router-link.settings-link(to="/settings/publisher/public") :: public info
+      router-link.settings-link(to="/settings/publisher/payout") :: payout info
+      router-link.settings-link(to="/settings/publisher/tax") :: tax info
+      //- router-link.settings-link(to="/settings/publisher" v-else) Publisher
       //- router-link.settings-link(to="/settings/help") Heed help?
     #settings-content
       router-view
@@ -22,13 +27,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#settings-page {
+#settings-user-page {
   @apply mx-auto w-4_5 py-8 grid;
   min-height: calc(100vh - 52px);
   grid-template-columns: auto 1fr;
 
   #settings-nav {
-    @apply flex flex-col mb-4;
+    @apply flex flex-wrap flex-col mb-4;
   }
 }
 
@@ -50,7 +55,7 @@ export default {
 }
 
 @media screen and (max-width: 800px) {
-  #settings-page {
+  #settings-user-page {
     width: inherit;
     justify-items: center;
     grid-template-columns: 1fr;

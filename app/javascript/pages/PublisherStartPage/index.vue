@@ -1,6 +1,5 @@
 <template lang="pug">
-  div
-    h1 HELLO
+  #publisher-start-app
 </template>
 
 <script>
@@ -9,6 +8,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>

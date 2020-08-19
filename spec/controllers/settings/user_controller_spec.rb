@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe SettingsController, type: :controller do
+RSpec.describe Settings::UserController, type: :controller do
 
   describe 'GET #index' do
     def make_request
@@ -10,20 +10,20 @@ RSpec.describe SettingsController, type: :controller do
     it_behaves_like 'Authorizable with redirect to login'
   end
 
-  describe 'GET #user_data' do
+  describe 'GET #show' do
     def make_request
-      get :user_data, format: :json
+      get :show, format: :json
     end
 
     it_behaves_like 'Authorizable with json'
   end
 
-  describe 'POST #update_user' do
+  describe 'POST #update' do
     let(:user) { create :user }
     let(:avatar) { fixture_file_upload('spec/fixtures/images/1920x1080_leopard.jpg', 'image/jpeg') }
 
     def make_request
-      post :update_user, params: { user: {
+      post :update, params: { user: {
         name: '123',
         surname: '123',
         jobtitle: '123',
@@ -118,54 +118,6 @@ RSpec.describe SettingsController, type: :controller do
     end
   end
 
-  describe 'POST #create_author' do
-    let(:user) { create :user }
-
-    def make_request
-      post :create_author, params: { author: { name: user.name, title: user.jobtitle } }, format: :json
-    end
-
-    it_behaves_like 'Authorizable with json'
-
-    context 'Authorized user' do
-      before do
-        sign_in user
-      end
-
-      it 'updates publisher status' do
-        expect{
-          make_request
-          user.reload
-        }.to change { user.is_author? }.to (true)
-      end
-    end
-  end
-
-  describe 'POST #update_author' do
-    let(:author) { create :author }
-    let(:user) { author.user }
-
-    def make_request
-      post :update_author, params: { author: { name: author.name+'_new', title: author.title+'_new' } }, format: :json
-    end
-
-    it_behaves_like 'Authorizable with json'
-
-    context 'Authorized user' do
-      before do
-        sign_in user
-      end
-
-      it 'updates publisher status' do
-        expect{
-          make_request
-          author.reload
-        }.to change { author.name }
-        .and change { author.title }
-      end
-    end
-  end
-
   describe 'DELETE #destroy_account_link' do
     let(:user) { create :user_with_oauth }
 
@@ -220,4 +172,5 @@ RSpec.describe SettingsController, type: :controller do
       end
     end
   end
+
 end

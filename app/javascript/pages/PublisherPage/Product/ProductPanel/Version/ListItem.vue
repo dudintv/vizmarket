@@ -20,7 +20,7 @@
             button.second-btn.middle-btn.ml-4(@click="deleteVersion()") Delete
     .version-script-container(v-if="version.script")
       button.show-script(@click="isShowingScript=!isShowingScript") show attached script
-      vue-code-highlight.script(language="basic")(v-if="isShowingScript")
+      vue-code-highlight.script(v-if="isShowingScript" language="basic")
         pre.code {{ version.script }}
 </template>
 

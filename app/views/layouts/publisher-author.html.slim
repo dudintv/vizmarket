@@ -2,15 +2,15 @@ doctype html
 html
   head
     title
-      | Vizmarket — Edit Settings
+      | Vizmarket — Edit Author Settings
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
-    = stylesheet_pack_tag 'settings', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'settings', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'publisher-author', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'publisher-author', 'data-turbolinks-track': 'reload'
     
   body.pattern-dark.relative
     = render 'shared/nav'

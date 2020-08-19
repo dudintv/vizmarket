@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import router from '../pages/SettingsPage/router'
+import router from '../pages/PublisherStartPage/router'
 import Vuelidate from 'vuelidate'
 import TurbolinksAdapter from 'vue-turbolinks'
 
-import SettingsApp from '../pages/SettingsPage'
+import PublisherStartApp from '../pages/PublisherStartPage'
 
 import backend from 'backend/axios'
 Vue.prototype.$backend = backend;
@@ -13,7 +13,7 @@ Vue.use(TurbolinksAdapter)
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     el: '#settings-app',
-    render: h => h(SettingsApp),
+    render: h => h(PublisherStartApp),
     router,
   }).$mount()
 })

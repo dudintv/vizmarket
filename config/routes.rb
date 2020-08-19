@@ -18,9 +18,6 @@ Rails.application.routes.draw do
     post 'resend', on: :member
   end
 
-  get "/profile", to: "profile#index"
-  get "/profile/*slug", to: "profile#index"
-
   # PUBLISHER
   namespace :publisher do
     root to: 'products#index'
@@ -53,22 +50,31 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    get 'author', to: 'author#index', format: :json
+    get 'author/show', to: 'author#show', format: :json
+    get 'author/start', to: 'author#new' # START TO BE A PUBLISHER
+    post 'author/create', to: 'author#create', format: :json
+    post 'author/update', to: 'author#update', format: :json
+    get 'author/*path', to: 'author#index' # to vue-router
   end
   
   # SETTINGS
-  get '/settings', to: 'settings#index'
-  get '/settings/user_data', to: 'settings#user_data', format: :json # get all settings data
-  post '/settings/update_user', to: 'settings#update_user', format: :json
-  post '/settings/reset_password', to: 'settings#reset_password', format: :json
-  post '/settings/update_password', to: 'settings#update_password', format: :json
-  post '/settings/create_author', to: 'settings#create_author', format: :json
-  post '/settings/update_author', to: 'settings#update_author', format: :json
-  delete '/settings/destroy_account_link', to: 'settings#destroy_account_link', format: :json
-  delete '/settings/destroy_my_account', to: 'settings#destroy_my_account'
-  get '/settings/*path', to: 'settings#index' # to vue-router
-
+  namespace :settings do
+    root to: 'user#index'
+    
+    get 'user', to: 'user#show', format: :json
+    post 'user', to: 'user#update', format: :json
+    post 'user/reset_password', to: 'user#reset_password', format: :json
+    post 'user/update_password', to: 'user#update_password', format: :json
+    delete 'user/destroy_account_link', to: 'user#destroy_account_link', format: :json
+    delete 'user/destroy_my_account', to: 'user#destroy_my_account'
+    get 'user/*path', to: 'user#index' # to vue-router
+  end
+  
+  
   # TEST
   get '/test', to: 'test#test'
-  get '/test/images', to: 'test#images' # to test vue-router
+  get '/test/images', to: 'test#images'
   get '/test/*path', to: 'test#test' # to test vue-router
 end
