@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_08_14_120515) do
   end
 
   create_table "authors", force: :cascade do |t|
+    t.boolean "completed"
     t.string "name"
     t.string "title"
     t.bigint "user_id", null: false

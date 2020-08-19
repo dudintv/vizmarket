@@ -1,6 +1,7 @@
 class CreateAuthors < ActiveRecord::Migration[6.0]
   def change
     create_table :authors do |t|
+      t.boolean :completed
       t.string :name
       t.string :title
       t.references :user, null: false, foreign_key: true
