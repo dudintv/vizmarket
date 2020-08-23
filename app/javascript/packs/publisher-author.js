@@ -12,7 +12,7 @@ Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
-    el: '#settings-app',
+    el: '#publisher-author-app',
     render: h => h(PublisherAuthorApp),
     router,
   }).$mount()

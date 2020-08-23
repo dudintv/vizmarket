@@ -25,6 +25,7 @@ export default {
     filteredAndSortedAndGroupedProducts () { return this.$store.getters.filteredAndSortedAndGroupedProducts },
   },
   activated() {
+    this.$store.dispatch('loadCurrentUser')
     this.$store.dispatch('loadProducts')
   },
   mounted () {

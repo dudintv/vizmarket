@@ -16,6 +16,9 @@ const settings_adapter = axios.create({
 })
 
 export default {
+  currectUser: {
+    get: () => publisher_adapter.get(`/current_user`),
+  },
   products: {
     index: () => publisher_adapter.get('/products'),
     new: () => publisher_adapter.get('/products/new'),
@@ -46,6 +49,6 @@ export default {
     deleteFile: (key) => publisher_adapter.delete(`/versions/delete_file`, { params: { key: key } }),
   },
   settings: {
-    userData: () => settings_adapter.get('/user_data')
+    userData: () => settings_adapter.get('/user')
   }
 }

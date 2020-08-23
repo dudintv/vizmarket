@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    currentUser: {},
     products: [],
     currentProduct: {},
     categoryList: [],
@@ -160,6 +161,12 @@ export default new Vuex.Store({
     setKinds: (state, kindList) => {
       state.kindList = kindList
     },
+    setCurrentUser: (state, newUser) => {
+      state.currentUser = newUser
+    },
+    setCurrentAuthor: (state, newAuthor) => {
+      state.currentAuthor = newAuthor
+    },
     setProducts: (state, productsData) => {
       state.products = productsData
     },
@@ -196,6 +203,20 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    loadCurrentUser ({ commit }) {
+      backend.currectUser.get()
+        .then(response => {
+          console.debug('!!!! response = ', response)
+          let user = response.data.data.attributes
+          let author = response.data.data.relationships.author
+          commit('setCurrentUser', user)
+          commit('setCurrentAuthor', author)
+        })
+        .catch(error => {
+          console.warn('Can\'t load current user data. Error: ', error)
+          FlashVM.alert(error.message)
+        })
+    },
     loadProducts ({ commit }) {
       backend.products.index()
         .then(response => {

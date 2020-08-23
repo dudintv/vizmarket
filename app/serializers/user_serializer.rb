@@ -1,6 +1,7 @@
 class UserSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :name, :surname, :jobtitle, :country, :about
+  attributes :email, :name, :surname, :jobtitle, :country, :about
+  has_one :author
 
   attribute :avatar do |object|
     if object.avatar.attached?

@@ -2,11 +2,11 @@ class Publisher::AuthorController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    render inline: '<div id="#publisher-author-app"></div>', layout: 'publisher-author'
+    render inline: '<div id="publisher-author-app"></div>', layout: 'publisher-author'
   end
 
   def new
-    render inline: '<div id="#publisher-start-app"></div>', layout: 'publisher-start'
+    render inline: '<div id="publisher-start-app"></div>', layout: 'publisher-start'
   end
 
   def create

@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     
     namespace :api, defaults: { format: :json } do
       constraints ->(r) { r.format == :json } do
+        get 'current_user', to: 'user#show'
+
         resources :products, only: %i[index show new create update destroy] do
           member do
             post :publish

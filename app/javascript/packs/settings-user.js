@@ -12,7 +12,7 @@ Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
-    el: '#settings-app',
+    el: '#settings-user-app',
     render: h => h(SettingsUserApp),
     router,
   }).$mount()

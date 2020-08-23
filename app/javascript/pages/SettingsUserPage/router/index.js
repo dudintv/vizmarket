@@ -10,14 +10,14 @@ export default new VueRouter({
   mode: 'history',
   hashbang: false,
   routes: [
-    // { path: '/settings', redirect: '/settings/general' },
-    { path: '/settings/general', component: SettingsGeneral },
+    { path: '/settings', redirect: '/settings/user/general' },
+    { path: '/settings/user/general', component: SettingsGeneral },
     // { path: '/settings/payments', component: undefined },
     // { path: '/settings/history', component: undefined },
-    { path: '/settings/password', component: SettingsPassword },
+    { path: '/settings/user/password', component: SettingsPassword },
     // { path: '/settings/agreements', component: undefined },
     // { path: '/settings/linked_accounts', component: undefined },
-    { path: '/settings/publisher', component: SettingsPublisher },
+    { path: '/settings/user/publisher', component: SettingsPublisher },
     // { path: '/settings/help', component: undefined },
   ]
 })

@@ -46,12 +46,8 @@ class ProductSerializer
   end
 
   attribute :versions do |object|
-    if object.versions.present?
-      object.versions.map do |version|
-        VersionSerializer.new(version).serializable_hash[:data][:attributes]
-      end
-    else
-      nil
+    object.versions&.map do |version|
+      VersionSerializer.new(version).serializable_hash[:data][:attributes]
     end
   end
 end

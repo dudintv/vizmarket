@@ -1,18 +1,12 @@
 <template lang="pug">
   #settings-user-page
     #settings-nav
-      router-link.settings-link(to="/settings/general") General
+      router-link.settings-link(to="/settings/user/general") General
       //- router-link.settings-link(to="/settings/payments") Payments
       //- router-link.settings-link(to="/settings/history") History
-      router-link.settings-link(to="/settings/password") Password
+      router-link.settings-link(to="/settings/user/password") Password
       //- router-link.settings-link(to="/settings/agreements") Agreements
-      router-link.settings-link(to="/settings/linked_accounts") Linked&nbsp;accounts
-      //- template(v-if="author && author.completed")
-      router-link.settings-link(to="/settings/publisher/private") :: private info
-      router-link.settings-link(to="/settings/publisher/public") :: public info
-      router-link.settings-link(to="/settings/publisher/payout") :: payout info
-      router-link.settings-link(to="/settings/publisher/tax") :: tax info
-      //- router-link.settings-link(to="/settings/publisher" v-else) Publisher
+      router-link.settings-link(to="/settings/user/linked_accounts") Linked&nbsp;accounts
       //- router-link.settings-link(to="/settings/help") Heed help?
     #settings-content
       router-view

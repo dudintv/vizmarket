@@ -2,7 +2,7 @@ class Settings::UserController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    render inline: '<div id="#settings-user-app"></div>', layout: 'settings-user'
+    render inline: '<div id="settings-user-app"></div>', layout: 'settings-user'
   end
 
   def show
