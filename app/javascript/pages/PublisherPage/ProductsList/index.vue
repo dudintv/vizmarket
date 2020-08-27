@@ -24,9 +24,9 @@ export default {
   computed: {
     filteredAndSortedAndGroupedProducts () { return this.$store.getters.filteredAndSortedAndGroupedProducts },
   },
-  activated() {
-    this.$store.dispatch('loadCurrentUser')
-    this.$store.dispatch('loadProducts')
+  async created () {
+    await this.$store.dispatch('loadCurrentUser')
+    await this.$store.dispatch('loadProducts')
   },
   mounted () {
     this.$store.dispatch('loadTaxonomy')

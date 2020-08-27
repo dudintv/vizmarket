@@ -204,9 +204,9 @@ export default new Vuex.Store({
   },
   actions: {
     loadCurrentUser ({ commit }) {
-      backend.currectUser.get()
+      backend.user.get()
         .then(response => {
-          console.debug('!!!! response = ', response)
+          console.debug('++++++ response' , response)
           let user = response.data.data.attributes
           let author = response.data.data.relationships.author
           commit('setCurrentUser', user)

@@ -44,6 +44,6 @@ class User < ApplicationRecord
   end
 
   def is_author?
-    author.present?
+    author&.completed?
   end
 end

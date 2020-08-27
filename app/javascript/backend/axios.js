@@ -11,13 +11,23 @@ const publisher_adapter = axios.create({
   baseURL: '/publisher/api',
 })
 
-const settings_adapter = axios.create({
-  baseURL: '/settings',
+const author_adapter = axios.create({
+  baseURL: '/publisher/author',
+})
+
+const user_adapter = axios.create({
+  baseURL: '/settings/user',
 })
 
 export default {
-  currectUser: {
-    get: () => publisher_adapter.get(`/current_user`),
+  user: {
+    get: () => user_adapter.get('/show'),
+    update: user => user_adapter.post('/update', { user } ),
+  },
+  author: {
+    get: () => author_adapter.get('/show'),
+    update: author => author_adapter.post('/update', { author } ),
+    activate: () => author_adapter.post('/activate'),
   },
   products: {
     index: () => publisher_adapter.get('/products'),
@@ -48,7 +58,4 @@ export default {
 
     deleteFile: (key) => publisher_adapter.delete(`/versions/delete_file`, { params: { key: key } }),
   },
-  settings: {
-    userData: () => settings_adapter.get('/user')
-  }
 }

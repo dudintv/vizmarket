@@ -5,10 +5,10 @@
 
 <script>
 export default {
-  watch: {
-    '$route' (to, from) {
-      console.log("FROM", from.path, '  TO', to.path)
-    }
-  }
+  // watch: {
+  //   '$route' (to, from) {
+  //     console.log("FROM", from.path, '  TO', to.path)
+  //   }
+  // }
 }
 </script>

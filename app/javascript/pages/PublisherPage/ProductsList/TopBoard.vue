@@ -1,7 +1,10 @@
 <template lang='pug'>
   .top-board.flex.flex-col.items-center.w-full
     h1.mb-0 Publisher Portal
-    ul.separated.mb-2
+
+    div(v-if="isAuthorLoading")
+      | loading ...
+    ul.separated.mb-2(v-else)
       li {{ author.name }}
       li {{ author.title }}
       li: a(href='/publisher/author') Publisher settings
@@ -26,6 +29,9 @@ export default {
     }
   },
   computed: {
+    isAuthorLoading () {
+      return Object.getOwnPropertyNames(this.author).length === 0
+    },
     user () {
       return this.$store.state.currentUser
     },

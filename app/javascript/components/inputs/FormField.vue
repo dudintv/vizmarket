@@ -22,6 +22,7 @@ export default {
 
 <style lang="scss" scoped>
   .field {
+    @apply mb-4;
     display: grid;
     grid-template-columns: auto;
     grid-column-gap: 1rem;
@@ -32,8 +33,12 @@ export default {
     }
   }
   .about {
+    @apply mb-4;
+    
     .required {
-      @apply uppercase text-white-50 text-sm;
+      @apply block uppercase text-white-50 text-sm;
+      margin-top: -3px;
+      margin-bottom: -3px;
     }
 
     .required-star {
