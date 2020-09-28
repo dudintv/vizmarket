@@ -46,4 +46,8 @@ class User < ApplicationRecord
   def is_author?
     author&.completed?
   end
+
+  def full_name
+    [name, surname].reject(&:empty?).join(' ')
+  end
 end

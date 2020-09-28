@@ -1,7 +1,7 @@
 <template lang="pug">
   #publisher-start-app
     h1 Become a Publisher
-    p.text-center.text-white-80.mb-8 If you want to share your content, please fill these fields.
+    p.text-center.text-white-80.mb-8 If you want to share your content, please fill in these fields.
     Stepper(:steps="steps")
     .form-container
       keep-alive
@@ -17,7 +17,7 @@ export default {
   },
   data () {
     return {
-      author: {},
+      // author: {},
       steps: [
         {
           name: 1,
@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.commit('setCurrentAuthor', this.$root.authorData)
+    this.$store.dispatch('loadAuthor')
   },
 }
 </script>

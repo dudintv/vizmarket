@@ -30,6 +30,8 @@ export default {
   },
   computed: {
     isAuthorLoading () {
+      console.log('this.author = ', this.author)
+      if (!this.author) return true
       return Object.getOwnPropertyNames(this.author).length === 0
     },
     user () {

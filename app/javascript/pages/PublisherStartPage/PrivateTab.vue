@@ -29,9 +29,6 @@ export default {
     FormField,
     TextInput,
   },
-  props: {
-    authorData: {},
-  },
   data () {
     return {
       private: {
@@ -41,6 +38,9 @@ export default {
         email: '',
       },
     }
+  },
+  beforeMount () {
+    this.private = this.$store.state.currentAuthor.private
   },
   computed: {
     author () {

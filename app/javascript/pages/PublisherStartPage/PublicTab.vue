@@ -36,7 +36,11 @@ export default {
   },
   data () {
     return {
-      author: {},
+      author: {
+        support: {},
+        links: {},
+        private: {},
+      },
     }
   },
   beforeMount () {

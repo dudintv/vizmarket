@@ -4,7 +4,7 @@ class Publisher::ProductsController < ApplicationController
 
   def index
     unless current_user.is_author?
-      flash[:notice] = 'Before, you need to register as a publisher'
+      flash[:notice] = 'Forehand, you need to register as a publisher'
       redirect_to publisher_author_start_path
     end
   end

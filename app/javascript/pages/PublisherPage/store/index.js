@@ -206,14 +206,20 @@ export default new Vuex.Store({
     loadCurrentUser ({ commit }) {
       backend.user.get()
         .then(response => {
-          console.debug('++++++ response' , response)
-          let user = response.data.data.attributes
-          let author = response.data.data.relationships.author
-          commit('setCurrentUser', user)
-          commit('setCurrentAuthor', author)
+          commit('setCurrentUser', response.data.data.attributes)
         })
         .catch(error => {
           console.warn('Can\'t load current user data. Error: ', error)
+          FlashVM.alert(error.message)
+        })
+    },
+    loadCurrentAuthor ({ commit }) {
+      backend.author.get()
+        .then(response => {
+          commit('setCurrentAuthor', response.data.data.attributes)
+        })
+        .catch(error => {
+          console.warn('Can\'t load current author data. Error: ', error)
           FlashVM.alert(error.message)
         })
     },

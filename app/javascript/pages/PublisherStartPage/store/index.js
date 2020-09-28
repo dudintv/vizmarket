@@ -7,7 +7,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    currentAuthor: {},
+    currentAuthor: {
+      support: {},
+      links: {},
+      private: {},
+    },
   },
   getters: {},
   mutations: {
@@ -33,7 +37,9 @@ export default new Vuex.Store({
     loadAuthor ({ commit }) {
       backend.author.get()
         .then(response => {
-          let author = response.data.data?.attributes ?? {}
+          let author = response.data.data.attributes
+          console.debug("!!!!!!! response  = ", response)
+          console.debug("!!!!!!! author  = ", author)
           commit('setCurrentAuthor', author)
         })
         .catch(error => {

@@ -12,11 +12,8 @@ Vue.use(Vuelidate)
 Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
-  let author = document.getElementById('publisher-start-app').dataset.author.replace(/\'/g,'"')
-
   const app = new Vue({
     el: '#publisher-start-app',
-    data: { authorData: JSON.parse(author)?.data?.attributes },
     render: h => h(PublisherStartApp),
     store,
     router,

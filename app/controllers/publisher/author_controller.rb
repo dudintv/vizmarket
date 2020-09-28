@@ -6,14 +6,27 @@ class Publisher::AuthorController < ApplicationController
   end
 
   def new
-    render inline: "<div id=\"publisher-start-app\" data-author=\"#{author_data}\"></div>", layout: 'publisher-start'
+    render inline: "<div id=\"publisher-start-app\"></div>", layout: 'publisher-start'
   end
 
   def show
     if current_user.author
       render json: AuthorSerializer.new(current_user.author).serialized_json
     else
-      render json: {}, status: :ok
+      render json: {
+        data: {
+          attributes: {
+            name: current_user.full_name,
+            support: {
+              email: current_user.email
+            },
+            private: {
+              fullName: current_user.full_name,
+              email: current_user.email
+            }
+          }
+        }
+      }, status: :ok
     end
   end
 
@@ -47,9 +60,5 @@ class Publisher::AuthorController < ApplicationController
 
   def author_params
     params.require(:author).permit(:name, links: {}, support_contacts: {}, private_contacts: {})
-  end
-
-  def author_data
-    current_user.author ? AuthorSerializer.new(current_user.author).serialized_json.gsub('"', '\'') : '{}'
   end
 end
