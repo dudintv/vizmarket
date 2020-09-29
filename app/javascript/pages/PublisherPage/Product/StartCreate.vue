@@ -1,6 +1,6 @@
 <template lang="pug">
   .start-create-new-product.p-4
-    h3 Choose type and name to begin
+    h3.mb-4 Choose type and name to begin
     form(@submit.prevent="createProduct")
       RadioInput(name="Type" v-model="kind" :options="kinds" :class="{'has_error': $v.kind.$error}")
         template(#error v-if="$v.kind.$error") Select Type to continue
