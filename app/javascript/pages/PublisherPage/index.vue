@@ -5,10 +5,8 @@
 
 <script>
 export default {
-  // watch: {
-  //   '$route' (to, from) {
-  //     console.log("FROM", from.path, '  TO', to.path)
-  //   }
-  // }
+  mounted () {
+    this.$store.dispatch('loadCurrentAuthor')
+  },
 }
 </script>

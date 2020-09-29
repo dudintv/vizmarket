@@ -1,6 +1,6 @@
 <template lang="pug">
   #publisher-settings-public
-    h5.mb-8 1. Store Info (public), how your customers can get support
+    h5.mb-8 1. Store Info (public), how your customers get your support
     
     FormField(:required="true", title="Publisher Name", description="This name will be showed on your product cards.")
       template(#input)

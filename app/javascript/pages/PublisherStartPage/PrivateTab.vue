@@ -1,6 +1,6 @@
 <template lang="pug">
   #publisher-settings-private
-    h5.mb-8 2. Personal Info (private)
+    h5.mb-8 2. Legal Info (private)
 
     FormField(title="Official Name", description="This name useful for official documents and communication with the Marketplace.")
       template(#input)

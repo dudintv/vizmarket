@@ -90,11 +90,11 @@ header
         .line
           label.label-text for='email' Email
           / input.input-text type='text' placeholder=' '
-          = text_field_tag('user[email]', '', class: 'input-text')
+          = text_field_tag('user[email]', '', id: 'nav_user_email', class: 'input-text', autocomplete: 'vizmarket email')
         .line
           label.label-text for='password' Password
           / input.input-text type='password' placeholder=' '
-          = password_field_tag('user[password]', '', class: 'input-text')
+          = password_field_tag('user[password]', '', id: 'nav_user_password', class: 'input-text', autocomplete: 'vizmarket password')
         .line.button
           button.main-button Sign in
       .line.button

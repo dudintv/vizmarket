@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../pages/PublisherAuthorPage/store'
 import router from '../pages/PublisherAuthorPage/router'
 import Vuelidate from 'vuelidate'
 import TurbolinksAdapter from 'vue-turbolinks'
@@ -14,6 +15,7 @@ document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     el: '#publisher-author-app',
     render: h => h(PublisherAuthorApp),
+    store,
     router,
   }).$mount()
 })

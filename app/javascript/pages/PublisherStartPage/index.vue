@@ -41,28 +41,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-  .form-container {
-    @apply mx-auto mt-8;
-    width: 700px;
-  }
-
-  @media (max-width: 800px) {
-    .form-container {
-      width: 600px;
-    }
-  }
-
-  @media (max-width: 620px) {
-    .form-container {
-      width: 90vw;
-    }
-  }
-
-  @media (max-width: 400px) {
-    .form-container {
-      width: 98vw;
-    }
-  }
-</style>

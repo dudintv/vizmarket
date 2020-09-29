@@ -7,6 +7,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentUser: {},
+    currentAuthor: {
+      links: {},
+      private_contacts: {},
+      support_contacts: {},
+    },
     products: [],
     currentProduct: {},
     categoryList: [],
@@ -216,6 +221,7 @@ export default new Vuex.Store({
     loadCurrentAuthor ({ commit }) {
       backend.author.get()
         .then(response => {
+          console.debug('response = ', response)
           commit('setCurrentAuthor', response.data.data.attributes)
         })
         .catch(error => {

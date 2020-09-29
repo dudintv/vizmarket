@@ -45,13 +45,13 @@ export default new Vuex.Store({
           FlashVM.alert(error.message)
         })
     },
-    saveAuthor ({ state, actions }) {
+    saveAuthor ({ state, dispatch }) {
       let author = { ...state.currentAuthor } // copy object
       renameObjectKey(author, 'support', 'support_contacts')
       renameObjectKey(author, 'private', 'private_contacts')
       backend.author.update(author) 
         .then(() => {
-          // actions.loadAuthor()
+          dispatch('loadAuthor')
         })
         .catch(error => {
           console.warn('Can\'t save data. Error: ', error)

@@ -53,10 +53,11 @@ Rails.application.routes.draw do
       end
     end
 
-    get 'author', to: 'author#index', format: :json
+    # get 'author', to: 'author#index', format: :json
     get 'author/show', to: 'author#show', format: :json
     get 'author/start', to: 'author#new' # START TO BE A PUBLISHER
     get 'author/start/*path', to: 'author#new' # START TO BE A PUBLISHER
+    get 'author/edit', to: 'author#edit'
     post 'author/update', to: 'author#update', format: :json
     post 'author/activate', to: 'author#activate', format: :json
     get 'author/*path', to: 'author#index' # to vue-router

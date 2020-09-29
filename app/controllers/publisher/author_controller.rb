@@ -1,10 +1,6 @@
 class Publisher::AuthorController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    render inline: '<div id="publisher-author-app"></div>', layout: 'publisher-author'
-  end
-
   def new
     render inline: "<div id=\"publisher-start-app\"></div>", layout: 'publisher-start'
   end
@@ -15,6 +11,10 @@ class Publisher::AuthorController < ApplicationController
     else
       render json: default_author_json, status: :ok
     end
+  end
+
+  def edit
+    render inline: '<div id="publisher-author-app"></div>', layout: 'publisher-author'
   end
 
   # def create
