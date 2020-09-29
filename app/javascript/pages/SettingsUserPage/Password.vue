@@ -1,7 +1,7 @@
 <template lang="pug">
   #settings-password
-    TextInput(name="New password" v-model="password")
-    TextInput(name="Repeat new password" v-model="repeat_password")
+    TextInput(name="New password" v-model="password" type="password" required)
+    TextInput(name="Repeat new password" v-model="repeat_password" type="password" required)
     button.btn.main-btn.big-btn Save
 </template>
 
