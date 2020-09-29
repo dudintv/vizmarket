@@ -13,20 +13,7 @@ class Publisher::AuthorController < ApplicationController
     if current_user.author
       render json: AuthorSerializer.new(current_user.author).serialized_json
     else
-      render json: {
-        data: {
-          attributes: {
-            name: current_user.full_name,
-            support: {
-              email: current_user.email
-            },
-            private: {
-              fullName: current_user.full_name,
-              email: current_user.email
-            }
-          }
-        }
-      }, status: :ok
+      render json: default_author_json, status: :ok
     end
   end
 
@@ -60,5 +47,22 @@ class Publisher::AuthorController < ApplicationController
 
   def author_params
     params.require(:author).permit(:name, links: {}, support_contacts: {}, private_contacts: {})
+  end
+
+  def default_author_json
+    {
+      data: {
+        attributes: {
+          name: current_user.full_name,
+          support: {
+            email: current_user.email
+          },
+          private: {
+            fullName: current_user.full_name,
+            email: current_user.email
+          }
+        }
+      }
+    }
   end
 end

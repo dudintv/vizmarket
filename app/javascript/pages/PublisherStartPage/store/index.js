@@ -38,8 +38,6 @@ export default new Vuex.Store({
       backend.author.get()
         .then(response => {
           let author = response.data.data.attributes
-          console.debug("!!!!!!! response  = ", response)
-          console.debug("!!!!!!! author  = ", author)
           commit('setCurrentAuthor', author)
         })
         .catch(error => {
