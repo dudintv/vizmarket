@@ -27,9 +27,10 @@ export default new Vuex.Store({
         })
     },
     saveUser ({ state, dispatch }) {
-      backend.user.update(author) 
+      backend.user.update(state.currentUser) 
         .then(() => {
           dispatch('loadUser')
+          FlashVM.notice('User data was successfuly updated.')
         })
         .catch(error => {
           console.warn('Can\'t save data. Error: ', error)
@@ -40,7 +41,7 @@ export default new Vuex.Store({
       backend.user.updatePassword(currentPassword, newPassword)
         .then(() => {
           window.location.href = '/'
-          FlashVM.notice("Password was successfuly updated.")
+          FlashVM.notice('Password was successfuly updated.')
         })
         .catch(error => {
           console.warn('Can\'t save data. Error: ', error)

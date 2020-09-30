@@ -6,7 +6,7 @@
     TextInput(name="Job title" v-model="user.jobtitle")
     TextInput(name="Country" v-model="user.country")
     TextareaInput(name="About" v-model="user.about")
-    button.btn.main-btn.big-btn Save
+    button.btn.main-btn.big-btn(@click="save()") Save
     
     .bg-body-darker.p-8.mt-16.text-white-30.hover--text-white-80
       h3 Request to delete the account
@@ -30,11 +30,16 @@ export default {
   },
   data () {
     return {
-      user: {},
       isAvatarLoading: false,
       avatarSuccessMessage: '',
       avatarErrorMessage: '',
     }
+  },
+  computed: {
+    user: {
+      get () { return this.$store.state.currentUser },
+      set (value) { this.$store.commit('setCurrentUser', value) }
+    },
   },
   mounted () {
     this.loadUser()
@@ -49,6 +54,9 @@ export default {
           console.warn('Can\'t load user data. Error: ', error)
           FlashVM.alert(error.message)
         })
+    },
+    save () {
+      this.$store.dispatch('saveUser')
     }
   }
 }
