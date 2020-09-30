@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const SettingsGeneral = () => import('../General')
-const SettingsPassword = () => import('../Password')
-const SettingsPublisher = () => import('../Publisher')
+const SettingsGeneral = () => import('./General')
+const SettingsPassword = () => import('./Password')
+const SettingsLinkedAccounts = () => import('./LinkedAccounts')
 
 Vue.use(VueRouter)
 export default new VueRouter({
@@ -16,8 +16,8 @@ export default new VueRouter({
     // { path: '/settings/history', component: undefined },
     { path: '/settings/user/password', component: SettingsPassword },
     // { path: '/settings/agreements', component: undefined },
-    // { path: '/settings/linked_accounts', component: undefined },
-    { path: '/settings/user/publisher', component: SettingsPublisher },
+    { path: '/settings/linked_accounts', component: SettingsLinkedAccounts },
+    // { path: '/settings/user/publisher', component: SettingsPublisher },
     // { path: '/settings/help', component: undefined },
   ]
 })

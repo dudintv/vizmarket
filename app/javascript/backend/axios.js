@@ -23,6 +23,7 @@ export default {
   user: {
     get: () => user_adapter.get('/show'),
     update: user => user_adapter.post('/update', { user } ),
+    updatePassword: (currentPassword, newPassword) => user_adapter.post('/update_password', { user: { current_password: currentPassword, new_password: newPassword }} ),
   },
   author: {
     get: () => author_adapter.get('/show'),

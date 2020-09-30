@@ -41,9 +41,8 @@ export default {
   },
   methods: {
     loadUser () {
-      this.$backend.settings.userData()
+      this.$backend.user.get()
         .then(response => {
-          console.log("response", response)
           this.user = response.data.data.attributes
         })
         .catch(error => {

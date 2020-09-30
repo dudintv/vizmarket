@@ -1,15 +1,11 @@
 <template lang="pug">
   #settings-publisher
-    button.btn.main-btn.big-btn Become a publisher
+    h2 Your linked accounts
 </template>
 
 <script>
-import TextInput from "components/inputs/text.vue"
 
 export default {
-  components: {
-    TextInput,
-  },
   data () {
     return {
     }

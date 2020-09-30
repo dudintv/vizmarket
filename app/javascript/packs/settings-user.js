@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../pages/SettingsUserPage/store'
 import router from '../pages/SettingsUserPage/router'
 import Vuelidate from 'vuelidate'
 import TurbolinksAdapter from 'vue-turbolinks'
@@ -14,6 +15,7 @@ document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     el: '#settings-user-app',
     render: h => h(SettingsUserApp),
+    store,
     router,
   }).$mount()
 })
