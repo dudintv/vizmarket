@@ -71,6 +71,8 @@ Rails.application.routes.draw do
     post 'user/update', to: 'user#update', format: :json
     post 'user/reset_password', to: 'user#reset_password', format: :json
     post 'user/update_password', to: 'user#update_password', format: :json
+    post 'user/upload_avatar', to: 'user#upload_avatar', format: :json
+    delete 'user/delete_avatar', to: 'user#delete_avatar', format: :json
     delete 'user/destroy_account_link', to: 'user#destroy_account_link', format: :json
     delete 'user/destroy_my_account', to: 'user#destroy_my_account'
     get 'user/*path', to: 'user#index' # to vue-router

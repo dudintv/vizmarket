@@ -24,6 +24,8 @@ export default {
     get: () => user_adapter.get('/show'),
     update: user => user_adapter.post('/update', { user } ),
     updatePassword: (currentPassword, newPassword) => user_adapter.post('/update_password', { user: { current_password: currentPassword, new_password: newPassword }} ),
+    uploadAvatar: avatar => user_adapter.post('/upload_avatar', avatar),
+    deleteAvatar: () => user_adapter.delete('/delete_avatar'),
   },
   author: {
     get: () => author_adapter.get('/show'),

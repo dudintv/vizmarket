@@ -39,6 +39,21 @@ class Settings::UserController < ApplicationController
     end
   end
 
+  def upload_avatar
+    if params[:avatar]
+      if current_user.update(avatar: params[:avatar])
+        render json: { avatar: current_user.avatar }, status: :ok
+      else
+        render json: current_user.errors.as_json, status: :unprocessable_entity
+      end
+    end
+  end
+
+  def delete_avatar
+    current_user.avatar.purge
+    render json: {}, status: :ok
+  end
+
   def destroy_account_link
     if current_user.authorizations.where(provider: params[:link]).first&.destroy
       render json: {}, status: :ok

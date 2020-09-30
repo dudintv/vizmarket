@@ -1,6 +1,6 @@
 <template lang="pug">
   #settings-general
-    ImageInput(name="Avatar" v-model="user.avatar" recommendations="Your avatar" :isLoading="isAvatarLoading" :successMessage="avatarSuccessMessage" :errorMessage="avatarErrorMessage")
+    ImageInput(name="Avatar" v-model="avatar" recommendations="Your avatar" :isLoading="isAvatarLoading" :successMessage="avatarSuccessMessage" :errorMessage="avatarErrorMessage")
     TextInput(name="Name" v-model="user.name")
     TextInput(name="Surname" v-model="user.surname")
     TextInput(name="Job title" v-model="user.jobtitle")
@@ -40,9 +40,61 @@ export default {
       get () { return this.$store.state.currentUser },
       set (value) { this.$store.commit('setCurrentUser', value) }
     },
+    avatar: {
+      get () { return this.$store.state.currentUser.avatar },
+      set (value) { this.$store.commit('setAvatar', value) }
+    },
   },
   mounted () {
     this.loadUser()
+  },
+  watch: {
+    avatar (newAvatar) {
+      this.isAvatarLoading = true
+      if (this.avatar) {
+        // UPLOAD IMAGE
+        fetch(this.avatar)
+          .then( res => res.blob())
+          .then( blob => {
+            const formData = new FormData()
+            formData.append('avatar', blob)
+            return this.$backend.user.uploadAvatar(formData)
+          })
+          .then(response => {
+            this.avatarSuccessMessage = 'Loaded successfully'
+            this.avatarErrorMessage = ''
+            setTimeout(() => {
+              this.avatarSuccessMessage = ''
+            }, 2000)
+            console.log('SUCCES', response)
+          })
+          .catch(error => {
+            this.avatarErrorMessage = error.message
+            console.warn('ERROR', error)
+          })
+          .finally(() => {
+            this.isAvatarLoading = false
+          })
+      } else {
+        // DELETE IMAGE
+        this.$backend.user.deleteAvatar()
+          .then(response => {
+            this.avatarSuccessMessage = 'Deleted successfully'
+            this.avatarErrorMessage = ''
+            setTimeout(() => {
+              this.avatarSuccessMessage = ''
+            }, 2000)
+            console.log('SUCCES', response)
+          })
+          .catch(error => {
+            this.avatarErrorMessage = error
+            console.warn('ERROR', error)
+          })
+          .finally(() => {
+            this.isAvatarLoading = false
+          })
+      }
+    },
   },
   methods: {
     loadUser () {
