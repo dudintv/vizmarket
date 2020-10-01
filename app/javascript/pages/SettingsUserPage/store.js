@@ -40,7 +40,7 @@ export default new Vuex.Store({
           FlashVM.alert(error.message)
         })
     },
-    saveNewPassword ({ state }, { currentPassword, newPassword }) {
+    saveNewPassword ({}, { currentPassword, newPassword }) {
       backend.user.updatePassword(currentPassword, newPassword)
         .then(() => {
           window.location.href = '/'
@@ -50,7 +50,18 @@ export default new Vuex.Store({
           console.warn('Can\'t save data. Error: ', error)
           FlashVM.alert(error.message)
         })
-    }
+    },
+    destroyAccountLink ({ dispatch }, account) {
+      backend.user.destroyAccountLink(account)
+        .then(() => {
+          dispatch('loadUser')
+          FlashVM.notice('Linked account was successfuly delete.')
+        })
+        .catch(error => {
+          console.warn('Can\'t delete. Error: ', error)
+          FlashVM.alert(error.message)
+        })
+    },
   },
   modules: {},
   plugins: [],

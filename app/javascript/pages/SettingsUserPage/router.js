@@ -12,12 +12,12 @@ export default new VueRouter({
   routes: [
     { path: '/settings', redirect: '/settings/user/general' },
     { path: '/settings/user/general', component: SettingsGeneral },
-    // { path: '/settings/payments', component: undefined },
-    // { path: '/settings/history', component: undefined },
     { path: '/settings/user/password', component: SettingsPassword },
+    { path: '/settings/user/linked_accounts', component: SettingsLinkedAccounts },
+    // { path: '/settings/user/payments', component: undefined },
+    // { path: '/settings/user/history', component: undefined },
+    // { path: '/settings/user/publisher', component: undefined },
     // { path: '/settings/agreements', component: undefined },
-    { path: '/settings/linked_accounts', component: SettingsLinkedAccounts },
-    // { path: '/settings/user/publisher', component: SettingsPublisher },
     // { path: '/settings/help', component: undefined },
   ]
 })

@@ -55,7 +55,10 @@ class Settings::UserController < ApplicationController
   end
 
   def destroy_account_link
-    if current_user.authorizations.where(provider: params[:link]).first&.destroy
+    p "!!!! params = " + params.to_s
+    p "!!!! params[:account] = " + params[:account].to_s
+    p "!!!! current_user.authorizations.where(provider: params[:account]).first = " + current_user.authorizations.where(provider: params[:account]).first.to_s
+    if current_user.authorizations.where(provider: params[:account]).first&.destroy
       render json: {}, status: :ok
     else
       render json: {}, status: :not_found

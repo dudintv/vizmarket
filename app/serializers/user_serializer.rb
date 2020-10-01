@@ -13,4 +13,8 @@ class UserSerializer
   attribute :isAuthor do |object|
     object.is_author?
   end
+
+  attribute :linkedAccounts do |object|
+    object.authorizations.map(&:provider)
+  end
 end
