@@ -102,4 +102,5 @@ header
       .line.socnets
         span or login with 
         - for socnet in @data[:socnets]
-          a.socnet href='#': img src="/images/svg-icons/#{socnet[:icon]}.svg"
+          a.socnet href=socnet[:link]
+            img src="/images/svg-icons/#{socnet[:icon]}.svg"
