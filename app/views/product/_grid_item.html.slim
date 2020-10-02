@@ -1,26 +1,32 @@
 .product
   .image
-    - if(product[:image] == '')
-      img src='/images/svg/default-product.svg'
+    - if(product.thumbnail.present?)
+      img src=url_for(product.thumbnail)
     - else
-      img src=product[:image]
+      img src='/images/svg/default-product.svg'
     / .labels
     /   - for label in product[:labels]
     /     .label.uppercase class="#{label.downcase}" = label
   .info
     .line.flex.justify-between
       .left.categories
-        a.kind href="/#{product.kind.title.downcase}" = product[:kind]
+        a.kind href="/#{product.kind.title.downcase}" = product.kind.title
         - for category in product.categories
-          a.category href=category[:link] = "/ #{category[:title]}"
-      .right.rating= product[:pating]
+          a.category href="/categories/#{category.title}"
+            | /&nbsp;
+            = category.title
+      / .right.rating= product.rating
     .line
-      h3.text-3xl= product[:title]
+      h3.text-3xl= product.title
     .line
-      .author= product[:author]
+      .author= product.author.name
     .line.flex.justify-between.items-center
       .left.flex.items-center
-        .version= "v #{product[:version]}"
-        .date= product[:date]
+        .version= "v #{product.versions&.last&.number}"
+        .date= product.updated_at.strftime("%Y-%m-%d")
       .right
-        .price= "$ #{product[:price]}"
+        .price
+          - if product.price.present? && product.price > 0
+            = "$ #{product.price}"
+          - else
+            | FREE

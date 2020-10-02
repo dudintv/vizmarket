@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_14_120515) do
+ActiveRecord::Schema.define(version: 2020_10_02_122350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(version: 2020_08_14_120515) do
     t.integer "kind_id"
     t.text "videos"
     t.text "youtube_ids"
+    t.bigint "author_id", null: false
+    t.index ["author_id"], name: "index_products_on_author_id"
     t.index ["kind_id"], name: "index_products_on_kind_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
@@ -179,6 +181,7 @@ ActiveRecord::Schema.define(version: 2020_08_14_120515) do
   add_foreign_key "authors", "users"
   add_foreign_key "new_categories", "products"
   add_foreign_key "new_categories", "users"
+  add_foreign_key "products", "authors"
   add_foreign_key "products", "users"
   add_foreign_key "scripts", "versions"
   add_foreign_key "versions", "products"
