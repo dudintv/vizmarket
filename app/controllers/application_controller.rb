@@ -15,48 +15,28 @@ class ApplicationController < ActionController::Base
   #TEMP DATA:
 
   def get_data
-    if user_signed_in?
-      user = {
-        "name": "Temp",
-        "surname": "Temporary",
-        "email": current_user.email
-      }
-    end
     @data = {
-      menu: [
-        "Scripts",
-        "Scenes",
-        "Plugins",
-        "Free",
-        "Portfolios",
-        "Vault"
-      ],
-      user: user,
-      # user: {
-      #   "name": "Dmitry",
-      #   "surname": "Dudin",
-      #   "email": "svetoz@gmail.com"
-      # },
-      cart_items: [
-        {
-            "type": "Script",
-            "category": "Position",
-            "title": "Random movements with brilliant accuracy",
-            "original_price": "$ 50.0",
-            "price": "$ 12.5"
-        },{
-            "type": "Script",
-            "category": "Position",
-            "title": "Flex",
-            "price": "$ 29.0"
-        },{
-            "type": "Plugin",
-            "category": "Position",
-            "title": "Center array lines",
-            "original_price": "$ 200.0",
-            "price": "$ 150.0"
-        }
-      ],
+      user: current_user,
+      # cart_items: [
+      #   {
+      #       "type": "Script",
+      #       "category": "Position",
+      #       "title": "Random movements with brilliant accuracy",
+      #       "original_price": "$ 50.0",
+      #       "price": "$ 12.5"
+      #   },{
+      #       "type": "Script",
+      #       "category": "Position",
+      #       "title": "Flex",
+      #       "price": "$ 29.0"
+      #   },{
+      #       "type": "Plugin",
+      #       "category": "Position",
+      #       "title": "Center array lines",
+      #       "original_price": "$ 200.0",
+      #       "price": "$ 150.0"
+      #   }
+      # ],
       socnets: [
         {
           "title": "Google",
@@ -94,127 +74,127 @@ class ApplicationController < ActionController::Base
         },
       ],
 
-      products: [
-        {
-          image: '',
-          title: 'Random Movement',
-          author: 'Dmitry Dudin',
-          version: '1.2',
-          date: '03-07-2019',
-          price: 10,
-          pating: 4.5,
-          kind: "Script",
-          categories: [
-            {title: "position", link: '#'},
-          ],
-          labels: [
-            "Featured",
-            "New",
-          ]
-        },
-        {
-          image: '',
-          title: 'Random Movement',
-          author: 'Dmitry Dudin',
-          version: '1.2',
-          date: '03-07-2019',
-          price: 10,
-          pating: 4.5,
-          kind: "Script",
-          categories: [
-            {title: "position", link: '#'},
-          ],
-          labels: [
-            "Featured",
-            "New",
-          ]
-        },
-        {
-          image: '',
-          title: 'Random Movement',
-          author: 'Dmitry Dudin',
-          version: '1.2',
-          date: '03-07-2019',
-          price: 10,
-          pating: 4.5,
-          kind: "Script",
-          categories: [
-            {title: "position", link: '#'},
-          ],
-          labels: [
-            "Featured",
-            "New",
-          ]
-        },
-        {
-          image: '',
-          title: 'Random Movement',
-          author: 'Dmitry Dudin',
-          version: '1.2',
-          date: '03-07-2019',
-          price: 10,
-          pating: 4.5,
-          kind: "Script",
-          categories: [
-            {title: "position", link: '#'},
-          ],
-          labels: [
-            "Featured",
-            "New",
-          ]
-        },
-        {
-          image: '',
-          title: 'Random Movement',
-          author: 'Dmitry Dudin',
-          version: '1.2',
-          date: '03-07-2019',
-          price: 10,
-          pating: 4.5,
-          kind: "Script",
-          categories: [
-            {title: "position", link: '#'},
-          ],
-          labels: [
-            "Featured",
-            "New",
-          ]
-        },
-        {
-          image: '',
-          title: 'Random Movement',
-          author: 'Dmitry Dudin',
-          version: '1.2',
-          date: '03-07-2019',
-          price: 10,
-          pating: 4.5,
-          kind: "Script",
-          categories: [
-            {title: "position", link: '#'},
-          ],
-          labels: [
-            "Featured",
-            "New",
-          ]
-        },
-        {
-          image: '',
-          title: 'Random Movement',
-          author: 'Dmitry Dudin',
-          version: '1.2',
-          date: '03-07-2019',
-          price: 10,
-          pating: 4.5,
-          kind: "Script",
-          categories: [
-            {title: "position", link: '#'},
-          ],
-          labels: [
-            "Featured",
-            "New",
-          ]
-        },
-      ]
+      # products: [
+      #   {
+      #     image: '',
+      #     title: 'Random Movement',
+      #     author: 'Dmitry Dudin',
+      #     version: '1.2',
+      #     date: '03-07-2019',
+      #     price: 10,
+      #     pating: 4.5,
+      #     kind: "Script",
+      #     categories: [
+      #       {title: "position", link: '#'},
+      #     ],
+      #     labels: [
+      #       "Featured",
+      #       "New",
+      #     ]
+      #   },
+      #   {
+      #     image: '',
+      #     title: 'Random Movement',
+      #     author: 'Dmitry Dudin',
+      #     version: '1.2',
+      #     date: '03-07-2019',
+      #     price: 10,
+      #     pating: 4.5,
+      #     kind: "Script",
+      #     categories: [
+      #       {title: "position", link: '#'},
+      #     ],
+      #     labels: [
+      #       "Featured",
+      #       "New",
+      #     ]
+      #   },
+      #   {
+      #     image: '',
+      #     title: 'Random Movement',
+      #     author: 'Dmitry Dudin',
+      #     version: '1.2',
+      #     date: '03-07-2019',
+      #     price: 10,
+      #     pating: 4.5,
+      #     kind: "Script",
+      #     categories: [
+      #       {title: "position", link: '#'},
+      #     ],
+      #     labels: [
+      #       "Featured",
+      #       "New",
+      #     ]
+      #   },
+      #   {
+      #     image: '',
+      #     title: 'Random Movement',
+      #     author: 'Dmitry Dudin',
+      #     version: '1.2',
+      #     date: '03-07-2019',
+      #     price: 10,
+      #     pating: 4.5,
+      #     kind: "Script",
+      #     categories: [
+      #       {title: "position", link: '#'},
+      #     ],
+      #     labels: [
+      #       "Featured",
+      #       "New",
+      #     ]
+      #   },
+      #   {
+      #     image: '',
+      #     title: 'Random Movement',
+      #     author: 'Dmitry Dudin',
+      #     version: '1.2',
+      #     date: '03-07-2019',
+      #     price: 10,
+      #     pating: 4.5,
+      #     kind: "Script",
+      #     categories: [
+      #       {title: "position", link: '#'},
+      #     ],
+      #     labels: [
+      #       "Featured",
+      #       "New",
+      #     ]
+      #   },
+      #   {
+      #     image: '',
+      #     title: 'Random Movement',
+      #     author: 'Dmitry Dudin',
+      #     version: '1.2',
+      #     date: '03-07-2019',
+      #     price: 10,
+      #     pating: 4.5,
+      #     kind: "Script",
+      #     categories: [
+      #       {title: "position", link: '#'},
+      #     ],
+      #     labels: [
+      #       "Featured",
+      #       "New",
+      #     ]
+      #   },
+      #   {
+      #     image: '',
+      #     title: 'Random Movement',
+      #     author: 'Dmitry Dudin',
+      #     version: '1.2',
+      #     date: '03-07-2019',
+      #     price: 10,
+      #     pating: 4.5,
+      #     kind: "Script",
+      #     categories: [
+      #       {title: "position", link: '#'},
+      #     ],
+      #     labels: [
+      #       "Featured",
+      #       "New",
+      #     ]
+      #   },
+      # ]
     }
   end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'pages#test'
+  root 'pages#index'
 
   get 'scripts', to: 'products#scripts'
   get 'scenes', to: 'products#scenes'
@@ -82,5 +82,6 @@ Rails.application.routes.draw do
   # TEST
   get '/test', to: 'test#test'
   get '/test/images', to: 'test#images'
+  get '/test/index', to: 'test#index'
   get '/test/*path', to: 'test#test' # to test vue-router
 end

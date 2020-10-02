@@ -87,6 +87,7 @@ header nav {
 
     li {
       @apply flex-grow;
+      max-width: 10rem;
     }
 
     a {

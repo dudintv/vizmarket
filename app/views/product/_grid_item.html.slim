@@ -4,14 +4,14 @@
       img src='/images/svg/default-product.svg'
     - else
       img src=product[:image]
-    .labels
-      - for label in product[:labels]
-        .label.uppercase class="#{label.downcase}" = label
+    / .labels
+    /   - for label in product[:labels]
+    /     .label.uppercase class="#{label.downcase}" = label
   .info
     .line.flex.justify-between
       .left.categories
-        a.kind href="/#{product[:kind].downcase}" = product[:kind]
-        - for category in product[:categories]
+        a.kind href="/#{product.kind.title.downcase}" = product[:kind]
+        - for category in product.categories
           a.category href=category[:link] = "/ #{category[:title]}"
       .right.rating= product[:pating]
     .line

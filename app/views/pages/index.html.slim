@@ -1,0 +1,11 @@
+.anonses.mx-auto
+  - for anons in @anonses
+    = render partial: 'shared/anons', locals: {anons: anons}
+
+hr.hr
+
+section.products-grid.container.mx-auto
+  / h2.grid-full-row All products
+  - for product in @products
+    = render partial: 'product/grid_item', locals: {product: product}
+  a.main-btn.long-btn.grid-full-row href='' All products
