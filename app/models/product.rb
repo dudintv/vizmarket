@@ -7,6 +7,8 @@ class Product < ApplicationRecord
   has_one_attached :thumbnail
   has_one_attached :featured_image
   has_many_attached :images
+
+  default_scope { where(public: true) }
   
   validates :title, :kind, :user, presence: true
 end

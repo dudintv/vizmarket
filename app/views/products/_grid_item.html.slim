@@ -10,14 +10,15 @@
   .info
     .line.flex.justify-between
       .left.categories
-        a.kind href="/#{product.kind.title.downcase}" = product.kind.title
+        a.kind href="/#{product.kind.title.pluralize.downcase}" = product.kind.title
         - for category in product.categories
           a.category href="/categories/#{category.title}"
             | /&nbsp;
             = category.title
       / .right.rating= product.rating
     .line
-      h3.text-3xl= product.title
+      h3.text-3xl
+        = link_to product.title, product_path(product)
     .line
       .author= product.author.name
     .line.flex.justify-between.items-center
