@@ -1,0 +1,3 @@
+section.products-grid.container.mx-auto.mt-16
+  - for product in @products
+    = render partial: 'products/grid_item', locals: {product: product}
