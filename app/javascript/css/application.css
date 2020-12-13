@@ -21,5 +21,6 @@
 @import "./shared/nav.scss";
 
 @import "./product/grid-item.scss";
+@import "./product/product-page.scss";
 
 @import "tailwind/tailwind";

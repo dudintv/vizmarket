@@ -117,9 +117,11 @@ export default {
       for (const file of document.getElementById('versionFileInput').files) {
         formData.append('version[files][]', file)
       }
-      for (const file of this.oldFiles) {
-        if (file.isRemoved) {
-          formData.append('version[remove_files][]', file.id)
+      if (this.oldFiles) {
+        for (const file of this.oldFiles) {
+          if (file.isRemoved) {
+            formData.append('version[remove_files][]', file.id)
+          }
         }
       }
       if (this.product.kind === 'script') {

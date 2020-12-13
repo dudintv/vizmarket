@@ -10,7 +10,8 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.includes(:versions, :author, :kind, :categories).find(params[:id])
+    @product_decorator = @product.decorate
   end
 
   def scripts

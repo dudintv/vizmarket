@@ -2,6 +2,7 @@
   .stepper
     router-link.step(
       v-for="(step, index) in steps" 
+      :key="index"
       :class="{ invalid: !!step.invalid, done: !!step.done }"
       :to="step.link"
       )

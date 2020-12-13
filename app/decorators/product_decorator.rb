@@ -10,6 +10,28 @@ class ProductDecorator < Draper::Decorator
   #     end
   #   end
 
+  def last_version
+    object.versions.last
+  end
+
+  def author_link
+    h.link_to(object.author.name, h.author_url(object.author), class: 'author')
+  end
+
+  def taxonomy_links
+    kind = h.link_to(object.kind.title, "/#{object.kind.title.pluralize}", class: 'kind')
+    categories = object.categories.map{ |category| h.link_to("/ #{category.title}", h.category_path(category), class: 'category') }.join(' ')
+    "#{kind} #{categories}"
+  end
+
+  def created_at
+    object.created_at.strftime("%d %B %Y")
+  end
+
+  def updated_at
+    object.updated_at.strftime("%d %B %Y")
+  end
+
   # Product images:
 
   def thumbnail

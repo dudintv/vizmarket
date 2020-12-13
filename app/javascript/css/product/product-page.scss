@@ -1,0 +1,85 @@
+.product-page {
+  @apply grid mt-8 p-8 bg-body-darker shadow-xl;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+
+  section {
+    @apply mb-6;
+  }
+
+  .taxonomy {
+    @apply flex uppercase;
+
+    .kind {
+      @apply text-orange;
+
+      &:hover {
+        @apply text-orange-hover;
+      }
+    }
+
+    .category {
+      @apply ml-2 text-light-blue;
+
+      &:hover {
+        @apply text-light-blue-hover;
+      }
+    }
+  }
+
+  .author, .price {
+    @apply text-light-blue;
+  }
+
+  .author {
+    @apply text-blue-50;
+  }
+
+  .price {
+    @apply text-xl font-bold;
+  }
+
+  .title {
+    @apply text-2xl;
+    line-height: 1.5rem;
+  }
+
+  .short-description{
+    @apply px-4 py-2;
+    background: linear-gradient(119.02deg, #0081CE 0%, rgba(0, 115, 184, 0.680985) 2.68%, rgba(0, 102, 162, 0.376874) 7.07%, rgba(0, 85, 136, 0) 28.7%), linear-gradient(90deg, rgba(0, 77, 124, 0.25) 0%, rgba(0, 45, 71, 0) 100%);
+  }
+
+  .version, .date {
+    @apply text-white-50;
+  }
+
+  .version{
+    @apply my-2 flex;
+  }
+
+  .version-number {
+    @apply inline-block py-1 px-2 mr-2 border border-white-20;
+    height: fit-content;
+  }
+
+  .version-date, .version-support {
+    @apply py-1 px-2;
+  }
+
+  .version-items {
+    @apply py-1 px-2 flex flex-col;
+  }
+
+  .version:first-child {
+    .version-number {
+      @apply border-orange;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .product-page {
+    @apply grid;
+    grid-template-columns: 1fr;
+  }  
+}

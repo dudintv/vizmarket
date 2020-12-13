@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :products, only: [:index, :show]
+  resources :authors, only: [:show]
   get 'scripts', to: 'products#scripts'
   get 'scenes', to: 'products#scenes'
   get 'plugins', to: 'products#plugins'

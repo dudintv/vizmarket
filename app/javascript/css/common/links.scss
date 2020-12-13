@@ -2,7 +2,7 @@ a {
   @apply text-white;
 
   &:hover {
-    @apply text-white-hover;
+    @apply text-white-hover bg-white-10;
   }
 }
 
@@ -12,4 +12,8 @@ a.file {
   &:hover {
     @apply text-orange-hover border-b border-orange-hover;
   }
+}
+
+button {
+  @apply text-white bg-blue-50 px-2;
 }

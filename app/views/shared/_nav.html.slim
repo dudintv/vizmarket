@@ -48,9 +48,12 @@ header
         - if @data[:user]
           .auth-user
             = link_to settings_root_path, id: 'open-user' do
-              img src='/images/svg/default_avatar.svg' width='40' height='40'
+              - if current_user.avatar.attached?
+                = image_tag @data[:user].avatar.variant(resize_to_fill: [40, 40]), class: 'avatar'
+              - else
+                = image_tag '/images/svg/default_avatar.svg', width: '40', height: '40', class: 'avatar'
               ' &nbsp;
-              span.normal-case= current_account.email
+              span.normal-case.ml-2 = current_account.email
           .popup.user-popup#user-popup
             .line.edit
               span.name= @data[:user][:email]

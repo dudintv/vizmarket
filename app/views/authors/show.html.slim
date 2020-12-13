@@ -1,0 +1,6 @@
+section.author-info
+  h1 = @author.name
+section.products-grid.container.mx-auto.mt-16
+  / h2.grid-full-row All products
+  - for product in @products
+    = render partial: 'products/grid_item', locals: {product: product}

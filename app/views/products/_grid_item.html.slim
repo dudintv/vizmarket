@@ -1,9 +1,10 @@
-.product
+.product-grid-item
   .image
-    - if(product.thumbnail.present?)
-      img src=url_for(product.thumbnail)
-    - else
-      img src='/images/svg/default-product.svg'
+    = link_to product_path(product) do
+      - if(product.thumbnail.present?)
+        img src=url_for(product.thumbnail)
+      - else
+        img src='/images/svg/default-product.svg'
     / .labels
     /   - for label in product[:labels]
     /     .label.uppercase class="#{label.downcase}" = label
@@ -12,7 +13,7 @@
       .left.categories
         a.kind href="/#{product.kind.title.pluralize.downcase}" = product.kind.title
         - for category in product.categories
-          a.category href="/categories/#{category.title}"
+          = link_to category_url(category.title), class: 'category'
             | /&nbsp;
             = category.title
       / .right.rating= product.rating

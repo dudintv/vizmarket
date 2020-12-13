@@ -1,0 +1,42 @@
+.product-page.container.mx-auto
+  .gallery
+    = image_tag @product_decorator.featured_image
+  .main-info
+    section
+      .taxonomy == @product_decorator.taxonomy_links
+      .header
+        .author == @product_decorator.author_link
+        .title = @product.title
+      .buy
+    - if @product.short_description
+      section
+        .short-description
+          = @product.short_description
+    section
+      - @product.versions.each do |version|
+        .version
+          .version-number == "v&nbsp;#{version.number}"
+          .version-date = version.updated_at.strftime("%d.%m.%Y")
+          .version-support = version.support
+          .version-items
+            - if version.files.present?
+              - version.files.each do |file|
+                .version-file
+                  = link_to file.filename.to_s, rails_blob_path(file, disposition: 'attachment')
+                  / = link_to file.filename.to_s, url_for(file)
+            - if version.script
+              .version-script-btn
+                button Show the script
+              / .version-script = version.script.script
+  .descriptions-block
+    - if @product.description
+      .description
+        h3 Description
+        = @product.description
+    - if @product.instruction
+      .how-to-use
+        h3 How to use
+        = @product.instruction
+  .comments-block
+    .new-comment-form
+    .comments
