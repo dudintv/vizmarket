@@ -1,3 +1,9 @@
+= stylesheet_pack_tag 'code-highlighter', 'data-turbolinks-track': 'reload'
+= javascript_pack_tag 'code-highlighter', 'data-turbolinks-track': 'reload'
+
+= stylesheet_pack_tag 'modal-window', 'data-turbolinks-track': 'reload'
+= javascript_pack_tag 'modal-window', 'data-turbolinks-track': 'reload'
+
 .product-page.container.mx-auto
   .gallery
     = image_tag @product_decorator.featured_image
@@ -16,7 +22,7 @@
       - @product.versions.each do |version|
         .version
           .version-number == "v&nbsp;#{version.number}"
-          .version-date = version.updated_at.strftime("%d.%m.%Y")
+          .version-date = version.updated_at.strftime('%d.%m.%Y')
           .version-support = version.support
           .version-items
             - if version.files.present?
@@ -26,8 +32,20 @@
                   / = link_to file.filename.to_s, url_for(file)
             - if version.script
               .version-script-btn
-                button Show the script
+                button data-hystmodal="#scriptCodeModal" Show the script
+              / pre.language-vb
+              /   code id="product-code" class="language-vb"
+              /     = version.script.script
               / .version-script = version.script.script
+              #scriptCodeModal.hystmodal aria-hidden="true"
+                .hystmodal__wrap
+                  .hystmodal__window aria-modal="true" role="dialog"
+                    button.hystmodal__close data-hystclose="" Закрыть
+                    /! Ваш HTML код модального окна:
+                    pre.language-vb
+                      code id="product-code" class="language-vb"
+                        = version.script.script
+
   .descriptions-block
     - if @product.description
       .description
