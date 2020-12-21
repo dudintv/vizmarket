@@ -33,15 +33,18 @@
             - if version.script
               .version-script-btn
                 button data-hystmodal="#scriptCodeModal-#{version.id}" Show the script
+                button onClick="copyToClipboard('product-code-#{version.id}')" Copy to clipboard
               / pre.language-vb
               /   code id="product-code" class="language-vb"
               /     = version.script.script
               / .version-script = version.script.script
+
+              / https://addmorescripts.github.io/hystModal/index_ru.html
               .hystmodal id="scriptCodeModal-#{version.id}" aria-hidden="true"
                 .hystmodal__wrap
                   .hystmodal__window aria-modal="true" role="dialog"
-                    button.hystmodal__close data-hystclose="" Закрыть
-                    /! Ваш HTML код модального окна:
+                    button.copy-icon onClick="copyToClipboard('product-code-#{version.id}')"
+                    button.hystmodal__close data-hystclose="" Close
                     pre.language-vb
                       code id="product-code-#{version.id}" class="language-vb"
                         = version.script.script
