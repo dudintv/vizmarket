@@ -1,12 +1,18 @@
-= stylesheet_pack_tag 'code-highlighter', 'data-turbolinks-track': 'reload'
-= javascript_pack_tag 'code-highlighter', 'data-turbolinks-track': 'reload'
+= stylesheet_pack_tag 'fotorama', 'data-turbolinks-track': 'reload'
+= javascript_pack_tag 'fotorama', 'data-turbolinks-track': 'reload'
+
+= stylesheet_pack_tag 'code', 'data-turbolinks-track': 'reload'
+= javascript_pack_tag 'code', 'data-turbolinks-track': 'reload'
 
 = stylesheet_pack_tag 'modal-window', 'data-turbolinks-track': 'reload'
 = javascript_pack_tag 'modal-window', 'data-turbolinks-track': 'reload'
 
 .product-page.container.mx-auto
   .gallery
-    = image_tag @product_decorator.featured_image
+    .fotorama data-allowfullscreen="true" data-width="100%" data-ratio="16/9"
+      = image_tag @product_decorator.featured_image
+      - @product.images.each do |image|
+        img src="#{url_for(image)}"
   .main-info
     section
       .taxonomy == @product_decorator.taxonomy_links
