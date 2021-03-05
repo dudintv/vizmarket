@@ -8,9 +8,12 @@
 = javascript_pack_tag 'modal-window', 'data-turbolinks-track': 'reload'
 
 .product-page.container.mx-auto
-  .gallery
-    .fotorama data-allowfullscreen="true" data-width="100%" data-ratio="16/9"
-      = image_tag @product_decorator.featured_image
+  .gallery#product-gallery
+    .fotorama data-allowfullscreen="true" data-width="100%" data-ratio="16/9" data-minwidth="100" data-maxwidth="800" data-minheight="300" data-maxheight="100%"
+      / = image_tag @product_decorator.featured_image
+      - if @product.videos
+        - @product.videos.split(' ').each do |video_link|
+          a href="#{video_link}" video
       - @product.images.each do |image|
         img src="#{url_for(image)}"
   .main-info

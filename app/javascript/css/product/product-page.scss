@@ -1,6 +1,6 @@
 .product-page {
   @apply grid mt-8 p-8 bg-body-darker shadow-xl;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr fit-content(50%);
   grid-gap: 2rem;
 
   section {
@@ -75,11 +75,15 @@
       @apply border-orange;
     }
   }
+
+  // .gallery {
+  //   width: 50%;
+  // }
 }
 
 @media (max-width: 800px) {
   .product-page {
     @apply grid;
     grid-template-columns: 1fr;
-  }  
+  }
 }
