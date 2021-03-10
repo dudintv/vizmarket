@@ -19,6 +19,10 @@ body.pattern, body.pattern-dark {
   background-size: 400px, auto;
 }
 
-body.pattern-dark{
+body.pattern-dark {
   background-blend-mode: saturation;
+}
+
+.main-content {
+  min-height: 70vh;
 }

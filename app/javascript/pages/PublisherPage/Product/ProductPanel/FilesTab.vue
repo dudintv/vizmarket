@@ -3,7 +3,7 @@
     div(v-for="version in product.versions" :key="version.id")
       VersionForm(v-if="version.isEdit" :version="version" @hide="hideEditingPanel(version)")
       VersionListItem(v-else :version="version")
-    VersionForm(v-if="isShowCreateVersionPanel" @hide="hideCreatingPanel()" isCreating)
+    VersionForm(v-if="isShowCreateVersionPanel" @hide="hideCreatingPanel()" :recommendedNewNumber="recommendedNewNumber" isCreating)
     button.btn.main-btn.middle-btn.mb-4(v-else @click="isShowCreateVersionPanel=true") Create new version
 </template>
 
@@ -25,6 +25,15 @@ export default {
     product () {
       return this.$store.state.currentProduct;
     },
+    recommendedNewNumber () {
+      if (this.product.versions.length > 0) {
+        const majorVer = this.product.versions.slice(-1)[0].number ?? 1
+        return `${Number(majorVer) + 1}`
+        // return "9.99"
+      } else {
+        return "1.0"
+      }
+    }
   },
   methods: {
     hideCreatingPanel () {

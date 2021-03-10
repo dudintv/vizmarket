@@ -20,5 +20,6 @@ document.addEventListener('turbolinks:load', () => {
   // const el = document.getElementById('product-code')
   // Prism.highlightElement(document.getElementById('product-code'))
 
+  console.log('[ code.js turbolinks:load ]')
   window.copyToClipboard = copyToClipboard
 })

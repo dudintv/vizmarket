@@ -7,11 +7,13 @@ header
           img src='/images/svg/logo-name.svg' width="123" height="35"
       .nav-lg-md
         ul.nav.horizontal-nav
-          li.line = link_to 'Scripts',  '/scripts', class: @selected=='scripts' ? 'selected' : ''
-          li.line = link_to 'Scenes',   '/scenes',  class: @selected=='scenes'  ? 'selected' : ''
-          li.line = link_to 'Plugins',  '/plugins', class: @selected=='plugins' ? 'selected' : ''
-          / li.line = link_to 'Free',     free_path,    class: @selected=='free'    ? 'selected' : ''
-          / li.line = link_to 'Vault',    vault_path,   class: @selected=='vault'   ? 'selected' : ''
+          li.line = link_to 'Scripts', '/scripts', class: @selected == 'scripts' ? 'selected' : ''
+          li.line = link_to 'Shaders', '/shaders', class: @selected == 'shaders' ? 'selected' : ''
+          li.line = link_to 'Scenes', '/scenes',  class: @selected == 'scenes'  ? 'selected' : ''
+          li.line = link_to 'Plugins', '/plugins', class: @selected == 'plugins' ? 'selected' : ''
+          li.line = link_to 'Tutorials', '/tutorials', class: @selected == 'tutorials' ? 'selected' : ''
+          / li.line = link_to 'Free', free_path, class: @selected == 'free' ? 'selected' : ''
+          / li.line = link_to 'Vault', vault_path, class: @selected == 'vault' ? 'selected' : ''
     .nav-right-half
       .nav-lg-md
         .search
@@ -37,8 +39,10 @@ header
                 a.button-search.over-input href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
             
             li.line = link_to 'Scripts',  '/scripts', class: @selected=='scripts' ? 'selected' : ''
+            li.line = link_to 'Shaders',  '/shaders', class: @selected=='shaders' ? 'selected' : ''
             li.line = link_to 'Scenes',   '/scenes',  class: @selected=='scenes'  ? 'selected' : ''
             li.line = link_to 'Plugins',  '/plugins', class: @selected=='plugins' ? 'selected' : ''
+            li.line = link_to 'Tutorials',  '/tutorials', class: @selected=='tutorials' ? 'selected' : ''
       / .cart
       /     a#open-cart href='#'
       /       img src='/images/svg-icons/cart.svg' width="24" height="24"

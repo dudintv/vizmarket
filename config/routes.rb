@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   resources :authors, only: [:show]
   get 'scripts', to: 'products#scripts'
+  get 'shaders', to: 'products#shaders'
   get 'scenes', to: 'products#scenes'
   get 'plugins', to: 'products#plugins'
+  get 'tutorials', to: 'products#tutorials'
 
   get 'categories/:title', to: 'categories#show', as: 'category'
   

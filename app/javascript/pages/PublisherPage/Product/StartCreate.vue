@@ -23,7 +23,7 @@ export default {
   },
   data () {
     return {
-      kinds: ['script', 'scene', 'plugin', 'asset'],
+      kinds: ['script', 'shader', 'scene', 'plugin', 'tutorial'],
       kind: '',
       name: '',
       errorFromServer: '',

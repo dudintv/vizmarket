@@ -18,12 +18,20 @@ class ProductsController < ApplicationController
     redirect_to action: :index, kind: 'script'
   end
 
+  def shaders
+    redirect_to action: :index, kind: 'shader'
+  end
+
   def scenes
     redirect_to action: :index, kind: 'scene'
   end
 
   def plugins
     redirect_to action: :index, kind: 'plugin'
+  end
+
+  def tutorials
+    redirect_to action: :index, kind: 'tutorial'
   end
 
   private

@@ -103,9 +103,9 @@ export default new Vuex.Store({
     // ],
     // kindList: [
     //   "script",
+    //   "shader",
     //   "scene",
     //   "plugin",
-    //   "assets",
     // ],
 
     filter: 'all',

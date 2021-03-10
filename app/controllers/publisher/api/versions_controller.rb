@@ -17,7 +17,7 @@ class Publisher::Api::VersionsController < ApplicationController
     @version = Version.new(version_params.merge(product: @product))
     if @version.save
       @version.files.attach(params[:version][:files]) if params.dig(:version, :files).present?
-      if params[:version][:script].present? && @product.kind.title == 'script'
+      if params[:version][:script].present? && (@product.kind.title == 'script' || @version.product.kind.title == 'shader' )
         Script.create(version: @version, script: params[:version][:script])
       end
       render json: VersionSerializer.new(@version).serialized_json, status: :created
@@ -34,7 +34,8 @@ class Publisher::Api::VersionsController < ApplicationController
           @version.files.find(file_id).purge
         end
       end
-      if params[:version][:script].present? && @version.product.kind.title == 'script'
+      puts "!!!!! ++++ !!!!! params[:version][:script] = #{params[:version][:script]}"
+      if params[:version][:script].present? && ( @version.product.kind.title == 'script' || @version.product.kind.title == 'shader' )
         if @version.script.present?
           @version.script.update(script: params[:version][:script])
         else

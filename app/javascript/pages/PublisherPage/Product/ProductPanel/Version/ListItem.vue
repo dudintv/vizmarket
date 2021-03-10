@@ -71,7 +71,7 @@ export default {
     },
     publicStatus () {
       return this.version.public ? "published" : "unpublished"
-    }
+    },
   },
   methods: {
     editVersion () {
