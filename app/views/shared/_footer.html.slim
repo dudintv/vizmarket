@@ -10,10 +10,11 @@ footer.footer.py-8.mt-8.relative
       / a href='#' Create a portfolio
       / a href='#' Author Guidlines
     .w-1_6.flex.flex-col.items-start
-      a href='#' Privacy Policy
-      a href='#' License Terms
-      a href='#' FAQ
+      = link_to 'FAQ', faq_path
+      = link_to 'Privacy Policy', privacy_path
+      = link_to 'Terms of service', terms_path
     .w-1_6.flex.flex-col.items-start
+      = link_to 'Contact', contact_path
       / a href='#' Authors
       / a href='#' Using products
       / a href='#' Feedback
@@ -27,5 +28,5 @@ footer.footer.py-8.mt-8.relative
   .container.relative.mx-auto.flex.z-20.pt-4
     .w-2_6
     .w-2_6.copyright
-      | created by dudin.tv © 2019
+      | created & support by <strong>dudin.tv</strong> © 2021
     .w-2_6

@@ -26,6 +26,21 @@ class PagesController < ApplicationController
     @products = Product.all.with_attached_thumbnail
   end
 
+  def faq
+  end
+
+  def how_to_install_scripts
+  end
+
+  def privacy
+  end
+
+  def terms
+  end
+
+  def contact
+  end
+
   def test
   end
 end
