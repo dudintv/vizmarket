@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[facebook google]
   has_many :authorizations, dependent: :destroy
   has_many :products, dependent: :destroy
+  has_many :feedback_messages
   has_one :author, dependent: :destroy
   has_one_attached :avatar
 

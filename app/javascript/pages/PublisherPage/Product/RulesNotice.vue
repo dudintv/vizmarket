@@ -7,7 +7,7 @@
       | Before continuing any further, please ensure that
       br
       | you have thoroughly reviewed the 
-      a(href="#") Marketplace Guidelines.
+      a(href="/guidelines") Marketplace Guidelines.
 </template>
 
 <script>

@@ -82,10 +82,13 @@ Rails.application.routes.draw do
   
   # FOOTER LIKS
   get '/faq', to: 'pages#faq'
+  get '/guidelines', to: 'pages#guidelines'
   get '/how-to-install-scripts', to: 'pages#how_to_install_scripts'
   get '/privacy', to: 'pages#privacy'
   get '/terms', to: 'pages#terms'
   get '/contact', to: 'pages#contact'
+  
+  resources :feedback_messages, only: [:index, :new, :create, :destroy]
   
   # TEST
   get '/test', to: 'test#test'

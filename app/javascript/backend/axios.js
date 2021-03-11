@@ -19,6 +19,10 @@ const user_adapter = axios.create({
   baseURL: '/settings/user',
 })
 
+const feedback_message_adapter = axios.create({
+  baseURL: '/feedback_messages',
+})
+
 export default {
   user: {
     get: () => user_adapter.get('/show'),
@@ -62,4 +66,10 @@ export default {
 
     deleteFile: (key) => publisher_adapter.delete(`/versions/delete_file`, { params: { key: key } }),
   },
+  feedbackMessages: {
+    index: () => feedback_message_adapter.get('/'),
+    new: () => feedback_message_adapter.get('/new'),
+    create: message => feedback_message_adapter.post('/', message),
+    delete: id => feedback_message_adapter.delete(`/${id}`),
+  }
 }

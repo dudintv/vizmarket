@@ -1,3 +1,5 @@
+require 'pushover'
+
 class PagesController < ApplicationController
   def index
     @anonses = [
@@ -19,7 +21,7 @@ class PagesController < ApplicationController
         image: '/images/anons/learn-basic.jpg',
         title: 'VizScript is easy!',
         text: 'Instructions for VizScript\'s beginners. If you are using a script in the first time.',
-        link: '#',
+        link: '/how-to-install-scripts',
         action: 'How to install a script?'
       },
     ]
@@ -39,6 +41,9 @@ class PagesController < ApplicationController
   end
 
   def contact
+  end
+
+  def guidelines
   end
 
   def test
