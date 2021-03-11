@@ -65,3 +65,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 
 gem 'draper'
+
+# instant push messages for developer
+gem 'pushover'
