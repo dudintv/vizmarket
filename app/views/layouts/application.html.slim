@@ -5,12 +5,16 @@ html
       | Vizmarket
     = csrf_meta_tags
     = csp_meta_tag
+    = render 'shared/google_head'
     link rel="icon" type="image/png" href="/images/favicon.png"
+
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = yield :head
+
   body.pattern.relative
+    = render 'shared/google_body'
     = render 'shared/nav'
     = render 'shared/flash'
     .main-content = yield
