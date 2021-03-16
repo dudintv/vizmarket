@@ -3,7 +3,7 @@
     ul.mb-1
       li.filter.inline-block(v-for="filter in filters" :key="filter.name")
         a.cursor-pointer( 
-          :class="{'selected_filter': filter.name?.toLowerCase() === selected_filter?.toLowerCase() }"
+          :class="{'selected_filter': filter.name.toLowerCase() === selected_filter.toLowerCase() }"
           @click.prevent="changeFilter(filter)"
           ) {{ filter.name }} ({{ filter.count }})
         | &nbsp;
