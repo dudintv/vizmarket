@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     inputName () {
-      return this.name.toLowerCase().replace(/\s/g, '_')
+      return this.name?.toLowerCase().replace(/\s/g, '_')
     },
     width () {
       return this.height * this.aspect

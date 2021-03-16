@@ -123,7 +123,7 @@ export default new Vuex.Store({
     //   return state.products.filter(product => !!product.public && !product.aproved)
     // },
     filteredProducts: (state, getters) => {
-      switch(state.filter.toLowerCase()){
+      switch(state.filter?.toLowerCase()){
         case 'published':
           return getters.publics
         case 'drafts':
