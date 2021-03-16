@@ -182,7 +182,7 @@ export default new Vuex.Store({
       state.currentProduct.versions = vesrionsData
     },
     setFilter: (state, newFilter) => {
-      state.filter = newFilter
+      state.filter = String(newFilter).toLowerCase()
     },
     setSort: (state, newSort) => {
       state.sort = newSort

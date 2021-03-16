@@ -2,7 +2,7 @@
   .product-thumbnail
     .thumbnail(:style="`background-image: url(${thumbnailUrl}); background-size: cover; background-position: center;`")
     .labels
-      .label.uppercase(v-for="label in product.labels" :class="label.toLowerCase()") {{ label }}
+      .label.uppercase(v-for="label in product.labels" :class="String(label).toLowerCase()") {{ label }}
 </template>
 
 <script>
