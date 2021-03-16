@@ -4,7 +4,6 @@ lock "~> 3.16.0"
 set :application, "vizmarket"
 set :repo_url, "git@bitbucket.org:dudintv/vizmarket.git"
 
-puts ENV
 server '91.228.155.190', port: 4321, user: 'deploy', password: ENV['PASSWORD'], roles: [:web, :app, :db], primary: true
 
 set :user,            'deploy'
@@ -31,7 +30,7 @@ set :puma_init_active_record, true # Change to false when not using ActiveRecord
 
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 
 
 namespace :puma do
