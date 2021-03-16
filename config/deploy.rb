@@ -4,7 +4,7 @@ lock "~> 3.16.0"
 set :application, "vizmarket"
 set :repo_url, "git@bitbucket.org:dudintv/vizmarket.git"
 
-server '91.228.155.190', port: 4321, user: 'deploy', password: ENV['PASSWORD'], roles: [:web, :app, :db], primary: true
+server '91.228.155.190', port: 4321, user: 'deploy', password: ENV['DEPLOY_USER_PASSWORD'], roles: [:web, :app, :db], primary: true
 
 set :user,            'deploy'
 set :puma_threads,    [4, 16]
