@@ -3,6 +3,7 @@ lock "~> 3.16.0"
 
 set :application, "vizmarket"
 set :repo_url, "git@bitbucket.org:dudintv/vizmarket.git"
+set :branch, :test
 
 server '91.228.155.190', port: 4321, user: 'deploy', password: ENV['DEPLOY_USER_PASSWORD'], roles: [:web, :app, :db], primary: true
 
