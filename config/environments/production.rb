@@ -111,4 +111,9 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.action_mailer.default_url_options = { host: "vizrt.store" }
+  config.action_mailer.smtp_settings = {
+    # enable_starttls_auto: false,
+    address: "vizrt.store",
+    # openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+  }
 end
