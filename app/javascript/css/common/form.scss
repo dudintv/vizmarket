@@ -194,29 +194,4 @@ form.devise {
     }
   }
 
-//   // FOCUS EFFECT:
-//   input:focus, input:not(:placeholder-shown),
-//   select:focus, select:not(:placeholder-shown),
-//   textarea:focus, textarea:not(:placeholder-shown) {
-//     & + label .input-name{
-//       @apply text-blue;
-//       transform: translateY(0%) scale(1);
-//     }
-//   }
-//   input:focus,
-//   select:focus,
-//   textarea:focus {
-//     & + label {
-//       @apply border border-transparent;
-//       animation: blink 0.5s linear;
-//     }
-//     & + label::after{
-//       @apply text-blue;
-//       transform: scaleX(1);
-//     }
-//   }
-// }
 
-// .tip {
-//   @apply text-sm text-white-50 pl-4;
-// }
