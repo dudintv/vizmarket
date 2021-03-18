@@ -44,6 +44,11 @@ class FeedbackMessagesController < ApplicationController
         ).push
       end
 
+      AdminMailer.with(
+        message: @feedback_message.message,
+        contacts: @feedback_message.contacts
+      ).feedback_email.deliver_now
+
       render json: FeedbackMessageSerializer.new(@feedback_message).serialized_json, status: :created
     else
       puts "@product.errors = #{@feedback_message.errors.as_json}"
