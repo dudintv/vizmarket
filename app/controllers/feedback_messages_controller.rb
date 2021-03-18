@@ -33,14 +33,15 @@ class FeedbackMessagesController < ApplicationController
 
     if @feedback_message.save
       ### Pushover (for Pullover)
-      if true # Rails.env.production?
+      if Rails.env.production?
         message = "#{@feedback_message.message}\n#{@feedback_message.contacts}"
         Pushover::Message.new(
           token: 'av8pp5co4at3msifcsz6autfc3bqrz',
           user: 'uG6H3dbSE6hXkD3kf94yGEYXaXhDKG',
           title: 'VizMarket: feedback',
           message: message,
-          priority: 0
+          priority: 0,
+          expire: 1
         ).push
       end
 
