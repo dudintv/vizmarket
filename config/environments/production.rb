@@ -110,7 +110,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { host: "vizrt.store" }
+  config.action_mailer.default_url_options = { host: "localhost" }
   config.action_mailer.default_options = { from: 'no-reply@vizrt.store' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
