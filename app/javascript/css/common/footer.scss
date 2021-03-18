@@ -1,0 +1,32 @@
+footer.footer{
+  @apply bg-item-darker;
+
+  .pattern {
+    background-image: url(/images/svg/pattern.svg);
+    background-size: 400px;
+    background-position-y: -100px;
+    opacity: .04;
+    transition: all 1s ease-in-out;
+  }
+
+  &:hover .pattern {
+    @apply opacity-10;
+    background-position-y: -105px;
+  }
+
+  a {
+    @apply py-1;
+  }
+
+  .icons a {
+    @apply p-1 opacity-80;
+
+    &:hover {
+      @apply opacity-100;
+    }
+  }
+
+  .copyright {
+    @apply text-white-50;
+  }
+}

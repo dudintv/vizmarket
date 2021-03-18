@@ -1,0 +1,28 @@
+*::selection {
+  background: #000;
+  color: #fff;
+}
+
+html,
+body {
+  @apply bg-body text-white;
+  font-family: OpenSans;
+  font-size: 14px;
+  font-weight: normal;
+  min-height: 100vh;
+}
+
+body.pattern, body.pattern-dark {
+  background-image: url(/images/svg/pattern-red.svg),
+                    linear-gradient(theme('colors.body-darker') 0%, theme('colors.body-darker-0') 500px);
+  background-repeat: repeat-x, repeat-x;
+  background-size: 400px, auto;
+}
+
+body.pattern-dark {
+  background-blend-mode: saturation;
+}
+
+.main-content {
+  min-height: 70vh;
+}

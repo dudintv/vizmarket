@@ -1,0 +1,10 @@
+.products-grid {
+  @apply justify-center;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 230px);
+}
+
+.grid-full-row {
+  grid-column: 1 / -1;
+}
