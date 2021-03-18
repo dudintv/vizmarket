@@ -2,7 +2,7 @@
 
 /* @import "./libs/line-awesome.scss"; */
 
-@import "./common/fonts.scss";
+/* @import "./common/fonts.scss";
 @import "./common/base.scss";
 @import "./common/grid.scss";
 
@@ -14,7 +14,7 @@
 @import "./common/links.scss";
 @import "./common/list.scss";
 
-@import "./common/utility.scss";
+@import "./common/utility.scss"; */
 
 @import "./shared/anons.scss";
 @import "./shared/devise.scss";
