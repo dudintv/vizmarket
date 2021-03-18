@@ -70,7 +70,7 @@ input {
   @apply relative text-orange text-2xl;
   font-family: 'Line Awesome Free';
   font-weight: 900;
-  @extend .la-exclamation-circle:before;
+  // @extend .la-exclamation-circle:before;
   left: -0.3rem;
   top: 0.2rem;
 }
@@ -79,7 +79,7 @@ input {
   @apply px-4 py-2 border border-orange bg-item;
 
   li:before {
-    @extend %before-icon-exclamation-circle;
+    // @extend %before-icon-exclamation-circle;
   }
 }
 
@@ -90,9 +90,9 @@ input {
 .error-in-field {
   @apply text-orange pl-4 pt-1 pb-2 leading-none;
 
-  &:before {
-    @extend %before-icon-exclamation-circle;
-  }
+  // &:before {
+  //   @extend %before-icon-exclamation-circle;
+  // }
 }
 
 // :VALIDATIONS
@@ -112,9 +112,9 @@ form.devise {
     label {
       @apply text-orange ml-2;
 
-      &:before {
-        @extend %before-icon-exclamation-circle;
-      }
+      // &:before {
+      //   @extend %before-icon-exclamation-circle;
+      // }
     }
   }
 

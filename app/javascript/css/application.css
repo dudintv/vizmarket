@@ -8,7 +8,7 @@
 
 @import "./common/buttons.scss";
 @import "./common/footer.scss";
-/* @import "./common/form.scss"; */
+@import "./common/form.scss";
 @import "./common/headers.scss";
 @import "./common/decoration.scss";
 @import "./common/links.scss";
