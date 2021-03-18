@@ -156,13 +156,14 @@ form.devise {
 
 @keyframes blink {
   from { border-color: transparent; }
-  10% { border-color: theme('blue-50'); }
+  10% { border-color: theme('colors.blue-50'); }
   to { border-color: transparent; }
 }
 
 .form-field {
   @apply mb-4;
 }
+
 
 .field-with-label {
   @apply relative w-full;
@@ -194,5 +195,30 @@ form.devise {
     }
   }
 
+  
+  // FOCUS EFFECT:
+  input:focus, input:not(:placeholder-shown),
+  select:focus, select:not(:placeholder-shown),
+  textarea:focus, textarea:not(:placeholder-shown) {
+    & + label .input-name{
+      @apply text-blue;
+      transform: translateY(0%) scale(1);
+    }
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    & + label {
+      @apply border border-transparent;
+      animation: blink 0.5s linear;
+    }
+    & + label::after{
+      @apply text-blue;
+      transform: scaleX(1);
+    }
+  }
+}
 
+.tip {
+  @apply text-sm text-white-50 pl-4;
 }
