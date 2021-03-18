@@ -2,7 +2,7 @@ doctype html
 html
   head
     title
-      | Vizmarket
+      | Vizmarket — Publisher Portal
     = csrf_meta_tags
     = csp_meta_tag
     = render 'shared/google_head'
@@ -13,9 +13,9 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = yield :head
 
-  body.pattern.relative
+  body.pattern-dark.relative
     = render 'shared/google_body'
     = render 'shared/nav'
     = render 'shared/flash'
-    .main-content = yield
+    .main-content.container.mx-auto.w-4_5 = yield
     = render 'shared/footer'

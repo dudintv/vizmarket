@@ -13,9 +13,9 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = yield :head
 
-  body.pattern.relative
+  body
     = render 'shared/google_body'
     = render 'shared/nav'
     = render 'shared/flash'
-    .main-content = yield
-    = render 'shared/footer'
+    .container.mx-auto.w-4_5.max-w-2xl
+      = yield

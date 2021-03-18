@@ -2,7 +2,7 @@ doctype html
 html
   head
     title
-      | Vizmarket
+      | Vizmarket — Edit Author Settings
     = csrf_meta_tags
     = csp_meta_tag
     = render 'shared/google_head'
@@ -11,11 +11,14 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    = yield :head
 
-  body.pattern.relative
+    = stylesheet_pack_tag 'publisher-start', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'publisher-start', 'data-turbolinks-track': 'reload'
+
+    = yield :head
+    
+  body.pattern-dark.relative
     = render 'shared/google_body'
     = render 'shared/nav'
     = render 'shared/flash'
     .main-content = yield
-    = render 'shared/footer'
