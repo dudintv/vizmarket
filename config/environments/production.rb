@@ -44,7 +44,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -111,9 +111,17 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.action_mailer.default_url_options = { host: "vizrt.store" }
+  config.action_mailer.default_options = { from: 'no-reply@vizrt.store' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
   config.action_mailer.smtp_settings = {
     # enable_starttls_auto: false,
     address: "vizrt.store",
     # openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   }
+
+  # config.action_mailer.sendmail_settings = {
+    
+  # }
 end
