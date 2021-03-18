@@ -70,7 +70,7 @@ input {
   @apply relative text-orange text-2xl;
   font-family: 'Line Awesome Free';
   font-weight: 900;
-  // @extend .la-exclamation-circle:before;
+  @extend .la-exclamation-circle:before;
   left: -0.3rem;
   top: 0.2rem;
 }
@@ -79,7 +79,7 @@ input {
   @apply px-4 py-2 border border-orange bg-item;
 
   li:before {
-    // @extend %before-icon-exclamation-circle;
+    @extend %before-icon-exclamation-circle;
   }
 }
 
@@ -90,9 +90,9 @@ input {
 .error-in-field {
   @apply text-orange pl-4 pt-1 pb-2 leading-none;
 
-  // &:before {
-  //   @extend %before-icon-exclamation-circle;
-  // }
+  &:before {
+    @extend %before-icon-exclamation-circle;
+  }
 }
 
 // :VALIDATIONS
@@ -112,9 +112,9 @@ form.devise {
     label {
       @apply text-orange ml-2;
 
-      // &:before {
-      //   @extend %before-icon-exclamation-circle;
-      // }
+      &:before {
+        @extend %before-icon-exclamation-circle;
+      }
     }
   }
 
@@ -129,94 +129,94 @@ form.devise {
 // :DEVICE
 //////////////////////////////////////////////////////////////
 
-.form-container {
-  @apply mx-auto mt-8;
-  width: 700px;
-}
+// .form-container {
+//   @apply mx-auto mt-8;
+//   width: 700px;
+// }
 
-@media (max-width: 800px) {
-  .form-container {
-    width: 600px;
-  }
-}
+// @media (max-width: 800px) {
+//   .form-container {
+//     width: 600px;
+//   }
+// }
 
-@media (max-width: 620px) {
-  .form-container {
-    width: 90vw;
-  }
-}
+// @media (max-width: 620px) {
+//   .form-container {
+//     width: 90vw;
+//   }
+// }
 
-@media (max-width: 400px) {
-  .form-container {
-    width: 98vw;
-  }
-}
+// @media (max-width: 400px) {
+//   .form-container {
+//     width: 98vw;
+//   }
+// }
 
-//////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////
 
-@keyframes blink {
-  from { border-color: transparent; }
-  10% { border-color: theme('blue-50'); }
-  to { border-color: transparent; }
-}
+// @keyframes blink {
+//   from { border-color: transparent; }
+//   10% { border-color: theme('blue-50'); }
+//   to { border-color: transparent; }
+// }
 
-.form-field {
-  @apply mb-4;
-}
+// .form-field {
+//   @apply mb-4;
+// }
 
-.field-with-label {
-  @apply relative w-full;
+// .field-with-label {
+//   @apply relative w-full;
 
-  input, select {
-    @apply w-full h-16 px-4 pt-4 bg-blue-10 outline-none;
-  }
+//   input, select {
+//     @apply w-full h-16 px-4 pt-4 bg-blue-10 outline-none;
+//   }
 
-  textarea {
-    @apply w-full h-32 px-4 pt-8 pb-4 block outline-none;
-  }
+//   textarea {
+//     @apply w-full h-32 px-4 pt-8 pb-4 block outline-none;
+//   }
 
-  label {
-    @apply absolute left-0 top-0 w-full h-full pointer-events-none text-white text-sm;
+//   label {
+//     @apply absolute left-0 top-0 w-full h-full pointer-events-none text-white text-sm;
 
-    .input-name {
-      @apply absolute top-2 left-4 text-white-80 normal-case;
-      transform: translateY(70%) scale(1.5);
-      transform-origin: left center;
-      transition: all .3s ease;
-    }
+//     .input-name {
+//       @apply absolute top-2 left-4 text-white-80 normal-case;
+//       transform: translateY(70%) scale(1.5);
+//       transform-origin: left center;
+//       transition: all .3s ease;
+//     }
 
-    &::after {
-      content: "";
-      @apply absolute left-0 top-0 w-full h-full border-b-2 border-blue;
-      transform: scaleX(0);
-      transform-origin: left center;
-      transition: all .3s ease;
-    }
-  }
+//     &::after {
+//       content: "";
+//       @apply absolute left-0 top-0 w-full h-full border-b-2 border-blue;
+//       transform: scaleX(0);
+//       transform-origin: left center;
+//       transition: all .3s ease;
+//     }
+//   }
 
-  // FOCUS EFFECT:
-  input:focus, input:not(:placeholder-shown),
-  select:focus, select:not(:placeholder-shown),
-  textarea:focus, textarea:not(:placeholder-shown) {
-    & + label .input-name{
-      @apply text-blue;
-      transform: translateY(0%) scale(1);
-    }
-  }
-  input:focus,
-  select:focus,
-  textarea:focus {
-    & + label {
-      @apply border border-transparent;
-      animation: blink 0.5s linear;
-    }
-    & + label::after{
-      @apply text-blue;
-      transform: scaleX(1);
-    }
-  }
-}
+//   // FOCUS EFFECT:
+//   input:focus, input:not(:placeholder-shown),
+//   select:focus, select:not(:placeholder-shown),
+//   textarea:focus, textarea:not(:placeholder-shown) {
+//     & + label .input-name{
+//       @apply text-blue;
+//       transform: translateY(0%) scale(1);
+//     }
+//   }
+//   input:focus,
+//   select:focus,
+//   textarea:focus {
+//     & + label {
+//       @apply border border-transparent;
+//       animation: blink 0.5s linear;
+//     }
+//     & + label::after{
+//       @apply text-blue;
+//       transform: scaleX(1);
+//     }
+//   }
+// }
 
-.tip {
-  @apply text-sm text-white-50 pl-4;
-}
+// .tip {
+//   @apply text-sm text-white-50 pl-4;
+// }
