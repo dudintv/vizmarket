@@ -1,6 +1,6 @@
-/* @import "./tailwind/preflight.css"; */
+@import "./tailwind/preflight.css";
 
-/* @import "./libs/line-awesome.scss"; */
+@import "./libs/line-awesome.scss";
 
 /* @import "./common/fonts.scss";
 @import "./common/base.scss";
@@ -23,4 +23,4 @@
 @import "./product/grid-item.scss";
 @import "./product/product-page.scss";
 
-/* @import "tailwind/tailwind"; */
+@import "tailwind/tailwind";
