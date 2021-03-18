@@ -2,11 +2,11 @@
 
 @import "./libs/line-awesome.scss";
 
-/* @import "./common/fonts.scss";
+@import "./common/fonts.scss";
 @import "./common/base.scss";
 @import "./common/grid.scss";
 
-@import "./common/buttons.scss";
+/* @import "./common/buttons.scss";
 @import "./common/footer.scss";
 @import "./common/form.scss";
 @import "./common/headers.scss";
