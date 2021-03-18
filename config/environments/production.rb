@@ -117,7 +117,8 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     # enable_starttls_auto: false,
-    address: "vizrt.store",
+    # address: "vizrt.store",
+    address: "localhost",
     # openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   }
 
