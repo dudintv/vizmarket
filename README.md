@@ -34,3 +34,9 @@ It's avaliable everywhere, includes Vue and regular js code.
 300 — popup main menu
 1000 — modal window
 10000 — Dropdown menu ul.vs__dropdown-menu
+
+# Support info
+
+### PUMA MANUAL RUN:
+cd /home/deploy/rails/vizmarket/current
+RAILS_ENV=production bundle exec puma -e production -b unix:///home/deploy/rails/vizmarket/shared/tmp/sockets/vizmarket-puma.sock -d
