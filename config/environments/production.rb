@@ -122,17 +122,20 @@ Rails.application.configure do
   #   openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   # }
 
+  domain = 'vizrt.store'
+  user_name = 'no-reply'
   config.action_mailer.delivery_method = :smtp
-  host = 'vizrt.store'
-  config.action_mailer.default_url_options = { host: host }
-
-  # SMTP settings for gmail
+  config.action_mailer.default_url_options = { host: domain }
+  config.action_mailer.default_options = { from: "#{user_name}@#{domain}" }
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
     :address              => "smtp.yandex.ru",
     :port                 => 465,
-    :user_name            => 'no-reply',
+    :domain               => domain,
+    :user_name            => user_name,
     :password             => 'MarketplacePassword',
     :authentication       => "plain",
-    :enable_starttls_auto => true
+    :enable_starttls_auto => true,
+    :ssl                  => true
   }
 end
