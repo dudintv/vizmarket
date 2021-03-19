@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'categories/:title', to: 'categories#show', as: 'category'
   
   devise_for :admins, controllers: { sessions: "admins/sessions", registrations: 'admins/registrations', passwords: 'admins/passwords' }
-  devise_for :users, controllers: { sessions: "users/sessions", registrations: 'users/registrations', passwords: 'users/passwords', omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: 'users/registrations', passwords: 'users/passwords' } #, omniauth_callbacks: 'users/omniauth_callbacks' }
   get '/users', to: redirect('/')
 
   resources :authorizations, only: [:new, :create] do

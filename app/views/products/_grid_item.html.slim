@@ -24,7 +24,7 @@
       .author= product.author.name
     .line.flex.justify-between.items-center
       .left.flex.items-center
-        .version= "v #{product.versions&.last&.number}"
+        .version= "v #{product.versions&.first&.number}"
         .date= product.updated_at.strftime("%Y-%m-%d")
       .right
         .price

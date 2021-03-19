@@ -2,11 +2,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable,
-         :omniauthable, omniauth_providers: %i[facebook google]
+         :recoverable, :rememberable, :validatable, :confirmable
+         # :omniauthable, omniauth_providers: %i[facebook google]
   has_many :authorizations, dependent: :destroy
   has_many :products, dependent: :destroy
-  has_many :feedback_messages
+  has_many :feedback_messages, dependent: :nullify
   has_one :author, dependent: :destroy
   has_one_attached :avatar
 
@@ -49,6 +49,6 @@ class User < ApplicationRecord
   end
 
   def full_name
-    [name, surname].reject(&:empty?).join(' ')
+    [name, surname].reject(&:blank?).join(' ')
   end
 end

@@ -45,7 +45,7 @@
   }
 
   .info {
-    @apply flex flex-col p-4;
+    @apply flex flex-col p-4 overflow-x-hidden;
 
     .line{
       @apply pb-1;

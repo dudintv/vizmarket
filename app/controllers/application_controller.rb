@@ -38,16 +38,16 @@ class ApplicationController < ActionController::Base
       #   }
       # ],
       socnets: [
-        {
-          "title": "Google",
-          "icon": "google",
-          "link": user_google_omniauth_authorize_path
-        },
-        {
-          "title": "Facebook",
-          "icon": "facebook",
-          "link": user_facebook_omniauth_authorize_path
-        }
+        # {
+        #   "title": "Google",
+        #   "icon": "google",
+        #   "link": user_google_omniauth_authorize_path
+        # },
+        # {
+        #   "title": "Facebook",
+        #   "icon": "facebook",
+        #   "link": user_facebook_omniauth_authorize_path
+        # }
       ],
 
       anonses: [

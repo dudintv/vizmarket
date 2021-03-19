@@ -73,6 +73,11 @@ class Publisher::Api::VersionsController < ApplicationController
   end
 
   def publish
+    puts "---------------------------------"
+    puts "---------------------------------"
+    puts "@version = #{@version.inspect}"
+    puts "---------------------------------"
+    puts "---------------------------------"
     if @version.update(public: true)
       render json: {id: @version.id, public: @version.public}, status: :ok
     else
@@ -101,7 +106,7 @@ class Publisher::Api::VersionsController < ApplicationController
   end
 
   def set_version
-    @version = Version.find_by(id: params[:id])
+    @version = Version.unscoped.find_by(id: params[:id])
 
     # until @version
     if !@version || @version.product.user != current_user

@@ -104,8 +104,9 @@ header
           button.main-button Sign in
       .line.button
         = link_to "Forgot your password?", new_password_path(:user), class: 'button'
-      .line.socnets
-        span or login with 
-        - for socnet in @data[:socnets]
-          a.socnet href=socnet[:link]
-            img src="/images/svg-icons/#{socnet[:icon]}.svg"
+      - if @socnets
+        .line.socnets
+          span or login with 
+          - for socnet in @data[:socnets]
+            a.socnet href=socnet[:link]
+              img src="/images/svg-icons/#{socnet[:icon]}.svg"
