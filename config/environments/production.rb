@@ -135,7 +135,6 @@ Rails.application.configure do
     :user_name            => user_name,
     :password             => 'MarketplacePassword',
     :authentication       => "plain",
-    :enable_starttls_auto => true,
     :ssl                  => true
   }
 end
