@@ -122,8 +122,8 @@ Rails.application.configure do
   #   openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   # }
 
-  domain = 'vizrt.store'
   user_name = 'no-reply'
+  domain = 'vizrt.store'
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: domain }
   config.action_mailer.default_options = { from: "#{user_name}@#{domain}" }
@@ -132,7 +132,7 @@ Rails.application.configure do
     :address              => "smtp.yandex.ru",
     :port                 => 465,
     :domain               => domain,
-    :user_name            => user_name,
+    :user_name            => "#{user_name}@#{domain}",
     :password             => 'MarketplacePassword',
     :authentication       => "plain",
     :ssl                  => true
