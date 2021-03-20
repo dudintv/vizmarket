@@ -70,7 +70,8 @@ header
             = link_to(new_user_session_path, id: 'open-signin') do
               .sign-in Log in
           .auth-signup
-            = link_to(new_user_registration_path) do
+            / = link_to(new_user_registration_path) do
+            = link_to(invitation_path) do
               .sign-up Sign up
     .popup.cart-popup#cart-popup
       - if @data[:cart_items]

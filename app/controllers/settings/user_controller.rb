@@ -75,6 +75,21 @@ class Settings::UserController < ApplicationController
     end
   end
 
+  def get_invitations_list
+    invitations = current_user.invitations
+    render json: { invitations: invitations }, status: :ok
+  end
+
+  def create_invitations
+    new_invitations = []
+    3.times do
+      new_invitations.push(current_user.invitations.create)
+    end
+    if new_invitations
+      render json: { invitations: new_invitations }, status: :ok
+    end
+  end
+
   private
 
   def user_params

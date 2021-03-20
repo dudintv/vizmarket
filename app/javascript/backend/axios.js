@@ -31,6 +31,8 @@ export default {
     uploadAvatar: avatar => user_adapter.post('/upload_avatar', avatar),
     deleteAvatar: () => user_adapter.delete('/delete_avatar'),
     destroyAccountLink: account => user_adapter.delete('/destroy_account_link', { params: { account } }),
+    getInvitationsList: () => user_adapter.get('/get_invitations_list'),
+    createInvitations: () => user_adapter.post('/create_invitations'),
   },
   author: {
     get: () => author_adapter.get('/show'),

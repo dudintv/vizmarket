@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :authorizations, dependent: :destroy
   has_many :products, dependent: :destroy
   has_many :feedback_messages, dependent: :nullify
+  has_many :invitations
   has_one :author, dependent: :destroy
   has_one_attached :avatar
 

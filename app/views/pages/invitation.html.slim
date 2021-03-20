@@ -1,0 +1,7 @@
+.container.mx-auto
+  h1 Registration with invitation 
+
+  .bg-body-darker.p-16
+    = form_with url: use_invitation_path, method: :post, local: true, class: 'flex'
+      input type='text' name='code' placeholder=' '
+      input.button-main type="submit" value="Use invitation"

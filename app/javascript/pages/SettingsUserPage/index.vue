@@ -8,6 +8,7 @@
       //- router-link.settings-link(to="/settings/agreements") Agreements
       router-link.settings-link(to="/settings/user/linked_accounts") Linked&nbsp;accounts
       //- router-link.settings-link(to="/settings/help") Heed help?
+      router-link.settings-link(to="/settings/user/invitations") My invitations
     #settings-content
       router-view
 </template>
