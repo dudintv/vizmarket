@@ -55,6 +55,9 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
+
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :test do
@@ -74,3 +77,6 @@ gem 'draper'
 
 # instant push messages for developer
 gem 'pushover'
+
+# simple full text search
+gem 'pg_search'

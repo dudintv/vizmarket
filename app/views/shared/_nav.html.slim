@@ -17,26 +17,27 @@ header
     .nav-right-half
       .nav-lg-md
         .search
-          .search-lg
+          = form_with url: search_path, method: :get, local: true, class: 'search-lg'
             / add the label to disable aggresive auto-complete:
             label style='display: none;' for='vizmarket-search' Search query
-            input.input-search type='search' name='vizmarket-search' placeholder='' id='vizmarket-search' autocomplete='off'
+            input.input-search type='search' name='q' placeholder='' id='vizmarket-search' autocomplete='off'
             / autocomplete='vizmarket-search' readonly=true onfocus="this.removeAttribute('readonly')"
-            a.button-search.over-input href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
-          .search-md
-            a.button-search#open-search href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
+            button.button-search.over-input type="submit" value=""
+              img src='/images/svg-icons/search.svg' width="24" height="24"
+          = form_with url: search_path, method: :get, local: true, class: 'search-md'
+            button.button-search#open-search type="submit": img src='/images/svg-icons/search.svg' width="24" height="24"
             .popup.search-popup#search-popup
-              .line: input.input-search type='text' placeholder=' '
-              .line.button: a.main-button href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
+              .line: input.input-search name='q' type='text' placeholder=' '
+              .line.button: button.main-button type="submit": img src='/images/svg-icons/search.svg' width="24" height="24"
       .nav-sm
         .burger#burger
           a href='#': img src='/images/svg-icons/menu.svg' width="24" height="24"
         .popup.nav-dropdown#nav-dropdown
           ul.nav
             li.line
-              .search
-                input type='text' name='search' placeholder=' '
-                a.button-search.over-input href='#': img src='/images/svg-icons/search.svg' width="24" height="24"
+              = form_with url: search_path, method: :get, local: true, class: 'search'
+                input type='text' name='q' placeholder=' '
+                button.button-search.over-input type="submit": img src='/images/svg-icons/search.svg' width="24" height="24"
             
             li.line = link_to 'Scripts',  '/scripts', class: @selected=='scripts' ? 'selected' : ''
             li.line = link_to 'Shaders',  '/shaders', class: @selected=='shaders' ? 'selected' : ''

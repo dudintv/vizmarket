@@ -28,6 +28,12 @@ class PagesController < ApplicationController
     @products = Product.all.with_attached_thumbnail
   end
 
+  def search
+    @search_results = PgSearch.multisearch(params["q"])
+    @products_ids = @search_results.filter{ |res| res.searchable_type == 'Product' }.map(&:searchable_id)
+    @products = Product.find(@products_ids)
+  end
+
   def faq
   end
 

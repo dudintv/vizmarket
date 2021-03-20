@@ -113,14 +113,14 @@ header nav {
   }
 
   .input-search {
-    @apply pl-3 pr-16;
+    @apply pl-3 pr-16 text-white-50;
   }
 
   .button-search {
     @apply flex items-center h-full px-4 flex-shrink-0 w-full justify-center;
 
     &.over-input {
-      @apply absolute right-0 w-auto px-4;
+      @apply absolute right-0 w-auto px-4 bg-transparent;
     }
 
     &:hover {

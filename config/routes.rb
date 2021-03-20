@@ -80,6 +80,8 @@ Rails.application.routes.draw do
     get 'user/*path', to: 'user#index' # to vue-router
   end
   
+  # SEARCH
+  get '/search', to: 'pages#search'
   # FOOTER LIKS
   get '/faq', to: 'pages#faq'
   get '/guidelines', to: 'pages#guidelines'

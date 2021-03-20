@@ -1,0 +1,11 @@
+.container.mx-auto
+  h1 Search result
+
+  - if @search_results&.size > 0
+    .products-grid
+      - @products.each do |product|
+        = render partial: 'products/grid_item', locals: {product: product}
+  - else 
+    p.text-center
+      | No results with 
+      strong = params[:q]
