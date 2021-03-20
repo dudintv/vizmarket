@@ -14,8 +14,13 @@
         //- | Click the button to begin destroing your account with all history, purcheses. Also, you lose all your earned money that you didn’t withdraw. We recomend to get it before delete account!
         //- | Click the button begin destroing your account with all your products and history.
         //- | The account will be available to restore for 30 days. After that, it will be automatically totally deleted in databases.
-        | Click the button to begin destroing your account with all your history.
-      a.btn.second-btn.big-btn(href='/settings/destroy_my_account' data-method="delete") Delete account
+        | Click the button to begin destroing your account with all your products and history.
+      .destroy-proof(v-if="hasVisibleDestroyProof")
+        p.my-4 Please enter your email — {{ user.email }}
+        TextInput(name="email" v-model="destroyEmail")
+        button.btn.second-btn.big-btn(@click="destroyMyAccount") Delete account
+      .destroy-start(v-else)
+        button.btn.second-btn.big-btn(href="#" @click.prevent="showDestroyProof") Let me delete my account
 </template>
 
 <script>
@@ -34,6 +39,8 @@ export default {
       isAvatarLoading: false,
       avatarSuccessMessage: '',
       avatarErrorMessage: '',
+      hasVisibleDestroyProof: false,
+      destroyEmail: '',
     }
   },
   computed: {
@@ -110,6 +117,16 @@ export default {
     },
     save () {
       this.$store.dispatch('saveUser')
+    },
+    showDestroyProof () {
+      this.hasVisibleDestroyProof = true
+    },
+    destroyMyAccount () {
+      if (this.user.email === this.destroyEmail) {
+        this.$store.dispatch('destroyMyAccount', this.destroyEmail)
+      } else {
+        this.hasVisibleDestroyProof = false
+      }
     }
   }
 }

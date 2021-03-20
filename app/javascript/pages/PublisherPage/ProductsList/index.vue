@@ -26,10 +26,15 @@ export default {
   },
   async created () {
     await this.$store.dispatch('loadCurrentUser')
-    await this.$store.dispatch('loadProducts')
+    // await this.$store.dispatch('loadProducts') // moved to beforeRouteEnter()
   },
   mounted () {
     this.$store.dispatch('loadTaxonomy')
-  }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$store.dispatch('loadProducts')
+    })
+  },
 }
 </script>

@@ -10,7 +10,7 @@
     .new-product
       button.big-btn.main-btn(@click="isShowNewProductDialog=true") New product
       ModalWindow(v-model="isShowNewProductDialog")
-        StartCreate
+        StartCreate(@started="isShowNewProductDialog = false")
 </template>
 
 <script>

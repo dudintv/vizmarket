@@ -40,8 +40,9 @@ export default {
   },
   methods: {
     createProduct () {
-      this.$v.$touch()
+      this.$v.$touch() // Sets the $dirty flag of the model and all its children to true recursively.
       if (!this.$v.$error) {
+        this.$emit('started')
         this.$backend.products.create({ name: this.name, kind: this.kind })
           .then(response => {
             if (response.status === 201) {

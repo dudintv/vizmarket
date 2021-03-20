@@ -93,6 +93,15 @@ export default new Vuex.Store({
           FlashVM.alert(error.message)
         })
     },
+    async destroyMyAccount ({}, email) {
+      try {
+        await backend.user.destroyMyAccount(email)
+        window.location.href = '/'
+      } catch (error) {
+        console.warn('Can\'t load data. Error: ', error)
+        FlashVM.alert(error.message)
+      }
+    },
   },
   modules: {},
   plugins: [],

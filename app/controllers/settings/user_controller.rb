@@ -66,12 +66,16 @@ class Settings::UserController < ApplicationController
   end
 
   def destroy_my_account
-    if current_user.update(deleted_at: Time.zone.now)
+    if current_user.email == params[:email]
+      current_user.update(deleted_at: Time.zone.now)
+      current_user.products.each do |product|
+        product.update(public: false)
+      end
       sign_out
       flash[:notice] = "Successfully delete account. Good bye!"
       redirect_to root_path
     else
-      render json: current_password.errors.as_json, status: :unprocessable_entity
+      render json: current_user.errors.as_json, status: :unprocessable_entity
     end
   end
 

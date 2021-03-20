@@ -60,7 +60,8 @@ export default {
     async save () {
       this.saveAuthor()
       await this.$store.dispatch('activateAuthor')
-      router.push('/publisher')
+      // router.push('/publisher')
+      window.location.href = '/publisher'
     },
   }
 }
