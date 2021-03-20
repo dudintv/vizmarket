@@ -25,7 +25,7 @@ class Publisher::Api::ProductsController < ApplicationController
   def create
     @kind = Kind.find_by(title: params[:kind])
     @author = current_user.author
-    @product = Product.new(title: params[:name], user: current_user, author: @author, kind: @kind)
+    @product = Product.new(title: params[:name], user: current_user, author: @author, kind: @kind, public: false)
 
     if @product.save
       render json: ProductSerializer.new(@product).serialized_json, status: :created
