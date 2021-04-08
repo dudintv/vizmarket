@@ -14,7 +14,6 @@
         a.kind href="/#{product.kind.title.pluralize.downcase}" = product.kind.title
         - for category in product.categories
           = link_to category_url(category.title), class: 'category'
-            | /&nbsp;
             = category.title
       / .right.rating= product.rating
     .line

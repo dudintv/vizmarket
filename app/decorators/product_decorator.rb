@@ -20,7 +20,7 @@ class ProductDecorator < Draper::Decorator
 
   def taxonomy_links
     kind = h.link_to(object.kind.title, "/#{object.kind.title.pluralize}", class: 'kind')
-    categories = object.categories.map{ |category| h.link_to("/ #{category.title}", h.category_path(category), class: 'category') }.join(' ')
+    categories = object.categories.map{ |category| h.link_to(category.title, h.category_path(category), class: 'category') }.join(' ')
     "#{kind} #{categories}"
   end
 
