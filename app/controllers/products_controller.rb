@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
     if params[:kind]
       @products = Kind.find_by(title: params[:kind]).products.where(public: true)
     else
-      @products = Product.where(public: true).all
+      @products = Product.where(public: true)
     end
   end
 
