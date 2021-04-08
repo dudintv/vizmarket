@@ -35,15 +35,16 @@
           .version-support = version.support
           .version-items
             - if version.files.present?
-              - version.files.each do |file|
-                .version-file
-                  = link_to file.filename.to_s, rails_blob_path(file, disposition: 'attachment')
-                  / = link_to file.filename.to_s, url_for(file)
+              .version-files.flex-col
+                - version.files.each do |file|
+                  .version-file.mb-4
+                    = link_to file.filename.to_s, rails_blob_path(file, disposition: 'attachment'), class: 'px-2 py-2 border border-white-20'
+                    / = link_to file.filename.to_s, url_for(file)
             - if version.script
               .version-script-btn
-                button.leading-tight.px-2.py-1 data-hystmodal="#scriptCodeModal-#{version.id}" show the script
+                button.leading-tight.px-4.py-2 data-hystmodal="#scriptCodeModal-#{version.id}" show the script
                 span &nbsp;
-                button.leading-tight.px-2.py-1 onClick="copyToClipboard('product-code-#{version.id}')" copy to clipboard
+                button.leading-tight.px-4.py-2 onClick="copyToClipboard('product-code-#{version.id}')" copy to clipboard
               / pre.language-vb
               /   code id="product-code" class="language-vb"
               /     = version.script.script
