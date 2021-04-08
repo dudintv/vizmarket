@@ -11,6 +11,9 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.includes(:versions, :author, :kind, :categories).find(params[:id])
+    if current_user != @product.user
+      result = @product.update(show_stat: @product.show_stat ? @product.show_stat + 1 : 1)
+    end
     @product_decorator = @product.decorate
   end
 
