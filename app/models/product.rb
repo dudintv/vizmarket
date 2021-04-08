@@ -15,7 +15,7 @@ class Product < ApplicationRecord
   has_one_attached :featured_image
   has_many_attached :images
 
-  default_scope { where(public: true).order('created_at desc') }
+  default_scope { order('created_at desc') } # where(public: true).
   
   validates :title, :kind, :user, presence: true
 
