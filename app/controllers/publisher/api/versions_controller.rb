@@ -96,7 +96,7 @@ class Publisher::Api::VersionsController < ApplicationController
   private
 
   def set_product
-    @product = Product.find_by(id: params[:product_id])
+    @product = Product.unscoped.find_by(id: params[:product_id])
 
     # until @product
     if !@product || @product.user != current_user
