@@ -6,6 +6,7 @@ function copyToClipboard(elemId){
   const code = document.getElementById(elemId).textContent
   navigator.clipboard.writeText(code)
     .then(() => {
+      FlashVM.notice("Code is copied to clipboard")
       console.log("Ok. Code is copied to clipboard.")
     })
     .catch(err => {
