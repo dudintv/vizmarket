@@ -43,6 +43,7 @@ export default {
 .content {
   @apply bg-body relative;
   z-index: 1100;
+  max-width: 95vw;
 }
 
 .close {
