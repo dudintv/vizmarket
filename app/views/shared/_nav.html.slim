@@ -18,10 +18,8 @@ header
       .nav-lg-md
         .search
           = form_with url: search_path, method: :get, local: true, class: 'search-lg'
-            / add the label to disable aggresive auto-complete:
             label style='display: none;' for='vizmarket-search' Search query
             input.input-search type='search' name='q' placeholder='' id='vizmarket-search' autocomplete='off'
-            / autocomplete='vizmarket-search' readonly=true onfocus="this.removeAttribute('readonly')"
             button.button-search.over-input type="submit" value=""
               img src='/images/svg-icons/search.svg' width="24" height="24"
           = form_with url: search_path, method: :get, local: true, class: 'search-md'
@@ -44,35 +42,66 @@ header
             li.line = link_to 'Scenes',   '/scenes',  class: @selected=='scenes'  ? 'selected' : ''
             li.line = link_to 'Plugins',  '/plugins', class: @selected=='plugins' ? 'selected' : ''
             li.line = link_to 'Tutorials',  '/tutorials', class: @selected=='tutorials' ? 'selected' : ''
+
+
+
+
+
+            - if @data[:user]
+              li.line.auth-user.auth-sm
+                = link_to settings_root_path, id: 'open-user-sm' do
+                  - if current_user.avatar.attached?
+                    = image_tag @data[:user].avatar.variant(resize_to_fill: [40, 40]), class: 'avatar'
+                  - else
+                    = image_tag '/images/svg/default_avatar.svg', width: '40', height: '40', class: 'avatar'
+                  ' &nbsp;
+                  span.normal-case.ml-2 = current_account.email
+            - else
+              li.line.auth-signin
+                = link_to(new_user_session_path, id: 'open-signin-sm') do
+                  .sign-in Log in
+              li.line.auth-signup
+                / = link_to(new_user_registration_path) do
+                = link_to(invitation_path) do
+                  .sign-up Sign up
+
+
+
+
+
+
+
+
       / .cart
       /     a#open-cart href='#'
       /       img src='/images/svg-icons/cart.svg' width="24" height="24"
       /       - if @data[:cart_items]
       /         .count= @data[:cart_items].length
-      .auth
+      .auth.auth-lg-md
         - if @data[:user]
           .auth-user
-            = link_to settings_root_path, id: 'open-user' do
+            = link_to settings_root_path, id: 'open-user-lg-md' do
               - if current_user.avatar.attached?
                 = image_tag @data[:user].avatar.variant(resize_to_fill: [40, 40]), class: 'avatar'
               - else
                 = image_tag '/images/svg/default_avatar.svg', width: '40', height: '40', class: 'avatar'
               ' &nbsp;
               span.normal-case.ml-2 = current_account.email
-          .popup.user-popup#user-popup
-            .line.edit
-              span.name= @data[:user][:email]
-              = link_to('Edit info', settings_root_path, class: "button")
-            .line = link_to('Publisher portal', publisher_root_path, class: 'main-button', 'data-turbolinks': "false") 
-            .line = link_to('Sign out', destroy_user_session_path, class: 'button', method: :delete)
         - else
           .auth-signin
-            = link_to(new_user_session_path, id: 'open-signin') do
+            = link_to(new_user_session_path, id: 'open-signin-lg-md') do
               .sign-in Log in
           .auth-signup
             / = link_to(new_user_registration_path) do
             = link_to(invitation_path) do
               .sign-up Sign up
+    - if @data[:user]
+      .popup.user-popup#user-popup
+        .line.edit
+          span.name= @data[:user][:email]
+          = link_to('Edit info', settings_root_path, class: "button")
+        .line = link_to('Publisher portal', publisher_root_path, class: 'main-button', 'data-turbolinks': "false") 
+        .line = link_to('Sign out', destroy_user_session_path, class: 'button', method: :delete)
     .popup.cart-popup#cart-popup
       - if @data[:cart_items]
         - for item in @data[:cart_items]

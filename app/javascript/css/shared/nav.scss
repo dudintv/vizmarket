@@ -350,3 +350,15 @@ header nav {
     }
   }
 }
+
+@media (max-width: 415px) {
+  header nav {
+    .auth.auth-lg-md {
+      @apply hidden;
+    }
+
+    .auth.auth-sm {
+      @apply visible;
+    }
+  }
+}

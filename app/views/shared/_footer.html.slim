@@ -1,25 +1,24 @@
 footer.footer.py-8.mt-8.relative
   .pattern.absolute.top-0.left-0.w-full.h-full.z-10
-  .container.relative.mx-auto.flex.z-20
-    .w-2_6
+  .container.relative.mx-auto.flex.flex-col.sm--flex-row.z-20.px-16
+    .w-full.sm--w-2_6.pb-4
       / img src='/images/vizrt-certified-partner.png'
       / img src='/images/svg/logo.svg' height='52' width='26'
       img src='/images/svg/logo-name.svg' width="123" height="35"
-    .w-1_6.flex.flex-col.items-start
+    .w-full.sm--w-1_6.flex.flex-col.items-start.pr-4
       = link_to 'Submit product', publisher_root_path
       / a href='#' Create a portfolio
       / a href='#' Author Guidlines
-    .w-1_6.flex.flex-col.items-start
+    .w-full.sm--w-1_6.flex.flex-col.items-start.pr-4
       = link_to 'FAQ', faq_path
       = link_to 'Privacy Policy', privacy_path
       = link_to 'Terms of service', terms_path
-    .w-1_6.flex.flex-col.items-start
+    .w-full.sm--w-1_6.flex.flex-col.items-start.pr-4
       = link_to 'Contact', contact_path
       / a href='#' Authors
       / a href='#' Using products
       / a href='#' Feedback
-    .w-1_6.flex.icons.items-start
-      span test #1
+    .w-full.sm--w-1_6.flex.icons.items-start
       / a href='#'
       /   img src='/images/svg-icons/twitter.svg'
       / a href='#'
@@ -29,5 +28,5 @@ footer.footer.py-8.mt-8.relative
   .container.relative.mx-auto.flex.z-20.pt-4
     .w-2_6
     .w-2_6.copyright
-      | created & support by <strong>dudin.tv</strong> © 2021
+      | created & supports by <strong>dudin.tv</strong> © 2021
     .w-2_6
