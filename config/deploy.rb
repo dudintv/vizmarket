@@ -37,8 +37,21 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, true # Change to false when not using ActiveRecord
 
 
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/master.key', 'config/credentials/production.key')
+set :linked_dirs, fetch(:linked_dirs, []).push(
+  'log',
+  'tmp/pids',
+  'tmp/cache',
+  'tmp/sockets',
+  'vendor/bundle',
+  'public/system',
+  'public/uploads',
+  'storage'
+)
+set :linked_files, fetch(:linked_files, []).push(
+  'config/database.yml',
+  'config/master.key',
+  'config/credentials/production.key'
+)
 
 
 namespace :puma do
