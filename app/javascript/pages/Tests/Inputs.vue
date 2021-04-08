@@ -134,7 +134,7 @@
             SelectInput(name="Category" v-model="product.categories" :options="categories")
               template(#tip)
                 | If you didn't find proper category — select "Other" and&nbsp;
-                a advice a new category
+                a.border-b-1.border-white-20 advice a new category
 
         FormField(:required="true", title="Detailed description", description="Provide a full explanation of your product and set the expectations of what it can be used for. Must be 1900 characters or less.")
           template(#input): TextareaInput(name="Detailed description" v-model="product.description")

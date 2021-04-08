@@ -8,7 +8,6 @@ window.onresize = close_nav_popups;
 let setup_popup_opener = (opener_name, popup_name) => {
   let opener = document.getElementById(opener_name);
   let popup = document.getElementById(popup_name);
-  console.debug(opener, popup)
   if (opener && popup) {
     opener.onclick = (e) => {
       e.preventDefault();
