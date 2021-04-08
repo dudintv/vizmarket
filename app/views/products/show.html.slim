@@ -62,12 +62,12 @@
   .descriptions-block
     - if @product.description
       .description
-        h3 Description
-        = @product.description
+        h3.my-4 Description
+        = simple_format @product.description
     - if @product.instruction
       .how-to-use
-        h3 How to use
-        = @product.instruction
+        h3.my-4 How to use
+        = simple_format @product.instruction
   .comments-block
     .new-comment-form
     .comments
