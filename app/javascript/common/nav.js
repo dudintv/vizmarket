@@ -32,9 +32,11 @@ window.onmouseup = (e) => {
 onload = () => {
   setup_popup_opener('burger',      'nav-dropdown');
   setup_popup_opener('open-search', 'search-popup');
-  setup_popup_opener('open-signin', 'signin-popup');
+  // setup_popup_opener('open-signin-lg-md', 'signin-popup');
+  // setup_popup_opener('open-signin-sm', 'signin-popup');
+  setup_popup_opener('open-user-lg-md', 'user-popup');
+  setup_popup_opener('open-user-sm', 'user-popup');
   setup_popup_opener('open-cart',   'cart-popup');
-  setup_popup_opener('open-user',   'user-popup');
 
   // Select menu item by "[data-item]" == name_selected_item
   let name_selected_item = "Scenes";

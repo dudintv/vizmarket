@@ -1,4 +1,11 @@
 class Product < ApplicationRecord
+  include PgSearch::Model
+  multisearchable against: [ :title, :short_description, :description ]
+  # pg_search_scope :search_product,
+  #                 against: { title: 'A', short_description: 'B', description: 'C' },
+  #                 using: { tsearch: { dictionary: 'english' } }
+  # A, B, C are search priority
+
   belongs_to :user
   belongs_to :author
   belongs_to :kind
@@ -8,7 +15,14 @@ class Product < ApplicationRecord
   has_one_attached :featured_image
   has_many_attached :images
 
-  default_scope { where(public: true) }
+  default_scope { order('created_at desc') } # where(public: true).
   
   validates :title, :kind, :user, presence: true
+
+  # Naive approach for pg_search
+  def self.rebuild_pg_search_documents
+    find_each { |record| record.update_pg_search_document }
+  end
+  # manual way:
+  # PgSearch::Multisearch.rebuild(Product)
 end

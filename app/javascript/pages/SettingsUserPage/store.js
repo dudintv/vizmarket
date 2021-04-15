@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     currentUser: {},
+    invitations: [],
   },
   getters: {},
   mutations: {
@@ -16,12 +17,18 @@ export default new Vuex.Store({
     setAvatar (state, newAvatar) {
       state.currentUser.avatar = newAvatar
     },
+    setInvitations (state, newInvitations) {
+      state.invitations = newInvitations
+    },
+    addInvitations (state, newInvitations) {
+      state.invitations.push(...Array.from(newInvitations))
+    }
   },
   actions: {
     loadUser ({ commit }) {
       backend.user.get()
         .then(response => {
-          let user = response.data.data.attributes
+          const user = response.data.data.attributes
           commit('setCurrentUser', user)
         })
         .catch(error => {
@@ -61,6 +68,39 @@ export default new Vuex.Store({
           console.warn('Can\'t delete. Error: ', error)
           FlashVM.alert(error.message)
         })
+    },
+    loadInvitations ({ commit }) {
+      backend.user.getInvitationsList()
+        .then(response => {
+          console.log('response.data =', response.data)
+          const invitations = response.data.invitations
+          commit('setInvitations', invitations)
+        })
+        .catch(error => {
+          console.warn('Can\'t load data. Error: ', error)
+          FlashVM.alert(error.message)
+        })
+    },
+    createInvitations ({ commit }) {
+      backend.user.createInvitations()
+        .then(response => {
+          console.log('response.data =', response.data)
+          const new_invitations = response.data.invitations
+          commit('addInvitations', new_invitations)
+        })
+        .catch(error => {
+          console.warn('Can\'t load data. Error: ', error)
+          FlashVM.alert(error.message)
+        })
+    },
+    async destroyMyAccount ({}, email) {
+      try {
+        await backend.user.destroyMyAccount(email)
+        window.location.href = '/'
+      } catch (error) {
+        console.warn('Can\'t load data. Error: ', error)
+        FlashVM.alert(error.message)
+      }
     },
   },
   modules: {},

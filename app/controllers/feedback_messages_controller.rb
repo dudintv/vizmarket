@@ -33,16 +33,22 @@ class FeedbackMessagesController < ApplicationController
 
     if @feedback_message.save
       ### Pushover (for Pullover)
-      if true # Rails.env.production?
+      if Rails.env.production?
         message = "#{@feedback_message.message}\n#{@feedback_message.contacts}"
         Pushover::Message.new(
           token: Rails.application.credentials.dig(:common, :pushover, :token), 
           user: Rails.application.credentials.dig(:common, :pushover, :user),
           title: 'VizMarket: feedback',
           message: message,
-          priority: 0
+          priority: 0,
+          expire: 1
         ).push
       end
+
+      AdminMailer.with(
+        message: @feedback_message.message,
+        contacts: @feedback_message.contacts
+      ).feedback_email.deliver_now
 
       render json: FeedbackMessageSerializer.new(@feedback_message).serialized_json, status: :created
     else

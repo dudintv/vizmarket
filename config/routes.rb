@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'categories/:title', to: 'categories#show', as: 'category'
   
   devise_for :admins, controllers: { sessions: "admins/sessions", registrations: 'admins/registrations', passwords: 'admins/passwords' }
-  devise_for :users, controllers: { sessions: "users/sessions", registrations: 'users/registrations', passwords: 'users/passwords', omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: 'users/registrations', passwords: 'users/passwords' } #, omniauth_callbacks: 'users/omniauth_callbacks' }
   get '/users', to: redirect('/')
 
   resources :authorizations, only: [:new, :create] do
@@ -77,9 +77,13 @@ Rails.application.routes.draw do
     delete 'user/delete_avatar', to: 'user#delete_avatar', format: :json
     delete 'user/destroy_account_link', to: 'user#destroy_account_link', format: :json
     delete 'user/destroy_my_account', to: 'user#destroy_my_account'
+    get 'user/get_invitations_list', to: 'user#get_invitations_list', format: :json
+    post 'user/create_invitations', to: 'user#create_invitations', format: :json
     get 'user/*path', to: 'user#index' # to vue-router
   end
   
+  # SEARCH
+  get '/search', to: 'pages#search'
   # FOOTER LIKS
   get '/faq', to: 'pages#faq'
   get '/guidelines', to: 'pages#guidelines'
@@ -89,6 +93,9 @@ Rails.application.routes.draw do
   get '/contact', to: 'pages#contact'
   
   resources :feedback_messages, only: [:index, :new, :create, :destroy]
+
+  get '/invitation', to: 'pages#invitation'
+  post '/use_invitation', to: 'pages#use_invitation'
   
   # TEST
   get '/test', to: 'test#test'

@@ -46,7 +46,7 @@ class ProductSerializer
   end
 
   attribute :versions do |object|
-    object.versions&.map do |version|
+    Version.unscoped.where(product_id: object.id).order(created_at: :asc)&.map do |version|
       VersionSerializer.new(version).serializable_hash[:data][:attributes]
     end
   end

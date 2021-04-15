@@ -1,6 +1,6 @@
 <template lang="pug">
   .new-product
-    RulesNotice(image="/images/anons/take-a-look.jpg")
+    //- RulesNotice(image="/images/anons/take-a-look.jpg")
     h1 Edit product
     ProductPanel
 </template>

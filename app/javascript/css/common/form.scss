@@ -127,7 +127,7 @@ form.devise {
 }
 
 // :DEVICE
-//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 .form-container {
   @apply mx-auto mt-8;
@@ -164,6 +164,7 @@ form.devise {
   @apply mb-4;
 }
 
+
 .field-with-label {
   @apply relative w-full;
 
@@ -194,6 +195,7 @@ form.devise {
     }
   }
 
+  
   // FOCUS EFFECT:
   input:focus, input:not(:placeholder-shown),
   select:focus, select:not(:placeholder-shown),
@@ -218,5 +220,5 @@ form.devise {
 }
 
 .tip {
-  @apply text-sm text-white-50 pl-4;
+  @apply text-sm text-white-50 pl-4 py-1;
 }

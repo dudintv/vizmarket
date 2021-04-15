@@ -120,6 +120,7 @@ export default {
     },
     getFormData () {
       const formData = new FormData()
+      // formData.append('version[product_id]', this.product.id)
       formData.append('version[number]', this.newNumber)
       formData.append('version[support]', this.newSupport)
       formData.append('version[public]', this.newPublic)
@@ -134,7 +135,7 @@ export default {
         }
       }
       if (this.product.kind === 'script' || this.product.kind === 'shader') {
-        formData.append('version[script]', this.script)
+        formData.append('version[script_attributes][script]', this.script)
       }
       return formData
     },

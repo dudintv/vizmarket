@@ -3,14 +3,17 @@ class ProductsController < ApplicationController
 
   def index
     if params[:kind]
-      @products = Kind.find_by(title: params[:kind]).products
+      @products = Kind.find_by(title: params[:kind]).products.where(public: true)
     else
-      @products = Product.all
+      @products = Product.where(public: true)
     end
   end
 
   def show
-    @product = Product.includes(:versions, :author, :kind, :categories).find(params[:id])
+    @product = Product.where(public: true).includes(:versions, :author, :kind, :categories).find(params[:id])
+    if current_user != @product.user
+      result = @product.update(show_stat: @product.show_stat ? @product.show_stat + 1 : 1)
+    end
     @product_decorator = @product.decorate
   end
 

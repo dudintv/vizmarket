@@ -10,6 +10,13 @@ set :user,            'deploy'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
+# postgres setting, I hope this it temporarly, because all credentials are in encrypted credential file
+set :pg_without_sudo, false
+set :pg_host, 'localhost'
+set :pg_database, 'vizmarket'
+set :pg_username, 'dudintv'
+set :pg_ask_for_password, true
+
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        false
@@ -29,8 +36,21 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, true # Change to false when not using ActiveRecord
 
 
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/credentials/production.key')
+set :linked_dirs, fetch(:linked_dirs, []).push(
+  'log',
+  'tmp/pids',
+  'tmp/cache',
+  'tmp/sockets',
+  'vendor/bundle',
+  'public/system',
+  'public/uploads',
+  'storage'
+)
+set :linked_files, fetch(:linked_files, []).push(
+  'config/database.yml',
+  'config/master.key',
+  'config/credentials/production.key'
+)
 
 
 namespace :puma do
@@ -49,8 +69,8 @@ namespace :deploy do
   desc 'Make sure local git is in sync with remote.'
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts 'WARNING: HEAD is not the same as origin/master'
+      unless `git rev-parse HEAD` == `git rev-parse origin/test`
+        puts 'WARNING: HEAD is not the same as origin/test'
         puts 'Run `git push` to sync changes.'
         exit
       end

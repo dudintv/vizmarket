@@ -1,6 +1,6 @@
 <template lang='pug'>
   .top-board.flex.flex-col.items-center.w-full
-    h1.mb-0 Publisher Portal
+    h1.mb-0.leading-none.mb-4 Publisher Portal
 
     //- div(v-if="isAuthorLoading")
     //-   | loading ...
@@ -10,7 +10,7 @@
     .new-product
       button.big-btn.main-btn(@click="isShowNewProductDialog=true") New product
       ModalWindow(v-model="isShowNewProductDialog")
-        StartCreate
+        StartCreate(@started="isShowNewProductDialog = false")
 </template>
 
 <script>

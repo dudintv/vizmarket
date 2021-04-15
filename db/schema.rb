@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_122009) do
+ActiveRecord::Schema.define(version: 2021_04_08_154614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,15 @@ ActiveRecord::Schema.define(version: 2021_03_11_122009) do
     t.index ["user_id"], name: "index_feedback_messages_on_user_id"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.string "code"
+    t.bigint "user_id", null: false
+    t.boolean "active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_invitations_on_user_id"
+  end
+
   create_table "kinds", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
@@ -115,6 +124,15 @@ ActiveRecord::Schema.define(version: 2021_03_11_122009) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_new_categories_on_product_id"
     t.index ["user_id"], name: "index_new_categories_on_user_id"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -134,6 +152,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_122009) do
     t.text "videos"
     t.text "youtube_ids"
     t.bigint "author_id", null: false
+    t.integer "show_stat"
     t.index ["author_id"], name: "index_products_on_author_id"
     t.index ["kind_id"], name: "index_products_on_kind_id"
     t.index ["user_id"], name: "index_products_on_user_id"
@@ -189,6 +208,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_122009) do
   add_foreign_key "authorizations", "users"
   add_foreign_key "authors", "users"
   add_foreign_key "feedback_messages", "users"
+  add_foreign_key "invitations", "users"
   add_foreign_key "new_categories", "products"
   add_foreign_key "new_categories", "users"
   add_foreign_key "products", "authors"

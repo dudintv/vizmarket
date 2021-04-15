@@ -11,7 +11,7 @@
         SelectInput(name="Category" v-model="product.categories" :options="categoryList")
           template(#tip)
             | If you didn't find proper category — choose "Other" and 
-            a(href="#" @click.prevent="showNewCategory = !showNewCategory") advice a new category
+            a.border-b-1.border-white-20(href="#" @click.prevent="showNewCategory = !showNewCategory") advice a new category
         TextInput(v-if="showNewCategory" name="New advisable category" v-model="newCategory")
 </template>
 

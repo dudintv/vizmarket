@@ -54,7 +54,7 @@
   }
 
   .version{
-    @apply my-2 flex;
+    @apply my-2 pb-4 flex flex-wrap;
   }
 
   .version-number {
@@ -63,11 +63,11 @@
   }
 
   .version-date, .version-support {
-    @apply py-1 px-2;
+    @apply py-1 mr-2;
   }
 
   .version-items {
-    @apply py-1 px-2 flex flex-col;
+    @apply py-1 mr-2 flex flex-col;
   }
 
   .version:first-child {

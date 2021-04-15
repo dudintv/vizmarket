@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :feedback_message do
     message { "MyString" }
-    author { nil }
+    user { create(:user) }
   end
 end

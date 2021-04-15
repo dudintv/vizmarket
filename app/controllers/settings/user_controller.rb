@@ -66,18 +66,37 @@ class Settings::UserController < ApplicationController
   end
 
   def destroy_my_account
-    if current_user.update(deleted_at: Time.zone.now)
+    if current_user.email == params[:email]
+      current_user.update(deleted_at: Time.zone.now)
+      current_user.products.each do |product|
+        product.update(public: false)
+      end
       sign_out
       flash[:notice] = "Successfully delete account. Good bye!"
       redirect_to root_path
     else
-      render json: current_password.errors.as_json, status: :unprocessable_entity
+      render json: current_user.errors.as_json, status: :unprocessable_entity
+    end
+  end
+
+  def get_invitations_list
+    invitations = current_user.invitations
+    render json: { invitations: invitations }, status: :ok
+  end
+
+  def create_invitations
+    new_invitations = []
+    3.times do
+      new_invitations.push(current_user.invitations.create)
+    end
+    if new_invitations
+      render json: { invitations: new_invitations }, status: :ok
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :surname, :jobtitle, :country, :about, :avatar)
+    params.require(:user).permit(:name, :surname, :jobtitle, :country, :about)
   end
 end

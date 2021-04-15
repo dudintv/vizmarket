@@ -14,7 +14,6 @@
         a.kind href="/#{product.kind.title.pluralize.downcase}" = product.kind.title
         - for category in product.categories
           = link_to category_url(category.title), class: 'category'
-            | /&nbsp;
             = category.title
       / .right.rating= product.rating
     .line
@@ -24,7 +23,7 @@
       .author= product.author.name
     .line.flex.justify-between.items-center
       .left.flex.items-center
-        .version= "v #{product.versions&.last&.number}"
+        .version= "v #{product.versions&.first&.number}"
         .date= product.updated_at.strftime("%Y-%m-%d")
       .right
         .price

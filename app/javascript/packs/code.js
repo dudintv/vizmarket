@@ -6,7 +6,7 @@ function copyToClipboard(elemId){
   const code = document.getElementById(elemId).textContent
   navigator.clipboard.writeText(code)
     .then(() => {
-      // alert('Code is copied')
+      FlashVM.notice("Code is copied to clipboard")
       console.log("Ok. Code is copied to clipboard.")
     })
     .catch(err => {
@@ -15,11 +15,13 @@ function copyToClipboard(elemId){
     })
 }
 
-document.addEventListener('turbolinks:load', () => {
+function setup() {
   Prism.highlightAll()
-  // const el = document.getElementById('product-code')
-  // Prism.highlightElement(document.getElementById('product-code'))
-
-  console.log('[ code.js turbolinks:load ]')
   window.copyToClipboard = copyToClipboard
+}
+
+document.addEventListener('turbolinks:load', () => {
+  setup()
 })
+
+setup()

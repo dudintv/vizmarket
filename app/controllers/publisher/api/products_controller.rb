@@ -7,7 +7,7 @@ class Publisher::Api::ProductsController < ApplicationController
     :destroy]
 
   def index
-    @products = current_user.products.unscoped.order(id: :desc)
+    @products = Product.unscoped.where(user: current_user).order(id: :desc)
     render json: ProductSerializer.new(@products).serialized_json
   end
 
@@ -25,7 +25,7 @@ class Publisher::Api::ProductsController < ApplicationController
   def create
     @kind = Kind.find_by(title: params[:kind])
     @author = current_user.author
-    @product = Product.new(title: params[:name], user: current_user, author: @author, kind: @kind)
+    @product = Product.new(title: params[:name], user: current_user, author: @author, kind: @kind, public: false)
 
     if @product.save
       render json: ProductSerializer.new(@product).serialized_json, status: :created

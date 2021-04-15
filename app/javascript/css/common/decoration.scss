@@ -1,3 +1,15 @@
 hr.hr {
   @apply mt-12 mb-6 border border-dashed border-body-darker;
 }
+
+.version-file a:before {
+  content: url('/images/svg-icons/download.svg');
+  margin-right: 5px;
+  position: relative;
+  top: .5em;
+  opacity: .3;
+}
+
+.version-file:hover a:before {
+  opacity: .7;
+}

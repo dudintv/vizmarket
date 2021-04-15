@@ -264,7 +264,6 @@ export default new Vuex.Store({
     updateVersionsList ({ commit, state }){
       backend.versions.index(state.currentProduct.id)
         .then(response => {
-          console.debug("response.data.data", response.data.data.map(el => el.attributes))
           commit('setProductVersions', response.data.data.map(el => el.attributes))
         })
         .catch(error => {
