@@ -7,7 +7,7 @@ class Publisher::Api::ProductsController < ApplicationController
     :destroy]
 
   def index
-    @products = Product.unscoped.where(user: current_user).order(id: :desc)
+    @products = current_user.products.order(id: :desc)
     render json: ProductSerializer.new(@products).serialized_json
   end
 
@@ -136,7 +136,7 @@ class Publisher::Api::ProductsController < ApplicationController
   private
 
   def set_product
-    @product = Product.unscoped.with_attached_thumbnail.with_attached_featured_image.with_attached_images.find_by(id: params[:id])
+    @product = Product.with_attached_thumbnail.with_attached_featured_image.with_attached_images.find_by(id: params[:id])
 
     if !@product || @product.user != current_user
       render json: "Can't find product with id: #{params[:id]}", status: :not_found

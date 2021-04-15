@@ -1,20 +1,26 @@
 class ProductsController < ApplicationController
-  before_action :set_selected_menu_item
-
   def index
     if params[:kind]
-      @products = Kind.find_by(title: params[:kind]).products.where(public: true)
+      @products = Kind.find_by(title: params[:kind]).products.published
+      @selected = params[:kind].pluralize
     else
-      @products = Product.where(public: true)
+      @products = Product.published
     end
   end
 
   def show
-    @product = Product.where(public: true).includes(:versions, :author, :kind, :categories).find(params[:id])
-    if current_user != @product.user
-      result = @product.update(show_stat: @product.show_stat ? @product.show_stat + 1 : 1)
+    begin
+      @product = Product.published.find(params[:id])
+
+      if current_user != @product.user
+        result = @product.update(show_stat: @product.show_stat ? @product.show_stat + 1 : 1)
+      end
+      @product_decorator = @product.decorate
+
+    rescue ActiveRecord::RecordNotFound => e
+      flash[:warning] = 'Can\'t find this product. ' + e.message
+      redirect_to root_path
     end
-    @product_decorator = @product.decorate
   end
 
   def scripts
@@ -35,11 +41,5 @@ class ProductsController < ApplicationController
 
   def tutorials
     redirect_to action: :index, kind: 'tutorial'
-  end
-
-  private
-
-  def set_selected_menu_item
-    @selected = action_name
   end
 end

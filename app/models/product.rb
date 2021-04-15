@@ -15,7 +15,9 @@ class Product < ApplicationRecord
   has_one_attached :featured_image
   has_many_attached :images
 
-  default_scope { order('created_at desc') } # where(public: true).
+  default_scope { order('products.created_at DESC') }
+  scope :published, -> { includes(:author, :kind, :categories).where(public: true) }
+  scope :with_published_versions, -> { includes(:versions).where(versions: { public: true }) }
   
   validates :title, :kind, :user, presence: true
 

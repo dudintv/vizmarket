@@ -95,7 +95,7 @@ class Publisher::Api::VersionsController < ApplicationController
   private
 
   def set_product
-    @product = Product.unscoped.find_by(id: params[:product_id])
+    @product = current_user.products.find(params[:product_id])
 
     # until @product
     if !@product || @product.user != current_user
@@ -105,14 +105,14 @@ class Publisher::Api::VersionsController < ApplicationController
   end
 
   def set_version
-    @version = Version.unscoped.find_by(id: params[:id])
+    @version = Version.find_by(id: params[:id])
     # puts "---------------------------"
     # puts "params = #{params.inspect}"
     # puts "@product = #{@product.inspect}"
     # puts "@version = #{@version.inspect}"
     # puts "@version.product_id = #{@version.product_id}"
     # puts "---------------------------"
-    product = Product.unscoped.find(@version.product_id)
+    product = Product.find(@version.product_id)
 
     # until @version
     if !@version || product.user != current_user

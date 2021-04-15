@@ -28,7 +28,7 @@
         .short-description
           = @product.short_description
     section
-      - @product.versions.each do |version|
+      - @product.versions.published.each do |version|
         .version
           .version-number == "v&nbsp;#{version.number}"
           .version-date = version.updated_at.strftime('%d.%m.%Y')
