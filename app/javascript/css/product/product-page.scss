@@ -39,7 +39,7 @@
 
 .product-page {
   @apply grid mt-8 bg-body-darker shadow-xl;
-  grid-template-columns: fit-content(50%) fit-content(50%); // fit-content(50%);
+  grid-template-columns: 50% 50%; // fit-content(50%);
   grid-gap: 2rem;
 
   section {
@@ -83,7 +83,7 @@
   }
 
   .title {
-    @apply text-2xl;
+    @apply text-2xl mb-4;
     line-height: 1.5rem;
   }
 

@@ -18,18 +18,22 @@
             a href="#{video_link}" video
         - @product.images.each do |image|
           img src="#{url_for(image)}"
-  - else
-    .thumbnail
-      img src="#{url_for(@product_decorator.thumbnail)}" width="284" height="284"
+  
   .main-info-block
     section
-      .taxonomy == @product_decorator.taxonomy_links
-      .header
-        .author == @product_decorator.author_link
-        .title = @product.title
+      .flex.gap-4
+        - if @product.thumbnail.attached?
+          .one-part
+            .thumbnail
+              img src="#{url_for(@product_decorator.thumbnail)}" width="71" height="71"
+        
+        .one-part
+          .taxonomy == @product_decorator.taxonomy_links
+          .header
+            .author == @product_decorator.author_link
+            .title = @product.title
       .buy
-    - if @product.short_description
-      section
+      - if @product.short_description
         .short-description
           = @product.short_description
     section
