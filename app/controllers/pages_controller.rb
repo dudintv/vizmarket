@@ -25,7 +25,7 @@ class PagesController < ApplicationController
         action: 'How to install a script?'
       },
     ]
-    @products = Product.where(public: true).with_attached_thumbnail
+    @products = Product.published.with_attached_thumbnail.limit(15)
   end
 
   def search
