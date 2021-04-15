@@ -1,30 +1,80 @@
 # Vizrt Marketplace
 
+## Setup
+```bash
+clone https://github.com/dudintv/vizmarket.git
+cd vizmarket
+bundle
+```
+
+## Developer using
+
+Current setup uses postgres in **docker** container. Rails server and webpack-dev-server run via **overmind**.
+
+```bash
+docker-compose up -d postgres; rm .overmind.sock; overmind s
+```
+
+### Rails 6 Credentials
+
+```bash
+# for development and test
+EDITOR="code --wait" rails credentials:edit
+
+# for production
+EDITOR="code --wait" rails credentials:edit --environment production
+
+# generate new secret_key_base string
+rails secret
+
+# using example in *.rb files
+Rails.application.credentials.dig(Rails.env.to_sym, :omniauth, :facebook, :id)
+
+# using example in *.yml files
+url: <%= Rails.application.credentials.dig Rails.env.to_sym, :database, :url %>
+```
+
+## Deploy
+
+```bash
+cap production deploy
+# or with deploy user password
+DEPLOY_USER_PASSWORD=password cap production deploy
+```
+
 ## Publisher Portal
 
 ### Frontend & Backend routes
 
-For rendering all back-office only the page:
+Back-office:  
 /publisher/products
 
-Inside Vue route there is routes for editing a product:
+Inside Vue route there is routes for editing a product:  
 /publisher/products/:id  
 /publisher/products/:id/title  
 /publisher/products/:id/texts  
 /publisher/products/:id/media  
 /publisher/products/:id/files  
 
-All the rest render by Vue, with inside API:
+Back-office API for Vue.js:
 /publisher/api/products
 
 ## Toasting / flash messages / global notification
 
-To make a new notification/toast just run:
-```javascript
-FlashVM.notice("message")
-FlashVM.alert("message")
+Supports rails controller classic:
+```ruby
+flash[:notice] = 'message'
+flash[:alert] = 'message'
+flash[:warning] = 'message'
+flash[:error] = 'message'
 ```
-It's avaliable everywhere, includes Vue and regular js code.
+
+And, custom Vue.js or Vanilla JS notification/toast:
+```javascript
+FlashVM.notice('message')
+FlashVM.alert('message')
+```
+It's avaliable everywhere, includes Vue and regular js code. **FlashVM** — is global Vue.js app.
 
 ## Z-index layers
 * 101 — image preview in Image Input
