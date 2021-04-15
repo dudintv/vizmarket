@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
       @product_decorator = @product.decorate
 
     rescue ActiveRecord::RecordNotFound => e
-      flash[:warning] = 'Can\'t find this product. ' + e.message
+      flash[:warning] = 'Can\'t find this product. ' # + e.message
       redirect_to root_path
     end
   end
