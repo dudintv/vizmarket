@@ -156,7 +156,7 @@ form.devise {
 
 @keyframes blink {
   from { border-color: transparent; }
-  10% { border-color: theme('blue-50'); }
+  10% { border-color: theme('colors.blue-50'); }
   to { border-color: transparent; }
 }
 
