@@ -80,3 +80,6 @@ gem 'pushover'
 
 # simple full text search
 gem 'pg_search'
+
+# auto generating link tags based on original text
+gem 'rails_autolink'

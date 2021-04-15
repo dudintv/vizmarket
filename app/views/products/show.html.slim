@@ -73,13 +73,13 @@
     - if @product.description
       .description
         h3.my-4 Description
-        = simple_format @product.description
+        = auto_link(simple_format(@product.description), :html => { :target => '_blank' })
     - if @product.featured_image.attached?
       = image_tag @product.featured_image
     - if @product.instruction
       .how-to-use
         h3.my-4 How to use
-        = simple_format @product.instruction
+        = auto_link(simple_format(@product.instruction), :html => { :target => '_blank' })
   .comments-block
     .new-comment-form
     .comments
