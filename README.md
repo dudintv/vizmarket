@@ -42,6 +42,14 @@ cap production deploy
 DEPLOY_USER_PASSWORD=password cap production deploy
 ```
 
+### Troubleshooting in deploy
+
+#### Missed Tailwind style.
+
+Error while capistrano deploying: ```TypeError: Cannot read property 'toLowerCase' of undefined```
+
+Solution: find in SCSS files something like: ```theme('blue-50')```, and add 'colors.' to get that: ```theme('colors.blue-50')```
+
 ## Publisher Portal
 
 ### Frontend & Backend routes
