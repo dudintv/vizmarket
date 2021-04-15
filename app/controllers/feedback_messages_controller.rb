@@ -36,8 +36,8 @@ class FeedbackMessagesController < ApplicationController
       if true # Rails.env.production?
         message = "#{@feedback_message.message}\n#{@feedback_message.contacts}"
         Pushover::Message.new(
-          token: 'av8pp5co4at3msifcsz6autfc3bqrz',
-          user: 'uG6H3dbSE6hXkD3kf94yGEYXaXhDKG',
+          token: Rails.application.credentials.dig(:common, :pushover, :token), 
+          user: Rails.application.credentials.dig(:common, :pushover, :user),
           title: 'VizMarket: feedback',
           message: message,
           priority: 0
