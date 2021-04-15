@@ -86,7 +86,7 @@ header
               - else
                 = image_tag '/images/svg/default_avatar.svg', width: '40', height: '40', class: 'avatar'
               ' &nbsp;
-              span.normal-case.ml-2 = current_account.email
+              span.nav-email-text.normal-case.ml-2 = current_account.email
         - else
           .auth-signin
             = link_to(new_user_session_path, id: 'open-signin-lg-md') do

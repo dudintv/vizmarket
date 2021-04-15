@@ -4,7 +4,7 @@
 
 @import "./common/fonts.scss";
 @import "./common/base.scss";
-@import "./common/grid.scss";
+@import "./common/nav.scss";
 
 @import "./common/buttons.scss";
 @import "./common/footer.scss";
@@ -18,7 +18,6 @@
 
 @import "./shared/anons.scss";
 @import "./shared/devise.scss";
-@import "./shared/nav.scss";
 
 @import "./product/grid-item.scss";
 @import "./product/product-page.scss";

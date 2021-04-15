@@ -7,16 +7,21 @@
 = stylesheet_pack_tag 'modal-window', 'data-turbolinks-track': 'reload'
 = javascript_pack_tag 'modal-window', 'data-turbolinks-track': 'reload'
 
-.product-page.container.mx-auto
-  .gallery#product-gallery
-    .fotorama data-allowfullscreen="true" data-width="100%" data-ratio="16/9" data-minwidth="100" data-maxwidth="800" data-minheight="300" data-maxheight="100%"
-      / = image_tag @product_decorator.featured_image
-      - if @product.videos
-        - @product.videos.split(' ').each do |video_link|
-          a href="#{video_link}" video
-      - @product.images.each do |image|
-        img src="#{url_for(image)}"
-  .main-info
+
+.product-page-container.product-page.mx-auto
+  - if @product.videos || @product.images&.count > 0
+    .gallery#product-gallery
+      .fotorama data-allowfullscreen="true" data-width="100%" data-ratio="16/9" data-minwidth="100" data-maxwidth="800" data-minheight="300" data-maxheight="100%"
+        / = image_tag @product_decorator.featured_image
+        - if @product.videos
+          - @product.videos.split(' ').each do |video_link|
+            a href="#{video_link}" video
+        - @product.images.each do |image|
+          img src="#{url_for(image)}"
+  - else
+    .thumbnail
+      img src="#{url_for(@product_decorator.thumbnail)}" width="284" height="284"
+  .main-info-block
     section
       .taxonomy == @product_decorator.taxonomy_links
       .header
@@ -65,6 +70,8 @@
       .description
         h3.my-4 Description
         = simple_format @product.description
+    - if @product.featured_image.attached?
+      = image_tag @product.featured_image
     - if @product.instruction
       .how-to-use
         h3.my-4 How to use

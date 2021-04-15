@@ -178,6 +178,10 @@ header nav {
     }
   }
 
+  .nav-email-text {
+    @apply block;
+  }
+
   .popup {
     @apply hidden absolute right-4 shadow-2xl rounded overflow-hidden pt-4;
     @apply bg-item;
@@ -359,6 +363,15 @@ header nav {
 
     .auth.auth-sm {
       @apply visible;
+    }
+  }
+}
+
+
+@media (max-width: 520px) {
+  header nav {
+    .nav-email-text {
+      @apply hidden;
     }
   }
 }

@@ -2,7 +2,10 @@
   .edit-product-page
     .edit-product-panel(:class="bgClass")
       .nav
-        ProductThumbnail(:product="product")
+        a.link-open-in-new(:href="productUrl" target="_blank")
+          .link-img-container
+            img.open-in-new(src="/images/svg-icons/open-in-new.svg")
+          ProductThumbnail(:product="product")
         ProductTitle(:product="product")
         .tabs
           router-link.tab(:to="`/publisher/products/${product.id}/title`")
@@ -63,6 +66,9 @@ export default {
     },
     currentTabName () {
       return this.$route.fullPath.split('/').slice(-1)[0]
+    },
+    productUrl () {
+      return `/products/${this.product.id}`
     }
   },
   activated () {
@@ -235,4 +241,25 @@ export default {
     }
   }
 
+  .link-open-in-new {
+    @apply relative;
+
+    .link-img-container {
+      @apply absolute top-0 right-0 z-100 w-full h-full flex items-start justify-end;
+      @apply bg-white-20;
+      opacity: 0;
+
+      transition: 0.2s;
+
+      &:hover {
+        opacity: 0.5;
+      }
+      
+      .open-in-new {
+        @apply m-4;
+        width: 20%;
+        height: 20%;
+      }
+    }
+  }
 </style>
