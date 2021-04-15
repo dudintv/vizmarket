@@ -88,3 +88,9 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  .product-grid-item {
+    max-width: 100%;
+  }
+}
