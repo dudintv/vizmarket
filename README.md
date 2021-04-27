@@ -1,6 +1,6 @@
 # Vizrt Marketplace
 
-[https://vizrt.store](https://vizrt.store){:target="_blank" rel="noopener"}
+[https://vizrt.store](https://vizrt.store){:target="_blank"}
 
 ![VizMarket short presentation](https://github.com/dudintv/vizmarket/raw/master/public/images/for-github-readme/vizmarket-short-presentation.gif)
 
