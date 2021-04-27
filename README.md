@@ -1,5 +1,7 @@
 # Vizrt Marketplace
 
+![VizMarket short presentation](https://github.com/dudintv/vizmarket/raw/master/public/images/for-github-readme/for-github-readme/vizmarket-short-presentation.gif)
+
 ## Setup
 ```bash
 clone https://github.com/dudintv/vizmarket.git
