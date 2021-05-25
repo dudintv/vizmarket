@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
       anonses: [
         {
           image: '/images/anons/became-author.jpg',
-          title: 'Became an Author',
+          title: 'Become an Author',
           text: 'Do you have usefull solutions, like scripts or scene example? Lets share the gems!',
           link: '#',
           action: 'Submit content'

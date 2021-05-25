@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     @anonses = [
       {
         image: '/images/anons/became-author.jpg',
-        title: 'Became an Author',
+        title: 'Become an Author',
         text: 'Do you have usefull solutions, like scripts or scenes? Lets share your gems!',
         link: '/publisher/index',
         action: 'Submit content'
