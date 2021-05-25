@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     post 'resend', on: :member
   end
 
+  namespace :admin do
+    root to: 'dashboard#index'
+    get '*path', to: 'dashboard#index' # to vue-router
+  end
+
   # PUBLISHER
   namespace :publisher do
     root to: 'products#index'

@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title
+      | Vizmarket — Admin
+    = csrf_meta_tags
+    = csp_meta_tag
+    link rel="icon" type="image/png" href="/images/favicon.png"
+    meta name="viewport" content="width=device-width,initial-scale=1"
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+    = yield :head
+    
+  body.pattern-dark.relative
+    / = render 'shared/nav'
+    = render 'shared/flash'
+    .main-content.container.mx-auto.w-4_5 = yield
