@@ -1,5 +1,9 @@
 # Vizrt Marketplace
 
+<a href="https://vizrt.store" target="_blank">https://vizrt.store</a>
+
+![VizMarket short presentation](https://github.com/dudintv/vizmarket/raw/master/public/images/for-github-readme/vizmarket-short-presentation.gif)
+
 ## Setup
 ```bash
 clone https://github.com/dudintv/vizmarket.git
