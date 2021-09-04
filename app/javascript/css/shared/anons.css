@@ -1,0 +1,44 @@
+.anonses {
+  @apply flex flex-col w-full justify-center;
+}
+
+.anonses .anons {
+  @apply flex flex-col justify-between flex-1 p-6 shadow-md;
+  @apply bg-item-darker bg-center bg-cover;
+  -webkit-transition: -webkit-box-shadow .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  transition: -webkit-box-shadow .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out, transform .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out, transform .2s ease-in-out, -webkit-box-shadow .2s ease-in-out, -webkit-transform .2s ease-in-out;
+}
+
+.anonses .anons:hover {
+  @apply shadow-2xl z-50;
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+}
+
+.anonses .anons h2 {
+  @apply text-2xl leading-tight mb-4;
+}
+
+.anonses .anons p {
+  @apply w-2_3;
+}
+
+.anonses .anons a.action {
+  @apply inline-block px-6 py-2 mt-4 font-bold;
+}
+
+@screen sm {
+  .anonses {
+    @apply flex-row;
+  }
+  .anonses .anons {
+    @apply flex-col flex-1 m-4 p-8 shadow-lg;
+    max-width: 30rem;
+  }
+  .anonses .anons + .anons {
+    @apply ml-0;
+  }
+}
+/*# sourceMappingURL=anons.css.map */

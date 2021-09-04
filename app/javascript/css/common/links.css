@@ -1,0 +1,20 @@
+a {
+  @apply text-white;
+}
+
+a:hover {
+  @apply text-white-hover bg-white-10;
+}
+
+a.file {
+  @apply text-orange;
+}
+
+a.file:hover {
+  @apply text-orange-hover border-b border-orange-hover;
+}
+
+button {
+  @apply text-white bg-blue-50 px-2;
+}
+/*# sourceMappingURL=links.css.map */

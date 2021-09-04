@@ -1,0 +1,52 @@
+.main-btn {
+  @apply bg-red-grad-x;
+}
+
+.main-btn:hover {
+  @apply bg-red-grad-x-hover;
+}
+
+.second-btn {
+  @apply bg-white-20;
+}
+
+.second-btn:hover {
+  @apply bg-white-30;
+}
+
+.third-btn {
+  @apply bg-white-05;
+}
+
+.third-btn:hover {
+  @apply bg-white-20;
+}
+
+.transparent-btn {
+  background: transparent;
+}
+
+.transparent-btn:hover {
+  @apply bg-white-05;
+}
+
+.long-btn {
+  @apply text-center w-full py-2;
+}
+
+.big-btn, .large-btn {
+  @apply inline-block px-6 py-3 text-lg uppercase;
+}
+
+.middle-btn {
+  @apply inline-block px-4 py-2 uppercase;
+}
+
+.small-btn {
+  @apply inline-block px-2 py-1;
+}
+
+.tiny-btn {
+  @apply inline-block px-1;
+}
+/*# sourceMappingURL=buttons.css.map */

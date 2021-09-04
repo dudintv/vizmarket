@@ -1,0 +1,34 @@
+footer.footer {
+  @apply bg-item-darker;
+}
+
+footer.footer .pattern {
+  background-image: url(/images/svg/pattern.svg);
+  background-size: 400px;
+  background-position-y: -100px;
+  opacity: .04;
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+
+footer.footer:hover .pattern {
+  @apply opacity-10;
+  background-position-y: -105px;
+}
+
+footer.footer a {
+  @apply py-1;
+}
+
+footer.footer .icons a {
+  @apply p-1 opacity-80;
+}
+
+footer.footer .icons a:hover {
+  @apply opacity-100;
+}
+
+footer.footer .copyright {
+  @apply text-white-50;
+}
+/*# sourceMappingURL=footer.css.map */

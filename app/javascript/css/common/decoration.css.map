@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,EAAE,AAAA,GAAG,CAAC;EACJ,MAAM,CAAN,kDAAM;CACP;;AAED,AAAA,aAAa,CAAC,CAAC,AAAA,OAAO,CAAC;EACrB,OAAO,EAAE,qCAAqC;EAC9C,YAAY,EAAE,GAAG;EACjB,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,IAAI;EACT,OAAO,EAAE,EAAE;CACZ;;AAED,AAAA,aAAa,AAAA,MAAM,CAAC,CAAC,AAAA,OAAO,CAAC;EAC3B,OAAO,EAAE,EAAE;CACZ",
+    "sources": [
+        "decoration.scss"
+    ],
+    "names": [],
+    "file": "decoration.css"
+}

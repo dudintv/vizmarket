@@ -1,0 +1,100 @@
+.product-grid-item {
+  @apply block shadow bg-item;
+  max-width: 300px;
+  -webkit-transition: -webkit-box-shadow .2s ease-in-out;
+  transition: -webkit-box-shadow .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out, -webkit-box-shadow .2s ease-in-out;
+}
+
+.product-grid-item:hover {
+  @apply shadow-xl;
+}
+
+.product-grid-item .image {
+  @apply relative;
+}
+
+.product-grid-item .image .labels {
+  @apply flex absolute bottom-0 right-0;
+}
+
+.product-grid-item .image .labels .label {
+  @apply block px-2 relative;
+}
+
+.product-grid-item .image .labels .label::before {
+  @apply absolute;
+  content: '';
+  width: .6rem;
+  height: 100%;
+  left: -.6rem;
+  border-left: .6rem solid transparent;
+}
+
+.product-grid-item .image .labels .label.featured {
+  @apply bg-red-grad-x;
+}
+
+.product-grid-item .image .labels .label.featured::before {
+  border-bottom: 1.5rem solid theme("colors.orange");
+}
+
+.product-grid-item .image .labels .label.new {
+  @apply bg-green-grad-x;
+}
+
+.product-grid-item .image .labels .label.new::before {
+  border-bottom: 1.5rem solid theme("colors.lime");
+}
+
+.product-grid-item .info {
+  @apply flex flex-col p-4 overflow-x-hidden;
+}
+
+.product-grid-item .info .line {
+  @apply pb-1;
+}
+
+.product-grid-item .info .line .categories {
+  @apply flex uppercase;
+}
+
+.product-grid-item .info .line .categories .kind {
+  @apply text-orange;
+}
+
+.product-grid-item .info .line .categories .kind:hover {
+  @apply text-orange-hover;
+}
+
+.product-grid-item .info .line .categories .category {
+  @apply ml-2 text-light-blue;
+}
+
+.product-grid-item .info .line .categories .category:hover {
+  @apply text-light-blue-hover;
+}
+
+.product-grid-item .info .line .author, .product-grid-item .info .line .price {
+  @apply text-light-blue;
+}
+
+.product-grid-item .info .line .version, .product-grid-item .info .line .date {
+  @apply text-white-50;
+}
+
+.product-grid-item .info .line .version {
+  @apply py-1 px-2 mr-2 border border-white-20;
+}
+
+.product-grid-item .info .line .price {
+  @apply text-xl font-bold;
+}
+
+@media (max-width: 480px) {
+  .product-grid-item {
+    max-width: 100%;
+  }
+}
+/*# sourceMappingURL=grid-item.css.map */
